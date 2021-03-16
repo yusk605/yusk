@@ -17,6 +17,7 @@ data class QuestionWorkBook(
     @PrimaryKey(autoGenerate = true)val workBookNo:Int,
     @ColumnInfo(name = "workbook_title")val workBookTitle:String,
     @ColumnInfo(name = "workbook_text")val workBookText:String,
+    @ColumnInfo(name = "workbook_accuracy")val answerAccuracyRate:Float,
     @ColumnInfo(name = "relation_category")val relationCategory:Int
 )
 
@@ -27,6 +28,5 @@ data class QuestionAnswer(
     @ColumnInfo(name = "answer_second")val answerSecond:String,
     @ColumnInfo(name = "answer_third")val answerThird:String,
     @ColumnInfo(name = "answer_right")val answerRight:String,
-    @ColumnInfo(name = "answer_accuracyrate")val answerAccuracyRate:Float,
     @ColumnInfo(name = "relation_workbook")val relationWorkBook:Int
 )
