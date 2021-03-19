@@ -13,20 +13,26 @@ import kotlinx.coroutines.launch
 @TypeConverters(Converter::class)
 @Database(
     entities = [
-        QuestionCategory::class,
-        QuestionWorkBook::class,
-        QuestionAnswer::class   ],
+        QuestionCategoryEntity::class,
+        QuestionWorkBookEntity::class,
+        QuestionProblemEntity::class,
+        QuestionAccuracyEntity::class,
+        QuestionAnswerEntity::class ] ,
     version = 1)
 abstract class QuestionDatabase:RoomDatabase() {
 
     abstract fun getCategoryDao():QuestionCategoryDao
     abstract fun getWorkBookDao():QuestionWorkBookDao
+    abstract fun getProblemDao():QuestionProblemDao
+    abstract fun getAccuracyDao():QuestionAccuracyDao
     abstract fun getAnswerDao():QuestionAnswerDao
 
     companion object{
+
         var singleton:QuestionDatabase? = null
-        fun getInstance(application: Application,scope: LifecycleCoroutineScope):QuestionDatabase{
-            return singleton ?: synchronized(this){
+
+        fun getInstance(application: Application,scope: LifecycleCoroutineScope):QuestionDatabase =
+            singleton ?: synchronized(this){
                 val instance = Room
                     .databaseBuilder(application,QuestionDatabase::class.java,"question_book")
                     //.addCallback(QuestionDBCallBack(scope))
@@ -34,7 +40,7 @@ abstract class QuestionDatabase:RoomDatabase() {
                 singleton = instance
                 instance
             }
-        }
+
         class QuestionDBCallBack(private val scope: LifecycleCoroutineScope):RoomDatabase.Callback(){
             override fun onOpen(db: SupportSQLiteDatabase) {
                 super.onOpen(db)
