@@ -10,7 +10,7 @@ import java.time.LocalDateTime
 
 //カテゴリーテーブル
 @Entity(tableName = "question_category")
-data class QuestionCategory(
+data class QuestionCategoryEntity(
     @PrimaryKey(autoGenerate = true)val categoryNo:Int,
     @ColumnInfo(name = "category_title")var categoryTitle:String,
     @ColumnInfo(name="category_flag")val categoryFlag:Int
@@ -18,7 +18,7 @@ data class QuestionCategory(
 
 //問題集テーブル
 @Entity(tableName = "question_workbook")
-data class QuestionWorkBook(
+data class QuestionWorkBookEntity(
     @PrimaryKey(autoGenerate = true)val workBookNo:Int,
     @ColumnInfo(name = "workbook_title")val workBookTitle:String,
     @ColumnInfo(name = "workbook_flag")val workBookFlag:Int,
@@ -28,7 +28,7 @@ data class QuestionWorkBook(
 
 //正解率テーブル
 @Entity(tableName = "question_accuracy")
-data class QuestionAccuracy(
+data class QuestionAccuracyEntity(
         @PrimaryKey(autoGenerate = true)val accuracyNo:Int,
         @ColumnInfo(name = "accuracy_rate")val accuracyRate:Float,
         @ColumnInfo(name = "accuracy_savedate")val accuracySaveDate:LocalDate,
@@ -37,7 +37,7 @@ data class QuestionAccuracy(
 
 //問題文テーブル
 @Entity(tableName = "question_problem")
-data class QuestionProblem(
+data class QuestionProblemEntity(
     @PrimaryKey(autoGenerate = true)val problemNo:Int,
     @ColumnInfo(name = "problem_statement")val problemStatement:String,
     @ColumnInfo(name = "problem_flag")val problemFlag:Int,
@@ -47,7 +47,7 @@ data class QuestionProblem(
 
 //回答欄テーブル
 @Entity(tableName = "question_answer")
-data class QuestionAnswer(
+data class QuestionAnswerEntity(
     @PrimaryKey(autoGenerate = true)val answerNo:Int,
     @ColumnInfo(name = "answer_firs")val answerFirs:String,
     @ColumnInfo(name = "answer_second")val answerSecond:String,
