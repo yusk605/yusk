@@ -2,9 +2,7 @@ package com.example.questionbook.room
 
 import android.os.Parcel
 import android.os.Parcelable
-import androidx.room.ColumnInfo
-import androidx.room.Entity
-import androidx.room.PrimaryKey
+import androidx.room.*
 import java.time.LocalDate
 import java.time.LocalDateTime
 
@@ -54,4 +52,43 @@ data class QuestionAnswerEntity(
     @ColumnInfo(name = "answer_third")val answerThird:String,
     @ColumnInfo(name = "answer_right")val answerRight:String,
     @ColumnInfo(name = "relation_problem")val relationWorkBook:Int
+)
+
+
+/**
+ * カテゴリーテーブルのプライマリキー（識別番号）
+ * に紐づいた問題集一覧を取得します。
+ */
+data class CategoryWithWorkBooks(
+        @Embedded
+        val questionCategoryEntity:QuestionCategoryEntity,
+        @Relation(
+                parentColumn = "categoryNo",
+                entityColumn = "relation_category"
+        )val workBooks:List<QuestionWorkBookEntity>
+)
+/**
+ * ワークブック（問題集）の識別番号に紐づいた、
+ * テキスト（問題）をすべて取得する。
+ */
+data class WorkBookWithProblems(
+        @Embedded
+        val workBookEntity:QuestionWorkBookEntity,
+        @Relation(
+                parentColumn = "workBookNo",
+                entityColumn = "relation_workbook",
+        )val problems:List<QuestionProblemEntity>
+)
+
+/**
+ *問題となるテキストの識別番号に紐づいた、
+ *回答欄すべてを取得する。
+ */
+data class ProblemWithAnswer(
+        @Embedded
+        val problemEntity: QuestionProblemEntity,
+        @Relation(
+                parentColumn = "problemNo",
+                entityColumn = "relation_problem"
+        )val answers:List<QuestionAnswerEntity>
 )
