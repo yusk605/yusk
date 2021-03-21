@@ -1,9 +1,8 @@
-package com.example.questionbook.ui
+package com.example.questionbook.view_model
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.example.questionbook.room.QuestionDatabase
-import com.example.questionbook.ui.view_model.*
 
 class CategoryViewModelFactory(private val database: QuestionDatabase):ViewModelProvider.Factory{
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
