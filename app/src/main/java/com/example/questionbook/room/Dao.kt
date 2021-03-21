@@ -5,7 +5,7 @@ import androidx.room.*
 
 @Dao    //カテゴリー
 interface QuestionCategoryDao{
-    @Query("select * from question_category") fun getAll():LiveData<List<QuestionCategoryEntity>>
+    @Query("select * from question_category") fun getAll():LiveData<List<CategoryWithWorkBooks>>
     @Insert suspend fun insert(entity:QuestionCategoryEntity)
     @Update suspend fun update(entity:QuestionCategoryEntity)
     @Delete suspend fun delete(entity:QuestionCategoryEntity)
@@ -13,7 +13,7 @@ interface QuestionCategoryDao{
 
 @Dao    //問題集
 interface QuestionWorkBookDao{
-    @Query("select * from question_workbook")fun getAll():LiveData<List<QuestionWorkBookEntity>>
+    @Query("select * from question_workbook")fun getAll():LiveData<List<WorkBookWithProblemsAndAccuracy>>
     @Insert suspend fun insert(entity:QuestionWorkBookEntity)
     @Update suspend fun update(entity:QuestionWorkBookEntity)
     @Delete suspend fun delete(entity:QuestionWorkBookEntity)
@@ -21,7 +21,7 @@ interface QuestionWorkBookDao{
 
 @Dao    //問題文
 interface QuestionProblemDao{
-    @Query("select * from question_problem")fun getAll():LiveData<List<QuestionProblemEntity>>
+    @Query("select * from question_problem")fun getAll():LiveData<List<ProblemWithAnswer>>
     @Insert suspend fun insert(entity:QuestionProblemEntity)
     @Update suspend fun update(entity:QuestionProblemEntity)
     @Delete suspend fun delete(entity:QuestionProblemEntity)

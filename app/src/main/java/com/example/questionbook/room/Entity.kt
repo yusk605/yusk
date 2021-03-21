@@ -29,7 +29,7 @@ data class QuestionWorkBookEntity(
 data class QuestionAccuracyEntity(
         @PrimaryKey(autoGenerate = true)val accuracyNo:Int,
         @ColumnInfo(name = "accuracy_rate")val accuracyRate:Float,
-        @ColumnInfo(name = "accuracy_savedate")val accuracySaveDate:LocalDate,
+        @ColumnInfo(name = "accuracy_date")val accuracyDate:LocalDate,
         @ColumnInfo(name = "relation_workbook")val relationWorkBook: Int
 )
 
@@ -56,8 +56,7 @@ data class QuestionAnswerEntity(
 
 
 /**
- * カテゴリーテーブルのプライマリキー（識別番号）
- * に紐づいた問題集一覧を取得します。
+ * カテゴリーテーブルの識別番号に紐づいた問題集一覧を取得します。
  */
 data class CategoryWithWorkBooks(
         @Embedded
@@ -65,24 +64,26 @@ data class CategoryWithWorkBooks(
         @Relation(
                 parentColumn = "categoryNo",
                 entityColumn = "relation_category"
-        )val workBooks:List<QuestionWorkBookEntity>
+        )val workBookList:List<QuestionWorkBookEntity>
 )
 /**
- * ワークブック（問題集）の識別番号に紐づいた、
- * テキスト（問題）をすべて取得する。
+ * ワークブック（問題集）の識別番号に紐づいた、テキスト（問題）をすべて取得する。
  */
-data class WorkBookWithProblems(
+data class WorkBookWithProblemsAndAccuracy(
         @Embedded
         val workBookEntity:QuestionWorkBookEntity,
         @Relation(
                 parentColumn = "workBookNo",
-                entityColumn = "relation_workbook",
-        )val problems:List<QuestionProblemEntity>
+                entityColumn = "relation_workbook", )
+        val problemList:List<QuestionProblemEntity>,
+        @Relation(
+                parentColumn = "workBookNo",
+                entityColumn = "relation_workbook")
+        val accuracyList:List<QuestionAccuracyEntity>
 )
 
 /**
- *問題となるテキストの識別番号に紐づいた、
- *回答欄すべてを取得する。
+ *問題となるテキストの識別番号に紐づいた、回答欄すべてを取得する。
  */
 data class ProblemWithAnswer(
         @Embedded
@@ -90,5 +91,5 @@ data class ProblemWithAnswer(
         @Relation(
                 parentColumn = "problemNo",
                 entityColumn = "relation_problem"
-        )val answers:List<QuestionAnswerEntity>
+        )val answerList:List<QuestionAnswerEntity>
 )
