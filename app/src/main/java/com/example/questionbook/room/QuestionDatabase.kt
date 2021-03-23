@@ -11,14 +11,13 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 @TypeConverters(Converter::class)
-@Database(
-    entities = [
-        QuestionCategoryEntity::class,
-        QuestionWorkBookEntity::class,
-        QuestionProblemEntity::class,
-        QuestionAccuracyEntity::class,
-        QuestionAnswerEntity::class ] ,
-    version = 1)
+@Database(entities = [
+    QuestionCategoryEntity::class,
+    QuestionWorkBookEntity::class,
+    QuestionProblemEntity::class,
+    QuestionAccuracyEntity::class,
+    QuestionAnswerEntity::class
+                     ],version = 1)
 abstract class QuestionDatabase:RoomDatabase() {
 
     abstract fun getCategoryDao():QuestionCategoryDao
@@ -35,18 +34,26 @@ abstract class QuestionDatabase:RoomDatabase() {
             singleton ?: synchronized(this){
                 val instance = Room
                     .databaseBuilder(application,QuestionDatabase::class.java,"question_book")
-                    //.addCallback(QuestionDBCallBack(scope))
+                    .addCallback(QuestionDBCallBack(scope))
                     .build()
                 singleton = instance
                 instance
             }
 
+        /**
+         *多分エラーが発生します。
+         */
         class QuestionDBCallBack(private val scope: LifecycleCoroutineScope):RoomDatabase.Callback(){
             override fun onOpen(db: SupportSQLiteDatabase) {
                 super.onOpen(db)
                 singleton?.let { database->
                     scope.launch(Dispatchers.IO) {
-                        // TODO データベースの初期処理を記述すること。
+                        database.run {
+                            getWorkBookDao().collBackDelete()
+                            getProblemDao().collBackDelete()
+                            getAccuracyDao().collBackDelete()
+                            getAnswerDao().collBackDelete()
+                        }
                     }
                 }
             }
