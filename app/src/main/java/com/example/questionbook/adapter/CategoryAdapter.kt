@@ -18,9 +18,7 @@ import org.w3c.dom.Text
 
 class CategoryAdapter(
         private val onClick:(QuestionCategoryEntity,View)->Unit
-    ):ListAdapter<
-        CategoryWithWorkBooks,
-        CategoryAdapter.CategoryAdapterHolder >(Diff){
+    ):ListAdapter< CategoryWithWorkBooks,CategoryAdapter.CategoryAdapterHolder >(Diff){
 
     companion object Diff: DiffUtil.ItemCallback<CategoryWithWorkBooks>(){
         override fun areItemsTheSame(
@@ -41,10 +39,7 @@ class CategoryAdapter(
 
         init {
                 itemView.setOnClickListener {
-                    onClick(
-                        getItem(layoutPosition).questionCategoryEntity,
-                        itemView
-                    )
+                    onClick(getItem(layoutPosition).questionCategoryEntity, itemView)
                 }
             }
 
