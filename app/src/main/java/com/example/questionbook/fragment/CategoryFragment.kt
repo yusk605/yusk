@@ -6,17 +6,35 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.Navigation
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.questionbook.R
 import com.example.questionbook.adapter.CategoryAdapter
 import com.example.questionbook.databinding.FragmentCategoryBinding
+import com.example.questionbook.room.QuestionDatabase
+import com.example.questionbook.view_model.CategoryViewModel
+import com.example.questionbook.view_model.CategoryViewModelFactory
+import kotlinx.android.synthetic.main.fragment_category.*
 
 
 class CategoryFragment : Fragment() {
 
-    lateinit var binding: FragmentCategoryBinding
-    lateinit var adapter: CategoryAdapter
+    private lateinit var binding: FragmentCategoryBinding
+
+    private val adapter: CategoryAdapter by lazy {
+        CategoryAdapter { entity,view ->
+            Navigation.findNavController(view).navigate(
+                    R.id.action_categoryFragment_to_workBookFragment,
+                    Bundle().apply { putInt(ARGS_KEY,entity.categoryNo) }
+            )
+        }
+    }
+
+    private val viewModel:CategoryViewModel by lazy {
+        CategoryViewModelFactory(app = activity?.application!!)
+                .create(CategoryViewModel::class.java)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,20 +49,22 @@ class CategoryFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        adapter = CategoryAdapter { entity,view ->
-            //カテゴリーリストからアイテムをタップした場合に、
-            //カテゴリーに紐づいたワークブックをを表示させる画面へ遷移する。
-            Navigation.findNavController(view).navigate(
-                    R.id.action_categoryFragment_to_workBookFragment,
-                    Bundle().apply { putInt(ARGS_KEY,entity.categoryNo) }
-            )
+        viewModel.let { vm ->
+            vm.data.observe(viewLifecycleOwner){ data ->
+                adapter.submitList(data)
+            }
         }
+        recycleInit()
     }
 
-    private fun recycleInit(){ }
+    private fun recycleInit(){
+        category_recycle_view.also {
+            it.adapter = adapter
+            it.layoutManager = LinearLayoutManager(activity)
+        }
+    }
 
     companion object{
         const val ARGS_KEY = "navigate_args_category_to_workBook"
     }
-
 }
