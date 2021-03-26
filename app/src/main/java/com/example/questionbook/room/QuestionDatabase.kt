@@ -1,6 +1,7 @@
 package com.example.questionbook.room
 
 import android.app.Application
+import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.LifecycleCoroutineScope
 import androidx.room.Database
 import androidx.room.Room
@@ -28,9 +29,9 @@ abstract class QuestionDatabase:RoomDatabase() {
 
     companion object{
 
-        var singleton:QuestionDatabase? = null
+        private var singleton:QuestionDatabase? = null
 
-        fun getInstance(application: Application,scope: LifecycleCoroutineScope):QuestionDatabase =
+        fun getInstance(application:Application, scope:LifecycleCoroutineScope):QuestionDatabase =
             singleton ?: synchronized(this){
                 val instance = Room
                     .databaseBuilder(application,QuestionDatabase::class.java,"question_book")
