@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav"
     app:startDestination="@id/workBookFragment">
-
     <fragment
         android:id="@+id/workBookFragment"
         android:name="com.example.questionbook.fragment.WorkBookFragment"
