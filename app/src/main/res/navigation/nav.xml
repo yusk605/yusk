@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav"
-    app:startDestination="@id/workBookFragment">
+    app:startDestination="@id/categoryFragment">
     <fragment
         android:id="@+id/workBookFragment"
         android:name="com.example.questionbook.fragment.WorkBookFragment"
@@ -12,6 +12,10 @@
         <action
             android:id="@+id/action_workBookFragment_to_problemFragment"
             app:destination="@id/problemFragment" />
+        <argument
+            android:name="categoryNo"
+            app:argType="integer"
+            android:defaultValue="0" />
     </fragment>
     <fragment
         android:id="@+id/answerFragment"
@@ -31,11 +35,7 @@
         android:id="@+id/gameStartFragment"
         android:name="com.example.questionbook.fragment.GameStartFragment"
         android:label="fragment_game_start"
-        tools:layout="@layout/fragment_game_start" >
-        <action
-            android:id="@+id/action_gameStartFragment_to_categoryFragment"
-            app:destination="@id/categoryFragment" />
-    </fragment>
+        tools:layout="@layout/fragment_game_start" />
     <fragment
         android:id="@+id/laboratoryFragment"
         android:name="com.example.questionbook.fragment.LaboratoryFragment"
@@ -45,11 +45,7 @@
         android:id="@+id/holderFragment"
         android:name="com.example.questionbook.fragment.HolderFragment"
         android:label="fragment_holder"
-        tools:layout="@layout/fragment_holder" >
-        <action
-            android:id="@+id/action_holderFragment_to_categoryFragment"
-            app:destination="@id/categoryFragment" />
-    </fragment>
+        tools:layout="@layout/fragment_holder" />
     <fragment
         android:id="@+id/problemFragment"
         android:name="com.example.questionbook.fragment.ProblemFragment"
