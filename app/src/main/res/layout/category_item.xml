@@ -30,7 +30,7 @@
             app:srcCompat="@drawable/question_ic_books" />
 
         <TextView
-            android:id="@+id/textView"
+            android:id="@+id/label_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/category_work_books"
@@ -39,8 +39,18 @@
             app:layout_constraintStart_toEndOf="@+id/imageView"
             app:layout_constraintTop_toBottomOf="@+id/item_category_title" />
 
+        <TextView
+            android:id="@+id/category_workbook_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0"
+            android:textSize="18dp"
+            app:layout_constraintBottom_toBottomOf="@+id/imageView"
+            app:layout_constraintStart_toEndOf="@+id/label_text"
+            app:layout_constraintTop_toBottomOf="@+id/item_category_title" />
+
         <ImageView
-            android:id="@+id/category_ic"
+            android:id="@+id/category_submenu"
             android:layout_width="50dp"
             android:layout_height="50dp"
             app:layout_constraintEnd_toEndOf="parent"
