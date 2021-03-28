@@ -20,7 +20,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        latainit()
+        lateInit()
         binding = setContentView<ActivityMainBinding>(this,R.layout.activity_main)
         NavigationUI.setupActionBarWithNavController(this,controller,drawerLayout)
         NavigationUI.setupWithNavController(binding.navigationView,controller)
@@ -33,7 +33,7 @@ class MainActivity : AppCompatActivity() {
     /**
      * バッキングフィールドへ初期化を行うメソッド。
      */
-    private fun latainit(){
+    private fun lateInit(){
         drawerLayout = binding.drawerLayout
         controller = this.findNavController(R.id.nav_controller_view_tag)
     }
