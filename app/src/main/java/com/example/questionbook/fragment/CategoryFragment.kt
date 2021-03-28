@@ -22,11 +22,16 @@ class CategoryFragment : Fragment() {
 
     private lateinit var binding: FragmentCategoryBinding
 
+    /**
+     * アダプタークラスの作成。
+     * 項目をタップされた場合に、
+     * タップされた項目に紐づいた問題集画面へ遷移を行う。
+     */
     private val adapter: CategoryAdapter by lazy {
         CategoryAdapter { entity,view ->
             Navigation.findNavController(view).navigate(
                     R.id.action_categoryFragment_to_workBookFragment,
-                    Bundle().apply { putInt(ARGS_KEY,entity.categoryNo) }
+                    Bundle().apply { putParcelable(ARGS_KEY,entity) }
             )
         }
     }
@@ -56,14 +61,12 @@ class CategoryFragment : Fragment() {
         }
         recycleInit()
     }
-
     private fun recycleInit(){
         category_recycle_view.also {
             it.adapter = adapter
             it.layoutManager = LinearLayoutManager(activity)
         }
     }
-
     companion object{
         const val ARGS_KEY = "navigate_args_category_to_workBook"
     }
