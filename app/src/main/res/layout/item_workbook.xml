@@ -50,7 +50,7 @@
             app:layout_constraintTop_toBottomOf="@+id/item_workbook_title" />
 
         <TextView
-            android:id="@+id/workbook_problem_counter"
+            android:id="@+id/item_workbook_problem_counter"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="10"
@@ -59,6 +59,7 @@
             app:layout_constraintTop_toBottomOf="@+id/item_workbook_title" />
 
         <TextView
+            android:id="@+id/item_workbook_accuracy"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textStyle="bold"
