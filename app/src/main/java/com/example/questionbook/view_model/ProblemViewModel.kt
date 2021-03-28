@@ -1,7 +1,36 @@
 package com.example.questionbook.view_model
 
-import androidx.lifecycle.ViewModel
+import android.app.Application
+import androidx.lifecycle.*
+import com.example.questionbook.room.ProblemWithAnswer
+import com.example.questionbook.room.QuestionDatabase
 import com.example.questionbook.room.QuestionProblemDao
+import com.example.questionbook.room.QuestionProblemEntity
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
-class ProblemViewModel(dao:QuestionProblemDao): ViewModel() {
+class ProblemViewModel(private val app:Application): AndroidViewModel(app) {
+
+    private val dao = QuestionDatabase
+        .getInstance(app,viewModelScope as LifecycleCoroutineScope)
+        .getProblemDao()
+
+    val data:LiveData<List<ProblemWithAnswer>> by lazy {
+        dao.getAll()
+    }
+
+    fun insert(entity: QuestionProblemEntity) =
+        viewModelScope.launch(Dispatchers.IO){
+            dao.insert(entity = entity)
+        }
+
+    fun update(entity: QuestionProblemEntity) =
+        viewModelScope.launch(Dispatchers.IO){
+            dao.update(entity = entity)
+        }
+
+    fun delete(entity:QuestionProblemEntity) =
+        viewModelScope.launch(Dispatchers.IO){
+            dao.delete(entity = entity)
+        }
 }
