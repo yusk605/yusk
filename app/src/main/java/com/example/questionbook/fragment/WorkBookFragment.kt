@@ -5,30 +5,45 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
+import androidx.lifecycle.LifecycleOwner
+import androidx.navigation.Navigation
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.questionbook.R
+import com.example.questionbook.adapter.WorkBookAdapter
+import com.example.questionbook.room.QuestionCategoryEntity
+import com.example.questionbook.view_model.WorkBookViewModel
+import com.example.questionbook.view_model.WorkBookViewModelFactory
+import kotlinx.android.synthetic.main.fragment_work_book.*
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [WorkBookFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class WorkBookFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+
+    //カテゴリーリストからタップされた項目番号
+    private var category:QuestionCategoryEntity? = null
+
+    private val adapter:WorkBookAdapter by lazy {
+        WorkBookAdapter(category?.categoryTitle?:""){ view,obj->
+            val bundle=Bundle().apply { putParcelable(ARGS_KEY,obj) }
+            Navigation.findNavController(view)
+                .navigate(R.id.action_workBookFragment_to_problemFragment,bundle)
+        }
+    }
+
+    //view model の取得
+    private val  viewModel:WorkBookViewModel by lazy {
+        WorkBookViewModelFactory(activity?.application!!)
+            .create(WorkBookViewModel::class.java)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
+            category = it.get(CategoryFragment.ARGS_KEY) as QuestionCategoryEntity
         }
     }
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -38,23 +53,18 @@ class WorkBookFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_work_book, container, false)
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        viewModel.data.observe(viewLifecycleOwner)
+        { data-> adapter.submitList(data) }
+    }
+    private fun recycleInit(){
+        recycle_view_work_book.also {
+            it.adapter = adapter
+            it.layoutManager = LinearLayoutManager(activity)
+        }
+    }
     companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment WorkBookFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            WorkBookFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+        const val ARGS_KEY = "navigate_args_workBook_to_problem"
     }
 }
