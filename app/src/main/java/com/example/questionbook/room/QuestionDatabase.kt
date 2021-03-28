@@ -11,7 +11,6 @@ import androidx.sqlite.db.SupportSQLiteDatabase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-//ma
 @TypeConverters(Converter::class)
 @Database(entities = [
     QuestionCategoryEntity::class,
