@@ -13,9 +13,10 @@
             android:id="@+id/action_workBookFragment_to_problemFragment"
             app:destination="@id/problemFragment" />
         <argument
-            android:name="categoryNo"
-            app:argType="integer"
-            android:defaultValue="0" />
+            android:name="categoryObj"
+            app:argType="com.example.questionbook.room.QuestionCategoryEntity"
+            app:nullable="true"
+            android:defaultValue="@null" />
     </fragment>
     <fragment
         android:id="@+id/answerFragment"
