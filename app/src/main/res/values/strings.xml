@@ -2,18 +2,17 @@
     <string name="app_name">QuestionBook</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-
     <!--@layout/fragment_category.xml -->
     <string name="category_work_books">問題集×</string>
-
     <!--@layout/fragment_workbook.xml  -->
     <string name="workbook_problems">出題数×</string>
     <string name="workbook_accuracy_max">最大の正解率</string>
-
     <!--@menu/menu_sidebar.xml -->
     <string name="side_menu_holder"></string>
     <string name="side_menu_laboratory"></string>
     <string name="side_menu_accuracy"></string>
     <string name="side_menu_game"></string>
+    <!--@layout/fragment_problem.xml -->
+    <string name="problem_label">問題_</string>
 
 </resources>
