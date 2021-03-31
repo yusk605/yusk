@@ -57,7 +57,7 @@ data class QuestionAnswerEntity(
     @ColumnInfo(name = "answer_second")val answerSecond:String,
     @ColumnInfo(name = "answer_third")val answerThird:String,
     @ColumnInfo(name = "answer_right")val answerRight:String,
-    @ColumnInfo(name = "relation_problem")val relationWorkBook:Int
+    @ColumnInfo(name = "relation_problem")val relationProblem:Int
 ):Parcelable
 
 /**

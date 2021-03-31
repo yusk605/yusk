@@ -15,16 +15,14 @@ import com.google.android.material.textfield.TextInputEditText
 import kotlinx.android.synthetic.main.fragment_problem.view.*
 
 class ProblemAdapter(
-    private val onClick:(QuestionProblemEntity)->Unit
+    private val onClick:(QuestionProblemEntity,View)->Unit
 ):ListAdapter<ProblemWithAnswer,ProblemAdapter.ProblemHolder>(Diff) {
 
     companion object Diff:DiffUtil.ItemCallback<ProblemWithAnswer>(){
-
         override fun areItemsTheSame(
             oldItem: ProblemWithAnswer,
             newItem: ProblemWithAnswer
         ): Boolean = oldItem == newItem
-
         override fun areContentsTheSame(
             oldItem: ProblemWithAnswer,
             newItem: ProblemWithAnswer
@@ -33,29 +31,39 @@ class ProblemAdapter(
     }
 
     inner class ProblemHolder(view:View):RecyclerView.ViewHolder(view){
-        val statementEditText = view.findViewById<TextInputEditText>(R.id.item_problem_statement_edit)
-        val radioGroup = view.findViewById<RadioGroup>(R.id.problem_radio_group)
-        val problem_counter = view.findViewById<TextView>(R.id.item_problem_counter)
+
+        val itemProblemStatementEdit   =    view.findViewById<TextInputEditText>(R.id.item_problem_statement_edit)
+        val itemProblemAnswerFirst     =    view.findViewById<TextInputEditText>(R.id.item_problem_answer_first)
+        val itemProblemAnswerSecond    =    view.findViewById<TextInputEditText>(R.id.item_problem_answer_second)
+        val itemProblemAnswerThird     =    view.findViewById<TextInputEditText>(R.id.item_problem_answer_third)
+        val itemProblemAnswerRight     =    view.findViewById<TextInputEditText>(R.id.item_problem_answer_right)
 
         init {
             onClick(
-                getItem(layoutPosition).problemEntity
+                getItem(layoutPosition).problemEntity,
+                itemView
             )
         }
-
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProblemHolder =
         ProblemHolder(
-            LayoutInflater.from(parent.context).inflate(R.layout.fragment_problem,parent,false)
+            LayoutInflater.from(parent.context)
+                .inflate(R.layout.problem_item,parent,false)
         )
 
     override fun onBindViewHolder(holder: ProblemHolder, position: Int) {
-       holder.also {
-           it.statementEditText.setText(
-               getItem(position).problemEntity.problemStatement
-            )
-           it.radioGroup.checkedRadioButtonId
+        val answer = getItem(position).let {
+                item -> item.answerList.filter {
+                    it.relationProblem == item.problemEntity.problemNo
+                }.first()
+            }
+        holder.also {
+            it.itemProblemStatementEdit.setText(getItem(position).problemEntity.problemStatement)
+            it.itemProblemAnswerFirst.setText(answer.answerFirs)
+            it.itemProblemAnswerSecond.setText(answer.answerSecond)
+            it.itemProblemAnswerThird.setText(answer.answerThird)
+            it.itemProblemAnswerRight.setText(answer.answerRight)
        }
     }
 
@@ -66,4 +74,5 @@ class ProblemAdapter(
             3 -> R.id.problem_radio_button_third
             else -> R.id.problem_radio_button_fourth
         }
+
 }
