@@ -9,14 +9,14 @@
         android:name="com.example.questionbook.fragment.WorkBookFragment"
         android:label="fragment_work_book"
         tools:layout="@layout/fragment_work_book" >
-        <action
-            android:id="@+id/action_workBookFragment_to_problemFragment"
-            app:destination="@id/problemFragment" />
         <argument
             android:name="categoryObj"
             app:argType="com.example.questionbook.room.QuestionCategoryEntity"
             app:nullable="true"
             android:defaultValue="@null" />
+        <action
+            android:id="@+id/action_workBookFragment_to_problemListFragment"
+            app:destination="@id/problemListFragment" />
     </fragment>
     <fragment
         android:id="@+id/answerFragment"
@@ -51,11 +51,7 @@
         android:id="@+id/problemFragment"
         android:name="com.example.questionbook.fragment.ProblemFragment"
         android:label="fragment_problem"
-        tools:layout="@layout/fragment_problem" >
-        <action
-            android:id="@+id/action_problemFragment_to_answerFragment"
-            app:destination="@id/answerFragment" />
-    </fragment>
+        tools:layout="@layout/fragment_problem" />
     <fragment
         android:id="@+id/accuracyFragment"
         android:name="com.example.questionbook.fragment.AccuracyFragment"
@@ -66,4 +62,13 @@
         android:name="com.example.questionbook.fragment.GarbageCanFragment"
         android:label="fragment_garbage_can"
         tools:layout="@layout/fragment_garbage_can" />
+    <fragment
+        android:id="@+id/problemListFragment"
+        android:name="com.example.questionbook.ProblemListFragment"
+        android:label="fragment_problem_list"
+        tools:layout="@layout/fragment_problem_list" >
+        <action
+            android:id="@+id/action_problemListFragment_to_answerFragment"
+            app:destination="@id/answerFragment" />
+    </fragment>
 </navigation>
