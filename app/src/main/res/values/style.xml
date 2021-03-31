@@ -24,4 +24,10 @@
         <item name="android:backgroundTint">@color/teal_200</item>
     </style>
 
+    <style name="side_margin">
+        <item name="android:layout_marginStart">16dp</item>
+        <item name="android:layout_marginEnd">16dp</item>
+        <item name="android:layout_marginTop">16dp</item>
+    </style>
+
 </resources>
