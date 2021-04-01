@@ -18,7 +18,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/textView"
+            android:id="@+id/item_workbook_text"
             style="@style/question_default_text"
             android:text="@string/workbook_problems"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -36,13 +36,13 @@
 
         <com.google.android.material.chip.Chip
             style="@style/question_chip"
-            android:id="@+id/workbook_chip"
+            android:id="@+id/item_workbook_chip"
             android:text="android"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/textView2"
+            android:id="@+id/item_workbook_accuracy_count"
             style="@style/question_default_text"
             android:text="@string/workbook_accuracy_max"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -50,12 +50,12 @@
             app:layout_constraintTop_toBottomOf="@+id/item_workbook_title" />
 
         <TextView
-            android:id="@+id/item_workbook_problem_counter"
+            android:id="@+id/item_workbook_problem_count"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="10"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/textView"
+            app:layout_constraintStart_toEndOf="@+id/item_workbook_text"
             app:layout_constraintTop_toBottomOf="@+id/item_workbook_title" />
 
         <TextView
@@ -65,7 +65,7 @@
             android:textStyle="bold"
             android:text="0%"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/textView2"
+            app:layout_constraintStart_toEndOf="@+id/item_workbook_accuracy_count"
             app:layout_constraintTop_toBottomOf="@+id/item_workbook_title" />
  </androidx.constraintlayout.widget.ConstraintLayout>
 </LinearLayout>
