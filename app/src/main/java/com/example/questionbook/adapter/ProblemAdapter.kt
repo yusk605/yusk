@@ -3,6 +3,7 @@ package com.example.questionbook.adapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -34,6 +35,7 @@ class ProblemAdapter(
         val itemProblemAnswerSecond    =    view.findViewById<TextInputEditText>(R.id.item_problem_answer_second)
         val itemProblemAnswerThird     =    view.findViewById<TextInputEditText>(R.id.item_problem_answer_third)
         val itemProblemAnswerRight     =    view.findViewById<TextInputEditText>(R.id.item_problem_answer_right)
+        val itemProblemPageCount       =    view.findViewById<TextView>(R.id.item_problem_page_count)
 
         init {
             onClick(
@@ -61,6 +63,7 @@ class ProblemAdapter(
             it.itemProblemAnswerSecond.setText(answer.answerSecond)
             it.itemProblemAnswerThird.setText(answer.answerThird)
             it.itemProblemAnswerRight.setText(answer.answerRight)
+            it.itemProblemPageCount.text = "${currentList.indexOf(getItem(position))+1}"
        }
     }
 
