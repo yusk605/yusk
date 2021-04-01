@@ -26,5 +26,6 @@
     <string name="item_problem_answer_second">選択2</string>
     <string name="item_problem_answer_third">選択3</string>
     <string name="item_problem_answer_right">解答</string>
+    <string name="item_problem_page">ページ</string>
 
 </resources>

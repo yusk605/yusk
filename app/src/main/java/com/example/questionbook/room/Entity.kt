@@ -8,7 +8,12 @@ import kotlinx.android.parcel.Parcelize
 import java.time.LocalDate
 import java.time.LocalDateTime
 
-//カテゴリーテーブル
+/**
+ * ■カテゴリー分類分けされるテーブル
+ * ・categoryNo　識別番号
+ * ・category_title カテゴリーでのタイトル。
+ * ・category_flag　カテゴリーでのチェック項目。
+ */
 @Parcelize
 @Entity(tableName = "question_category")
 data class QuestionCategoryEntity(

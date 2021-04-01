@@ -1,11 +1,9 @@
 package com.example.questionbook.adapter
 
-import android.media.browse.MediaBrowser
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import androidx.core.os.persistableBundleOf
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -46,7 +44,7 @@ class WorkBookAdapter(
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): WorkBookHolder =
         WorkBookHolder(
             LayoutInflater.from(parent.context)
-                .inflate(R.layout.item_workbook,parent,false)
+                .inflate(R.layout.item_workbook_layout,parent,false)
         )
 
     override fun onBindViewHolder(holder: WorkBookHolder, position: Int) {

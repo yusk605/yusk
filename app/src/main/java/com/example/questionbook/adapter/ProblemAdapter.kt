@@ -3,8 +3,6 @@ package com.example.questionbook.adapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.RadioGroup
-import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -12,7 +10,6 @@ import com.example.questionbook.R
 import com.example.questionbook.room.ProblemWithAnswer
 import com.example.questionbook.room.QuestionProblemEntity
 import com.google.android.material.textfield.TextInputEditText
-import kotlinx.android.synthetic.main.fragment_problem.view.*
 
 class ProblemAdapter(
     private val onClick:(QuestionProblemEntity,View)->Unit
@@ -49,7 +46,7 @@ class ProblemAdapter(
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProblemHolder =
         ProblemHolder(
             LayoutInflater.from(parent.context)
-                .inflate(R.layout.problem_item,parent,false)
+                .inflate(R.layout.item_problem_layout,parent,false)
         )
 
     override fun onBindViewHolder(holder: ProblemHolder, position: Int) {

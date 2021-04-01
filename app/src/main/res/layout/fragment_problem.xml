@@ -21,7 +21,7 @@
             app:layout_constraintStart_toStartOf="parent" />
 
         <TextView
-            android:id="@+id/item_problem_counter"
+            android:id="@+id/item_problem_page"
             android:text="0"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
