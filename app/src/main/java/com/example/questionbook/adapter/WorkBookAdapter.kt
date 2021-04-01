@@ -14,7 +14,7 @@ import com.google.android.material.chip.Chip
 class WorkBookAdapter(
     private val categoryTitle:String,
     private val onClick:(View,WorkBookWithProblemsAndAccuracy) -> Unit
-    ):ListAdapter<WorkBookWithProblemsAndAccuracy,WorkBookAdapter.WorkBookHolder>(Diff) {
+):ListAdapter<WorkBookWithProblemsAndAccuracy,WorkBookAdapter.WorkBookHolder>(Diff) {
 
     companion object Diff: DiffUtil.ItemCallback<WorkBookWithProblemsAndAccuracy>() {
         override fun areItemsTheSame(
@@ -26,6 +26,7 @@ class WorkBookAdapter(
             oldItem: WorkBookWithProblemsAndAccuracy,
             newItem: WorkBookWithProblemsAndAccuracy
         ): Boolean = oldItem == newItem
+
     }
 
     inner class WorkBookHolder(private val view: View):RecyclerView.ViewHolder(view){
