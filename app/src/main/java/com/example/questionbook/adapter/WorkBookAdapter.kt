@@ -31,9 +31,9 @@ class WorkBookAdapter(
 
     inner class WorkBookHolder(private val view: View):RecyclerView.ViewHolder(view){
        val  itemWorkBookTitle = view.findViewById<TextView>(R.id.item_workbook_title)
-       val  itemWorkBookProblemCount = view.findViewById<TextView>(R.id.item_workbook_problem_counter)
+       val  itemWorkBookProblemCount = view.findViewById<TextView>(R.id.item_workbook_problem_count)
        val  itemWorkBookAccuracy = view.findViewById<TextView>(R.id.item_workbook_accuracy)
-       val  itemWorkBookChip    = view.findViewById<Chip>(R.id.workbook_chip)
+       val  itemWorkBookChip    = view.findViewById<Chip>(R.id.item_workbook_chip)
         init {
             onClick(
                 view,
