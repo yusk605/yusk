@@ -26,6 +26,7 @@ class MainActivity : AppCompatActivity() {
         NavigationUI.setupWithNavController(binding.navigationView,controller)
     }
 
+
     override fun onSupportNavigateUp(): Boolean {
         return NavigationUI.navigateUp(controller,drawerLayout)
     }
