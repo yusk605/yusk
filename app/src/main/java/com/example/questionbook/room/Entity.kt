@@ -105,5 +105,5 @@ data class ProblemWithAnswer(
         @Relation(
                 parentColumn = "problemNo",
                 entityColumn = "relation_problem"
-        )val answerList:List<QuestionAnswerEntity>
+        )val answer:QuestionAnswerEntity
 ):Parcelable
