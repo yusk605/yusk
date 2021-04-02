@@ -52,11 +52,7 @@ class ProblemAdapter(
         )
 
     override fun onBindViewHolder(holder: ProblemHolder, position: Int) {
-        val answer = getItem(position).let {
-                item -> item.answerList.filter {
-                    it.relationProblem == item.problemEntity.problemNo
-                }.first()
-            }
+        val answer = getItem(position).answer
         holder.also {
             it.itemProblemStatementEdit.setText(getItem(position).problemEntity.problemStatement)
             it.itemProblemAnswerFirst.setText(answer.answerFirs)
