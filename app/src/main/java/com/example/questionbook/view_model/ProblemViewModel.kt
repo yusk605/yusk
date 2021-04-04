@@ -2,9 +2,8 @@ package com.example.questionbook.view_model
 
 import android.app.Application
 import androidx.lifecycle.*
-import com.example.questionbook.room.ProblemWithAnswer
+import com.example.questionbook.room.ProblemWithAnswerAndHistory
 import com.example.questionbook.room.QuestionDatabase
-import com.example.questionbook.room.QuestionProblemDao
 import com.example.questionbook.room.QuestionProblemEntity
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -15,7 +14,7 @@ class ProblemViewModel(private val app:Application): AndroidViewModel(app) {
         .getInstance(app,viewModelScope as LifecycleCoroutineScope)
         .getProblemDao()
 
-    val data:LiveData<List<ProblemWithAnswer>> by lazy {
+    val data:LiveData<List<ProblemWithAnswerAndHistory>> by lazy {
         dao.getAll()
     }
 
