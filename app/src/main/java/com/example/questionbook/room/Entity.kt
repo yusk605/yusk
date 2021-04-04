@@ -34,13 +34,14 @@ data class QuestionWorkBookEntity(
 ):Parcelable
 
 //正解率テーブル
+@Parcelize
 @Entity(tableName = "question_accuracy")
 data class QuestionAccuracyEntity(
         @PrimaryKey(autoGenerate = true)val accuracyNo:Int,
         @ColumnInfo(name = "accuracy_rate")val accuracyRate:Float,
         @ColumnInfo(name = "accuracy_date")val accuracyDate:LocalDate,
         @ColumnInfo(name = "relation_workbook")val relationWorkBook: Int
-)
+):Parcelable
 
 //問題文テーブル
 @Parcelize
@@ -65,6 +66,15 @@ data class QuestionAnswerEntity(
     @ColumnInfo(name = "relation_problem")val relationProblem:Int
 ):Parcelable
 
+@Parcelize
+@Entity(tableName = "question_history")
+data class QuestionHistory(
+    @PrimaryKey(autoGenerate = true)val historyNo:Int,
+    @ColumnInfo(name = "history_rate")val historyRate:Int,
+    @ColumnInfo(name = "relation_problem")val relationProblem:Int,
+    @ColumnInfo(name = "relation_accuracy")val relationAccuracy:Int
+):Parcelable
+
 /**
  * カテゴリーテーブルの識別番号に紐づいた問題集一覧を取得します。
  */
@@ -77,6 +87,7 @@ data class CategoryWithWorkBooks(
                 entityColumn = "relation_category"
         )val workBookList:List<QuestionWorkBookEntity>
 ):Parcelable
+
 
 /**
  * ワークブック（問題集）の識別番号に紐づいた、テキスト（問題）をすべて取得する。
@@ -95,15 +106,32 @@ data class WorkBookWithProblemsAndAccuracy(
         val accuracyList:List<QuestionAccuracyEntity>
 ):Parcelable
 
+
 /**
  *問題となるテキストの識別番号に紐づいた、回答欄すべてを取得する。
  */
 @Parcelize
-data class ProblemWithAnswer(
+data class ProblemWithAnswerAndHistory(
         @Embedded
         val problemEntity: QuestionProblemEntity,
         @Relation(
                 parentColumn = "problemNo",
                 entityColumn = "relation_problem"
-        )val answer:QuestionAnswerEntity
+        )val answer:QuestionAnswerEntity,
+        @Relation(
+            parentColumn = "problemNo",
+            entityColumn = "relation_problem"
+        )val history:QuestionHistory
 ):Parcelable
+
+@Parcelize
+data class AccuracyWithHistory(
+        @Embedded
+        val accuracyEntity: QuestionAccuracyEntity,
+        @Relation(
+                parentColumn = "accuracyNo",
+                entityColumn = "relation_accuracy"
+        )val historyList:List<QuestionHistory>
+):Parcelable
+
+
