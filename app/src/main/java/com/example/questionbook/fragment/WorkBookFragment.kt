@@ -27,7 +27,7 @@ class WorkBookFragment : Fragment() {
         WorkBookAdapter(category?.categoryTitle?:""){ view,obj->
             val bundle=Bundle().apply { putParcelable(ARGS_KEY,obj) }
             Navigation.findNavController(view)
-                .navigate(R.id.action_workBookFragment_to_problemFragment,bundle)
+                .navigate(R.id.action_workBookFragment_to_problemListFragment,bundle)
         }
     }
 
