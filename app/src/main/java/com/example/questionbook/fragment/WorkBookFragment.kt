@@ -55,8 +55,10 @@ class WorkBookFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.data.observe(viewLifecycleOwner)
-        { data-> adapter.submitList(data) }
+        recycleInit()
+        viewModel.data.observe(viewLifecycleOwner) { data->
+            adapter.submitList(data)
+        }
     }
     private fun recycleInit(){
         recycle_view_work_book.also {
