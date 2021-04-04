@@ -27,7 +27,7 @@ interface QuestionWorkBookDao{
 
 @Dao    //問題文
 interface QuestionProblemDao{
-    @Query("select * from question_problem")fun getAll():LiveData<List<ProblemWithAnswer>>
+    @Query("select * from question_problem")fun getAll():LiveData<List<ProblemWithAnswerAndHistory>>
     @Insert suspend fun insert(entity:QuestionProblemEntity)
     @Update suspend fun update(entity:QuestionProblemEntity)
     @Delete suspend fun delete(entity:QuestionProblemEntity)
@@ -40,7 +40,8 @@ interface QuestionProblemDao{
 
 @Dao    //正解率
 interface QuestionAccuracyDao{
-    @Query("select * from question_accuracy")fun getAll():LiveData<List<QuestionAccuracyEntity>>
+    @Query("select * from question_accuracy")fun getAll():LiveData<List<AccuracyWithHistory>>
+
     @Insert suspend fun insert(entity:QuestionAccuracyEntity)
     @Update suspend fun update(entity:QuestionAccuracyEntity)
     @Delete suspend fun delete(entity:QuestionAccuracyEntity)
@@ -64,3 +65,7 @@ interface QuestionAnswerDao{
     suspend fun collBackDelete()
 }
 
+@Dao
+interface QuestionHistoryDao{
+    //TODO 入出力の記述を行うこと。
+}
