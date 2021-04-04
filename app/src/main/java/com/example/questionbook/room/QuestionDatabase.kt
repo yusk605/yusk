@@ -17,7 +17,8 @@ import kotlinx.coroutines.launch
     QuestionWorkBookEntity::class,
     QuestionProblemEntity::class,
     QuestionAccuracyEntity::class,
-    QuestionAnswerEntity::class
+    QuestionAnswerEntity::class,
+    QuestionHistory::class
                      ],version = 1)
 abstract class QuestionDatabase:RoomDatabase() {
 
@@ -26,6 +27,7 @@ abstract class QuestionDatabase:RoomDatabase() {
     abstract fun getProblemDao():QuestionProblemDao
     abstract fun getAccuracyDao():QuestionAccuracyDao
     abstract fun getAnswerDao():QuestionAnswerDao
+    abstract fun getHistoryDao():QuestionHistoryDao
 
     companion object{
 
