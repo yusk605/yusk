@@ -8,22 +8,22 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.questionbook.R
-import com.example.questionbook.room.ProblemWithAnswer
+import com.example.questionbook.room.ProblemWithAnswerAndHistory
 import com.example.questionbook.room.QuestionProblemEntity
 import com.google.android.material.textfield.TextInputEditText
 
 class ProblemAdapter(
     private val onClick:(QuestionProblemEntity,View)->Unit
-):ListAdapter<ProblemWithAnswer,ProblemAdapter.ProblemHolder>(Diff) {
+):ListAdapter<ProblemWithAnswerAndHistory,ProblemAdapter.ProblemHolder>(Diff) {
 
-    companion object Diff:DiffUtil.ItemCallback<ProblemWithAnswer>(){
+    companion object Diff:DiffUtil.ItemCallback<ProblemWithAnswerAndHistory>(){
         override fun areItemsTheSame(
-            oldItem: ProblemWithAnswer,
-            newItem: ProblemWithAnswer
+            oldItem: ProblemWithAnswerAndHistory,
+            newItem: ProblemWithAnswerAndHistory
         ): Boolean = oldItem == newItem
         override fun areContentsTheSame(
-            oldItem: ProblemWithAnswer,
-            newItem: ProblemWithAnswer
+            oldItem: ProblemWithAnswerAndHistory,
+            newItem: ProblemWithAnswerAndHistory
         ): Boolean = oldItem == newItem
 
     }
