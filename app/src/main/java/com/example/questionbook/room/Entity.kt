@@ -8,9 +8,9 @@ import java.time.LocalDateTime
 
 /**
  * ■カテゴリー分類分けされるテーブル
- * ・categoryNo　識別番号
- * ・category_title カテゴリーでのタイトル。
- * ・category_flag　カテゴリーでのチェック項目。
+ *  @param categoryNo　  識別番号
+ *  @param categoryTitle カテゴリーでのタイトル。
+ *  @param categoryFlag　カテゴリーでのチェック項目。
  */
 @Parcelize
 @Entity(tableName = "question_category")
