@@ -27,6 +27,18 @@
     <string name="item_problem_answer_third">選択3</string>
     <string name="item_problem_answer_right">解答</string>
     <string name="item_problem_page">ページ</string>
+
     <!--@layout/fragment.LaboratoryFragment-->
     <string name="laboratory_category_btm">カテゴリーの追加</string>
+    <string name="laboratory_workbook_btm">問題集の追加</string>
+    <string name="laboratory_problem_btm">テキストの追加</string>
+
+    <!--@layout/problem_form.xml-->
+    <string name="problem_form_label">テキスト作成</string>
+    <string name="problem_form_statement">問題文</string>
+    <string name="problem_form_answer_first">解答案1</string>
+    <string name="problem_form_answer_second">解答案2</string>
+    <string name="problem_form_answer_third">解答案3</string>
+    <string name="problem_form_answer_right">解答</string>
+
 </resources>
