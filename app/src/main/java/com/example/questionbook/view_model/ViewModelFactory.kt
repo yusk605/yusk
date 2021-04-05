@@ -3,7 +3,6 @@ package com.example.questionbook.view_model
 import android.app.Application
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.example.questionbook.room.QuestionDatabase
 
 class CategoryViewModelFactory(private val app: Application):ViewModelProvider.Factory{
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
@@ -35,13 +34,13 @@ class AccuracyViewModelFactory(private val app:Application):ViewModelProvider.Fa
     }
 }
 
-class AnswerViewModelFactory(private val app: Application):ViewModelProvider.Factory{
+class QuestionViewModelFactory(private val app: Application):ViewModelProvider.Factory{
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
 
-        if (modelClass.isAssignableFrom(AnswerViewModel::class.java))
-            return AnswerViewModel(app) as T
+        if (modelClass.isAssignableFrom(QuestionFormViewModel::class.java))
+            return QuestionFormViewModel(app) as T
 
-        throw IllegalArgumentException("Type mismatch AnswerViewModel")
+        throw IllegalArgumentException("Type mismatch QuestionViewModelFactory")
     }
 }
 
