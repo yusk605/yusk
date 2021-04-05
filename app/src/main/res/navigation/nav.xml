@@ -41,7 +41,11 @@
         android:id="@+id/laboratoryFragment"
         android:name="com.example.questionbook.fragment.LaboratoryFragment"
         android:label="fragment_laboratory"
-        tools:layout="@layout/fragment_laboratory" />
+        tools:layout="@layout/fragment_laboratory" >
+        <action
+            android:id="@+id/action_laboratoryFragment_to_problemInsertFragment"
+            app:destination="@id/problemInsertFragment" />
+    </fragment>
     <fragment
         android:id="@+id/holderFragment"
         android:name="com.example.questionbook.fragment.HolderFragment"
@@ -73,7 +77,7 @@
     </fragment>
     <fragment
         android:id="@+id/problemInsertFragment"
-        android:name="com.example.questionbook.ProblemInsertFragment"
+        android:name="com.example.questionbook.fragment.QuestionFormFragment"
         android:label="fragment_problem_insert"
         tools:layout="@layout/fragment_problem_insert" />
 </navigation>
