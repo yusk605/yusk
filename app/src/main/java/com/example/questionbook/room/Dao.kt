@@ -65,7 +65,12 @@ interface QuestionAnswerDao{
     suspend fun collBackDelete()
 }
 
-@Dao
+
+@Dao    //履歴の表示
 interface QuestionHistoryDao{
-    //TODO 入出力の記述を行うこと。
+    @Query("select * from question_history")fun getAll():LiveData<List<QuestionHistoryEntity>>
+    @Insert fun insert(entity:QuestionHistoryEntity)
+    @Update fun update(entity:QuestionHistoryEntity)
+    @Delete fun delete(entity:QuestionHistoryEntity)
+
 }
