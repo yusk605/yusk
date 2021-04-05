@@ -10,30 +10,40 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/problem_form_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:text="@string/problem_form_label"
-            android:textSize="28sp"
-            app:layout_constraintBottom_toTopOf="@+id/linearLayout"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
         <LinearLayout
             android:id="@+id/linearLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
+            <TextView
+                android:id="@+id/form_label_category"
+                android:text="@string/problem_form_label_spinner_category"
+                style="@style/default_margin_side"
+                android:layout_marginTop="16dp"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"/>
             <Spinner
+                android:id="@+id/form_problem_category_spinner"
+                android:layout_marginBottom="8dp"
+                style="@style/default_margin_side"
+                android:layout_height="50dp"
+                android:layout_width="match_parent" />
+            <TextView
+                android:id="@+id/form_label_workbook"
+                android:text="@string/problem_form_label_spinner_workbook"
+                style="@style/default_margin_side"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"/>
+            <Spinner
+                android:id="@+id/form_problem_workbook_spinner"
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"
-                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                style="@style/Widget.AppCompat.Spinner.DropDown"
+                android:layout_height="50dp"
                 android:layout_width="match_parent"/>
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/form_problem_textInputLayout"
@@ -48,10 +58,10 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/form_problem_statement_edit"
                     android:layout_width="match_parent"
-                    android:layout_height="240dp"
+                    android:layout_height="180dp"
                     android:gravity="start||top"
-                    android:hint="問題集"
-                    android:maxLines="10" />
+                    android:hint="@string/problem_form_statement"
+                    android:maxLines="6" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
