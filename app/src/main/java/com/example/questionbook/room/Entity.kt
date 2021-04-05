@@ -1,9 +1,7 @@
 package com.example.questionbook.room
 
-import android.os.Parcel
 import android.os.Parcelable
 import androidx.room.*
-import kotlinx.android.parcel.Parceler
 import kotlinx.android.parcel.Parcelize
 import java.time.LocalDate
 import java.time.LocalDateTime
@@ -68,7 +66,7 @@ data class QuestionAnswerEntity(
 
 @Parcelize
 @Entity(tableName = "question_history")
-data class QuestionHistory(
+data class QuestionHistoryEntity(
     @PrimaryKey(autoGenerate = true)val historyNo:Int,
     @ColumnInfo(name = "history_rate")val historyRate:Int,
     @ColumnInfo(name = "relation_problem")val relationProblem:Int,
@@ -121,7 +119,7 @@ data class ProblemWithAnswerAndHistory(
         @Relation(
             parentColumn = "problemNo",
             entityColumn = "relation_problem"
-        )val history:QuestionHistory
+        )val history:QuestionHistoryEntity
 ):Parcelable
 
 @Parcelize
@@ -131,7 +129,7 @@ data class AccuracyWithHistory(
         @Relation(
                 parentColumn = "accuracyNo",
                 entityColumn = "relation_accuracy"
-        )val historyList:List<QuestionHistory>
+        )val historyList:List<QuestionHistoryEntity>
 ):Parcelable
 
 
