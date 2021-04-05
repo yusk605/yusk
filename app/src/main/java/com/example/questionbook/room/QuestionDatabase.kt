@@ -1,7 +1,6 @@
 package com.example.questionbook.room
 
 import android.app.Application
-import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.LifecycleCoroutineScope
 import androidx.room.Database
 import androidx.room.Room
@@ -18,7 +17,7 @@ import kotlinx.coroutines.launch
     QuestionProblemEntity::class,
     QuestionAccuracyEntity::class,
     QuestionAnswerEntity::class,
-    QuestionHistory::class
+    QuestionHistoryEntity::class
                      ],version = 1)
 abstract class QuestionDatabase:RoomDatabase() {
 
