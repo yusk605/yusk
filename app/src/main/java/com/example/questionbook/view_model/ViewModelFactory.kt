@@ -35,11 +35,11 @@ class AccuracyViewModelFactory(private val app:Application):ViewModelProvider.Fa
     }
 }
 
-class AnswerViewModelFactory(private val database:QuestionDatabase):ViewModelProvider.Factory{
+class AnswerViewModelFactory(private val app: Application):ViewModelProvider.Factory{
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
 
         if (modelClass.isAssignableFrom(AnswerViewModel::class.java))
-            return AnswerViewModel(database.getAnswerDao()) as T
+            return AnswerViewModel(app) as T
 
         throw IllegalArgumentException("Type mismatch AnswerViewModel")
     }
