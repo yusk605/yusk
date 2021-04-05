@@ -30,11 +30,11 @@ class ProblemAdapter(
 
     inner class ProblemHolder(view:View):RecyclerView.ViewHolder(view){
 
-        val itemProblemStatementEdit   =    view.findViewById<TextInputEditText>(R.id.item_problem_statement_edit)
-        val itemProblemAnswerFirst     =    view.findViewById<TextInputEditText>(R.id.item_problem_answer_first)
-        val itemProblemAnswerSecond    =    view.findViewById<TextInputEditText>(R.id.item_problem_answer_second)
-        val itemProblemAnswerThird     =    view.findViewById<TextInputEditText>(R.id.item_problem_answer_third)
-        val itemProblemAnswerRight     =    view.findViewById<TextInputEditText>(R.id.item_problem_answer_right)
+        val itemProblemStatementEdit   =    view.findViewById<TextInputEditText>(R.id.form_problem_statement_edit)
+        val itemProblemAnswerFirst     =    view.findViewById<TextInputEditText>(R.id.form_problem_answer_first)
+        val itemProblemAnswerSecond    =    view.findViewById<TextInputEditText>(R.id.form_problem_answer_second)
+        val itemProblemAnswerThird     =    view.findViewById<TextInputEditText>(R.id.form_problem_answer_third)
+        val itemProblemAnswerRight     =    view.findViewById<TextInputEditText>(R.id.form_problem_answer_right)
         val itemProblemPageCount       =    view.findViewById<TextView>(R.id.item_problem_page_count)
 
         init {
