@@ -71,4 +71,5 @@
             android:id="@+id/action_problemListFragment_to_answerFragment"
             app:destination="@id/answerFragment" />
     </fragment>
+    <fragment android:id="@+id/placeholder" />
 </navigation>
