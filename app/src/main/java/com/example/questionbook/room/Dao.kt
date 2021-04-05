@@ -3,7 +3,7 @@ package com.example.questionbook.room
 import androidx.lifecycle.LiveData
 import androidx.room.*
 
-@Dao    //カテゴリー
+@Dao
 interface QuestionCategoryDao{
     @Query("select * from question_category")fun getAll():LiveData<List<CategoryWithWorkBooks>>
     @Insert suspend fun insert(entity:QuestionCategoryEntity)
@@ -11,7 +11,7 @@ interface QuestionCategoryDao{
     @Delete suspend fun delete(entity:QuestionCategoryEntity)
 }
 
-@Dao    //問題集
+@Dao
 interface QuestionWorkBookDao{
     @Query("select * from question_workbook")fun getAll():LiveData<List<WorkBookWithProblemsAndAccuracy>>
     @Insert suspend fun insert(entity:QuestionWorkBookEntity)
@@ -25,7 +25,7 @@ interface QuestionWorkBookDao{
 
 }
 
-@Dao    //問題文
+@Dao
 interface QuestionProblemDao{
     @Query("select * from question_problem")fun getAll():LiveData<List<ProblemWithAnswerAndHistory>>
     @Insert suspend fun insert(entity:QuestionProblemEntity)
@@ -38,7 +38,7 @@ interface QuestionProblemDao{
     suspend fun collBackDelete()
 }
 
-@Dao    //正解率
+@Dao
 interface QuestionAccuracyDao{
     @Query("select * from question_accuracy")fun getAll():LiveData<List<AccuracyWithHistory>>
 
@@ -52,7 +52,7 @@ interface QuestionAccuracyDao{
     suspend fun collBackDelete()
 }
 
-@Dao    //回答欄
+@Dao
 interface QuestionAnswerDao{
     @Query("select * from question_answer")fun getAll():LiveData<List<QuestionAnswerEntity>>
     @Insert fun insert(entity:QuestionAnswerEntity)
@@ -66,7 +66,7 @@ interface QuestionAnswerDao{
 }
 
 
-@Dao    //履歴の表示
+@Dao
 interface QuestionHistoryDao{
     @Query("select * from question_history")fun getAll():LiveData<List<QuestionHistoryEntity>>
     @Insert fun insert(entity:QuestionHistoryEntity)
