@@ -26,10 +26,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintStart_toEndOf="@+id/problem_label"
-            app:layout_constraintBottom_toTopOf="@+id/item_textInputLayout" />
+            app:layout_constraintBottom_toTopOf="@+id/form_problem_textInputLayout" />
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/item_textInputLayout"
+            android:id="@+id/form_problem_textInputLayout"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -40,36 +40,46 @@
             app:layout_constraintTop_toBottomOf="@id/problem_label">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/item_problem_statement_edit"
+                android:id="@+id/form_problem_statement_edit"
                 android:layout_width="match_parent"
                 android:layout_height="240dp"
                 android:gravity="start||top"
                 android:hint="問題集"
                 android:maxLines="10" />
-
-            <RadioGroup
-                android:id="@+id/problem_radio_group"
-                android:layout_marginTop="16dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <RadioButton
-                    android:id="@+id/problem_radio_button_first"
-                    android:layout_height="wrap_content"
-                    android:layout_width="wrap_content"/>
-                <RadioButton
-                    android:id="@+id/problem_radio_button_second"
-                    android:layout_height="wrap_content"
-                    android:layout_width="wrap_content"/>
-                <RadioButton
-                    android:id="@+id/problem_radio_button_third"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-                <RadioButton
-                    android:id="@+id/problem_radio_button_fourth"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
-            </RadioGroup>
         </com.google.android.material.textfield.TextInputLayout>
+
+        <RadioGroup
+            android:id="@+id/problem_radio_group"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/form_problem_textInputLayout">
+
+            <RadioButton
+                android:id="@+id/problem_radio_button_first"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <RadioButton
+                android:id="@+id/problem_radio_button_second"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <RadioButton
+                android:id="@+id/problem_radio_button_third"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <RadioButton
+                android:id="@+id/problem_radio_button_fourth"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </RadioGroup>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.card.MaterialCardView>
 </layout>
