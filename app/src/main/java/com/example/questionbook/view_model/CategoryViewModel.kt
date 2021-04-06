@@ -12,7 +12,7 @@ import kotlinx.coroutines.launch
 
 class CategoryViewModel(private val app: Application):AndroidViewModel(app) {
 
-    private val dao = QuestionDatabase.getInstance(app, viewModelScope as LifecycleCoroutineScope).getCategoryDao()
+    private val dao = QuestionDatabase.getInstance(app, viewModelScope).getCategoryDao()
     private var _data:LiveData<List<CategoryWithWorkBooks>> = dao.getAll()
 
     val data get() = _data

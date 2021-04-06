@@ -16,7 +16,7 @@ import kotlinx.coroutines.launch
  */
 class QuestionFormViewModel(private val app:Application): AndroidViewModel(app) {
 
-    private val db   = QuestionDatabase.getInstance(app,viewModelScope as LifecycleCoroutineScope)
+    private val db   = QuestionDatabase.getInstance(app,viewModelScope)
 
     private val problemDao = db.getProblemDao()
 

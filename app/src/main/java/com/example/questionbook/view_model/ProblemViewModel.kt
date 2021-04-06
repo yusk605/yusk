@@ -11,7 +11,7 @@ import kotlinx.coroutines.launch
 class ProblemViewModel(private val app:Application): AndroidViewModel(app) {
 
     private val dao = QuestionDatabase
-        .getInstance(app,viewModelScope as LifecycleCoroutineScope)
+        .getInstance(app,viewModelScope)
         .getProblemDao()
 
     val data:LiveData<List<ProblemWithAnswerAndHistory>> by lazy {

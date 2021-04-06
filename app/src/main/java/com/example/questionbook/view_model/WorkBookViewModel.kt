@@ -12,7 +12,7 @@ import kotlinx.coroutines.launch
 class WorkBookViewModel(app:Application):AndroidViewModel(app) {
     private val  dao =
         QuestionDatabase
-        .getInstance(app,viewModelScope as LifecycleCoroutineScope)
+        .getInstance(app,viewModelScope)
         .getWorkBookDao()
 
     val data:LiveData<List<WorkBookWithProblemsAndAccuracy>> by lazy {
