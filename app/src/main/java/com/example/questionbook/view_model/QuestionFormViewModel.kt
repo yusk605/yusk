@@ -8,6 +8,12 @@ import com.example.questionbook.room.QuestionDatabase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
+/**
+ * ■保持されているデータ
+ * ・Problem 問題集
+ * ・Answer 解答
+ * @param app  　アプリケーションの指定
+ */
 class QuestionFormViewModel(private val app:Application): AndroidViewModel(app) {
 
     private val db   = QuestionDatabase.getInstance(app,viewModelScope as LifecycleCoroutineScope)
