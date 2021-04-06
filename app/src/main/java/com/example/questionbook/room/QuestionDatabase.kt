@@ -7,6 +7,7 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import androidx.sqlite.db.SupportSQLiteDatabase
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
@@ -32,7 +33,7 @@ abstract class QuestionDatabase:RoomDatabase() {
 
         private var singleton:QuestionDatabase? = null
 
-        fun getInstance(application:Application, scope:LifecycleCoroutineScope):QuestionDatabase =
+        fun getInstance(application:Application, scope:CoroutineScope):QuestionDatabase =
             singleton ?: synchronized(this){
                 val instance = Room
                     .databaseBuilder(application,QuestionDatabase::class.java,"question_book")
@@ -45,7 +46,7 @@ abstract class QuestionDatabase:RoomDatabase() {
         /**
          *多分エラーが発生します。
          */
-        class QuestionDBCallBack(private val scope: LifecycleCoroutineScope):RoomDatabase.Callback(){
+        class QuestionDBCallBack(private val scope:CoroutineScope):RoomDatabase.Callback(){
             override fun onOpen(db: SupportSQLiteDatabase) {
                 super.onOpen(db)
                 singleton?.let { database->
