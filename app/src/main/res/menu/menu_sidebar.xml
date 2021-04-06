@@ -12,5 +12,11 @@
         <item
             android:id="@+id/side_third"
             android:title="TODO"/>
+        <item
+            android:id="@+id/side_third2"
+            android:title="TODO"/>
+        <item
+            android:id="@+id/side_third11"
+            android:title="TODO"/>
     </group>
 </menu>
