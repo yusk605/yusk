@@ -3,6 +3,7 @@ package com.example.questionbook.adapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
@@ -13,7 +14,7 @@ import com.example.questionbook.room.QuestionProblemEntity
 import com.google.android.material.textfield.TextInputEditText
 
 class ProblemAdapter(
-    private val onClick:(QuestionProblemEntity,View)->Unit
+    private val onClickButton:(Button,QuestionProblemEntity)->Unit
 ):ListAdapter<ProblemWithAnswerAndHistory,ProblemAdapter.ProblemHolder>(Diff) {
 
     companion object Diff:DiffUtil.ItemCallback<ProblemWithAnswerAndHistory>(){
@@ -25,7 +26,6 @@ class ProblemAdapter(
             oldItem: ProblemWithAnswerAndHistory,
             newItem: ProblemWithAnswerAndHistory
         ): Boolean = oldItem == newItem
-
     }
 
     inner class ProblemHolder(view:View):RecyclerView.ViewHolder(view){
@@ -36,11 +36,12 @@ class ProblemAdapter(
         val itemProblemAnswerThird     =    view.findViewById<TextInputEditText>(R.id.form_problem_answer_third)
         val itemProblemAnswerRight     =    view.findViewById<TextInputEditText>(R.id.form_problem_answer_right)
         val itemProblemPageCount       =    view.findViewById<TextView>(R.id.item_problem_page_count)
+        val itemProblemButton          =    view.findViewById<Button>(R.id.problem_button_update)
 
         init {
-            onClick(
-                getItem(layoutPosition).problemEntity,
-                itemView
+            onClickButton(
+                itemProblemButton,
+                getItem(layoutPosition).problemEntity
             )
         }
     }
