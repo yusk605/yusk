@@ -36,7 +36,7 @@ abstract class QuestionDatabase:RoomDatabase() {
             singleton ?: synchronized(this){
                 val instance = Room
                     .databaseBuilder(application,QuestionDatabase::class.java,"question_book")
-                    .addCallback(QuestionDBCallBack(scope))
+                    //.addCallback(QuestionDBCallBack(scope))
                     .build()
                 singleton = instance
                 instance
