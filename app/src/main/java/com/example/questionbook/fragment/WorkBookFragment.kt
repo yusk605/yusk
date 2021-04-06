@@ -60,12 +60,14 @@ class WorkBookFragment : Fragment() {
             adapter.submitList(data)
         }
     }
+
     private fun recycleInit(){
         recycle_view_work_book.also {
             it.adapter = adapter
             it.layoutManager = LinearLayoutManager(activity)
         }
     }
+
     companion object {
         const val ARGS_KEY = "navigate_args_workBook_to_problem"
     }

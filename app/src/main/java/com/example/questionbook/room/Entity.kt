@@ -92,6 +92,13 @@ data class QuestionAnswerEntity(
     @ColumnInfo(name = "relation_problem")val relationProblem:Int
 ):Parcelable
 
+/**
+ * ■履歴を保存するためのエンティティ
+ * @param historyNo         識別番号
+ * @param historyRate       正解
+ * @param relationProblem   問題集と紐づくナンバー
+ * @param relationAccuracy  解答と紐づくナンバー
+ */
 @Parcelize
 @Entity(tableName = "question_history")
 data class QuestionHistoryEntity(
