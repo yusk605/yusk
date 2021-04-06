@@ -16,12 +16,14 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var drawerLayout: DrawerLayout
-    private lateinit var controller: NavController
+    private val controller: NavController by lazy{
+        this.findNavController(R.id.fragment_host)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        lateInit()
         binding = setContentView<ActivityMainBinding>(this,R.layout.activity_main)
+        drawerLayout = binding.drawerLayout
         NavigationUI.setupActionBarWithNavController(this,controller,drawerLayout)
         NavigationUI.setupWithNavController(binding.navigationView,controller)
     }
@@ -29,14 +31,6 @@ class MainActivity : AppCompatActivity() {
 
     override fun onSupportNavigateUp(): Boolean {
         return NavigationUI.navigateUp(controller,drawerLayout)
-    }
-
-    /**
-     * バッキングフィールドへ初期化を行うメソッド。
-     */
-    private fun lateInit(){
-        drawerLayout = binding.drawerLayout
-        controller = this.findNavController(R.id.nav_controller_view_tag)
     }
 
 }

@@ -18,7 +18,7 @@ interface QuestionWorkBookDao{
     @Update suspend fun update(entity:QuestionWorkBookEntity)
     @Delete suspend fun delete(entity:QuestionWorkBookEntity)
 
-    @Transaction
+
     @Query("delete from question_workbook where relation_category in (" +
             "select relation_category from question_workbook left join question_category on relation_category = categoryNo where categoryNo is null)")
     suspend fun collBackDelete()
@@ -32,7 +32,7 @@ interface QuestionProblemDao{
     @Update suspend fun update(entity:QuestionProblemEntity)
     @Delete suspend fun delete(entity:QuestionProblemEntity)
 
-    @Transaction
+
     @Query("delete from question_problem where relation_workbook in ( " +
             "select relation_workbook from question_problem left join question_workbook on relation_workbook = workBookNo where workBookNo is null)")
     suspend fun collBackDelete()
@@ -46,7 +46,7 @@ interface QuestionAccuracyDao{
     @Update suspend fun update(entity:QuestionAccuracyEntity)
     @Delete suspend fun delete(entity:QuestionAccuracyEntity)
 
-    @Transaction
+
     @Query("delete from question_accuracy where relation_workbook in (" +
             " select relation_workbook from question_accuracy left join question_workbook on relation_workbook = workBookNo where workBookNo is null)")
     suspend fun collBackDelete()
@@ -59,7 +59,7 @@ interface QuestionAnswerDao{
     @Update fun update(entity:QuestionAnswerEntity)
     @Delete fun delete(entity:QuestionAnswerEntity)
 
-    @Transaction
+
     @Query("delete from question_answer where relation_problem in ( " +
             "select relation_problem from question_answer left join question_problem on relation_problem = problemNo where answerNo is null)")
     suspend fun collBackDelete()

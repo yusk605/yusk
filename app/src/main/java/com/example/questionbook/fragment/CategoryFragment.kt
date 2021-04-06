@@ -11,7 +11,6 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.questionbook.R
 import com.example.questionbook.adapter.CategoryAdapter
-import com.example.questionbook.databinding.FragmentCategoryBinding
 import com.example.questionbook.room.QuestionDatabase
 import com.example.questionbook.view_model.CategoryViewModel
 import com.example.questionbook.view_model.CategoryViewModelFactory
@@ -19,8 +18,6 @@ import kotlinx.android.synthetic.main.fragment_category.*
 
 
 class CategoryFragment : Fragment() {
-
-    private lateinit var binding: FragmentCategoryBinding
 
     /**
      * アダプタークラスの作成。
@@ -49,8 +46,7 @@ class CategoryFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentCategoryBinding.inflate(inflater,container,false)
-        return binding.root
+        return inflater.inflate(R.layout.fragment_category,container,false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
