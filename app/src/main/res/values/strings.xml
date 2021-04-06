@@ -18,7 +18,7 @@
 
     <!--@layout/fragment_problem.xml -->
     <string name="item_problem_label">問題_</string>
-    <stirng name="item_problem">問題集</stirng>
+    <string name="item_problem">問題集</string>
 
     <!--@layout/problem_item.xml -->
     <string name="item_problem_statement">問題集</string>

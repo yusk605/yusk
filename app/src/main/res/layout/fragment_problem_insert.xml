@@ -59,7 +59,7 @@
                     android:id="@+id/form_problem_statement_edit"
                     android:layout_width="match_parent"
                     android:layout_height="180dp"
-                    android:gravity="start||top"
+                    android:gravity="start|top"
                     android:hint="@string/problem_form_statement"
                     android:maxLines="6" />
             </com.google.android.material.textfield.TextInputLayout>

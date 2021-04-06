@@ -4,19 +4,24 @@
     tools:showIn="navigation_view">
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/side_first"
-            android:title="TODO"/>
+            android:id="@+id/categoryFragment"
+            android:title="ホルダー"
+            android:icon="@drawable/question_book_holder"/>
         <item
-            android:id="@+id/side_second"
-            android:title="TODO"/>
+            android:id="@+id/laboratoryFragment"
+            android:title="ラボ"
+            android:icon="@drawable/laboratory_ico"/>
         <item
             android:id="@+id/side_third"
-            android:title="TODO"/>
+            android:title="回答率"
+            android:icon="@drawable/question_accuracy"/>
         <item
             android:id="@+id/side_third2"
-            android:title="TODO"/>
+            android:title="ゲーム"
+            android:icon="@drawable/question_geme_ic"/>
         <item
             android:id="@+id/side_third11"
-            android:title="TODO"/>
+            android:title="ゴミ箱"
+            android:icon="@drawable/question_garbage_can_ic"/>
     </group>
 </menu>

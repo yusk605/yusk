@@ -47,11 +47,6 @@
             app:destination="@id/problemInsertFragment" />
     </fragment>
     <fragment
-        android:id="@+id/holderFragment"
-        android:name="com.example.questionbook.fragment.HolderFragment"
-        android:label="fragment_holder"
-        tools:layout="@layout/fragment_holder" />
-    <fragment
         android:id="@+id/problemFragment"
         android:name="com.example.questionbook.fragment.ProblemFragment"
         android:label="fragment_problem"

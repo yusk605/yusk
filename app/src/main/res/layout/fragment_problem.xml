@@ -3,10 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".fragment.ProblemFragment">
+    <LinearLayout
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:padding="16dp">
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_padding="16dp">
+        android:layout_height="match_parent">
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_height="match_parent"
         android:layout_width="match_parent">
@@ -43,7 +46,7 @@
                 android:id="@+id/form_problem_statement_edit"
                 android:layout_width="match_parent"
                 android:layout_height="240dp"
-                android:gravity="start||top"
+                android:gravity="start|top"
                 android:hint="問題集"
                 android:maxLines="10" />
         </com.google.android.material.textfield.TextInputLayout>
@@ -79,7 +82,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
         </RadioGroup>
-
     </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.card.MaterialCardView>
+    </LinearLayout>
 </layout>
