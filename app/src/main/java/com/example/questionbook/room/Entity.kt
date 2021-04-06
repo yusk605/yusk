@@ -7,7 +7,7 @@ import java.time.LocalDate
 import java.time.LocalDateTime
 
 /**
- * ■カテゴリー分類分けされるテーブル
+ * ■カテゴリーの分類分けをするエンティティ
  *  @param categoryNo　  識別番号
  *  @param categoryTitle カテゴリーでのタイトル。
  *  @param categoryFlag　カテゴリーでのチェック項目。
@@ -20,7 +20,14 @@ data class QuestionCategoryEntity(
     @ColumnInfo(name="category_flag")val categoryFlag:Int
 ):Parcelable
 
-//問題集テーブル
+/**
+ * ■問題集の分類分けをするエンティティ
+ * @param workBookNo 識別番号
+ * @param workBookTitle 問題集のタイトル
+ * @param workBookDate timestamp 更新日：更新時間
+ * @param workBookFlag 0..ホルダー、ゲーム表示可 1..ゲーム一覧非表示 2..削除候補
+ * @param relationCategory question_category categoryNo 紐づけとなるナンバー
+ */
 @Parcelize
 @Entity(tableName = "question_workbook")
 data class QuestionWorkBookEntity(
@@ -31,7 +38,13 @@ data class QuestionWorkBookEntity(
     @ColumnInfo(name = "relation_category")val relationCategory:Int
 ):Parcelable
 
-//正解率テーブル
+/**
+ * ■回答率を保持するエンティティ
+ * @param accuracyNo        識別番号
+ * @param accuracyRate      正解率
+ * @param accuracyDate      日付
+ * @param relationWorkBook  question_workbook workBookNo 紐づけとなるナンバー
+ */
 @Parcelize
 @Entity(tableName = "question_accuracy")
 data class QuestionAccuracyEntity(
@@ -41,7 +54,14 @@ data class QuestionAccuracyEntity(
         @ColumnInfo(name = "relation_workbook")val relationWorkBook: Int
 ):Parcelable
 
-//問題文テーブル
+/**
+ * ■問題のテキストとなるデータを表示
+ * @param problemNo         識別番号
+ * @param problemStatement  問題文
+ * @param problemFlag       0..ホルダー、ゲーム表示可 1..ゲーム一覧非表示  2..削除候補
+ * @param timeStamp         更新日時
+ * @param relationWorkBook  question_workbook workBookNo 紐づけとなるナンバー
+ */
 @Parcelize
 @Entity(tableName = "question_problem")
 data class QuestionProblemEntity(
@@ -52,7 +72,15 @@ data class QuestionProblemEntity(
     @ColumnInfo(name = "relation_workbook")val relationWorkBook: Int
 ):Parcelable
 
-//回答欄テーブル
+/**
+ * ■解答案を保存するためのエンティティ
+ * @param answerNo        識別番号
+ * @param answerFirs      解答案その1
+ * @param answerSecond    解答案その2
+ * @param answerThird     解答案その3
+ * @param answerRight     解答案
+ * @param relationProblem question_problem problemNo 紐づけるナンバー
+ */
 @Parcelize
 @Entity(tableName = "question_answer")
 data class QuestionAnswerEntity(
