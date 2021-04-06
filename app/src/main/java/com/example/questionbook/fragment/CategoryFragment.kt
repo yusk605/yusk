@@ -61,12 +61,14 @@ class CategoryFragment : Fragment() {
         }
         recycleInit()
     }
+
     private fun recycleInit(){
         category_recycle_view.also {
             it.adapter = adapter
             it.layoutManager = LinearLayoutManager(activity)
         }
     }
+
     companion object{
         const val ARGS_KEY = "navigate_args_category_to_workBook"
     }
