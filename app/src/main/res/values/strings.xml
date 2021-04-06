@@ -43,4 +43,10 @@
     <string name="problem_form_answer_third">解答案3</string>
     <string name="problem_form_answer_right">正解</string>
 
+    <!--@menu/menu_sidebar-->
+    <string name="menu_side_holder">ホルダー</string>
+    <string name="menu_side_laboratory">ラボ</string>
+    <string name="menu_side_accuracy">回答率</string>
+    <string name="menu_side_game">ゲーム</string>
+    <string name="menu_side_wastebasket">ゴミ箱</string>
 </resources>
