@@ -9,6 +9,8 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Spinner
 import com.example.questionbook.R
+import com.example.questionbook.room.QuestionAnswerEntity
+import com.example.questionbook.room.QuestionCategoryEntity
 import com.example.questionbook.room.QuestionProblemEntity
 import com.example.questionbook.view_model.*
 import kotlinx.android.synthetic.main.fragment_problem_insert.*
@@ -17,6 +19,14 @@ import java.time.LocalDateTime
 class QuestionFormFragment : Fragment() {
 
     private val app = activity?.application
+
+    private var itemCategory:String = ""
+    private var itemWorkBook:String = ""
+
+    private val workBookViewModel:WorkBookViewModel by lazy {
+        WorkBookViewModelFactory(app=app!!)
+            .create(WorkBookViewModel::class.java)
+    }
 
     private val formViewModel:QuestionFormViewModel by lazy {
         QuestionViewModelFactory(app = app!!)
@@ -43,18 +53,30 @@ class QuestionFormFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        categoryViewModel.data.observe(viewLifecycleOwner)
-        { data ->
-            form_problem_category_spinner.adapter =
-                activity?.let {fragmentActivity->
-                    ArrayAdapter(
-                        fragmentActivity,
-                        android.R.layout.simple_spinner_dropdown_item,
-                        data.map { it.questionCategoryEntity }
-                            .map { it.categoryTitle }
-                            .toList() as Array<out String>
-                    ) }
+        categoryViewModel.data.observe(viewLifecycleOwner) { data ->
 
+            form_problem_category_spinner.also{ sp->
+                sp.setCategoryAdapter(
+                    data.map { it.questionCategoryEntity }
+                        .map { it.categoryTitle }
+                        .toList()
+                )
+                sp.getSelectItem()
+            }
+
+           var categoryEntity:QuestionCategoryEntity = data
+                    .asSequence()
+                    .map { it.questionCategoryEntity }
+                    .filter { it.categoryTitle == itemCategory }
+                    .toList()
+                    .first()
+
+            form_problem_workbook_spinner.setWorkBookAdapter(
+               data.filter { it.questionCategoryEntity == categoryEntity }
+                   .map { it.workBookList }
+                   .map { it.map { m->m.workBookTitle }.toList() }
+                   .first()
+            )
         }
 
         form_problem_btn.setOnClickListener {
@@ -62,9 +84,43 @@ class QuestionFormFragment : Fragment() {
         }
     }
 
-    private fun get(){
-        form_problem_category_spinner.onItemSelectedListener =
-            object : AdapterView.OnItemSelectedListener{
+
+    /**
+     * ■スピナーのドロップリストが選択されているかどうかの判断
+      */
+    private fun isSelectSpinner():Boolean = itemCategory.isNotEmpty()
+
+    /**
+     * ■スピナーにボックスとなるリストを表示させるために必要な値を渡す。
+     * @param list 文字例をリスト化したものをスピナーのアダプターに渡す。
+     */
+    private fun Spinner.setCategoryAdapter(list:List<String>){
+        adapter = activity?.let {
+            fragmentActivity ->
+            ArrayAdapter(
+                    fragmentActivity,
+                    android.R.layout.simple_spinner_dropdown_item,
+                    list
+            )
+        }
+    }
+
+    /**
+     * ■カテゴリー選択するスピナーを選択した場合に、問題集となるスピナーを選択欄に動的に変化させる。
+     * @param list 表示させたい問題集のドロップリスト一覧（文字列）
+     */
+    private fun Spinner.setWorkBookAdapter(list:List<String>){
+        if ( isSelectSpinner() )
+            setCategoryAdapter(list)
+
+        return
+    }
+
+    /**
+     * 選択された項目を取得する
+     */
+    private fun Spinner.getSelectItem(){
+        onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
             override fun onItemSelected(
                 parent: AdapterView<*>?,
                 view: View?,
@@ -72,24 +128,41 @@ class QuestionFormFragment : Fragment() {
                 id: Long
             ) {
                 val sp   = parent as? Spinner
-                val item = sp?.selectedItem as? String
+                val itemSpinner = sp?.selectedItem as? String
+                itemCategory = itemSpinner?:""
             }
-
             override fun onNothingSelected(parent: AdapterView<*>?) {
-                TODO("Not yet implemented")
+               itemCategory = ""
             }
         }
     }
 
-    private fun setSpinnerItem(){
-        form_problem_workbook_spinner.adapter
-    }
-
-    private fun setProblemEntity() = QuestionProblemEntity(
+    /**
+     * ■問題集のエンティティに値を入れるメソッド。
+     * 入力フォームに保持されている、問題文の値を取得する。
+     * @param workBookNo 問題集の連番となる連番に紐づく番号
+     * @return QuestionProblemEntity
+     */
+    private fun getProblemEntity(workBookNo:Int) = QuestionProblemEntity(
         problemNo = 0,
         problemFlag = 0,
-        relationWorkBook = 0,
+        relationWorkBook = workBookNo,
         timeStamp = LocalDateTime.now(),
         problemStatement = form_problem_statement_edit.text.toString()
+    )
+
+    /**
+     * ■解答のテーブル内に値を入れるためのメソッド
+     * 入力フォームに保持されている、解答案の値を取得する。
+     * @param problemNo 問題のテキストとなる連番
+     * @return QuestionAnswerEntity
+     */
+    private fun getAnswerEntity(problemNo:Int) = QuestionAnswerEntity(
+        answerNo = 0,
+        answerFirs =    form_problem_answer_first.text.toString(),
+        answerSecond =  form_problem_answer_second.text.toString(),
+        answerThird =   form_problem_answer_third.text.toString(),
+        answerRight =   form_problem_answer_right.text.toString(),
+        relationProblem = problemNo
     )
 }
