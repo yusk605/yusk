@@ -1,3 +1,10 @@
 package com.example.questionbook.model
 
-data class GarbageCan()
+/**
+ * ■削除を確定させるためのクラス
+ *
+ */
+data class GarbageCan(
+        val primaryNo:Int,
+        val title:String
+    )
