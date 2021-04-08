@@ -10,6 +10,7 @@ import androidx.sqlite.db.SupportSQLiteDatabase
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import java.time.LocalDateTime
 
 @TypeConverters(Converter::class)
 @Database(entities = [
@@ -37,7 +38,7 @@ abstract class QuestionDatabase:RoomDatabase() {
             singleton ?: synchronized(this){
                 val instance = Room
                     .databaseBuilder(application,QuestionDatabase::class.java,"question_book")
-                    //.addCallback(QuestionDBCallBack(scope))
+                    //.addCallback(QuestionDBInsertTestCallBack(scope))
                     .build()
                 singleton = instance
                 instance
@@ -57,6 +58,55 @@ abstract class QuestionDatabase:RoomDatabase() {
                             getAccuracyDao().collBackDelete()
                             getAnswerDao().collBackDelete()
                         }
+                    }
+                }
+            }
+        }
+
+        /**
+         * テスト用の初期表示クラス
+         */
+        class QuestionDBInsertTestCallBack(private val scope: CoroutineScope):RoomDatabase.Callback(){
+            override fun onOpen(db: SupportSQLiteDatabase) {
+                super.onOpen(db)
+                singleton?.let { database ->
+                    scope?.launch(Dispatchers.IO) {
+                        initInsertEntity(database, scope)
+                    }
+                }
+            }
+
+            /**
+             * 初期化時にデータを入れる。
+             */
+            private fun initInsertEntity(database: QuestionDatabase,scope:CoroutineScope){
+                (0..10).forEach {
+                    scope.launch(Dispatchers.IO){
+                        database.getCategoryDao().insert(
+                                QuestionCategoryEntity(
+                                        categoryNo = 0,
+                                        categoryTitle = "CategoryTest${it}",
+                                        categoryFlag = 0
+                                )
+                        )
+                        database.getWorkBookDao().insert(
+                                QuestionWorkBookEntity(
+                                        workBookNo = 0,
+                                        workBookTitle = "WorkbookTitle${it}",
+                                        workBookDate = LocalDateTime.now(),
+                                        workBookFlag = 0,
+                                        relationCategory = 1
+                                )
+                        )
+                        database.getProblemDao().insert(
+                                QuestionProblemEntity(
+                                        problemNo = 0,
+                                        problemStatement = "問題文問題文問題文問題文問題文問題文問題文問題文",
+                                        problemFlag = 0,
+                                        timeStamp = LocalDateTime.now(),
+                                        relationWorkBook =1
+                                )
+                        )
                     }
                 }
             }
