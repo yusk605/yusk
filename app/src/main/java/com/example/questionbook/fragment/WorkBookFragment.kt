@@ -57,7 +57,11 @@ class WorkBookFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         recycleInit()
         viewModel.data.observe(viewLifecycleOwner) { data->
-            adapter.submitList(data)
+            adapter.submitList(
+                    data.filter {
+                        it.workBookEntity.relationCategory == category?.categoryNo
+                    }.toList()
+            )
         }
     }
 
