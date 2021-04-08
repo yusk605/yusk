@@ -34,4 +34,14 @@
         <item name="android:layout_marginEnd">16dp</item>
         <item name="android:layout_marginTop">16dp</item>
     </style>
+
+    <style name="start_and_top_margin_16dp">
+        <item name="android:layout_marginStart">16dp</item>
+        <item name="android:layout_marginTop">16dp</item>
+    </style>
+
+    <style name="start_and_bottom_margin_16dp">
+        <item name="android:layout_marginBottom">16dp</item>
+        <item name="android:layout_marginStart">16dp</item>
+    </style>
 </resources>
