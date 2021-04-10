@@ -3,24 +3,29 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:showIn="navigation_view">
     <group android:checkableBehavior="single">
+
+        <!--
+            android:title = "指定される文字列は直打ち"
+            理由としては、リソースファイルのstringを使用した文字列を指定すると
+            その指定された文字が、表示されないことについて。
+        -->
         <item
-            android:id="@+id/categoryFragment"
+            android:id="@+id/holder_list_fragment"
             android:title="ホルダー"
             android:icon="@drawable/question_book_holder"/>
+
         <item
-            android:id="@+id/laboratoryFragment"
-            android:title="ラボ"
-            android:icon="@drawable/laboratory_ico"/>
+            android:id="@+id/game_list_fragment"
+            android:title="ゲーム"
+            android:icon="@drawable/question_game_ic"/>
+
         <item
-            android:id="@+id/side_third"
+            android:id="@+id/accuracy_list_fragment"
             android:title="回答率"
             android:icon="@drawable/question_accuracy"/>
+
         <item
-            android:id="@+id/side_third2"
-            android:title="ゲーム"
-            android:icon="@drawable/question_geme_ic"/>
-        <item
-            android:id="@+id/side_third11"
+            android:id="@+id/garbage_can_fragment"
             android:title="ゴミ箱"
             android:icon="@drawable/question_garbage_can_ic"/>
     </group>
