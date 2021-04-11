@@ -56,10 +56,13 @@
     <string name="menu_side_accuracy">回答率</string>
     <string name="menu_side_game">ゲーム</string>
     <string name="menu_side_wastebasket">ゴミ箱</string>
-    <!-- id -->
+
+    <!-- menu_side id -->
     <string name="menu_side_holder_id">holder_list_fragment</string>
     <string name="menu_side_laboratory_id">laboratory_list_fragment</string>
     <string name="menu_side_game_id">game_list_fragment</string>
 
-
+    <!-- dialog  -->
+    <string name="dialog_category_title">カテゴリーの追加</string>
+    <string name="dialog_workbook_title">タイトルの追加</string>
 </resources>
