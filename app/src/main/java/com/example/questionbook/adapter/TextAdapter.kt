@@ -9,58 +9,57 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.questionbook.R
+import com.example.questionbook.room.TextWithAnswer
 import com.example.questionbook.room.TextWithAnswerAndHistory
-import com.example.questionbook.room.QuestionTextEntity
 import com.google.android.material.textfield.TextInputEditText
 
-class ProblemAdapter(
-    private val onClick:(View, QuestionTextEntity)->Unit
-):ListAdapter<TextWithAnswerAndHistory,ProblemAdapter.ProblemHolder>(Diff) {
+class TextAdapter(
+    //private val onClick:(View, QuestionTextEntity)->Unit
+):ListAdapter<TextWithAnswer,TextAdapter.TextmHolder>(Diff) {
 
-    companion object Diff:DiffUtil.ItemCallback<TextWithAnswerAndHistory>(){
+    companion object Diff:DiffUtil.ItemCallback<TextWithAnswer>(){
         override fun areItemsTheSame(
-                oldItem: TextWithAnswerAndHistory,
-                newItem: TextWithAnswerAndHistory
+                oldItem: TextWithAnswer,
+                newItem: TextWithAnswer
         ): Boolean = oldItem == newItem
         override fun areContentsTheSame(
-                oldItem: TextWithAnswerAndHistory,
-                newItem: TextWithAnswerAndHistory
+                oldItem: TextWithAnswer,
+                newItem: TextWithAnswer
         ): Boolean = oldItem == newItem
     }
 
-    inner class ProblemHolder(view:View):RecyclerView.ViewHolder(view){
+    inner class TextmHolder(view:View):RecyclerView.ViewHolder(view){
 
-        val itemProblemStatementEdit   =    view.findViewById<TextInputEditText>(R.id.form_problem_statement_edit)
-        val itemProblemAnswerFirst     =    view.findViewById<TextInputEditText>(R.id.form_problem_answer_first)
-        val itemProblemAnswerSecond    =    view.findViewById<TextInputEditText>(R.id.form_problem_answer_second)
-        val itemProblemAnswerThird     =    view.findViewById<TextInputEditText>(R.id.form_problem_answer_third)
-        val itemProblemAnswerRight     =    view.findViewById<TextInputEditText>(R.id.form_problem_answer_right)
-        val itemProblemPageCount       =    view.findViewById<TextView>(R.id.item_problem_page_count)
-        val itemProblemAmendment       =    view.findViewById<ImageView>(R.id.item_problem_amendment)
+        val itemTextStatementEdit   =    view.findViewById<TextInputEditText>(R.id.form_text_statement_edit)
+        val itemTextAnswerFirst     =    view.findViewById<TextInputEditText>(R.id.form_text_answer_first)
+        val itemTextAnswerSecond    =    view.findViewById<TextInputEditText>(R.id.form_text_answer_second)
+        val itemTextAnswerThird     =    view.findViewById<TextInputEditText>(R.id.form_problem_text_third)
+        val itemTextAnswerRight     =    view.findViewById<TextInputEditText>(R.id.form_text_answer_right)
+        val itemTextPageCount       =    view.findViewById<TextView>(R.id.item_text_page_count)
+        val itemTextAmendment       =    view.findViewById<ImageView>(R.id.item_text_amendment)
 
-        init {
-            itemProblemAmendment.setOnClickListener {
+       /* init {
+            itemTextAmendment.setOnClickListener {
                 onClick(it,getItem(layoutPosition).problemEntity)
             }
-        }
-
+        }*/
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProblemHolder =
-        ProblemHolder(
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TextmHolder =
+        TextmHolder(
             LayoutInflater.from(parent.context)
                 .inflate(R.layout.item_text_layout,parent,false)
         )
 
-    override fun onBindViewHolder(holder: ProblemHolder, position: Int) {
+    override fun onBindViewHolder(holder: TextmHolder, position: Int) {
         val answer = getItem(position).answer
         holder.also {
-            it.itemProblemStatementEdit.setText(getItem(position).problemEntity.textStatement)
-            it.itemProblemAnswerFirst.setText(answer.answerFirs)
-            it.itemProblemAnswerSecond.setText(answer.answerSecond)
-            it.itemProblemAnswerThird.setText(answer.answerThird)
-            it.itemProblemAnswerRight.setText(answer.answerRight)
-            it.itemProblemPageCount.text = "${currentList.indexOf(getItem(position))+1}"
+            it.itemTextStatementEdit.setText(getItem(position).textEntity.textStatement)
+            it.itemTextAnswerFirst.setText(answer.answerFirs)
+            it.itemTextAnswerSecond.setText(answer.answerSecond)
+            it.itemTextAnswerThird.setText(answer.answerThird)
+            it.itemTextAnswerRight.setText(answer.answerRight)
+            it.itemTextPageCount.text = "${currentList.indexOf(getItem(position))+1}"
        }
     }
 
