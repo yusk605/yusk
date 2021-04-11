@@ -8,15 +8,15 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.questionbook.R
-import com.example.questionbook.adapter.ProblemAdapter
+import com.example.questionbook.adapter.TextAdapter
 import com.example.questionbook.view_model.TextViewModel
 import com.example.questionbook.view_model.TextViewModelFactory
-import kotlinx.android.synthetic.main.fragment_problem_list.*
+import kotlinx.android.synthetic.main.fragment_text_list.*
 
 
 class TextFragment : Fragment() {
 
-    private lateinit var adapter:ProblemAdapter
+    private lateinit var adapter:TextAdapter
 
     private val problemViewModel:TextViewModel by lazy {
         TextViewModelFactory(app = activity?.application!!)
@@ -32,14 +32,6 @@ class TextFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        adapter = ProblemAdapter{btn,entiry-> }
-
-        problemViewModel.data.observe(viewLifecycleOwner){
-            data-> adapter.submitList(data)
-        }
-
-        initRecycleView()
-
         return inflater.inflate(R.layout.fragment_text, container, false)
 
     }
@@ -48,7 +40,7 @@ class TextFragment : Fragment() {
      * リサイクラービューでの初期化を行うメソッド
      */
     private fun initRecycleView(){
-        problem_recycle_view.also {
+        text_recycle_view.also {
             it.adapter = adapter
             it.layoutManager = LinearLayoutManager(activity).apply {
                 orientation = LinearLayoutManager.VERTICAL
