@@ -56,9 +56,9 @@ data class QuestionAccuracyEntity(
 
 /**
  * ■問題のテキストとなるデータを表示
- * @param textNo         識別番号
- * @param textStatement  問題文
- * @param textFlag       0..ホルダー、ゲーム表示可 1..ゲーム一覧非表示  2..削除候補
+ * @param textNo            識別番号
+ * @param textStatement     問題文
+ * @param textFlag          0..ホルダー、ゲーム表示可 1..ゲーム一覧非表示  2..削除候補
  * @param timeStamp         更新日時
  * @param relationWorkBook  question_workbook workBookNo 紐づけとなるナンバー
  */
@@ -96,7 +96,7 @@ data class QuestionAnswerEntity(
  * ■履歴を保存するためのエンティティ
  * @param historyNo         識別番号
  * @param historyRate       正解
- * @param relationText   問題集と紐づくナンバー
+ * @param relationText      問題集と紐づくナンバー
  * @param relationAccuracy  解答と紐づくナンバー
  */
 @Parcelize
@@ -127,13 +127,13 @@ data class CategoryWithWorkBooks(
  */
 @Parcelize
 data class WorkBookWithTextAndAccuracy(
-        @Embedded
+    @Embedded
         val workBookEntity:QuestionWorkBookEntity,
-        @Relation(
+    @Relation(
                 parentColumn = "workBookNo",
                 entityColumn = "relation_workbook", )
-        val problemList:List<QuestionTextEntity>,
-        @Relation(
+        val textList:List<QuestionTextEntity>,
+    @Relation(
                 parentColumn = "workBookNo",
                 entityColumn = "relation_workbook")
         val accuracyList:List<QuestionAccuracyEntity>
@@ -145,16 +145,29 @@ data class WorkBookWithTextAndAccuracy(
  */
 @Parcelize
 data class TextWithAnswerAndHistory(
-        @Embedded
-        val problemEntity: QuestionTextEntity,
-        @Relation(
-                parentColumn = "problemNo",
-                entityColumn = "relation_problem"
+    @Embedded
+        val textEntity: QuestionTextEntity,
+    @Relation(
+                parentColumn = "textNo",
+                entityColumn = "relation_text"
         )val answer:QuestionAnswerEntity,
-        @Relation(
-            parentColumn = "problemNo",
-            entityColumn = "relation_problem"
+    @Relation(
+            parentColumn = "textNo",
+            entityColumn = "relation_text"
         )val history:QuestionHistoryEntity
+):Parcelable
+
+/**
+*問題となるテキストの識別番号に紐づいた、回答欄すべてを取得する。
+*/
+@Parcelize
+data class TextWithAnswer(
+    @Embedded
+    val textEntity: QuestionTextEntity,
+    @Relation(
+        parentColumn = "textNo",
+        entityColumn = "relation_text"
+    )val answer:QuestionAnswerEntity
 ):Parcelable
 
 @Parcelize

@@ -17,6 +17,9 @@
         <action
             android:id="@+id/action_workBookFragment_to_problemListFragment"
             app:destination="@id/textListFragment" />
+        <action
+            android:id="@+id/action_workBookFragment_to_gameStartFragment"
+            app:destination="@id/gameStartFragment" />
     </fragment>
     <fragment
         android:id="@+id/answerFragment"
@@ -31,12 +34,19 @@
         <action
             android:id="@+id/action_categoryFragment_to_workBookFragment"
             app:destination="@id/workBookFragment" />
+        <action
+            android:id="@+id/action_categoryFragment_to_accuracyFragment"
+            app:destination="@id/accuracyFragment" />
     </fragment>
     <fragment
         android:id="@+id/gameStartFragment"
         android:name="com.example.questionbook.fragment.GameStartFragment"
         android:label="fragment_game_start"
-        tools:layout="@layout/fragment_game_start" />
+        tools:layout="@layout/fragment_game_start" >
+        <action
+            android:id="@+id/action_gameStartFragment_to_answerFragment"
+            app:destination="@id/answerFragment" />
+    </fragment>
     <fragment
         android:id="@+id/laboratoryFragment"
         android:name="com.example.questionbook.fragment.LaboratoryFragment"
@@ -66,9 +76,10 @@
         android:name="com.example.questionbook.fragment.TextListFragment"
         android:label="fragment_problem_list"
         tools:layout="@layout/fragment_text_list" >
-        <action
-            android:id="@+id/action_problemListFragment_to_answerFragment"
-            app:destination="@id/answerFragment" />
+        <argument android:name="workBookWithTextAndAccuracy"
+            app:argType="com.example.questionbook.room.WorkBookWithTextAndAccuracy"
+            app:nullable="true"
+            android:defaultValue="@null" />
     </fragment>
     <fragment
         android:id="@+id/textInsertFragment"

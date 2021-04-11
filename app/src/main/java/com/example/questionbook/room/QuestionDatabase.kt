@@ -24,7 +24,7 @@ abstract class QuestionDatabase:RoomDatabase() {
 
     abstract fun getCategoryDao():QuestionCategoryDao
     abstract fun getWorkBookDao():QuestionWorkBookDao
-    abstract fun getProblemDao():QuestionProblemDao
+    abstract fun getTextDao():QuestionTextDao
     abstract fun getAccuracyDao():QuestionAccuracyDao
     abstract fun getAnswerDao():QuestionAnswerDao
     abstract fun getHistoryDao():QuestionHistoryDao
@@ -37,7 +37,7 @@ abstract class QuestionDatabase:RoomDatabase() {
             singleton ?: synchronized(this){
                 val instance = Room
                     .databaseBuilder(application,QuestionDatabase::class.java,"question_book")
-                    //.addCallback(QuestionDBInsertTestCallBack(scope))
+                   // .addCallback(QuestionDBInsertTestCallBack(scope))
                     .build()
                 singleton = instance
                 instance
@@ -53,7 +53,7 @@ abstract class QuestionDatabase:RoomDatabase() {
                     scope.launch(Dispatchers.IO) {
                         database.run {
                             getWorkBookDao().collBackDelete()
-                            getProblemDao().collBackDelete()
+                            getTextDao().collBackDelete()
                             getAccuracyDao().collBackDelete()
                             getAnswerDao().collBackDelete()
                         }
@@ -81,7 +81,7 @@ abstract class QuestionDatabase:RoomDatabase() {
             private fun initInsertEntity(database: QuestionDatabase,scope:CoroutineScope){
                 (0..10).forEach {
                     scope.launch(Dispatchers.IO){
-                        database.getCategoryDao().insert(
+                       /* database.getCategoryDao().insert(
                                 QuestionCategoryEntity(
                                         categoryNo = 0,
                                         categoryTitle = "CategoryTest${it}",
@@ -97,7 +97,7 @@ abstract class QuestionDatabase:RoomDatabase() {
                                         relationCategory = 1
                                 )
                         )
-                        database.getProblemDao().insert(
+                        database.getTextDao().insert(
                                 QuestionTextEntity(
                                         textNo = 0,
                                         textStatement = "問題文問題文問題文問題文問題文問題文問題文問題文",
@@ -105,6 +105,16 @@ abstract class QuestionDatabase:RoomDatabase() {
                                         timeStamp = LocalDateTime.now(),
                                         relationWorkBook =1
                                 )
+                        )*/
+                        database.getAnswerDao().insert(
+                            QuestionAnswerEntity(
+                                answerNo = 0,
+                                answerFirs = "選択案その一",
+                                answerSecond = "選択案その2",
+                                answerThird = "選択案その3",
+                                answerRight = "正解となる案",
+                                relationText = 0
+                            )
                         )
                     }
                 }

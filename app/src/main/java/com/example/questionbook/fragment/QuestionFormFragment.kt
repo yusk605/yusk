@@ -13,7 +13,7 @@ import com.example.questionbook.room.QuestionAnswerEntity
 import com.example.questionbook.room.QuestionCategoryEntity
 import com.example.questionbook.room.QuestionTextEntity
 import com.example.questionbook.view_model.*
-import kotlinx.android.synthetic.main.fragment_problem_insert.*
+import kotlinx.android.synthetic.main.fragment_text_insert.*
 import java.time.LocalDateTime
 
 class QuestionFormFragment : Fragment() {
@@ -148,7 +148,7 @@ class QuestionFormFragment : Fragment() {
         textFlag = 0,
         relationWorkBook = workBookNo,
         timeStamp = LocalDateTime.now(),
-        textStatement = form_problem_statement_edit.text.toString()
+        textStatement = form_text_statement_edit.text.toString()
     )
 
     /**
@@ -159,10 +159,10 @@ class QuestionFormFragment : Fragment() {
      */
     private fun getAnswerEntity(problemNo:Int) = QuestionAnswerEntity(
         answerNo = 0,
-        answerFirs =    form_problem_answer_first.text.toString(),
-        answerSecond =  form_problem_answer_second.text.toString(),
-        answerThird =   form_problem_answer_third.text.toString(),
-        answerRight =   form_problem_answer_right.text.toString(),
+        answerFirs =    form_text_answer_first.text.toString(),
+        answerSecond =  form_text_answer_second.text.toString(),
+        answerThird =   form_problem_text_third.text.toString(),
+        answerRight =   form_text_answer_right.text.toString(),
         relationText = problemNo
     )
 }

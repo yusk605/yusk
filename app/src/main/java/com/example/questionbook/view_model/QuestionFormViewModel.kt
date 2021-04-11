@@ -2,9 +2,9 @@ package com.example.questionbook.view_model
 
 import android.app.Application
 import androidx.lifecycle.*
-import com.example.questionbook.room.TextWithAnswerAndHistory
 import com.example.questionbook.room.QuestionAnswerEntity
 import com.example.questionbook.room.QuestionDatabase
+import com.example.questionbook.room.TextWithAnswer
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
@@ -18,13 +18,13 @@ class QuestionFormViewModel(private val app:Application): AndroidViewModel(app) 
 
     private val db   = QuestionDatabase.getInstance(app,viewModelScope)
 
-    private val problemDao = db.getProblemDao()
+    private val problemDao = db.getTextDao()
 
     private val answerDao = db.getAnswerDao()
 
-    private var _problemData = problemDao.getAll()
+    private var _problemData = problemDao.get()
 
-    val problemData:LiveData<List<TextWithAnswerAndHistory>>
+    val problemData:LiveData<List<TextWithAnswer>>
         get() = _problemData
 
     fun insert(entity:QuestionAnswerEntity) =
