@@ -58,7 +58,7 @@
     <string name="menu_side_wastebasket">ゴミ箱</string>
     <!-- id -->
     <string name="menu_side_holder_id">holder_list_fragment</string>
-    <stirng name="menu_side_laboratory_id">laboratory_list_fragment</stirng>
+    <string name="menu_side_laboratory_id">laboratory_list_fragment</string>
     <string name="menu_side_game_id">game_list_fragment</string>
 
 

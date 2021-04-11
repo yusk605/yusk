@@ -44,11 +44,11 @@ class QuestionViewModelFactory(private val app: Application):ViewModelProvider.F
     }
 }
 
-class ProblemViewModelFactory(private val app:Application):ViewModelProvider.Factory{
+class TextViewModelFactory(private val app:Application):ViewModelProvider.Factory{
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
 
-        if (modelClass.isAssignableFrom(ProblemViewModel::class.java))
-            return ProblemViewModel(app) as T
+        if (modelClass.isAssignableFrom(TextViewModel::class.java))
+            return TextViewModel(app) as T
 
         throw IllegalArgumentException("Type mismatch ProblemViewModel")
     }

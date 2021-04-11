@@ -7,21 +7,20 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.example.questionbook.R
 import com.example.questionbook.adapter.ProblemAdapter
-import com.example.questionbook.view_model.ProblemViewModel
-import com.example.questionbook.view_model.ProblemViewModelFactory
+import com.example.questionbook.view_model.TextViewModel
+import com.example.questionbook.view_model.TextViewModelFactory
 import kotlinx.android.synthetic.main.fragment_problem_list.*
 
 
-class ProblemFragment : Fragment() {
+class TextFragment : Fragment() {
 
     private lateinit var adapter:ProblemAdapter
 
-    private val problemViewModel:ProblemViewModel by lazy {
-        ProblemViewModelFactory(app = activity?.application!!)
-            .create(ProblemViewModel::class.java)
+    private val problemViewModel:TextViewModel by lazy {
+        TextViewModelFactory(app = activity?.application!!)
+            .create(TextViewModel::class.java)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

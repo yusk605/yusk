@@ -8,7 +8,7 @@ import com.example.questionbook.room.QuestionProblemEntity
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class ProblemViewModel(private val app:Application): AndroidViewModel(app) {
+class TextViewModel(private val app:Application): AndroidViewModel(app) {
 
     private val dao = QuestionDatabase
         .getInstance(app,viewModelScope)
