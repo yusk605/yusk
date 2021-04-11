@@ -46,7 +46,6 @@ class WorkBookFragment : Fragment() {
         }
     }
 
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -68,6 +67,7 @@ class WorkBookFragment : Fragment() {
     }
 
     private fun recycleInit(){
+
         val myLayoutManager = LinearLayoutManager(activity).apply { orientation= LinearLayoutManager.VERTICAL }
         val itemDecoration  = DividerItemDecoration(activity,myLayoutManager.orientation)
 
@@ -79,6 +79,7 @@ class WorkBookFragment : Fragment() {
     }
 
     companion object {
-        const val ARGS_KEY = "navigate_args_workBook_to_problem"
+        const val ARGS_KEY = "navigate_args_workBook_to_text"
     }
+
 }
