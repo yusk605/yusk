@@ -44,13 +44,13 @@
         tools:layout="@layout/fragment_laboratory" >
         <action
             android:id="@+id/action_laboratoryFragment_to_problemInsertFragment"
-            app:destination="@id/problemInsertFragment" />
+            app:destination="@id/textInsertFragment" />
     </fragment>
     <fragment
-        android:id="@+id/problemFragment"
+        android:id="@+id/textFragment"
         android:name="com.example.questionbook.fragment.TextFragment"
         android:label="fragment_problem"
-        tools:layout="@layout/fragment_problem" />
+        tools:layout="@layout/fragment_text" />
     <fragment
         android:id="@+id/accuracyFragment"
         android:name="com.example.questionbook.fragment.AccuracyFragment"
@@ -65,14 +65,14 @@
         android:id="@+id/textListFragment"
         android:name="com.example.questionbook.fragment.TextListFragment"
         android:label="fragment_problem_list"
-        tools:layout="@layout/fragment_problem_list" >
+        tools:layout="@layout/fragment_text_list" >
         <action
             android:id="@+id/action_problemListFragment_to_answerFragment"
             app:destination="@id/answerFragment" />
     </fragment>
     <fragment
-        android:id="@+id/problemInsertFragment"
+        android:id="@+id/textInsertFragment"
         android:name="com.example.questionbook.fragment.QuestionFormFragment"
         android:label="fragment_problem_insert"
-        tools:layout="@layout/fragment_problem_insert" />
+        tools:layout="@layout/fragment_text_insert" />
 </navigation>

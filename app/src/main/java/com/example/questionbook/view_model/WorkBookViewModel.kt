@@ -3,9 +3,8 @@ package com.example.questionbook.view_model
 import android.app.Application
 import androidx.lifecycle.*
 import com.example.questionbook.room.QuestionDatabase
-import com.example.questionbook.room.QuestionWorkBookDao
 import com.example.questionbook.room.QuestionWorkBookEntity
-import com.example.questionbook.room.WorkBookWithProblemsAndAccuracy
+import com.example.questionbook.room.WorkBookWithTextAndAccuracy
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
@@ -15,7 +14,7 @@ class WorkBookViewModel(app:Application):AndroidViewModel(app) {
         .getInstance(app,viewModelScope)
         .getWorkBookDao()
 
-    val data:LiveData<List<WorkBookWithProblemsAndAccuracy>> by lazy {
+    val data:LiveData<List<WorkBookWithTextAndAccuracy>> by lazy {
         dao.getAll()
     }
 

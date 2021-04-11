@@ -13,7 +13,7 @@ interface QuestionCategoryDao{
 
 @Dao
 interface QuestionWorkBookDao{
-    @Query("select * from question_workbook")fun getAll():LiveData<List<WorkBookWithProblemsAndAccuracy>>
+    @Query("select * from question_workbook")fun getAll():LiveData<List<WorkBookWithTextAndAccuracy>>
     @Insert suspend fun insert(entity:QuestionWorkBookEntity)
     @Update suspend fun update(entity:QuestionWorkBookEntity)
     @Delete suspend fun delete(entity:QuestionWorkBookEntity)
@@ -27,10 +27,10 @@ interface QuestionWorkBookDao{
 
 @Dao
 interface QuestionProblemDao{
-    @Query("select * from question_problem")fun getAll():LiveData<List<ProblemWithAnswerAndHistory>>
-    @Insert suspend fun insert(entity:QuestionProblemEntity)
-    @Update suspend fun update(entity:QuestionProblemEntity)
-    @Delete suspend fun delete(entity:QuestionProblemEntity)
+    @Query("select * from question_problem")fun getAll():LiveData<List<TextWithAnswerAndHistory>>
+    @Insert suspend fun insert(entity:QuestionTextEntity)
+    @Update suspend fun update(entity:QuestionTextEntity)
+    @Delete suspend fun delete(entity:QuestionTextEntity)
 
 
     @Query("delete from question_problem where relation_workbook in ( " +

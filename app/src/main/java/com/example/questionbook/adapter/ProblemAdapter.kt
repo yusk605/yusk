@@ -3,29 +3,28 @@ package com.example.questionbook.adapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.questionbook.R
-import com.example.questionbook.room.ProblemWithAnswerAndHistory
-import com.example.questionbook.room.QuestionProblemEntity
+import com.example.questionbook.room.TextWithAnswerAndHistory
+import com.example.questionbook.room.QuestionTextEntity
 import com.google.android.material.textfield.TextInputEditText
 
 class ProblemAdapter(
-    private val onClick:(View, QuestionProblemEntity)->Unit
-):ListAdapter<ProblemWithAnswerAndHistory,ProblemAdapter.ProblemHolder>(Diff) {
+    private val onClick:(View, QuestionTextEntity)->Unit
+):ListAdapter<TextWithAnswerAndHistory,ProblemAdapter.ProblemHolder>(Diff) {
 
-    companion object Diff:DiffUtil.ItemCallback<ProblemWithAnswerAndHistory>(){
+    companion object Diff:DiffUtil.ItemCallback<TextWithAnswerAndHistory>(){
         override fun areItemsTheSame(
-            oldItem: ProblemWithAnswerAndHistory,
-            newItem: ProblemWithAnswerAndHistory
+                oldItem: TextWithAnswerAndHistory,
+                newItem: TextWithAnswerAndHistory
         ): Boolean = oldItem == newItem
         override fun areContentsTheSame(
-            oldItem: ProblemWithAnswerAndHistory,
-            newItem: ProblemWithAnswerAndHistory
+                oldItem: TextWithAnswerAndHistory,
+                newItem: TextWithAnswerAndHistory
         ): Boolean = oldItem == newItem
     }
 
@@ -50,13 +49,13 @@ class ProblemAdapter(
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProblemHolder =
         ProblemHolder(
             LayoutInflater.from(parent.context)
-                .inflate(R.layout.item_problem_layout,parent,false)
+                .inflate(R.layout.item_text_layout,parent,false)
         )
 
     override fun onBindViewHolder(holder: ProblemHolder, position: Int) {
         val answer = getItem(position).answer
         holder.also {
-            it.itemProblemStatementEdit.setText(getItem(position).problemEntity.problemStatement)
+            it.itemProblemStatementEdit.setText(getItem(position).problemEntity.textStatement)
             it.itemProblemAnswerFirst.setText(answer.answerFirs)
             it.itemProblemAnswerSecond.setText(answer.answerSecond)
             it.itemProblemAnswerThird.setText(answer.answerThird)

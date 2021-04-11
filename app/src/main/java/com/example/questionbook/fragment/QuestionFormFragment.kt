@@ -11,7 +11,7 @@ import android.widget.Spinner
 import com.example.questionbook.R
 import com.example.questionbook.room.QuestionAnswerEntity
 import com.example.questionbook.room.QuestionCategoryEntity
-import com.example.questionbook.room.QuestionProblemEntity
+import com.example.questionbook.room.QuestionTextEntity
 import com.example.questionbook.view_model.*
 import kotlinx.android.synthetic.main.fragment_problem_insert.*
 import java.time.LocalDateTime
@@ -47,7 +47,7 @@ class QuestionFormFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_problem_insert, container, false)
+        return inflater.inflate(R.layout.fragment_text_insert, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -143,12 +143,12 @@ class QuestionFormFragment : Fragment() {
      * @param workBookNo 問題集の連番となる連番に紐づく番号
      * @return QuestionProblemEntity
      */
-    private fun getProblemEntity(workBookNo:Int) = QuestionProblemEntity(
-        problemNo = 0,
-        problemFlag = 0,
+    private fun getProblemEntity(workBookNo:Int) = QuestionTextEntity(
+        textNo = 0,
+        textFlag = 0,
         relationWorkBook = workBookNo,
         timeStamp = LocalDateTime.now(),
-        problemStatement = form_problem_statement_edit.text.toString()
+        textStatement = form_problem_statement_edit.text.toString()
     )
 
     /**
@@ -163,6 +163,6 @@ class QuestionFormFragment : Fragment() {
         answerSecond =  form_problem_answer_second.text.toString(),
         answerThird =   form_problem_answer_third.text.toString(),
         answerRight =   form_problem_answer_right.text.toString(),
-        relationProblem = problemNo
+        relationText = problemNo
     )
 }

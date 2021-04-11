@@ -1,7 +1,6 @@
 package com.example.questionbook.room
 
 import android.app.Application
-import androidx.lifecycle.LifecycleCoroutineScope
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
@@ -16,7 +15,7 @@ import java.time.LocalDateTime
 @Database(entities = [
     QuestionCategoryEntity::class,
     QuestionWorkBookEntity::class,
-    QuestionProblemEntity::class,
+    QuestionTextEntity::class,
     QuestionAccuracyEntity::class,
     QuestionAnswerEntity::class,
     QuestionHistoryEntity::class
@@ -99,10 +98,10 @@ abstract class QuestionDatabase:RoomDatabase() {
                                 )
                         )
                         database.getProblemDao().insert(
-                                QuestionProblemEntity(
-                                        problemNo = 0,
-                                        problemStatement = "問題文問題文問題文問題文問題文問題文問題文問題文",
-                                        problemFlag = 0,
+                                QuestionTextEntity(
+                                        textNo = 0,
+                                        textStatement = "問題文問題文問題文問題文問題文問題文問題文問題文",
+                                        textFlag = 0,
                                         timeStamp = LocalDateTime.now(),
                                         relationWorkBook =1
                                 )

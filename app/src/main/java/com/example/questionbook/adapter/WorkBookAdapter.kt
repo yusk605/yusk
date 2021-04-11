@@ -8,23 +8,23 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.questionbook.R
-import com.example.questionbook.room.WorkBookWithProblemsAndAccuracy
+import com.example.questionbook.room.WorkBookWithTextAndAccuracy
 import com.google.android.material.chip.Chip
 
 class WorkBookAdapter(
     private val categoryTitle:String,
-    private val onClick:(View,WorkBookWithProblemsAndAccuracy) -> Unit
-):ListAdapter<WorkBookWithProblemsAndAccuracy,WorkBookAdapter.WorkBookHolder>(Diff) {
+    private val onClick:(View, WorkBookWithTextAndAccuracy) -> Unit
+):ListAdapter<WorkBookWithTextAndAccuracy,WorkBookAdapter.WorkBookHolder>(Diff) {
 
-    companion object Diff: DiffUtil.ItemCallback<WorkBookWithProblemsAndAccuracy>() {
+    companion object Diff: DiffUtil.ItemCallback<WorkBookWithTextAndAccuracy>() {
         override fun areItemsTheSame(
-            oldItem: WorkBookWithProblemsAndAccuracy,
-            newItem: WorkBookWithProblemsAndAccuracy
+                oldItem: WorkBookWithTextAndAccuracy,
+                newItem: WorkBookWithTextAndAccuracy
         ): Boolean = oldItem == newItem
 
         override fun areContentsTheSame(
-            oldItem: WorkBookWithProblemsAndAccuracy,
-            newItem: WorkBookWithProblemsAndAccuracy
+                oldItem: WorkBookWithTextAndAccuracy,
+                newItem: WorkBookWithTextAndAccuracy
         ): Boolean = oldItem == newItem
 
     }

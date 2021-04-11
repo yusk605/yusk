@@ -68,7 +68,7 @@ class AccuracyRecycleAdapter(
             it.accuracyItemTitle.text = problemTitle
             it.accuracyChip.text = categoryTitle
             it.accuracyItemCount.text = getItem(position).historyList.filter{ f->
-                    f.relationProblem == getItem(position).accuracyEntity.accuracyNo
+                    f.relationText == getItem(position).accuracyEntity.accuracyNo
                 }.size.toString()
             it.accuracyItem.text = "${accuracy}%"
             it.accuracyProgressBar.progress = accuracy

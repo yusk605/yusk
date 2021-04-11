@@ -40,7 +40,7 @@ class TextFragment : Fragment() {
 
         initRecycleView()
 
-        return inflater.inflate(R.layout.fragment_problem, container, false)
+        return inflater.inflate(R.layout.fragment_text, container, false)
 
     }
 

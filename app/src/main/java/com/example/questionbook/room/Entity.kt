@@ -56,20 +56,20 @@ data class QuestionAccuracyEntity(
 
 /**
  * ■問題のテキストとなるデータを表示
- * @param problemNo         識別番号
- * @param problemStatement  問題文
- * @param problemFlag       0..ホルダー、ゲーム表示可 1..ゲーム一覧非表示  2..削除候補
+ * @param textNo         識別番号
+ * @param textStatement  問題文
+ * @param textFlag       0..ホルダー、ゲーム表示可 1..ゲーム一覧非表示  2..削除候補
  * @param timeStamp         更新日時
  * @param relationWorkBook  question_workbook workBookNo 紐づけとなるナンバー
  */
 @Parcelize
-@Entity(tableName = "question_problem")
-data class QuestionProblemEntity(
-    @PrimaryKey(autoGenerate = true)val problemNo:Int,
-    @ColumnInfo(name = "problem_statement")val problemStatement:String,
-    @ColumnInfo(name = "problem_flag")val problemFlag:Int,
-    @ColumnInfo(name = "timestamp")val timeStamp:LocalDateTime,
-    @ColumnInfo(name = "relation_workbook")val relationWorkBook: Int
+@Entity(tableName = "question_text")
+data class QuestionTextEntity(
+        @PrimaryKey(autoGenerate = true)val textNo:Int,
+        @ColumnInfo(name = "text_statement")val textStatement:String,
+        @ColumnInfo(name = "text_flag")val textFlag:Int,
+        @ColumnInfo(name = "timestamp")val timeStamp:LocalDateTime,
+        @ColumnInfo(name = "relation_workbook")val relationWorkBook: Int
 ):Parcelable
 
 /**
@@ -79,7 +79,7 @@ data class QuestionProblemEntity(
  * @param answerSecond    解答案その2
  * @param answerThird     解答案その3
  * @param answerRight     解答案
- * @param relationProblem question_problem problemNo 紐づけるナンバー
+ * @param relationText question_problem problemNo 紐づけるナンバー
  */
 @Parcelize
 @Entity(tableName = "question_answer")
@@ -89,23 +89,23 @@ data class QuestionAnswerEntity(
     @ColumnInfo(name = "answer_second")val answerSecond:String,
     @ColumnInfo(name = "answer_third")val answerThird:String,
     @ColumnInfo(name = "answer_right")val answerRight:String,
-    @ColumnInfo(name = "relation_problem")val relationProblem:Int
+    @ColumnInfo(name = "relation_text")val relationText:Int
 ):Parcelable
 
 /**
  * ■履歴を保存するためのエンティティ
  * @param historyNo         識別番号
  * @param historyRate       正解
- * @param relationProblem   問題集と紐づくナンバー
+ * @param relationText   問題集と紐づくナンバー
  * @param relationAccuracy  解答と紐づくナンバー
  */
 @Parcelize
 @Entity(tableName = "question_history")
 data class QuestionHistoryEntity(
-    @PrimaryKey(autoGenerate = true)val historyNo:Int,
-    @ColumnInfo(name = "history_rate")val historyRate:Int,
-    @ColumnInfo(name = "relation_problem")val relationProblem:Int,
-    @ColumnInfo(name = "relation_accuracy")val relationAccuracy:Int
+        @PrimaryKey(autoGenerate = true)val historyNo:Int,
+        @ColumnInfo(name = "history_rate")val historyRate:Int,
+        @ColumnInfo(name = "relation_text")val relationText:Int,
+        @ColumnInfo(name = "relation_accuracy")val relationAccuracy:Int
 ):Parcelable
 
 /**
@@ -126,13 +126,13 @@ data class CategoryWithWorkBooks(
  * ワークブック（問題集）の識別番号に紐づいた、テキスト（問題）をすべて取得する。
  */
 @Parcelize
-data class WorkBookWithProblemsAndAccuracy(
+data class WorkBookWithTextAndAccuracy(
         @Embedded
         val workBookEntity:QuestionWorkBookEntity,
         @Relation(
                 parentColumn = "workBookNo",
                 entityColumn = "relation_workbook", )
-        val problemList:List<QuestionProblemEntity>,
+        val problemList:List<QuestionTextEntity>,
         @Relation(
                 parentColumn = "workBookNo",
                 entityColumn = "relation_workbook")
@@ -144,9 +144,9 @@ data class WorkBookWithProblemsAndAccuracy(
  *問題となるテキストの識別番号に紐づいた、回答欄すべてを取得する。
  */
 @Parcelize
-data class ProblemWithAnswerAndHistory(
+data class TextWithAnswerAndHistory(
         @Embedded
-        val problemEntity: QuestionProblemEntity,
+        val problemEntity: QuestionTextEntity,
         @Relation(
                 parentColumn = "problemNo",
                 entityColumn = "relation_problem"

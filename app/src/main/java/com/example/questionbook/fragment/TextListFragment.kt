@@ -19,6 +19,6 @@ class TextListFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         
-        return inflater.inflate(R.layout.fragment_problem_list, container, false)
+        return inflater.inflate(R.layout.fragment_text_list, container, false)
     }
 }

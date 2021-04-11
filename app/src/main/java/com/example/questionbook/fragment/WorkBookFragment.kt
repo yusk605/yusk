@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.LinearLayout
 import androidx.lifecycle.LifecycleOwner
 import androidx.navigation.Navigation
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.questionbook.R
@@ -23,6 +24,7 @@ class WorkBookFragment : Fragment() {
     //カテゴリーリストからタップされた項目番号
     private var category:QuestionCategoryEntity? = null
 
+    //アダプターの生成
     private val adapter:WorkBookAdapter by lazy {
         WorkBookAdapter(category?.categoryTitle?:""){ view,obj->
             val bundle=Bundle().apply { putParcelable(ARGS_KEY,obj) }
@@ -31,7 +33,7 @@ class WorkBookFragment : Fragment() {
         }
     }
 
-    //view model の取得
+    //view model の生成
     private val  viewModel:WorkBookViewModel by lazy {
         WorkBookViewModelFactory(activity?.application!!)
             .create(WorkBookViewModel::class.java)
@@ -66,9 +68,13 @@ class WorkBookFragment : Fragment() {
     }
 
     private fun recycleInit(){
+        val myLayoutManager = LinearLayoutManager(activity).apply { orientation= LinearLayoutManager.VERTICAL }
+        val itemDecoration  = DividerItemDecoration(activity,myLayoutManager.orientation)
+
         recycle_view_work_book.also {
             it.adapter = adapter
-            it.layoutManager = LinearLayoutManager(activity)
+            it.layoutManager = myLayoutManager
+            it.addItemDecoration(itemDecoration)
         }
     }
 
