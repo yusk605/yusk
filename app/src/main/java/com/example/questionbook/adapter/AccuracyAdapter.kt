@@ -12,11 +12,11 @@ import com.example.questionbook.R
 import com.example.questionbook.room.AccuracyWithHistory
 import com.google.android.material.chip.Chip
 
-class AccuracyRecycleAdapter(
+class AccuracyAdapter(
         private val onClick:(AccuracyWithHistory,View) -> Unit,
         private val problemTitle:String,
         private val categoryTitle:String
-) :ListAdapter<AccuracyWithHistory,AccuracyRecycleAdapter.AccuracyRecycleHolder>(Diff) {
+) :ListAdapter<AccuracyWithHistory,AccuracyAdapter.AccuracyRecycleHolder>(Diff) {
 
     companion object Diff:DiffUtil.ItemCallback<AccuracyWithHistory>(){
         override fun areItemsTheSame(oldItem: AccuracyWithHistory, newItem: AccuracyWithHistory): Boolean =
