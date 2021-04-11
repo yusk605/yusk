@@ -50,12 +50,15 @@ class CategoryFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        recycleInit()
         viewModel.let { vm ->
             vm.data.observe(viewLifecycleOwner){ data ->
                 adapter.submitList(data)
             }
         }
-        recycleInit()
+        category_fab_add_button.setOnClickListener {
+
+        }
     }
 
     private fun recycleInit(){
