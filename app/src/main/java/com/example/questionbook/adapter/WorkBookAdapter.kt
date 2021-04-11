@@ -53,7 +53,7 @@ class WorkBookAdapter(
        val average = getItem(position).accuracyList.map {a-> a.accuracyRate }.toList().average()
        holder.also {
            it.itemWorkBookTitle.text = getItem(position).workBookEntity.workBookTitle
-           it.itemWorkBookProblemCount.text = "%${getItem(position).problemList.size}"
+           it.itemWorkBookProblemCount.text = "${getItem(position).textList.size}"
            it.itemWorkBookAccuracy.text = "$average%"
            it.itemWorkBookChip.text = categoryTitle
        }
