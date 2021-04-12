@@ -33,7 +33,7 @@ class WorkBookAdapter(
        val  itemWorkBookTitle = view.findViewById<TextView>(R.id.item_workbook_title)
        val  itemWorkBookProblemCount = view.findViewById<TextView>(R.id.item_workbook_problem_count)
        val  itemWorkBookAccuracy = view.findViewById<TextView>(R.id.item_workbook_accuracy)
-       val  itemWorkBookChip    = view.findViewById<Chip>(R.id.item_category_chip)
+       val  itemWorkBookChip    = view.findViewById<Chip>(R.id.game_start_chip)
         init {
             view.setOnClickListener {
                 onClick(
