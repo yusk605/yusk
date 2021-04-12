@@ -10,12 +10,11 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.questionbook.R
 import com.example.questionbook.room.TextWithAnswer
-import com.example.questionbook.room.TextWithAnswerAndHistory
 import com.google.android.material.textfield.TextInputEditText
 
 class TextAdapter(
-    //private val onClick:(View, QuestionTextEntity)->Unit
-):ListAdapter<TextWithAnswer,TextAdapter.TextmHolder>(Diff) {
+    private val onClick:(View,TextWithAnswer)->Unit
+):ListAdapter<TextWithAnswer,TextAdapter.TextHolder>(Diff) {
 
     companion object Diff:DiffUtil.ItemCallback<TextWithAnswer>(){
         override fun areItemsTheSame(
@@ -28,30 +27,35 @@ class TextAdapter(
         ): Boolean = oldItem == newItem
     }
 
-    inner class TextmHolder(view:View):RecyclerView.ViewHolder(view){
+    inner class TextHolder(view:View):RecyclerView.ViewHolder(view){
 
-        val itemTextStatementEdit   =    view.findViewById<TextInputEditText>(R.id.form_text_statement_edit)
-        val itemTextAnswerFirst     =    view.findViewById<TextInputEditText>(R.id.form_text_answer_first)
-        val itemTextAnswerSecond    =    view.findViewById<TextInputEditText>(R.id.form_text_answer_second)
-        val itemTextAnswerThird     =    view.findViewById<TextInputEditText>(R.id.form_problem_text_third)
-        val itemTextAnswerRight     =    view.findViewById<TextInputEditText>(R.id.form_text_answer_right)
+        val itemTextStatementEdit   =    view.findViewById<TextInputEditText>(R.id.dialog_text_statement_edit)
+        val itemTextAnswerFirst     =    view.findViewById<TextInputEditText>(R.id.dialog_text_answer_first)
+        val itemTextAnswerSecond    =    view.findViewById<TextInputEditText>(R.id.dialog_text_answer_second)
+        val itemTextAnswerThird     =    view.findViewById<TextInputEditText>(R.id.dialog_text_third)
+        val itemTextAnswerRight     =    view.findViewById<TextInputEditText>(R.id.dialog_text_answer_right)
         val itemTextPageCount       =    view.findViewById<TextView>(R.id.item_text_page_count)
-        val itemTextAmendment       =    view.findViewById<ImageView>(R.id.item_text_amendment)
+        val itemIcButton            =    view.findViewById<ImageView>(R.id.item_text_amendment)
 
-       /* init {
-            itemTextAmendment.setOnClickListener {
-                onClick(it,getItem(layoutPosition).problemEntity)
+        init {
+            /*
+             * テキストを追加する際の問題点として、answer エンティティをインサートする際に紐づけとなる
+             * 番号を取得する方法。text エンティティをインサートしたのち、最後に登録した text エンティティ
+             * の識別番号を取得する
+             */
+            itemIcButton.setOnClickListener {
+                onClick( it,getItem(layoutPosition) )
             }
-        }*/
+        }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TextmHolder =
-        TextmHolder(
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TextHolder =
+        TextHolder(
             LayoutInflater.from(parent.context)
                 .inflate(R.layout.item_text_layout,parent,false)
         )
 
-    override fun onBindViewHolder(holder: TextmHolder, position: Int) {
+    override fun onBindViewHolder(holder: TextHolder, position: Int) {
         val answer = getItem(position).answer
         holder.also {
             it.itemTextStatementEdit.setText(getItem(position).textEntity.textStatement)

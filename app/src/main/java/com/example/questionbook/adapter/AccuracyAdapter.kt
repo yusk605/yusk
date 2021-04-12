@@ -30,7 +30,7 @@ class AccuracyAdapter(
         val accuracyItemCount   = view.findViewById<TextView>(R.id.item_accuracy_counter_text)
         val accuracyProgressBar = view.findViewById<ProgressBar>(R.id.accuracy_progress_bar)
         val accuracyItem        = view.findViewById<TextView>(R.id.item_accuracy)
-        val accuracyChip        = view.findViewById<Chip>(R.id.item_category_chip)
+        val accuracyChip        = view.findViewById<Chip>(R.id.game_start_chip)
 
         init {
             view.setOnClickListener {
