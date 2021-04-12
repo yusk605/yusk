@@ -33,7 +33,7 @@
 
                 <com.google.android.material.chip.Chip
                     style="@style/question_chip"
-                    android:id="@+id/item_category_chip"
+                    android:id="@+id/game_start_chip"
                     android:text="android"
                     android:indeterminate="true"
                     android:progressDrawable="@drawable/progress"
