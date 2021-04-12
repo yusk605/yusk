@@ -1,23 +1,18 @@
 package com.example.questionbook.fragment
 
-import android.app.AlertDialog
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import android.widget.LinearLayout
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.ListAdapter
-import androidx.recyclerview.widget.RecyclerView
 import com.example.questionbook.R
 import com.example.questionbook.adapter.CategoryAdapter
 import com.example.questionbook.dialog.CategoryDialog
 import com.example.questionbook.dialog.CategoryDialogFactory
 import com.example.questionbook.room.QuestionCategoryEntity
-import com.example.questionbook.room.QuestionDatabase
 import com.example.questionbook.view_model.CategoryViewModel
 import com.example.questionbook.view_model.CategoryViewModelFactory
 import com.google.android.material.textfield.TextInputEditText
@@ -60,7 +55,7 @@ class CategoryFragment : Fragment() {
                 adapter.submitList(data)
             }
         }
-        category_fab_add_button.setOnClickListener {
+        fab_category_add.setOnClickListener {
             executeDialog()
         }
     }
