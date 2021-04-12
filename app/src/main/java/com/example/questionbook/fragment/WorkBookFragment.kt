@@ -57,12 +57,17 @@ class WorkBookFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         recycleInit()
+
+        val categoryNo = category?.categoryNo?:0
+
         viewModel.data.observe(viewLifecycleOwner) { data->
             adapter.submitList(
                     data.filter {
-                        it.workBookEntity.relationCategory == category?.categoryNo
-                    }.toList()
-            )
+                        it.workBookEntity.relationCategory == categoryNo }.toList()
+            )}
+
+        fab_workbook_add.setOnClickListener {
+            executeDialog()
         }
     }
 
@@ -76,6 +81,10 @@ class WorkBookFragment : Fragment() {
             it.layoutManager = myLayoutManager
             it.addItemDecoration(itemDecoration)
         }
+    }
+
+    private fun executeDialog(){
+
     }
 
     companion object {
