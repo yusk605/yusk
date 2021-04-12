@@ -18,7 +18,6 @@ interface QuestionWorkBookDao{
     @Update suspend fun update(entity:QuestionWorkBookEntity)
     @Delete suspend fun delete(entity:QuestionWorkBookEntity)
 
-
     @Query("delete from question_workbook where relation_category in (" +
             "select relation_category from question_workbook left join question_category on relation_category = categoryNo where categoryNo is null)")
     suspend fun collBackDelete()
@@ -28,13 +27,10 @@ interface QuestionWorkBookDao{
 @Dao
 interface QuestionTextDao{
     @Query("select * from question_text")fun get():LiveData<List<TextWithAnswer>>
-
     @Query("select * from question_text")fun getAll():LiveData<List<TextWithAnswerAndHistory>>
-
     @Insert suspend fun insert(entity:QuestionTextEntity)
     @Update suspend fun update(entity:QuestionTextEntity)
     @Delete suspend fun delete(entity:QuestionTextEntity)
-
 
     @Query("delete from question_text where relation_workbook in ( " +
             "select relation_workbook from question_text left join question_workbook on relation_workbook = workBookNo where workBookNo is null)")
@@ -44,11 +40,9 @@ interface QuestionTextDao{
 @Dao
 interface QuestionAccuracyDao{
     @Query("select * from question_accuracy")fun getAll():LiveData<List<AccuracyWithHistory>>
-
     @Insert suspend fun insert(entity:QuestionAccuracyEntity)
     @Update suspend fun update(entity:QuestionAccuracyEntity)
     @Delete suspend fun delete(entity:QuestionAccuracyEntity)
-
 
     @Query("delete from question_accuracy where relation_workbook in (" +
             " select relation_workbook from question_accuracy left join question_workbook on relation_workbook = workBookNo where workBookNo is null)")
@@ -61,7 +55,6 @@ interface QuestionAnswerDao{
     @Insert fun insert(entity:QuestionAnswerEntity)
     @Update fun update(entity:QuestionAnswerEntity)
     @Delete fun delete(entity:QuestionAnswerEntity)
-
 
     @Query("delete from question_answer where relation_text in ( " +
             "select relation_text from question_answer left join question_text on relation_text = textNo where answerNo is null)")
