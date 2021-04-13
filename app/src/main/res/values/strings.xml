@@ -7,10 +7,12 @@
     <string name="category_work_books">問題集×</string>
 
     <!--@MainActivity menu key-->
-    <string name="side_menu_key_holder">SIDE_MENU_TO_HOLDER</string>
-    <string name="side_menu_key_game">SIDE_MENU_TO_GAME</string>
-    <string name="side_menu_key_accuracy">SIDE_MENU_TO_ACCURACY</string>
-    <string name="side_menu_key_garbagecan">SIDE_MENU_TO_GARBAGE_CAN</string>
+    <string-array name="side_menu_keys">
+        <item name="side_menu_key_holder">SIDE_MENU_TO_HOLDER</item>
+        <item name="side_menu_key_game">SIDE_MENU_TO_GAME</item>
+        <item name="side_menu_key_accuracy">SIDE_MENU_TO_ACCURACY</item>
+        <item name="side_menu_key_garbagecan">SIDE_MENU_TO_GARBAGE_CAN</item>
+    </string-array>
 
     <!--@layout/fragment_workbook.xml  -->
     <string name="workbook_problems">出題数×</string>
