@@ -5,28 +5,37 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.example.questionbook.QuestionItem
 import com.example.questionbook.R
+import com.example.questionbook.databinding.FragmentGameStartBinding
+import com.example.questionbook.room.QuestionWorkBookEntity
+import com.example.questionbook.room.WorkBookWithTextAndAccuracy
+import com.example.questionbook.view_model.TextViewModel
+import com.example.questionbook.view_model.TextViewModelFactory
+import com.example.questionbook.view_model.WorkBookViewModel
+import com.example.questionbook.view_model.WorkBookViewModelFactory
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [GameStartFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class GameStartFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+
+    private lateinit var binding:FragmentGameStartBinding
+
+    private var questions:List<QuestionItem>? = null
+    private var createQuestion:QuestionItem? = null
+    private var answers:MutableList<String> = mutableListOf()
+
+    private val viewModel:TextViewModel by lazy {
+        TextViewModelFactory(app = activity?.application!!)
+                .create(TextViewModel::class.java)
+    }
+
+    private var workBookEntity:QuestionWorkBookEntity? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
+            workBookEntity =
+                    (it.get(WorkBookFragment.ARGS_KEY) as WorkBookWithTextAndAccuracy).workBookEntity
         }
     }
 
@@ -34,27 +43,59 @@ class GameStartFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_game_start, container, false)
+
+        binding = FragmentGameStartBinding.inflate(inflater,container,false)
+
+        return binding.root
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment GameStartFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            GameStartFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        viewModel.data.observe(viewLifecycleOwner){
+            data->
+            questions = data.filter { it.textEntity.relationWorkBook == workBookEntity?.workBookNo }
+                        .map { QuestionItem(
+                                questionTitle       = workBookEntity?.workBookTitle?:"",
+                                questionStatement   = it.textEntity.textStatement,
+                                questionFirs        = it.answer.answerFirs,
+                                questionSecond      = it.answer.answerSecond,
+                                questionThird       = it.answer.answerThird,
+                                questionRight       = it.answer .answerRight) }
+                        .toList()
+
+            data.filter { it.textEntity.relationWorkBook == workBookEntity?.workBookNo }
+                    .map { it.answer }
+                    .forEach {}
+
+
+            //単一のクイズデータを取得する。
+            createQuestion = questions?.let{ it.shuffled().first()  }
+
+            createQuestion?.let{
+                it.setQuestionText(it.getShuffledAnswer())
             }
+        }
     }
+
+    //ランダムで取得したクイズデータを問題文として表示させる。
+    private fun QuestionItem.setQuestionText(answer:List<String>){
+        binding.also {
+            it.dialogTextStatementEdit.setText(questionStatement)
+            it.gameRadioButtonFirst.text    = answer[0]
+            it.gameRadioButtonSecond.text   = answer[1]
+            it.gameRadioButtonThird.text    = answer[2]
+            it.gameRadioButtonFourth.text   = answer[3]
+        }
+    }
+
+    //解答案の文字列。
+    private fun QuestionItem.getShuffledAnswer()=
+            answers.also {
+                it.add(questionRight)
+                it.add(questionFirs)
+                it.add(questionSecond)
+                it.add(questionThird)
+            }.shuffled()
+
+    companion object {}
 }
