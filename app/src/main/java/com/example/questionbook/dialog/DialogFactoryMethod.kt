@@ -34,7 +34,9 @@ abstract class DialogProduct(
 
 
 /**
- *
+ * ■カテゴリー一覧からダイヤログを表示させる用のダイヤログクラスを作成。
+ * @param activity フラグメントのコンテキスト。
+ * @param resource 表示させたダイヤログのレイアウトを表示。
  */
 class CategoryDialogFactory (
         private val activity: FragmentActivity,
@@ -47,3 +49,23 @@ class CategoryDialogFactory (
         throw IllegalArgumentException("Type mismatch CategoryDialog")
     }
 }
+
+/**
+ * ■問題集一覧からダイヤログを表示させる用のダイヤログクラスを作成。
+ * @param activity フラグメントのコンテキスト。
+ * @param resource 表示させたダイヤログのレイアウトを表示。
+ */
+class WorkBookDialogFactory(
+        private val activity: FragmentActivity,
+        @LayoutRes private val resource:Int
+        ):DialogFactoryImpl<WorkBookDialog>{
+
+    override fun create(dialogClass: Class<WorkBookDialog>): DialogProduct {
+        if(dialogClass.isAssignableFrom(WorkBookDialog::class.java))
+            return WorkBookDialog.getInstance(activity, resource)
+
+        throw IllegalArgumentException("Type mismatch WorkBookDialog")
+    }
+}
+
+
