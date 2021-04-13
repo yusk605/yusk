@@ -5,17 +5,20 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.LinearLayout
-import androidx.lifecycle.LifecycleOwner
+import android.widget.Button
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.example.questionbook.R
 import com.example.questionbook.adapter.WorkBookAdapter
+import com.example.questionbook.dialog.CategoryDialog
+import com.example.questionbook.dialog.CategoryDialogFactory
+import com.example.questionbook.dialog.WorkBookDialog
+import com.example.questionbook.dialog.WorkBookDialogFactory
 import com.example.questionbook.room.QuestionCategoryEntity
 import com.example.questionbook.view_model.WorkBookViewModel
 import com.example.questionbook.view_model.WorkBookViewModelFactory
+import com.google.android.material.textfield.TextInputEditText
 import kotlinx.android.synthetic.main.fragment_work_book.*
 
 
@@ -85,7 +88,22 @@ class WorkBookFragment : Fragment() {
 
     private fun executeDialog(){
 
+        val dialogWorkBook = activity?.let {
+            WorkBookDialogFactory(it,R.layout.dialog_category_layout)
+                .create(WorkBookDialog::class.java)
+        }
+
+        dialogWorkBook?.let{ dg->
+            val alertDialog = dg.create().also { it.show() }
+            val (title,btn) = dg.getView().findViewById<TextInputEditText>(R.id.dialog_category_title_edit) to
+                    dg.getView().findViewById<Button>(R.id.dialog_category_insert_btn)
+            btn.setOnClickListener {
+                //viewModel.toInsert(title.text.toString())
+                alertDialog.cancel()
+            }
+        }
     }
+
 
     companion object {
         const val ARGS_KEY = "navigate_args_workBook_to_text"

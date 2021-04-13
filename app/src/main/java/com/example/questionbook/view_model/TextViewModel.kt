@@ -2,6 +2,7 @@ package com.example.questionbook.view_model
 
 import android.app.Application
 import androidx.lifecycle.*
+import com.example.questionbook.QuestionItem
 import com.example.questionbook.room.QuestionDatabase
 import com.example.questionbook.room.QuestionTextEntity
 import com.example.questionbook.room.TextWithAnswer
@@ -18,6 +19,10 @@ class TextViewModel(private val app:Application): AndroidViewModel(app) {
     val data:LiveData<List<TextWithAnswer>> by lazy {
         dao.get()
     }
+
+   // val questions:LiveData<List<QuestionItem>>
+
+
 
     fun insert(entity: QuestionTextEntity) =
         viewModelScope.launch(Dispatchers.IO){
