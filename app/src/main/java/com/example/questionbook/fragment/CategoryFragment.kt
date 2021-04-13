@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.questionbook.MainActivity
 import com.example.questionbook.R
 import com.example.questionbook.adapter.CategoryAdapter
 import com.example.questionbook.dialog.CategoryDialog
@@ -17,9 +18,14 @@ import com.example.questionbook.view_model.CategoryViewModel
 import com.example.questionbook.view_model.CategoryViewModelFactory
 import com.google.android.material.textfield.TextInputEditText
 import kotlinx.android.synthetic.main.fragment_category.*
+import java.util.*
 
 
 class CategoryFragment : Fragment() {
+
+    private val flags = activity?.resources?.getStringArray(R.array.side_menu_keys)
+
+    private var flag = 0
 
     private val adapter: CategoryAdapter by lazy {
         CategoryAdapter { entity,view ->
@@ -33,11 +39,17 @@ class CategoryFragment : Fragment() {
     private val viewModel:CategoryViewModel by lazy {
         CategoryViewModelFactory(app = activity?.application!!)
                 .create(CategoryViewModel::class.java)
-
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        arguments?.let { a->
+            flags?.let{ f->
+                f.forEach {
+                    if(a.get(it) != null)flag = a.get(it) as Int
+                }
+            }
+        }
     }
 
     override fun onCreateView(
@@ -79,6 +91,7 @@ class CategoryFragment : Fragment() {
             CategoryDialogFactory(it,R.layout.dialog_category_layout)
                     .create(CategoryDialog::class.java)
         }
+
         dialogCategory?.let{ dg->
             val alertDialog = dg.create().also { it.show() }
             val (title,btn) = dg.getView().findViewById<TextInputEditText>(R.id.dialog_category_title_edit) to
@@ -103,8 +116,9 @@ class CategoryFragment : Fragment() {
                         categoryTitle = title))
     }
 
+
     companion object{
-        const val ARGS_KEY = "navigate_args_category_to_workBook"
+        const val ARGS_KEY  = "navigate_args_category_to_workBook"
     }
 
 }

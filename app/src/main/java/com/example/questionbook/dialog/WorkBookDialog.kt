@@ -25,6 +25,7 @@ class WorkBookDialog(
     override fun getView(): View {
         return dialogView
     }
+
     companion object{
         var singleton:WorkBookDialog? =null
         fun getInstance(activity: FragmentActivity,@LayoutRes resource:Int):WorkBookDialog =
