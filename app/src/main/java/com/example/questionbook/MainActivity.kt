@@ -38,28 +38,28 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             R.id.holder_list_fragment -> {
                 controller.navigate(
                         R.id.categoryFragment,
-                        newBundleToPutInt(getString(R.string.side_menu_key_holder,), actionHolderValue)
+                        newBundleToPutInt(resources.getStringArray(R.array.side_menu_keys)[0], actionHolderValue)
                     )
                 }
             R.id.game_list_fragment -> {
                 controller.navigate(
-                        R.id.laboratoryFragment,
-                        newBundleToPutInt(getString(R.string.side_menu_key_game), actionGameValue)
+                        R.id.categoryFragment,
+                        newBundleToPutInt(resources.getStringArray(R.array.side_menu_keys)[1], actionGameValue)
                     )
                 }
             R.id.accuracy_list_fragment ->{
                 controller.navigate(
                         R.id.accuracyFragment,
-                        newBundleToPutInt(getString(R.string.side_menu_key_accuracy), actionAccuracyValue)
+                        newBundleToPutInt(resources.getStringArray(R.array.side_menu_keys)[2], actionAccuracyValue)
                     )
                 }
             R.id.garbage_can_fragment -> {
                 controller.navigate(
                         R.id.garbageCanFragment,
-                        newBundleToPutInt(getString(R.string.side_menu_key_garbagecan), actionGarbageCan)
+                        newBundleToPutInt(resources.getStringArray(R.array.side_menu_keys)[3], actionGarbageCan)
                     )
                 }
-        }
+            }
         drawerLayout.close()
         return true
     }
