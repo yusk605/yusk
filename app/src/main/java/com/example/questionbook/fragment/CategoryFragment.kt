@@ -1,6 +1,7 @@
 package com.example.questionbook.fragment
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -23,8 +24,6 @@ import java.util.*
 
 class CategoryFragment : Fragment() {
 
-    private val flags = activity?.resources?.getStringArray(R.array.side_menu_keys)
-
     private var flag = 0
 
     private val adapter: CategoryAdapter by lazy {
@@ -45,13 +44,16 @@ class CategoryFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         arguments?.let { a->
-            flags?.let{ f->
+            resources.getStringArray(R.array.side_menu_keys).let{ f->
                 f.forEach {
-                    if(a.get(it) != null)flag = a.get(it) as Int
+                    Log.d("tag","文字列＝${f}")
+                    if(a.get(it) != null)flag = a.getInt(it)
                 }
             }
         }
+        //Log.d("log","${flag?:1}：フラグ")
     }
 
     override fun onCreateView(
