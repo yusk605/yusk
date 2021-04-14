@@ -16,6 +16,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var drawerLayout: DrawerLayout
+
     private val controller: NavController by lazy{
         this.findNavController(R.id.fragment_host)
     }

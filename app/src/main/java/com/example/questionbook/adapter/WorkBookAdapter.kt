@@ -11,6 +11,13 @@ import com.example.questionbook.R
 import com.example.questionbook.room.WorkBookWithTextAndAccuracy
 import com.google.android.material.chip.Chip
 
+/**
+ * ■問題集一覧を表示するためのデータを中間的な役割を果たすクラス
+ * @param categoryTitle 表示するチップビューの項目のタイトルを表示するため
+ * @param onClick   問題集に関連するデータとビューを引数に取る関数型オブジェクト。
+ * ・なお、onClickを実装した理由としては項目をタップした時に、
+ * 　その項目に紐づいたリスト一覧を表示させるための必要な処理として。
+ */
 class WorkBookAdapter(
     private val categoryTitle:String,
     private val onClick:(View, WorkBookWithTextAndAccuracy) -> Unit
@@ -37,6 +44,7 @@ class WorkBookAdapter(
         init {
             view.setOnClickListener {
                 onClick(
+                    //遷移する際に必要なオブジェクトを渡すため。
                         view, getItem(adapterPosition)
                 )
             }
@@ -58,4 +66,4 @@ class WorkBookAdapter(
            it.itemWorkBookChip.text = categoryTitle
        }
     }
-}
+ }
