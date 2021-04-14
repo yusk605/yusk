@@ -20,6 +20,9 @@
         <action
             android:id="@+id/action_workBookFragment_to_gameStartFragment"
             app:destination="@id/gameStartFragment" />
+        <action
+            android:id="@+id/action_workBookFragment_to_accuracyFragment"
+            app:destination="@id/accuracyFragment" />
     </fragment>
     <fragment
         android:id="@+id/answerFragment"
@@ -34,9 +37,6 @@
         <action
             android:id="@+id/action_categoryFragment_to_workBookFragment"
             app:destination="@id/workBookFragment" />
-        <action
-            android:id="@+id/action_categoryFragment_to_accuracyFragment"
-            app:destination="@id/accuracyFragment" />
     </fragment>
     <fragment
         android:id="@+id/gameStartFragment"

@@ -31,8 +31,10 @@ class CategoryFragment : Fragment() {
         CategoryAdapter { entity,view ->
             Navigation.findNavController(view).navigate(
                     R.id.action_categoryFragment_to_workBookFragment,
-                    Bundle().apply { putParcelable(ARGS_KEY,entity) }
-            )
+                    Bundle().apply {
+                        putParcelable(ARGS_KEY,entity)
+                        putInt(ARGS_SIDE_MENU_FLAG,flag)
+                    })
         }
     }
 
@@ -67,9 +69,7 @@ class CategoryFragment : Fragment() {
                 adapter.submitList(data)
             }
         }
-        fab_category_add.setOnClickListener {
-            executeDialog()
-        }
+        fab_category_add.setOnClickListener { executeDialog() }
     }
 
     /**
@@ -87,6 +87,7 @@ class CategoryFragment : Fragment() {
      * カテゴリーエンティティへデータの登録を行う。
      */
     private fun executeDialog(){
+
         val dialogCategory = activity?.let {
             CategoryDialogFactory(it,R.layout.dialog_category_layout)
                     .create(CategoryDialog::class.java)
@@ -113,12 +114,13 @@ class CategoryFragment : Fragment() {
                 QuestionCategoryEntity(
                         categoryNo = 0,
                         categoryFlag = 0,
-                        categoryTitle = title))
-    }
-
+                        categoryTitle = title
+                ))
+        }
 
     companion object{
         const val ARGS_KEY  = "navigate_args_category_to_workBook"
+        const val ARGS_SIDE_MENU_FLAG = "navigate_args_side_menu"
     }
 
 }

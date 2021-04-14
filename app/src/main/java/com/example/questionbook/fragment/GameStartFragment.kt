@@ -97,5 +97,7 @@ class GameStartFragment : Fragment() {
                 it.add(questionThird)
             }.shuffled()
 
-    companion object {}
+    companion object {
+
+    }
 }
