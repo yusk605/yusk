@@ -37,6 +37,9 @@
         <action
             android:id="@+id/action_categoryFragment_to_workBookFragment"
             app:destination="@id/workBookFragment" />
+        <argument android:name="sendFlag"
+            app:argType="integer"
+            android:defaultValue="0" />
     </fragment>
     <fragment
         android:id="@+id/gameStartFragment"

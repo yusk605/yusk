@@ -21,7 +21,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="start|top"
-            android:hint="@string/problem_form_label_spinner_category"
+            android:hint="@string/dialog_workbook_title"
             android:maxLines="1" />
     </com.google.android.material.textfield.TextInputLayout>
 
