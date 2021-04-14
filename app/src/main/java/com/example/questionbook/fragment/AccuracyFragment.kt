@@ -21,5 +21,4 @@ class AccuracyFragment : Fragment() {
     ): View? {
         return inflater.inflate(R.layout.fragment_accuracy,container,false)
     }
-
 }
