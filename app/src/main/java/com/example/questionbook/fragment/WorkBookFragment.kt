@@ -31,16 +31,7 @@ class WorkBookFragment : Fragment() {
     private var flag:Int = 0
 
     //adapter
-    private val adapter:WorkBookAdapter by lazy {
-        WorkBookAdapter(category?.categoryTitle?:""){ view,obj->
-            val bundle=Bundle().apply { putParcelable(ARGS_KEY,obj) }
-            //サイドメニューから項目をタップした時に、その項目の値によって遷移先を変える。
-            flag.actionWorkBook(view,bundle)
-
-            /*Navigation.findNavController(view)
-                .navigate(R.id.action_workBookFragment_to_problemListFragment,bundle)*/
-        }
-    }
+    private var adapter:WorkBookAdapter? = null
 
     //view model
     private val  viewModel:WorkBookViewModel by lazy {
@@ -61,6 +52,15 @@ class WorkBookFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
+
+        adapter = WorkBookAdapter(category?.categoryTitle?:""){ view,obj->
+            val bundle = Bundle().apply { putParcelable(ARGS_KEY,obj) }
+            //サイドメニューから項目をタップした時に、その項目の値によって遷移先を変える。
+            flag.actionWorkBook(view,bundle)
+            /*Navigation.findNavController(view)
+                .navigate(R.id.action_workBookFragment_to_problemListFragment,bundle)*/
+        }
+
         return inflater.inflate(R.layout.fragment_work_book, container, false)
     }
 
@@ -71,7 +71,7 @@ class WorkBookFragment : Fragment() {
         val categoryNo = category?.categoryNo?:0
 
         viewModel.data.observe(viewLifecycleOwner) { data->
-            adapter.submitList(
+            adapter?.submitList(
                     data.filter {
                         it.workBookEntity.relationCategory == categoryNo }.toList()
             )}

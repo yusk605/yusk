@@ -22,6 +22,7 @@ class WorkBookDialog(
                 it.setView(dialogView as LinearLayout)
             }.create()
 
+
     override fun getView(): View {
         return dialogView
     }
