@@ -37,7 +37,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         when(item.itemId){
             R.id.holder_list_fragment -> {
-                controller.navigate(
+                    controller.navigate(
                         R.id.categoryFragment,
                         newBundleToPutInt(resources.getStringArray(R.array.side_menu_keys)[0], actionHolderValue)
                     )
