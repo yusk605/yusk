@@ -148,7 +148,7 @@ class QuestionFormFragment : Fragment() {
         textFlag = 0,
         relationWorkBook = workBookNo,
         timeStamp = LocalDateTime.now(),
-        textStatement = dialog_text_statement_edit.text.toString()
+        textStatement = list_text_statement_edit.text.toString()
     )
 
     /**
@@ -159,10 +159,10 @@ class QuestionFormFragment : Fragment() {
      */
     private fun getAnswerEntity(problemNo:Int) = QuestionAnswerEntity(
         answerNo = 0,
-        answerFirs =    dialog_text_answer_first.text.toString(),
+        answerFirs =    list_text_answer_first.text.toString(),
         answerSecond =  dialog_text_answer_second.text.toString(),
-        answerThird =   dialog_text_third.text.toString(),
-        answerRight =   dialog_text_answer_right.text.toString(),
+        answerThird =   list_text_answer_third.text.toString(),
+        answerRight =   list_text_answer_right.text.toString(),
         relationText = problemNo
     )
 }
