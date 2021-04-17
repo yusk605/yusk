@@ -30,6 +30,7 @@ abstract class DialogProduct(
 
     abstract fun create():AlertDialog
     abstract fun getView():View
+    abstract fun getValue():String
 }
 
 
@@ -68,4 +69,46 @@ class WorkBookDialogFactory(
     }
 }
 
+/**
+ * ■問題となるテキスト一覧から表示させる
+ * @param activity フラグメントのコンテキスト。
+ * @param resource 表示させたダイヤログのレイアウトを表示。
+ */
+class TextDialogFactory(
+        private val activity: FragmentActivity,
+        @LayoutRes private val resource:Int
+        ):DialogFactoryImpl<TextDialog>{
+    override fun create(dialogClass: Class<TextDialog>): DialogProduct {
+        if(dialogClass.isAssignableFrom(TextDialog::class.java))
+            return TextDialog.getInstance(activity, resource)
 
+        throw IllegalArgumentException("Type mismatch TextDialog")
+    }
+}
+
+/**
+ *
+ */
+class TextInsertDialogFactory(
+        private val activity: FragmentActivity,
+        @LayoutRes private val resource:Int
+):DialogFactoryImpl<TextInsertDialog>{
+    override fun create(dialogClass: Class<TextInsertDialog>): DialogProduct {
+        if(dialogClass.isAssignableFrom(TextInsertDialog::class.java))
+            return TextInsertDialog.getInstance(activity, resource)
+
+        throw IllegalArgumentException("Type mismatch TextDialog")
+    }
+}
+
+class AnswerDialogFactory(
+            private val activity: FragmentActivity,
+            @LayoutRes private val resource:Int
+        ):DialogFactoryImpl<AnswerInsertDialog>{
+    override fun create(dialogClass: Class<AnswerInsertDialog>): DialogProduct {
+        if (dialogClass.isAssignableFrom(AnswerInsertDialog::class.java))
+            return AnswerInsertDialog.getInstance(activity, resource)
+
+        throw IllegalArgumentException("Type mismatch AnswerDialog")
+    }
+}
