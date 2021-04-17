@@ -29,11 +29,11 @@ class TextAdapter(
 
     inner class TextHolder(view:View):RecyclerView.ViewHolder(view){
 
-        val itemTextStatementEdit   =    view.findViewById<TextInputEditText>(R.id.dialog_text_statement_edit)
-        val itemTextAnswerFirst     =    view.findViewById<TextInputEditText>(R.id.dialog_text_answer_first)
+        val itemTextStatementEdit   =    view.findViewById<TextInputEditText>(R.id.list_text_statement_edit)
+        val itemTextAnswerFirst     =    view.findViewById<TextInputEditText>(R.id.list_text_answer_first)
         val itemTextAnswerSecond    =    view.findViewById<TextInputEditText>(R.id.dialog_text_answer_second)
-        val itemTextAnswerThird     =    view.findViewById<TextInputEditText>(R.id.dialog_text_third)
-        val itemTextAnswerRight     =    view.findViewById<TextInputEditText>(R.id.dialog_text_answer_right)
+        val itemTextAnswerThird     =    view.findViewById<TextInputEditText>(R.id.list_text_answer_third)
+        val itemTextAnswerRight     =    view.findViewById<TextInputEditText>(R.id.list_text_answer_right)
         val itemTextPageCount       =    view.findViewById<TextView>(R.id.item_text_page_count)
         val itemIcButton            =    view.findViewById<ImageView>(R.id.item_text_amendment)
 
