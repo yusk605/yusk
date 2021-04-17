@@ -17,7 +17,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/dialog_text_textInputLayout"
+        android:id="@+id/form_text_textInputLayout"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -27,16 +27,16 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/dialog_text_chip">
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/dialog_text_statement_edit"
+            android:id="@+id/form_text_statement_edit"
             android:layout_width="match_parent"
-            android:layout_height="240dp"
+            android:layout_height="200dp"
             android:gravity="start|top"
             android:hint="@string/item_text_statement"
-            android:maxLines="10" />
+            android:maxLines="7" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/dialog_textInputLayout_first"
+        android:id="@+id/form_text_textInputLayout_first"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -46,18 +46,18 @@
         android:hint="@string/item_text_answer_first"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/dialog_text_textInputLayout">
+        app:layout_constraintTop_toBottomOf="@+id/form_text_textInputLayout">
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/dialog_text_answer_first"
+            android:id="@+id/form_text_answer_first"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/dialog_text_textInputLayout" />
+            app:layout_constraintTop_toBottomOf="@+id/form_text_textInputLayout" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/dialog_textInputLayout_second"
+        android:id="@+id/form_text_textInputLayout_second"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -67,18 +67,18 @@
         android:hint="@string/item_text_answer_second"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/dialog_textInputLayout_first">
+        app:layout_constraintTop_toBottomOf="@+id/form_text_textInputLayout_first">
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/dialog_text_answer_second"
+            android:id="@+id/form_text_answer_second"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/dialog_text_textInputLayout" />
+            app:layout_constraintTop_toBottomOf="@+id/form_text_textInputLayout" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/dialog_textInputLayout_third"
+        android:id="@+id/form_text_textInputLayout_third"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -88,19 +88,19 @@
         android:hint="@string/item_text_answer_third"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/dialog_textInputLayout_second">
+        app:layout_constraintTop_toBottomOf="@+id/form_text_textInputLayout_second">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/dialog_text_third"
+            android:id="@+id/form_text_answer_third"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/dialog_text_textInputLayout" />
+            app:layout_constraintTop_toBottomOf="@+id/form_text_textInputLayout" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/dialog_textInputLayout_fourth"
+        android:id="@+id/form_text_textInputLayout_fourth"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -110,24 +110,26 @@
         android:hint="@string/item_text_answer_right"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/dialog_textInputLayout_third">
+        app:layout_constraintTop_toBottomOf="@+id/form_text_textInputLayout_third">
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/dialog_text_answer_right"
+            android:id="@+id/form_text_answer_right"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/dialog_text_textInputLayout" />
+            app:layout_constraintTop_toBottomOf="@+id/form_text_textInputLayout" />
     </com.google.android.material.textfield.TextInputLayout>
+
         <Button
-            android:id="@+id/dialog_text_form_update_btn"
+            android:id="@+id/form_text_form_update_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="8dp"
             android:text="@string/item_text_btn_update"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/dialog_textInputLayout_fourth" />
+            app:layout_constraintTop_toBottomOf="@+id/form_text_textInputLayout_fourth" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </LinearLayout>
