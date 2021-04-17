@@ -1,6 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="300dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:padding="16dp"
+    android:orientation="vertical">
+    <androidx.cardview.widget.CardView
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        app:cardElevation="16dp"
+        app:cardCornerRadius="4dp">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_height="match_parent"
+            android:layout_width="match_parent">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+            <ImageView
+                android:id="@+id/result_check"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/result_right"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/result_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="問題1"
+                style="@style/start_and_top_margin_16dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/list_text_textInputLayout"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/result_title">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/list_text_statement_edit"
+                    android:layout_width="match_parent"
+                    android:layout_height="180dp"
+                    android:gravity="start|top"
+                    android:hint="@string/problem_form_statement"
+                    android:maxLines="6" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/text_input"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="android"
+                style="@style/question_chip"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+</LinearLayout>
