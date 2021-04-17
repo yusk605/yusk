@@ -80,7 +80,7 @@ class GameStartFragment : Fragment() {
     //ランダムで取得したクイズデータを問題文として表示させる。
     private fun QuestionItem.setQuestionText(answer:List<String>){
         binding.also {
-            it.dialogTextStatementEdit.setText(questionStatement)
+            //it.dialogTextStatementEdit.setText(questionStatement)
             it.gameRadioButtonFirst.text    = answer[0]
             it.gameRadioButtonSecond.text   = answer[1]
             it.gameRadioButtonThird.text    = answer[2]
