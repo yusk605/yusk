@@ -86,7 +86,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/form_answer_textInputLayout_third">
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/form_text_answer_right"
+                android:id="@+id/form_answer_answer_right"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:layout_constraintEnd_toEndOf="parent"

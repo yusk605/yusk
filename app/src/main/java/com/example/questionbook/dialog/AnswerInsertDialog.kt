@@ -3,6 +3,7 @@ package com.example.questionbook.dialog
 import android.app.Activity
 import android.app.AlertDialog
 import android.view.View
+import android.widget.LinearLayout
 import androidx.annotation.LayoutRes
 import androidx.fragment.app.FragmentActivity
 import com.example.questionbook.R
@@ -17,6 +18,7 @@ class AnswerInsertDialog(
     override fun create(): AlertDialog {
         return super.dialog
                 .setTitle(activity.getString(R.string.dialog_text_title))
+                .setView(view as LinearLayout)
                 .setNegativeButton(activity.getString(R.string.dialog_negative_button)){
                     dialog, which ->
                     dialog.cancel()

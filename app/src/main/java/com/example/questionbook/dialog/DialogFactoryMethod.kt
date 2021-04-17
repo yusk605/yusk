@@ -25,7 +25,7 @@ abstract class DialogProduct(
 
     private val _dialog: AlertDialog.Builder by lazy { AlertDialog.Builder(activity) }
 
-    protected val dialog: AlertDialog.Builder
+    protected val dialog:AlertDialog.Builder
         get() = _dialog
 
     abstract fun create():AlertDialog
