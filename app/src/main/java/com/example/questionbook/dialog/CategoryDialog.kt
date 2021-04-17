@@ -22,6 +22,10 @@ class CategoryDialog private constructor(
 
     override fun getView():View = dialogView
 
+    override fun  getValue():String {
+        TODO("Not yet implemented")
+    }
+
     companion object{
             private var singleton:CategoryDialog? = null
             fun getInstance(activity: FragmentActivity, @LayoutRes resource:Int): CategoryDialog =
