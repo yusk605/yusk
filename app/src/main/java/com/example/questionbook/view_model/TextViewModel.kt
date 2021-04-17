@@ -2,40 +2,43 @@ package com.example.questionbook.view_model
 
 import android.app.Application
 import androidx.lifecycle.*
-import com.example.questionbook.QuestionItem
-import com.example.questionbook.room.QuestionDatabase
-import com.example.questionbook.room.QuestionTextEntity
-import com.example.questionbook.room.TextWithAnswer
-import com.example.questionbook.room.TextWithAnswerAndHistory
+import com.example.questionbook.room.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class TextViewModel(private val app:Application): AndroidViewModel(app) {
 
-    private val dao = QuestionDatabase
-        .getInstance(app,viewModelScope)
-        .getTextDao()
+    private val textDao = QuestionDatabase.getInstance(app,viewModelScope).getTextDao()
 
-    val data:LiveData<List<TextWithAnswer>> by lazy {
-        dao.get()
+    private val answerDao = QuestionDatabase.getInstance(app,viewModelScope).getAnswerDao()
+
+    val data:LiveData<List<TextWithAnswer>> by lazy { textDao.get() }
+
+
+    fun insertAnswer(entity:QuestionAnswerEntity){
+        viewModelScope.launch(Dispatchers.IO) {
+            answerDao.insert(entity= entity)
+        }
     }
 
-   // val questions:LiveData<List<QuestionItem>>
+    fun updateAnswer(entity: QuestionAnswerEntity){
+        viewModelScope.launch(Dispatchers.IO) {
+            answerDao.update(entity = entity)
+        }
+    }
 
-
-
-    fun insert(entity: QuestionTextEntity) =
+    fun textInsert(entity: QuestionTextEntity) =
         viewModelScope.launch(Dispatchers.IO){
-            dao.insert(entity = entity)
+            textDao.insert(entity = entity)
         }
 
     fun update(entity: QuestionTextEntity) =
         viewModelScope.launch(Dispatchers.IO){
-            dao.update(entity = entity)
+            textDao.update(entity = entity)
         }
 
     fun delete(entity:QuestionTextEntity) =
         viewModelScope.launch(Dispatchers.IO){
-            dao.delete(entity = entity)
+            textDao.delete(entity = entity)
         }
 }
