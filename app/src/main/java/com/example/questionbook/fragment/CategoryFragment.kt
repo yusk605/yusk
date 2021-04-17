@@ -14,9 +14,12 @@ import com.example.questionbook.R
 import com.example.questionbook.adapter.CategoryAdapter
 import com.example.questionbook.dialog.CategoryDialog
 import com.example.questionbook.dialog.CategoryDialogFactory
+import com.example.questionbook.getMag
 import com.example.questionbook.room.QuestionCategoryEntity
+import com.example.questionbook.showSnackBar
 import com.example.questionbook.view_model.CategoryViewModel
 import com.example.questionbook.view_model.CategoryViewModelFactory
+import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.textfield.TextInputEditText
 import kotlinx.android.synthetic.main.fragment_category.*
 import java.util.*
@@ -34,33 +37,37 @@ class CategoryFragment : Fragment() {
                         putParcelable(ARGS_KEY,entity)
                         putInt(ARGS_SIDE_MENU_FLAG,flag)
                     })
-        }
-    }
+                }
+            }
 
     private val viewModel:CategoryViewModel by lazy {
         CategoryViewModelFactory(app = activity?.application!!)
                 .create(CategoryViewModel::class.java)
-    }
+        }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         arguments?.let { a->
             resources.getStringArray(R.array.side_menu_keys).let{ f->
                 f.forEach {
-                    Log.d("tag","文字列＝${f}")
                     if(a.get(it) != null)flag = a.getInt(it)
                 }
             }
         }
-        //Log.d("log","${flag?:1}：フラグ")
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_category,container,false)
+
+        val view = inflater.inflate(R.layout.fragment_category,container,false)
+
+        activity?.let {
+            view.showSnackBar(it.getMag(flag))
+        }
+
+        return view
     }
 
 
@@ -113,16 +120,16 @@ class CategoryFragment : Fragment() {
      */
     private fun CategoryViewModel.toInsert(title:String){
             insert(
-                QuestionCategoryEntity(
+                    QuestionCategoryEntity(
                         categoryNo = 0,
                         categoryFlag = 0,
-                        categoryTitle = title
-                ))
+                        categoryTitle = title))
         }
+
+
 
     companion object{
         const val ARGS_KEY  = "navigate_args_category_to_workBook"
         const val ARGS_SIDE_MENU_FLAG = "navigate_args_side_menu"
     }
-
 }
