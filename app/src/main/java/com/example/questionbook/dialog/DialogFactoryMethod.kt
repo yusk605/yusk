@@ -1,10 +1,8 @@
 package com.example.questionbook.dialog
 
 import android.app.AlertDialog
-import android.content.Context
 import android.view.View
 import androidx.annotation.LayoutRes
-import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.FragmentActivity
 
 /**
@@ -31,6 +29,7 @@ abstract class DialogProduct(
     abstract fun create():AlertDialog
     abstract fun getView():View
     abstract fun getValue():String
+    
 }
 
 
@@ -74,13 +73,13 @@ class WorkBookDialogFactory(
  * @param activity フラグメントのコンテキスト。
  * @param resource 表示させたダイヤログのレイアウトを表示。
  */
-class TextDialogFactory(
+class PageQuizDialogFactory(
         private val activity: FragmentActivity,
         @LayoutRes private val resource:Int
-        ):DialogFactoryImpl<TextDialog>{
-    override fun create(dialogClass: Class<TextDialog>): DialogProduct {
-        if(dialogClass.isAssignableFrom(TextDialog::class.java))
-            return TextDialog.getInstance(activity, resource)
+        ):DialogFactoryImpl<PageQuizDialog>{
+    override fun create(dialogClass: Class<PageQuizDialog>): DialogProduct {
+        if(dialogClass.isAssignableFrom(PageQuizDialog::class.java))
+            return PageQuizDialog.getInstance(activity, resource)
 
         throw IllegalArgumentException("Type mismatch TextDialog")
     }
