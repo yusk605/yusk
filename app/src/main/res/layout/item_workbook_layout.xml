@@ -38,7 +38,6 @@
             style="@style/question_chip"
             android:id="@+id/game_start_chip"
             android:text="android"
-            android:backgroundTint="@color/chip_category"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
