@@ -68,4 +68,8 @@
     <string name="dialog_category_title">カテゴリーの追加</string>
     <string name="dialog_workbook_title">タイトル</string>
     <string name="dialog_text_title">テキストの追加</string>
+    <string name="dialog_negative_button">キャンセル</string>
+    <string name="dialog_positive_button">次へ</string>
+    <string name="dialog_insert_button">登録</string>
+
 </resources>
