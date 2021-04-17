@@ -89,4 +89,9 @@
         android:name="com.example.questionbook.fragment.QuestionFormFragment"
         android:label="fragment_problem_insert"
         tools:layout="@layout/fragment_text_insert" />
+    <fragment
+        android:id="@+id/resultFragment"
+        android:name="com.example.questionbook.ResultFragment"
+        android:label="fragment_result"
+        tools:layout="@layout/fragment_result" />
 </navigation>
