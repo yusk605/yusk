@@ -63,6 +63,14 @@ interface QuestionAnswerDao{
 
 
 @Dao
+interface QuestionQuizDao{
+    @Query("select * from question_quiz")fun getAll():LiveData<List<QuestionQuizEntity>>
+    @Insert suspend fun insert(entity:QuestionQuizEntity)
+    @Update suspend fun update(entity:QuestionQuizEntity)
+    @Delete suspend fun delete(entity:QuestionQuizEntity)
+}
+
+@Dao
 interface QuestionHistoryDao{
     @Query("select * from question_history")fun getAll():LiveData<List<QuestionHistoryEntity>>
     @Insert fun insert(entity:QuestionHistoryEntity)

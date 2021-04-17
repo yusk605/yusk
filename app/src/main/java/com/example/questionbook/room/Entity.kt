@@ -93,6 +93,35 @@ data class QuestionAnswerEntity(
 ):Parcelable
 
 /**
+ * ■解答案を保存するためのエンティティ
+ * @param quizNo                識別番号
+ * @param quizStatement         問題文
+ * @param quizFirs              解答案その1
+ * @param quizSecond            解答案その2
+ * @param quizThird             解答案その3
+ * @param quizRight             解答案
+ * @param quizAnswerCheck       解答の値
+ * @param quizCommentary        解答案
+ * @param timeStamp             更新時間
+ * @param relationWorkBook      問題集に紐づける番号
+ */
+@Parcelize
+@Entity(tableName = "question_quiz")
+data class QuestionQuizEntity(
+        @PrimaryKey(autoGenerate = true)val quizNo:Int,
+        @ColumnInfo(name = "quiz_statement")val quizStatement:String,
+        @ColumnInfo(name = "quiz_firs")val quizFirs:String,
+        @ColumnInfo(name = "quiz_second")val quizSecond:String,
+        @ColumnInfo(name = "quiz_third")val quizThird:String,
+        @ColumnInfo(name = "quiz_right")val quizRight:String,
+        @ColumnInfo(name = "quiz_answer_check")val quizAnswerCheck:Int,
+        @ColumnInfo(name = "quiz_answer_commentary")val quizCommentary:String,
+        @ColumnInfo(name = "time_stamp")val timeStamp: LocalDateTime,
+        @ColumnInfo(name = "relation_workbook")val relationWorkBook:Int
+):Parcelable
+
+
+/**
  * ■履歴を保存するためのエンティティ
  * @param historyNo         識別番号
  * @param historyRate       正解
@@ -132,7 +161,7 @@ data class WorkBookWithTextAndAccuracy(
     @Relation(
                 parentColumn = "workBookNo",
                 entityColumn = "relation_workbook", )
-        val textList:List<QuestionTextEntity>,
+        val textList:List<QuestionQuizEntity>,
     @Relation(
                 parentColumn = "workBookNo",
                 entityColumn = "relation_workbook")
@@ -180,4 +209,13 @@ data class AccuracyWithHistory(
         )val historyList:List<QuestionHistoryEntity>
 ):Parcelable
 
+@Parcelize
+data class WorkBookWithQuiz(
+        @Embedded
+        val workBookEntity: QuestionWorkBookEntity,
+        @Relation(
+                parentColumn = "workbookNo",
+                entityColumn = "relation_workbook"
+        )val quizList:List<QuestionQuizEntity>
+):Parcelable
 

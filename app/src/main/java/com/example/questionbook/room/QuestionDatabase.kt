@@ -18,7 +18,8 @@ import java.time.LocalDateTime
     QuestionTextEntity::class,
     QuestionAccuracyEntity::class,
     QuestionAnswerEntity::class,
-    QuestionHistoryEntity::class
+    QuestionHistoryEntity::class,
+    QuestionQuizEntity::class
                      ],version = 1)
 abstract class QuestionDatabase:RoomDatabase() {
 
@@ -28,6 +29,7 @@ abstract class QuestionDatabase:RoomDatabase() {
     abstract fun getAccuracyDao():QuestionAccuracyDao
     abstract fun getAnswerDao():QuestionAnswerDao
     abstract fun getHistoryDao():QuestionHistoryDao
+    abstract fun getQuizDao():QuestionQuizDao
 
     companion object{
 
@@ -81,44 +83,43 @@ abstract class QuestionDatabase:RoomDatabase() {
             private fun initInsertEntity(database: QuestionDatabase,scope:CoroutineScope){
                 (0..10).forEach {
                     scope.launch(Dispatchers.IO){
-                       /* database.getCategoryDao().insert(
-                                QuestionCategoryEntity(
-                                        categoryNo = 0,
-                                        categoryTitle = "CategoryTest${it}",
-                                        categoryFlag = 0
-                                )
-                        )
-                        database.getWorkBookDao().insert(
-                                QuestionWorkBookEntity(
-                                        workBookNo = 0,
-                                        workBookTitle = "WorkbookTitle${it}",
-                                        workBookDate = LocalDateTime.now(),
-                                        workBookFlag = 0,
-                                        relationCategory = 1
-                                )
-                        )
-                        database.getTextDao().insert(
-                                QuestionTextEntity(
-                                        textNo = 0,
-                                        textStatement = "問題文問題文問題文問題文問題文問題文問題文問題文",
-                                        textFlag = 0,
+                      if(it<3) {
+                          database.getCategoryDao().insert(
+                                  QuestionCategoryEntity(
+                                          categoryNo = 0,
+                                          categoryTitle = "CategoryTest${it}",
+                                          categoryFlag = 0
+                                  )
+                          )
+                      }
+                       if(it<3) {
+                           database.getWorkBookDao().insert(
+                                   QuestionWorkBookEntity(
+                                           workBookNo = 0,
+                                           workBookTitle = "WorkbookTitle${it}",
+                                           workBookDate = LocalDateTime.now(),
+                                           workBookFlag = 0,
+                                           relationCategory = 1
+                                   )
+                           )
+                       }
+                        database.getQuizDao().insert(
+                                entity = QuestionQuizEntity(
+                                        quizNo = 0,
+                                        quizAnswerCheck = 0,
+                                        quizCommentary = "",
+                                        quizFirs = "問題1",
+                                        quizSecond = "問題2",
+                                        quizThird = "問題3",
+                                        quizRight = "正解",
+                                        quizStatement = "問題文問題文文字列を問題文問題文問題文",
                                         timeStamp = LocalDateTime.now(),
-                                        relationWorkBook =1
+                                        relationWorkBook = 1
                                 )
-                        )*/
-                        database.getAnswerDao().insert(
-                            QuestionAnswerEntity(
-                                answerNo = 0,
-                                answerFirs = "選択案その一",
-                                answerSecond = "選択案その2",
-                                answerThird = "選択案その3",
-                                answerRight = "正解となる案",
-                                relationText = 0
                             )
-                        )
+                        }
                     }
                 }
             }
         }
     }
-}
