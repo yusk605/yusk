@@ -1,14 +1,13 @@
 package com.example.questionbook.dialog
 
 import android.app.AlertDialog
-import android.content.Context
 import android.view.View
 import android.widget.LinearLayout
 import androidx.annotation.LayoutRes
 import androidx.fragment.app.FragmentActivity
 import com.example.questionbook.R
 
-class TextDialog private constructor(
+class PageQuizDialog private constructor(
         private val activity: FragmentActivity,
         @LayoutRes private val resource:Int
         ):DialogProduct(activity) {
@@ -31,10 +30,10 @@ class TextDialog private constructor(
     }
 
     companion object{
-        var instance:TextDialog? = null
+        var instance:PageQuizDialog? = null
         fun getInstance(
                 activity:FragmentActivity,
                 @LayoutRes resource:Int
-        ):TextDialog = instance?:TextDialog(activity, resource)
+        ):PageQuizDialog = instance?:PageQuizDialog(activity, resource)
     }
 }
