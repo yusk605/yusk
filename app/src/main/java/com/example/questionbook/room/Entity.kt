@@ -169,6 +169,24 @@ data class WorkBookWithTextAndAccuracy(
         val accuracyList:List<QuestionAccuracyEntity>
         ):Parcelable
 
+@Parcelize
+data class WorkBookWithAll(
+        @Embedded
+        val workBookEntity:QuestionWorkBookEntity,
+        @Relation(
+                parentColumn = "workBookNo",
+                entityColumn = "relation_workbook" )
+        val textList:List<QuestionQuizEntity>,
+        @Relation(
+                parentColumn = "workBookNo",
+                entityColumn = "relation_workbook" )
+        val accuracyList:List<QuestionAccuracyEntity>,
+        @Relation(
+                parentColumn = "workBookNo",
+                entityColumn = "relation_workbook"
+        )val quizList:List<QuestionQuizEntity>
+        ):Parcelable
+
 
 /**
 *問題となるテキストの識別番号に紐づいた、回答欄すべてを取得する。
