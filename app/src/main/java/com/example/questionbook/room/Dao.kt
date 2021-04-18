@@ -13,7 +13,8 @@ interface QuestionCategoryDao{
 
 @Dao
 interface QuestionWorkBookDao{
-    @Query("select * from question_workbook")fun getAll():LiveData<List<WorkBookWithTextAndAccuracy>>
+    @Query("select * from question_workbook")fun get():LiveData<List<WorkBookWithTextAndAccuracy>>
+    @Query("select * from question_workbook")fun getAll():LiveData<List<WorkBookWithAll>>
     @Insert suspend fun insert(entity:QuestionWorkBookEntity)
     @Update suspend fun update(entity:QuestionWorkBookEntity)
     @Delete suspend fun delete(entity:QuestionWorkBookEntity)
