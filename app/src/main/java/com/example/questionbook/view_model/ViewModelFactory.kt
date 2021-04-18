@@ -37,8 +37,8 @@ class AccuracyViewModelFactory(private val app:Application):ViewModelProvider.Fa
 class QuestionViewModelFactory(private val app: Application):ViewModelProvider.Factory{
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
 
-        if (modelClass.isAssignableFrom(QuestionFormViewModel::class.java))
-            return QuestionFormViewModel(app) as T
+        if (modelClass.isAssignableFrom(QuizGameViewModel::class.java))
+            return QuizGameViewModel(app) as T
 
         throw IllegalArgumentException("Type mismatch QuestionViewModelFactory")
     }

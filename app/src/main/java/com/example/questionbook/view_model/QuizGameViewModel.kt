@@ -14,7 +14,7 @@ import kotlinx.coroutines.launch
  * ・Answer 解答
  * @param app  　アプリケーションの指定
  */
-class QuestionFormViewModel(private val app:Application): AndroidViewModel(app) {
+class QuizGameViewModel(private val app:Application): AndroidViewModel(app) {
 
     private val db   = QuestionDatabase.getInstance(app,viewModelScope)
 
@@ -22,10 +22,10 @@ class QuestionFormViewModel(private val app:Application): AndroidViewModel(app) 
 
     private val answerDao = db.getAnswerDao()
 
-    private var _problemData = problemDao.get()
+    private val quizDao = db.getQuizDao()
 
-    val problemData:LiveData<List<TextWithAnswer>>
-        get() = _problemData
+    private var _data = quizDao.getAll()
+
 
     fun insert(entity:QuestionAnswerEntity) =
         viewModelScope.launch(Dispatchers.IO) {

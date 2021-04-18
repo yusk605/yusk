@@ -51,7 +51,7 @@ class WorkBookFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
+
         adapter = WorkBookAdapter(category?.categoryTitle?:""){ view,obj->
             val bundle = Bundle().apply { putParcelable(ARGS_KEY,obj) }
             //サイドメニューから項目をタップした時に、その項目の値によって遷移先を変える。

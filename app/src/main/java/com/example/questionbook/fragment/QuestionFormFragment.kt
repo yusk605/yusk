@@ -28,9 +28,9 @@ class QuestionFormFragment : Fragment() {
             .create(WorkBookViewModel::class.java)
     }
 
-    private val formViewModel:QuestionFormViewModel by lazy {
+    private val formViewModel:QuizGameViewModel by lazy {
         QuestionViewModelFactory(app = app!!)
-            .create(QuestionFormViewModel::class.java)
+            .create(QuizGameViewModel::class.java)
     }
 
     private val categoryViewModel:CategoryViewModel by lazy {
