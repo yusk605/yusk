@@ -52,7 +52,7 @@ class TextAdapter(
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TextHolder =
         TextHolder(
             LayoutInflater.from(parent.context)
-                .inflate(R.layout.item_text_layout,parent,false)
+                .inflate(R.layout.item_quiz_text_layout,parent,false)
         )
 
     override fun onBindViewHolder(holder: TextHolder, position: Int) {

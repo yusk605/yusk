@@ -12,18 +12,19 @@ import com.example.questionbook.R
 import com.example.questionbook.adapter.QuizAdapter
 import com.example.questionbook.dialog.*
 import com.example.questionbook.room.QuestionQuizEntity
+import com.example.questionbook.room.WorkBookWithAll
 import com.example.questionbook.room.WorkBookWithTextAndAccuracy
 import com.example.questionbook.view_model.QuizViewModel
 import com.example.questionbook.view_model.QuizViewModelFactory
 import com.google.android.material.textfield.TextInputEditText
-import kotlinx.android.synthetic.main.fragment_text_list.*
+import kotlinx.android.synthetic.main.fragment_quiz_text_list.*
 import java.time.LocalDateTime
 
 
-class TextListFragment : Fragment() {
+class QuizListFragment : Fragment() {
 
     //WorkBookFragmentから遷移されたときに渡される値として。
-    private var workBookWithTextAndAccuracy:WorkBookWithTextAndAccuracy? = null
+    private var workBookWithTextAndAccuracy:WorkBookWithAll? = null
 
     //view model の生成を行うこと。
     private val viewModel:QuizViewModel by lazy {
@@ -37,7 +38,7 @@ class TextListFragment : Fragment() {
         super.onCreate(savedInstanceState)
         arguments?.let {
             workBookWithTextAndAccuracy =
-                it.get(WorkBookFragment.ARGS_KEY) as WorkBookWithTextAndAccuracy
+                it.get(WorkBookFragment.ARGS_KEY) as WorkBookWithAll
         }
     }
 
@@ -45,7 +46,7 @@ class TextListFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_text_list, container, false)
+        return inflater.inflate(R.layout.fragment_quiz_text_list, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -122,7 +123,8 @@ class TextListFragment : Fragment() {
                 questionSecond      = dialogTextSecond.text.toString(),
                 questionThird       = dialogTextThird.text.toString(),
                 questionRight       = dialogTextRight.text.toString(),
-                questionTitle       = workBookWithTextAndAccuracy?.workBookEntity?.workBookTitle?:""
+                questionTitle       = workBookWithTextAndAccuracy?.workBookEntity?.workBookTitle?:"",
+                selectAnswers = mutableListOf()
         )
     }
 }

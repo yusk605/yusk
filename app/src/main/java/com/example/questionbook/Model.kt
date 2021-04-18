@@ -8,6 +8,7 @@ package com.example.questionbook
  * @param questionSecond 解答案2
  * @param questionThird　解答案3
  * @param questionRight  正解
+ * @param selectAnswers クイズゲームを行う際に選択案をシャッフルさせるためのリスト。
  */
 data class QuestionItem(
         val questionStatement:String,
@@ -16,6 +17,7 @@ data class QuestionItem(
         val questionSecond:String,
         val questionThird:String,
         val questionRight:String,
+        val selectAnswers:MutableList<String>
         )
 /*
     @Note　問題に必要な値を取得するものを考える。

@@ -7,9 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.example.questionbook.QuestionItem
 import com.example.questionbook.databinding.FragmentGameStartBinding
-import com.example.questionbook.room.QuestionWorkBookEntity
-import com.example.questionbook.room.WorkBookWithTextAndAccuracy
-
+import com.example.questionbook.room.WorkBookWithAll
 
 
 class GameStartFragment : Fragment() {
@@ -20,15 +18,12 @@ class GameStartFragment : Fragment() {
     private var createQuestion:QuestionItem? = null
     private var answers:MutableList<String> = mutableListOf()
 
-
-
-    private var workBookEntity:QuestionWorkBookEntity? = null
+    private var workBookWithAll:WorkBookWithAll? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-            workBookEntity =
-                    (it.get(WorkBookFragment.ARGS_KEY) as WorkBookWithTextAndAccuracy).workBookEntity
+            workBookWithAll = it.get(WorkBookFragment.ARGS_KEY) as WorkBookWithAll
         }
     }
 
@@ -45,8 +40,5 @@ class GameStartFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
-
-
             }
-        }
+    }

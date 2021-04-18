@@ -39,7 +39,7 @@ class QuizAdapter:ListAdapter<QuestionQuizEntity,QuizAdapter.QuizHolder>(Diff) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): QuizHolder =
         QuizHolder(
                 LayoutInflater.from(parent.context)
-                        .inflate(R.layout.item_text_layout,parent,false)
+                        .inflate(R.layout.item_quiz_text_layout,parent,false)
         )
 
     override fun onBindViewHolder(holder: QuizHolder, position: Int) {
