@@ -4,6 +4,7 @@ import android.app.Application
 import androidx.lifecycle.*
 import com.example.questionbook.room.QuestionDatabase
 import com.example.questionbook.room.QuestionWorkBookEntity
+import com.example.questionbook.room.WorkBookWithAll
 import com.example.questionbook.room.WorkBookWithTextAndAccuracy
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -14,9 +15,7 @@ class WorkBookViewModel(app:Application):AndroidViewModel(app) {
         .getInstance(app,viewModelScope)
         .getWorkBookDao()
 
-    val data:LiveData<List<WorkBookWithTextAndAccuracy>> by lazy {
-        dao.getAll()
-    }
+    val data:LiveData<List<WorkBookWithAll>> by lazy { dao.getAll() }
 
     fun insert(entity:QuestionWorkBookEntity) =
         viewModelScope.launch(Dispatchers.IO) {
