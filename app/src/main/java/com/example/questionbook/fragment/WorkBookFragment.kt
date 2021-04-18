@@ -56,8 +56,6 @@ class WorkBookFragment : Fragment() {
             val bundle = Bundle().apply { putParcelable(ARGS_KEY,obj) }
             //サイドメニューから項目をタップした時に、その項目の値によって遷移先を変える。
             flag.actionWorkBook(view,bundle)
-            /*Navigation.findNavController(view)
-                .navigate(R.id.action_workBookFragment_to_problemListFragment,bundle)*/
         }
 
         return inflater.inflate(R.layout.fragment_work_book, container, false)
