@@ -10,7 +10,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.questionbook.QuestionItem
 import com.example.questionbook.R
 import com.example.questionbook.adapter.QuizAdapter
-import com.example.questionbook.adapter.TextAdapter
 import com.example.questionbook.dialog.*
 import com.example.questionbook.room.QuestionQuizEntity
 import com.example.questionbook.room.WorkBookWithTextAndAccuracy

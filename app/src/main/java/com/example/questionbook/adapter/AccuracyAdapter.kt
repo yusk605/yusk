@@ -9,14 +9,13 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.questionbook.R
-import com.example.questionbook.room.AccuracyWithHistory
 import com.google.android.material.chip.Chip
 
 class AccuracyAdapter(
-        private val onClick:(AccuracyWithHistory,View) -> Unit,
+        private val onClick:(View) -> Unit,
         private val problemTitle:String,
         private val categoryTitle:String
-) :ListAdapter<AccuracyWithHistory,AccuracyAdapter.AccuracyRecycleHolder>(Diff) {
+) {/*ListAdapter<AccuracyWithHistory,AccuracyAdapter.AccuracyRecycleHolder>(Diff) {
 
     companion object Diff:DiffUtil.ItemCallback<AccuracyWithHistory>(){
         override fun areItemsTheSame(oldItem: AccuracyWithHistory, newItem: AccuracyWithHistory): Boolean =
@@ -74,5 +73,5 @@ class AccuracyAdapter(
             it.accuracyProgressBar.progress = accuracy
         }
     }
-
+*/
 }

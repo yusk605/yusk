@@ -53,9 +53,10 @@ data class QuestionAccuracyEntity(
         @ColumnInfo(name = "accuracy_date")val accuracyDate:LocalDate,
         @ColumnInfo(name = "relation_workbook")val relationWorkBook: Int
 ):Parcelable
-
+///////////////////////////////////////////////////////////////////////////////
 /**
  * ■問題のテキストとなるデータを表示
+ * ・削除予定
  * @param textNo            識別番号
  * @param textStatement     問題文
  * @param textFlag          0..ホルダー、ゲーム表示可 1..ゲーム一覧非表示  2..削除候補
@@ -71,7 +72,7 @@ data class QuestionTextEntity(
         @ColumnInfo(name = "timestamp")val timeStamp:LocalDateTime,
         @ColumnInfo(name = "relation_workbook")val relationWorkBook: Int
 ):Parcelable
-
+///////////////////////////////////////////////////////////////////////////////
 /**
  * ■解答案を保存するためのエンティティ
  * @param answerNo        識別番号
@@ -123,18 +124,18 @@ data class QuestionQuizEntity(
 
 /**
  * ■履歴を保存するためのエンティティ
- * @param historyNo         識別番号
- * @param historyRate       正解
- * @param relationText      問題集と紐づくナンバー
- * @param relationAccuracy  解答と紐づくナンバー
+ * @param historyNo        識別番号
+ * @param historyRate      正解
+ * @param historyDate      日付
+ * @param relationQuiz     解答と紐づくナンバー
  */
 @Parcelize
 @Entity(tableName = "question_history")
 data class QuestionHistoryEntity(
         @PrimaryKey(autoGenerate = true)val historyNo:Int,
         @ColumnInfo(name = "history_rate")val historyRate:Int,
-        @ColumnInfo(name = "relation_text")val relationText:Int,
-        @ColumnInfo(name = "relation_accuracy")val relationAccuracy:Int
+        @ColumnInfo(name = "history_date")val historyDate:LocalDate,
+        @ColumnInfo(name = "relation_quiz")val relationQuiz:Int
 ):Parcelable
 
 /**
@@ -147,7 +148,7 @@ data class CategoryWithWorkBooks(
         @Relation(
                 parentColumn = "categoryNo",
                 entityColumn = "relation_category"
-        )val workBookList:List<QuestionWorkBookEntity>
+        )val workBookList:List<QuestionWorkBookEntity>,
 ):Parcelable
 
 
@@ -159,32 +160,15 @@ data class WorkBookWithTextAndAccuracy(
     @Embedded
         val workBookEntity:QuestionWorkBookEntity,
     @Relation(
-                parentColumn = "workBookNo",
-                entityColumn = "relation_workbook", )
+            parentColumn = "workBookNo",
+            entityColumn = "relation_workbook" )
         val textList:List<QuestionQuizEntity>,
     @Relation(
-                parentColumn = "workBookNo",
-                entityColumn = "relation_workbook")
+            parentColumn = "workBookNo",
+            entityColumn = "relation_workbook" )
         val accuracyList:List<QuestionAccuracyEntity>
-):Parcelable
+        ):Parcelable
 
-
-/**
- *問題となるテキストの識別番号に紐づいた、回答欄すべてを取得する。
- */
-@Parcelize
-data class TextWithAnswerAndHistory(
-    @Embedded
-        val textEntity: QuestionTextEntity,
-    @Relation(
-                parentColumn = "textNo",
-                entityColumn = "relation_text"
-        )val answer:QuestionAnswerEntity,
-    @Relation(
-            parentColumn = "textNo",
-            entityColumn = "relation_text"
-        )val history:QuestionHistoryEntity
-):Parcelable
 
 /**
 *問題となるテキストの識別番号に紐づいた、回答欄すべてを取得する。
@@ -199,23 +183,20 @@ data class TextWithAnswer(
     )val answer:QuestionAnswerEntity
 ):Parcelable
 
-@Parcelize
-data class AccuracyWithHistory(
-        @Embedded
-        val accuracyEntity: QuestionAccuracyEntity,
-        @Relation(
-                parentColumn = "accuracyNo",
-                entityColumn = "relation_accuracy"
-        )val historyList:List<QuestionHistoryEntity>
-):Parcelable
 
+
+/**
+ * ■単一のクイズデータに紐づくヒストリーリストを取得
+ * @param quizEntity  親となるエンティティを指定（クイズエンティティ）
+ * @param historyList 子となるエンティティすべてをリストに格納。
+ */
 @Parcelize
-data class WorkBookWithQuiz(
+data class QuizWithHistoryList(
         @Embedded
-        val workBookEntity: QuestionWorkBookEntity,
+        val quizEntity: QuestionQuizEntity,
         @Relation(
-                parentColumn = "workbookNo",
-                entityColumn = "relation_workbook"
-        )val quizList:List<QuestionQuizEntity>
+                parentColumn = "quizNo",
+                entityColumn = "relation_quiz"
+        )val historyList: List<QuestionHistoryEntity>
 ):Parcelable
 

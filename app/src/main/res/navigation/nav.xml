@@ -54,16 +54,7 @@
         android:id="@+id/laboratoryFragment"
         android:name="com.example.questionbook.fragment.LaboratoryFragment"
         android:label="fragment_laboratory"
-        tools:layout="@layout/fragment_laboratory" >
-        <action
-            android:id="@+id/action_laboratoryFragment_to_problemInsertFragment"
-            app:destination="@id/textInsertFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/textFragment"
-        android:name="com.example.questionbook.fragment.TextFragment"
-        android:label="fragment_problem"
-        tools:layout="@layout/fragment_text" />
+        tools:layout="@layout/fragment_laboratory" />
     <fragment
         android:id="@+id/accuracyFragment"
         android:name="com.example.questionbook.fragment.AccuracyFragment"
@@ -84,11 +75,6 @@
             app:nullable="true"
             android:defaultValue="@null" />
     </fragment>
-    <fragment
-        android:id="@+id/textInsertFragment"
-        android:name="com.example.questionbook.fragment.QuestionFormFragment"
-        android:label="fragment_problem_insert"
-        tools:layout="@layout/fragment_text_insert" />
     <fragment
         android:id="@+id/resultFragment"
         android:name="com.example.questionbook.ResultFragment"

@@ -32,11 +32,7 @@ class LaboratoryFragment : Fragment() {
         laboratory_register_category.setOnClickListener {  }
         laboratory_register_workbook.setOnClickListener {  }
 
-        laboratory_register_problem.setOnClickListener {
-            Navigation.findNavController(it).navigate(
-                R.id.action_laboratoryFragment_to_problemInsertFragment
-            )
-        }
+
 
     }
 }

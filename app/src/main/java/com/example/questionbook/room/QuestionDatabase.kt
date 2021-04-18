@@ -57,7 +57,6 @@ abstract class QuestionDatabase:RoomDatabase() {
                             getWorkBookDao().collBackDelete()
                             getTextDao().collBackDelete()
                             getAccuracyDao().collBackDelete()
-                            getAnswerDao().collBackDelete()
                         }
                     }
                 }

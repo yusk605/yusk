@@ -27,7 +27,6 @@ interface QuestionWorkBookDao{
 @Dao
 interface QuestionTextDao{
     @Query("select * from question_text")fun get():LiveData<List<TextWithAnswer>>
-    @Query("select * from question_text")fun getAll():LiveData<List<TextWithAnswerAndHistory>>
     @Insert suspend fun insert(entity:QuestionTextEntity)
     @Update suspend fun update(entity:QuestionTextEntity)
     @Delete suspend fun delete(entity:QuestionTextEntity)
@@ -39,7 +38,7 @@ interface QuestionTextDao{
 
 @Dao
 interface QuestionAccuracyDao{
-    @Query("select * from question_accuracy")fun getAll():LiveData<List<AccuracyWithHistory>>
+    @Query("select * from question_accuracy")fun getAll():LiveData<List<QuestionAccuracyEntity>>
     @Insert suspend fun insert(entity:QuestionAccuracyEntity)
     @Update suspend fun update(entity:QuestionAccuracyEntity)
     @Delete suspend fun delete(entity:QuestionAccuracyEntity)
@@ -56,9 +55,6 @@ interface QuestionAnswerDao{
     @Update fun update(entity:QuestionAnswerEntity)
     @Delete fun delete(entity:QuestionAnswerEntity)
 
-    @Query("delete from question_answer where relation_text in ( " +
-            "select relation_text from question_answer left join question_text on relation_text = textNo where answerNo is null)")
-    suspend fun collBackDelete()
 }
 
 
