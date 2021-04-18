@@ -6,14 +6,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.questionbook.QuestionItem
-import com.example.questionbook.R
 import com.example.questionbook.databinding.FragmentGameStartBinding
 import com.example.questionbook.room.QuestionWorkBookEntity
 import com.example.questionbook.room.WorkBookWithTextAndAccuracy
 import com.example.questionbook.view_model.TextViewModel
 import com.example.questionbook.view_model.TextViewModelFactory
-import com.example.questionbook.view_model.WorkBookViewModel
-import com.example.questionbook.view_model.WorkBookViewModelFactory
 
 
 class GameStartFragment : Fragment() {
@@ -24,10 +21,11 @@ class GameStartFragment : Fragment() {
     private var createQuestion:QuestionItem? = null
     private var answers:MutableList<String> = mutableListOf()
 
-    private val viewModel:TextViewModel by lazy {
+    private val viewTextModel:TextViewModel by lazy {
         TextViewModelFactory(app = activity?.application!!)
                 .create(TextViewModel::class.java)
     }
+
 
     private var workBookEntity:QuestionWorkBookEntity? = null
 
@@ -51,7 +49,7 @@ class GameStartFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.data.observe(viewLifecycleOwner){
+        viewTextModel.data.observe(viewLifecycleOwner){
             data->
             questions = data.filter { it.textEntity.relationWorkBook == workBookEntity?.workBookNo }
                         .map { QuestionItem(

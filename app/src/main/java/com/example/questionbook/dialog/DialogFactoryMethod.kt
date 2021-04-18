@@ -14,8 +14,7 @@ interface DialogFactoryImpl<T:DialogProduct>{
 
 /**
  * 抽象的なダイヤログクラス
- * @param activity  フラグメント内で取得することが出来るコンテキスト
- * @param resource  表示させたいレイアウトファイル 例：R.layout.....xml
+ * @param activity  フラグメント内で取得することが出来るコンテキス
  */
 abstract class DialogProduct(
         private val activity: FragmentActivity
