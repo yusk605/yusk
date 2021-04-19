@@ -29,7 +29,7 @@ class TextAdapter(
 
     inner class TextHolder(view:View):RecyclerView.ViewHolder(view){
 
-        val itemTextStatementEdit   =    view.findViewById<TextInputEditText>(R.id.list_text_statement_edit)
+        val itemTextStatementEdit   =    view.findViewById<TextInputEditText>(R.id.game_start_statement_edit)
         val itemTextAnswerFirst     =    view.findViewById<TextInputEditText>(R.id.list_text_answer_first)
         val itemTextAnswerSecond    =    view.findViewById<TextInputEditText>(R.id.dialog_text_answer_second)
         val itemTextAnswerThird     =    view.findViewById<TextInputEditText>(R.id.list_text_answer_third)
