@@ -4,6 +4,7 @@ import android.app.Application
 import androidx.lifecycle.*
 import com.example.questionbook.room.QuestionAnswerEntity
 import com.example.questionbook.room.QuestionDatabase
+import com.example.questionbook.room.QuestionQuizEntity
 import com.example.questionbook.room.TextWithAnswer
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -18,14 +19,14 @@ class QuizGameViewModel(private val app:Application): AndroidViewModel(app) {
 
     private val db   = QuestionDatabase.getInstance(app,viewModelScope)
 
-    private val problemDao = db.getTextDao()
-
     private val answerDao = db.getAnswerDao()
 
     private val quizDao = db.getQuizDao()
 
     private var _data = quizDao.getAll()
 
+    val data:LiveData<List<QuestionQuizEntity>>
+        get() = _data
 
     fun insert(entity:QuestionAnswerEntity) =
         viewModelScope.launch(Dispatchers.IO) {
