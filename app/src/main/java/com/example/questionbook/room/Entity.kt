@@ -8,9 +8,9 @@ import java.time.LocalDateTime
 
 /**
  * ■カテゴリーの分類分けをするエンティティ
- *  @param categoryNo　  識別番号
- *  @param categoryTitle カテゴリーでのタイトル。
- *  @param categoryFlag　カテゴリーでのチェック項目。
+ *  @param categoryNo　   識別番号
+ *  @param categoryTitle  カテゴリーでのタイトル。
+ *  @param categoryFlag　 0..ホルダー、ゲーム表示可 1..ゲーム一覧非表示  2..削除候補　
  */
 @Parcelize
 @Entity(tableName = "question_category")
@@ -52,45 +52,6 @@ data class QuestionAccuracyEntity(
         @ColumnInfo(name = "accuracy_rate")val accuracyRate:Float,
         @ColumnInfo(name = "accuracy_date")val accuracyDate:LocalDate,
         @ColumnInfo(name = "relation_workbook")val relationWorkBook: Int
-):Parcelable
-///////////////////////////////////////////////////////////////////////////////
-/**
- * ■問題のテキストとなるデータを表示
- * ・削除予定
- * @param textNo            識別番号
- * @param textStatement     問題文
- * @param textFlag          0..ホルダー、ゲーム表示可 1..ゲーム一覧非表示  2..削除候補
- * @param timeStamp         更新日時
- * @param relationWorkBook  question_workbook workBookNo 紐づけとなるナンバー
- */
-@Parcelize
-@Entity(tableName = "question_text")
-data class QuestionTextEntity(
-        @PrimaryKey(autoGenerate = true)val textNo:Int,
-        @ColumnInfo(name = "text_statement")val textStatement:String,
-        @ColumnInfo(name = "text_flag")val textFlag:Int,
-        @ColumnInfo(name = "timestamp")val timeStamp:LocalDateTime,
-        @ColumnInfo(name = "relation_workbook")val relationWorkBook: Int
-):Parcelable
-///////////////////////////////////////////////////////////////////////////////
-/**
- * ■解答案を保存するためのエンティティ
- * @param answerNo        識別番号
- * @param answerFirs      解答案その1
- * @param answerSecond    解答案その2
- * @param answerThird     解答案その3
- * @param answerRight     解答案
- * @param relationText question_problem problemNo 紐づけるナンバー
- */
-@Parcelize
-@Entity(tableName = "question_answer")
-data class QuestionAnswerEntity(
-    @PrimaryKey(autoGenerate = true)val answerNo:Int,
-    @ColumnInfo(name = "answer_firs")val answerFirs:String,
-    @ColumnInfo(name = "answer_second")val answerSecond:String,
-    @ColumnInfo(name = "answer_third")val answerThird:String,
-    @ColumnInfo(name = "answer_right")val answerRight:String,
-    @ColumnInfo(name = "relation_text")val relationText:Int
 ):Parcelable
 
 /**
@@ -138,6 +99,7 @@ data class QuestionHistoryEntity(
         @ColumnInfo(name = "relation_quiz")val relationQuiz:Int
 ):Parcelable
 
+
 /**
  * カテゴリーテーブルの識別番号に紐づいた問題集一覧を取得します。
  */
@@ -152,22 +114,7 @@ data class CategoryWithWorkBooks(
 ):Parcelable
 
 
-/**
- * ワークブック（問題集）の識別番号に紐づいた、テキスト（問題）をすべて取得する。
- */
-@Parcelize
-data class WorkBookWithTextAndAccuracy(
-    @Embedded
-        val workBookEntity:QuestionWorkBookEntity,
-    @Relation(
-            parentColumn = "workBookNo",
-            entityColumn = "relation_workbook" )
-        val textList:List<QuestionQuizEntity>,
-    @Relation(
-            parentColumn = "workBookNo",
-            entityColumn = "relation_workbook" )
-        val accuracyList:List<QuestionAccuracyEntity>
-        ):Parcelable
+
 
 @Parcelize
 data class WorkBookWithAll(
@@ -189,21 +136,6 @@ data class WorkBookWithAll(
 
 
 /**
-*問題となるテキストの識別番号に紐づいた、回答欄すべてを取得する。
-*/
-@Parcelize
-data class TextWithAnswer(
-    @Embedded
-    val textEntity: QuestionTextEntity,
-    @Relation(
-        parentColumn = "textNo",
-        entityColumn = "relation_text"
-    )val answer:QuestionAnswerEntity
-):Parcelable
-
-
-
-/**
  * ■単一のクイズデータに紐づくヒストリーリストを取得
  * @param quizEntity  親となるエンティティを指定（クイズエンティティ）
  * @param historyList 子となるエンティティすべてをリストに格納。
@@ -218,3 +150,79 @@ data class QuizWithHistoryList(
         )val historyList: List<QuestionHistoryEntity>
 ):Parcelable
 
+
+///////////////////////////////////////////////////////////////////////////////
+//削除予定となるエンティティ//////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////
+/**
+ * ■問題のテキストとなるデータを表示
+ * ・削除予定
+ * @param textNo            識別番号
+ * @param textStatement     問題文
+ * @param textFlag          0..ホルダー、ゲーム表示可 1..ゲーム一覧非表示  2..削除候補
+ * @param timeStamp         更新日時
+ * @param relationWorkBook  question_workbook workBookNo 紐づけとなるナンバー
+ */
+@Parcelize
+@Entity(tableName = "question_text")
+data class QuestionTextEntity(
+        @PrimaryKey(autoGenerate = true)val textNo:Int,
+        @ColumnInfo(name = "text_statement")val textStatement:String,
+        @ColumnInfo(name = "text_flag")val textFlag:Int,
+        @ColumnInfo(name = "timestamp")val timeStamp:LocalDateTime,
+        @ColumnInfo(name = "relation_workbook")val relationWorkBook: Int
+):Parcelable
+
+/**
+ * ■解答案を保存するためのエンティティ
+ * @param answerNo        識別番号
+ * @param answerFirs      解答案その1
+ * @param answerSecond    解答案その2
+ * @param answerThird     解答案その3
+ * @param answerRight     解答案
+ * @param relationText question_problem problemNo 紐づけるナンバー
+ */
+@Parcelize
+@Entity(tableName = "question_answer")
+data class QuestionAnswerEntity(
+        @PrimaryKey(autoGenerate = true)val answerNo:Int,
+        @ColumnInfo(name = "answer_firs")val answerFirs:String,
+        @ColumnInfo(name = "answer_second")val answerSecond:String,
+        @ColumnInfo(name = "answer_third")val answerThird:String,
+        @ColumnInfo(name = "answer_right")val answerRight:String,
+        @ColumnInfo(name = "relation_text")val relationText:Int
+):Parcelable
+
+/**
+ * ワークブック（問題集）の識別番号に紐づいた、テキスト（問題）をすべて取得する。
+ */
+@Parcelize
+data class WorkBookWithTextAndAccuracy(
+        @Embedded
+        val workBookEntity:QuestionWorkBookEntity,
+        @Relation(
+                parentColumn = "workBookNo",
+                entityColumn = "relation_workbook" )
+        val textList:List<QuestionQuizEntity>,
+        @Relation(
+                parentColumn = "workBookNo",
+                entityColumn = "relation_workbook" )
+        val accuracyList:List<QuestionAccuracyEntity>
+):Parcelable
+
+
+/**
+ *問題となるテキストの識別番号に紐づいた、回答欄すべてを取得する。
+ */
+@Parcelize
+data class TextWithAnswer(
+        @Embedded
+        val textEntity: QuestionTextEntity,
+        @Relation(
+                parentColumn = "textNo",
+                entityColumn = "relation_text"
+        )val answer:QuestionAnswerEntity
+):Parcelable
+
+///////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////
