@@ -29,6 +29,7 @@ class CategoryFragment : Fragment() {
 
     private var flag = 0
 
+    //アダプタークラスの取得を行う。
     private val adapter: CategoryAdapter by lazy {
         CategoryAdapter { entity,view ->
             Navigation.findNavController(view).navigate(
@@ -40,6 +41,7 @@ class CategoryFragment : Fragment() {
                 }
             }
 
+    //分類一覧のビューモデルを作成
     private val viewModel:CategoryViewModel by lazy {
         CategoryViewModelFactory(app = activity?.application!!)
                 .create(CategoryViewModel::class.java)
