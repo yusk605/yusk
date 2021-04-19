@@ -25,11 +25,6 @@
             app:destination="@id/accuracyFragment" />
     </fragment>
     <fragment
-        android:id="@+id/answerFragment"
-        android:name="com.example.questionbook.fragment.AnswerFragment"
-        android:label="fragment_answer"
-        tools:layout="@layout/fragment_answer" />
-    <fragment
         android:id="@+id/categoryFragment"
         android:name="com.example.questionbook.fragment.CategoryFragment"
         android:label="fragment_category"
@@ -47,8 +42,8 @@
         android:label="fragment_game_start"
         tools:layout="@layout/fragment_game_start" >
         <action
-            android:id="@+id/action_gameStartFragment_to_answerFragment"
-            app:destination="@id/answerFragment" />
+            android:id="@+id/action_gameStartFragment_to_resultFragment"
+            app:destination="@id/resultFragment" />
     </fragment>
     <fragment
         android:id="@+id/laboratoryFragment"
