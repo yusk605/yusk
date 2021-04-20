@@ -5,7 +5,7 @@ import com.example.questionbook.room.QuestionQuizEntity
 import kotlin.math.log
 
 /**
- * クイズのデータをまとめるためのインターフェイス。
+ * クイズのデータをまとめるためのインターフェイスいわば集合体の役割を果たす。
  */
 interface AggregationQuestionItem {
     fun getSize():Int
@@ -28,6 +28,8 @@ interface QuizGameLogic{
 interface QuestionItemIterator{
     fun next():QuestionItem
     fun hasNext():Boolean
+    fun getIndex():Int
+    fun getSize():Int
 }
 
 /**
@@ -41,37 +43,30 @@ class QuestionItemShelf(
     private val logic:QuizGameLogic by lazy {
         object :QuizGameLogic{
             override fun isCorrectAnswer(item:QuestionItem, answer:String):Boolean =
-                    item.questionRight == answer
+                    item.entity.quizRight == answer
 
             override fun isIncorrectAnswer(item:QuestionItem, answer:String):Boolean =
-                    item.questionRight == answer
+                    item.entity.quizRight == answer
         }
     }
 
     private var correctAnswerCount      =   0
     private var incorrectAnswerCount    =   0
 
-
     private val _questionItemList:List<QuestionItem> by lazy {
         data.map {
             QuestionItem(
-                    answerCheck         = 0,
-                    questionStatement   = it.quizStatement,
-                    questionFirs        = it.quizFirs,
-                    questionSecond      = it.quizSecond,
-                    questionThird       = it.quizThird,
-                    questionRight       = it.quizRight,
-                    questionTitle       = title,
-                    entity              = it,
-                    selectAnswers       =
+                    questionTitle = title,
+                    answerCheck = 0,
+                    entity = it,
+                    selectAnswers =
                     mutableListOf<String>().apply {
                         add(it.quizRight)
                         add(it.quizFirs)
                         add(it.quizSecond)
                         add(it.quizThird)
                         shuffled()
-                    }
-            )
+                    })
         }.toList().shuffled()
     }
 
@@ -99,14 +94,20 @@ class QuestionItemShelf(
         }
     }
 
-    override fun getSize(): Int {
-        return _questionItemList.size
-    }
+    override fun getSize(): Int =_questionItemList.size
 
+    /**
+     * ■単一のQuestionItemオブジェクトを取得
+     * @param index リストの添え字番号となる物
+     * @return リストの番号に基づいたアイテム
+     */
     override fun getItemAt(index:Int):QuestionItem {
         return _questionItemList[index]
     }
 
+    /**
+     * ■イテレーターの生成を行う。
+     */
     override fun createIterator(): QuestionItemIterator {
         return ConnCreteQuestionItemIterator(this)
     }
@@ -124,6 +125,11 @@ class ConnCreteQuestionItemIterator(
     override fun next(): QuestionItem {
         return questionShelf.getItemAt(index).apply { index++ }
     }
-    override fun hasNext(): Boolean =
-            index < questionShelf.getSize()
+
+    override fun hasNext(): Boolean = index < questionShelf.getSize()
+
+    override fun getIndex(): Int = index
+
+    override fun getSize(): Int = questionShelf.getSize()
+
 }
