@@ -84,29 +84,5 @@ class PageQuizDialogFactory(
     }
 }
 
-/**
- *
- */
-class TextInsertDialogFactory(
-        private val activity: FragmentActivity,
-        @LayoutRes private val resource:Int
-):DialogFactoryImpl<TextInsertDialog>{
-    override fun create(dialogClass: Class<TextInsertDialog>): DialogProduct {
-        if(dialogClass.isAssignableFrom(TextInsertDialog::class.java))
-            return TextInsertDialog.getInstance(activity, resource)
 
-        throw IllegalArgumentException("Type mismatch TextDialog")
-    }
-}
 
-class AnswerDialogFactory(
-            private val activity: FragmentActivity,
-            @LayoutRes private val resource:Int
-        ):DialogFactoryImpl<AnswerInsertDialog>{
-    override fun create(dialogClass: Class<AnswerInsertDialog>): DialogProduct {
-        if (dialogClass.isAssignableFrom(AnswerInsertDialog::class.java))
-            return AnswerInsertDialog.getInstance(activity, resource)
-
-        throw IllegalArgumentException("Type mismatch AnswerDialog")
-    }
-}
