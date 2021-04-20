@@ -32,12 +32,14 @@ class ConcreteQuizGameStartLogic(
     private val _questionItemList:List<QuestionItem> by lazy {
         data.map {
             QuestionItem(
+                answerCheck = 0,
                 questionStatement   = it.quizStatement,
                 questionFirs        = it.quizFirs,
                 questionSecond      = it.quizSecond,
                 questionThird       = it.quizThird,
                 questionRight       = it.quizRight,
                 questionTitle       = title,
+                    entity          = it,
                 selectAnswers       =
                 mutableListOf<String>().apply {
                     add(it.quizRight)
