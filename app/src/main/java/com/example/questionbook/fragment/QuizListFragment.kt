@@ -71,29 +71,14 @@ class QuizListFragment : Fragment() {
                 val alertDialog     = dg.create().apply { show() }
                 val quizView        = dg.getView()
                 val quizButton      = quizView.findViewById<Button>(R.id.form_quiz_add_btn)
-                quizButton.setOnClickListener { b->
+                quizButton.setOnClickListener {
                     val questionItem    = getParameter(quizView)
-                    viewModel.insert(
-                            QuestionQuizEntity(
-                                    quizNo          = 0,
-                                    quizFirs        = questionItem.questionFirs,
-                                    quizSecond      = questionItem.questionSecond,
-                                    quizThird       = questionItem.questionThird,
-                                    quizRight       = questionItem.questionRight,
-                                    quizStatement   = questionItem.questionStatement,
-                                    quizCommentary  = "",
-                                    quizAnswerCheck = 0,
-                                    timeStamp = LocalDateTime.now(),
-                                    relationWorkBook = workBookWithTextAndAccuracy?.workBookEntity?.workBookNo?:0
-                            ))
+                    viewModel.insert(questionItem.entity)
                         alertDialog.cancel()
                     }
                 }
             }
         }
-
-
-
 
     /**
      * リサイクラービューでの初期化を行うメソッド。
@@ -118,13 +103,20 @@ class QuizListFragment : Fragment() {
         val dialogTextRight     = dialogView.findViewById<TextInputEditText>(R.id.form_quiz_answer_right)
 
         return QuestionItem(
-                questionStatement   = dialogStatement.text.toString(),
-                questionFirs        = dialogFirst.text.toString(),
-                questionSecond      = dialogTextSecond.text.toString(),
-                questionThird       = dialogTextThird.text.toString(),
-                questionRight       = dialogTextRight.text.toString(),
-                questionTitle       = workBookWithTextAndAccuracy?.workBookEntity?.workBookTitle?:"",
-                selectAnswers = mutableListOf()
-        )
+                questionTitle = workBookWithTextAndAccuracy?.workBookEntity?.workBookTitle?:"",
+                selectAnswers = mutableListOf(),
+                answerCheck = 0,
+                entity = QuestionQuizEntity(
+                                quizNo          = 0,
+                                quizFirs        = dialogFirst.text.toString(),
+                                quizSecond      = dialogTextSecond.text.toString(),
+                                quizThird       = dialogTextThird.text.toString(),
+                                quizRight       = dialogTextRight.text.toString(),
+                                quizStatement   = dialogStatement.text.toString(),
+                                quizCommentary  = "",
+                                quizAnswerCheck = 0,
+                                timeStamp = LocalDateTime.now(),
+                                relationWorkBook = workBookWithTextAndAccuracy?.workBookEntity?.workBookNo?:0
+                ))
     }
 }
