@@ -48,7 +48,7 @@
                 </TableRow>
             </TableLayout>
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/list_text_textInputLayout"
+                android:id="@+id/game_start_text_textInputLayout"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -79,7 +79,7 @@
                 android:hint="@string/item_text_answer_first"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/list_text_textInputLayout">
+                app:layout_constraintTop_toBottomOf="@+id/game_start_text_textInputLayout">
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/list_text_answer_first"
                 android:focusable="false"
@@ -87,7 +87,7 @@
                 android:layout_height="wrap_content"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/list_text_textInputLayout" />
+                app:layout_constraintTop_toBottomOf="@+id/game_start_text_textInputLayout" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -109,7 +109,7 @@
                     android:layout_height="wrap_content"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/list_text_textInputLayout" />
+                    app:layout_constraintTop_toBottomOf="@+id/game_start_text_textInputLayout" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -132,7 +132,7 @@
                     android:focusable="false"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/list_text_textInputLayout" />
+                    app:layout_constraintTop_toBottomOf="@+id/game_start_text_textInputLayout" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -154,7 +154,7 @@
                     android:focusable="false"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/list_text_textInputLayout" />
+                    app:layout_constraintTop_toBottomOf="@+id/game_start_text_textInputLayout" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <ImageView
