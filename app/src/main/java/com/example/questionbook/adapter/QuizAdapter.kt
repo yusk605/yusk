@@ -12,7 +12,9 @@ import com.example.questionbook.R
 import com.example.questionbook.room.QuestionQuizEntity
 import com.google.android.material.textfield.TextInputEditText
 
-class QuizAdapter:ListAdapter<QuestionQuizEntity,QuizAdapter.QuizHolder>(Diff) {
+class QuizAdapter(
+        private  val showDialog:(QuestionQuizEntity)->Unit
+    ) :ListAdapter<QuestionQuizEntity,QuizAdapter.QuizHolder>(Diff) {
 
     companion object Diff: DiffUtil.ItemCallback<QuestionQuizEntity>(){
         override fun areItemsTheSame(
@@ -34,6 +36,13 @@ class QuizAdapter:ListAdapter<QuestionQuizEntity,QuizAdapter.QuizHolder>(Diff) {
         val itemTextAnswerRight     =    view.findViewById<TextInputEditText>(R.id.list_text_answer_right)
         val itemTextPageCount       =    view.findViewById<TextView>(R.id.item_text_page_count)
         val itemIcButton            =    view.findViewById<ImageView>(R.id.item_text_amendment)
+        init {
+            itemIcButton.setOnClickListener {
+                showDialog(
+                        getItem(layoutPosition)
+                )
+            }
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): QuizHolder =
