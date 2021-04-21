@@ -71,7 +71,21 @@
     </fragment>
     <fragment
         android:id="@+id/resultFragment"
-        android:name="com.example.questionbook.ResultFragment"
+        android:name="com.example.questionbook.fragment.ResultFragment"
         android:label="fragment_result"
-        tools:layout="@layout/fragment_result" />
+        tools:layout="@layout/fragment_result" >
+        <argument
+            android:name="resultItem"
+            app:argType="com.example.questionbook.ResultItem"
+            app:nullable="true"
+            android:defaultValue="@null" />
+        <action
+            android:id="@+id/action_resultFragment_to_concreteResultFragment"
+            app:destination="@id/concreteResultFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/concreteResultFragment"
+        android:name="com.example.questionbook.fragment.ConcreteResultFragment"
+        android:label="fragment_concrete_result"
+        tools:layout="@layout/fragment_concrete_result" />
 </navigation>
