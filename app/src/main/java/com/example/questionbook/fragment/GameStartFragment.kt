@@ -9,6 +9,7 @@ import android.widget.RadioButton
 import androidx.navigation.Navigation
 import com.example.questionbook.QuestionItem
 import com.example.questionbook.R
+import com.example.questionbook.ResultItem
 import com.example.questionbook.databinding.FragmentGameStartBinding
 import com.example.questionbook.logic.QuestionItemIterator
 import com.example.questionbook.logic.QuestionItemShelf
@@ -24,6 +25,7 @@ class GameStartFragment : Fragment() {
     private var questionIt:QuestionItemIterator? = null
     private var questionItemShelf:QuestionItemShelf? = null
     private var questionItem:QuestionItem? = null
+
     private var questionItemList:MutableList<QuestionItem> = mutableListOf()
 
     private val viewModel:QuizViewModel by lazy {
@@ -74,7 +76,7 @@ class GameStartFragment : Fragment() {
                         shelf.correctAnswerCount(q,select)
                     } }
                 questionIt?.let{
-                    it. nextQuiz(view)
+                    it.nextQuiz(view)
                     game_start_quiz_count.text = "${it.getIndex()}/${it.getSize()}"
                 }
             }
@@ -96,8 +98,11 @@ class GameStartFragment : Fragment() {
             }
 
         }else{
+
+            val bundle = Bundle().apply { putParcelable(ARGS_KEY,ResultItem(questionItemList)) }
+
             Navigation.findNavController(view)
-                    .navigate(R.id.action_gameStartFragment_to_resultFragment)
+                    .navigate(R.id.action_gameStartFragment_to_resultFragment,bundle)
         }
     }
 
@@ -117,5 +122,8 @@ class GameStartFragment : Fragment() {
         game_radio_button_second.text   = selectAnswers[1]
         game_radio_button_third.text    = selectAnswers[2]
         game_radio_button_force.text    = selectAnswers[3]
+    }
+    companion object{
+        const val ARGS_KEY = "GameStartFragment to ResultFragment"
     }
 }
