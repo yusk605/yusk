@@ -1,6 +1,8 @@
 package com.example.questionbook
 
+import android.os.Parcelable
 import com.example.questionbook.room.QuestionQuizEntity
+import kotlinx.android.parcel.Parcelize
 
 /**
  * ■問題を表示させるためのオブジェクト
@@ -20,3 +22,13 @@ data class QuestionItem(
     クエッションアイテム内の属性に question_quiz のエンティティをプロパティに渡すこと。
 
  */
+
+/**
+ * ■リザルト画面に結果となるデータを表示させるためのオブジェクト
+ * @param questionItemList クイズを行ったデータを保持するクラス
+ */
+@Parcelize
+data class ResultItem(
+        val questionItemList:MutableList<QuestionItem>
+):Parcelable
+
