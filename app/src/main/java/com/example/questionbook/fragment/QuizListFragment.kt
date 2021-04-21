@@ -17,22 +17,44 @@ import com.example.questionbook.room.WorkBookWithTextAndAccuracy
 import com.example.questionbook.view_model.QuizViewModel
 import com.example.questionbook.view_model.QuizViewModelFactory
 import com.google.android.material.textfield.TextInputEditText
+import kotlinx.android.synthetic.main.dialog_text_form_layout.*
 import kotlinx.android.synthetic.main.fragment_quiz_text_list.*
 import java.time.LocalDateTime
 
 
 class QuizListFragment : Fragment() {
 
+    //ダイヤログを表示させるためのオブジェクト
+
+
     //WorkBookFragmentから遷移されたときに渡される値として。
     private var workBookWithTextAndAccuracy:WorkBookWithAll? = null
 
-    //view model の生成を行うこと。
+    //view model
     private val viewModel:QuizViewModel by lazy {
         QuizViewModelFactory(activity?.application!!)
                 .create(QuizViewModel::class.java)
     }
 
-    private val quizAdapter:QuizAdapter by lazy { QuizAdapter() }
+    //アダプター
+    private val quizAdapter:QuizAdapter by lazy {
+        QuizAdapter{ entity->
+            val quizDialog = activity?.let { it1 ->
+                PageQuizDialogFactory(it1,R.layout.dialog_text_form_layout)
+                        .create(PageQuizDialog::class.java) }
+
+            quizDialog?.let { dg->
+                val alertDialog = dg.create().apply { show() }
+                val dialogView  = dg.getView()
+                val quizButton      = dialogView.findViewById<Button>(R.id.form_quiz_add_btn)
+                dialogView.setParameter(entity)
+                quizButton.setOnClickListener {
+                    viewModel.update(dialogView.getParameter().entity)
+                    alertDialog.cancel()
+                }
+            }
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -52,8 +74,12 @@ class QuizListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        //リサイクラービューの初期化
         initRecycleView()
-        viewModel.data.observe(viewLifecycleOwner){ data->
+
+        //ビューモデルからデータを取得し観測を行う。
+        viewModel.data.observe(viewLifecycleOwner){
+            data->
             quizAdapter.submitList(
                 data.filter {
                     it.relationWorkBook ==
@@ -61,19 +87,18 @@ class QuizListFragment : Fragment() {
                 })
         }
 
+        //クイズテキスト一覧に表示されている、ボタンを押したときの処理
         fab_text_add.setOnClickListener { v->
             val quizDialog = activity?.let { it1 ->
                 PageQuizDialogFactory(it1,R.layout.dialog_text_form_layout)
                         .create(PageQuizDialog::class.java)
             }
-
             quizDialog?.let { dg->
                 val alertDialog     = dg.create().apply { show() }
                 val quizView        = dg.getView()
                 val quizButton      = quizView.findViewById<Button>(R.id.form_quiz_add_btn)
                 quizButton.setOnClickListener {
-                    val questionItem    = getParameter(quizView)
-                    viewModel.insert(questionItem.entity)
+                    viewModel.insert(quizView.getParameter().entity)
                         alertDialog.cancel()
                     }
                 }
@@ -94,13 +119,13 @@ class QuizListFragment : Fragment() {
      * ■ダイヤログのレイアウトに指定されている、ウィジェットを取得するメソッド。
      * @param dialogView ダイヤログに指定されているビューを引き数として渡す。
      */
-    private fun getParameter(dialogView: View):QuestionItem{
+    private fun View.getParameter():QuestionItem{
 
-        val dialogStatement     = dialogView.findViewById<TextInputEditText>(R.id.form_quiz_statement)
-        val dialogFirst         = dialogView.findViewById<TextInputEditText>(R.id.form_quiz_answer_first)
-        val dialogTextSecond    = dialogView.findViewById<TextInputEditText>(R.id.form_quiz_answer_second)
-        val dialogTextThird     = dialogView.findViewById<TextInputEditText>(R.id.form_quiz_answer_third)
-        val dialogTextRight     = dialogView.findViewById<TextInputEditText>(R.id.form_quiz_answer_right)
+        val dialogStatement     = findViewById<TextInputEditText>(R.id.form_quiz_statement)
+        val dialogFirst         = findViewById<TextInputEditText>(R.id.form_quiz_answer_first)
+        val dialogTextSecond    = findViewById<TextInputEditText>(R.id.form_quiz_answer_second)
+        val dialogTextThird     = findViewById<TextInputEditText>(R.id.form_quiz_answer_third)
+        val dialogTextRight     = findViewById<TextInputEditText>(R.id.form_quiz_answer_right)
 
         return QuestionItem(
                 questionTitle = workBookWithTextAndAccuracy?.workBookEntity?.workBookTitle?:"",
@@ -118,5 +143,18 @@ class QuizListFragment : Fragment() {
                                 timeStamp = LocalDateTime.now(),
                                 relationWorkBook = workBookWithTextAndAccuracy?.workBookEntity?.workBookNo?:0
                 ))
+    }
+
+    /**
+     * ■値をセットする際に呼び出すメソッド
+     * 問題一覧画面のスパナの ico をタップした際に予備さされるメソッド
+     * その際にダイヤログに修正を行うデータを表示させること。
+     * @param entity QuestionQuizEntity クイズのデータを格納する値。
+     */
+    private fun View.setParameter(entity:QuestionQuizEntity){
+        findViewById<TextInputEditText>(R.id.form_quiz_statement).setText(entity.quizStatement)
+        findViewById<TextInputEditText>(R.id.form_quiz_answer_first).setText(entity.quizStatement)
+        findViewById<TextInputEditText>(R.id.form_quiz_answer_third).setText(entity.quizStatement)
+        findViewById<TextInputEditText>(R.id.form_quiz_answer_right).setText(entity.quizStatement)
     }
 }
