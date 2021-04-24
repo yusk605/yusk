@@ -43,7 +43,7 @@
                     app:layout_constraintTop_toBottomOf="@id/game_start_chip">
 
                     <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/game_start_statement_edit"
+                        android:id="@+id/item_list_quiz_statement_edit"
                         android:layout_width="match_parent"
                         android:layout_height="240dp"
                         android:focusable="false"

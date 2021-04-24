@@ -1,14 +1,67 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".fragment.ResultFragment">
-
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_width="match_parent">
 
+        <TextView
+            android:id="@+id/fragment_result_title_text"
+            android:text="テキスト"
+            android:textSize="36sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            app:layout_constraintBottom_toTopOf="@+id/result_progress_bar"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+        <ProgressBar
+            android:id="@+id/result_progress_bar"
+
+            style="?android:attr/progressBarStyleLarge"
+            android:layout_width="280dp"
+            android:layout_height="280dp"
+            android:layout_margin="30dp"
+            android:max="100"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/fragment_result_title_text" />
+        <TextView
+            android:id="@+id/result_progress_accuracy"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="80%"
+            android:textSize="55sp"
+            app:layout_constraintBottom_toBottomOf="@+id/result_progress_bar"
+            app:layout_constraintEnd_toEndOf="@+id/result_progress_bar"
+            app:layout_constraintStart_toStartOf="@+id/result_progress_bar"
+            app:layout_constraintTop_toTopOf="@+id/result_progress_bar" />
+
+        <TextView
+            android:id="@+id/result_result_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="10問中8問正解"
+            android:layout_marginTop="38dp"
+            android:textSize="26sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/result_progress_bar"/>
+
+        <Button
+            android:id="@+id/concrete_result_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/result_details"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/result_result_text" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>
