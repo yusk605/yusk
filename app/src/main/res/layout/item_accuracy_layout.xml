@@ -43,7 +43,7 @@
                     app:layout_constraintBottom_toBottomOf="parent"/>
 
                 <ProgressBar
-                    android:id="@+id/accuracy_progress_bar"
+                    android:id="@+id/item_accuracy_progress_bar"
                     style="?android:attr/progressBarStyleLarge"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -55,14 +55,14 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
-                    android:id="@+id/item_accuracy"
+                    android:id="@+id/item_accuracy_text_view"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="30%"
-                    app:layout_constraintBottom_toBottomOf="@+id/accuracy_progress_bar"
-                    app:layout_constraintEnd_toEndOf="@+id/accuracy_progress_bar"
-                    app:layout_constraintStart_toStartOf="@+id/accuracy_progress_bar"
-                    app:layout_constraintTop_toTopOf="@+id/accuracy_progress_bar" />
+                    app:layout_constraintBottom_toBottomOf="@+id/item_accuracy_progress_bar"
+                    app:layout_constraintEnd_toEndOf="@+id/item_accuracy_progress_bar"
+                    app:layout_constraintStart_toStartOf="@+id/item_accuracy_progress_bar"
+                    app:layout_constraintTop_toTopOf="@+id/item_accuracy_progress_bar" />
 
                 <TextView
                     android:id="@+id/item_accuracy_counter_text"

@@ -45,21 +45,19 @@
             android:id="@+id/action_gameStartFragment_to_resultFragment"
             app:destination="@id/resultFragment" />
     </fragment>
-    <fragment
-        android:id="@+id/laboratoryFragment"
-        android:name="com.example.questionbook.fragment.LaboratoryFragment"
-        android:label="fragment_laboratory"
-        tools:layout="@layout/fragment_laboratory" />
+
     <fragment
         android:id="@+id/accuracyFragment"
         android:name="com.example.questionbook.fragment.AccuracyFragment"
         android:label="fragment_accuracy"
         tools:layout="@layout/fragment_accuracy" />
+
     <fragment
         android:id="@+id/garbageCanFragment"
         android:name="com.example.questionbook.fragment.GarbageCanFragment"
         android:label="fragment_garbage_can"
         tools:layout="@layout/fragment_garbage_can" />
+
     <fragment
         android:id="@+id/QuizListFragment"
         android:name="com.example.questionbook.fragment.QuizListFragment"
@@ -69,6 +67,7 @@
             app:argType="com.example.questionbook.room.WorkBookWithAll"
             app:nullable="true" />
     </fragment>
+
     <fragment
         android:id="@+id/resultFragment"
         android:name="com.example.questionbook.fragment.ResultFragment"
@@ -76,16 +75,17 @@
         tools:layout="@layout/fragment_result" >
         <argument
             android:name="resultItem"
-            app:argType="com.example.questionbook.ResultItem"
+            app:argType="com.example.questionbook.QuizResult"
             app:nullable="true"
             android:defaultValue="@null" />
         <action
             android:id="@+id/action_resultFragment_to_concreteResultFragment"
-            app:destination="@id/concreteResultFragment" />
+            app:destination="@id/ConcreteResultListFragment" />
     </fragment>
+
     <fragment
-        android:id="@+id/concreteResultFragment"
-        android:name="com.example.questionbook.fragment.ConcreteResultFragment"
+        android:id="@+id/ConcreteResultListFragment"
+        android:name="com.example.questionbook.fragment.ConcreteResultListFragment"
         android:label="fragment_concrete_result"
-        tools:layout="@layout/fragment_concrete_result" />
+        tools:layout="@layout/fragment_concrete_result_list" />
 </navigation>

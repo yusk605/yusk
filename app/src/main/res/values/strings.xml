@@ -28,7 +28,7 @@
     <string name="item_problem_label">問題</string>
     <string name="item_problem">問題集</string>
 
-    <!--@layout/problem_item.xml -->
+    <!--@layout/quiz_item.xml -->
     <string name="item_text_statement">問題集</string>
     <string name="item_text_answer_first">選択1</string>
     <string name="item_text_answer_second">選択2</string>
@@ -42,7 +42,7 @@
     <string name="laboratory_workbook_btm">問題集の追加</string>
     <string name="laboratory_problem_btm">テキストの追加</string>
 
-    <!--@layout/problem_form-->
+    <!--@layout/quiz_form-->
     <string name="problem_form_label_spinner_category">カテゴリー</string>
     <string name="problem_form_label_spinner_workbook">問題集</string>
     <string name="problem_form_label">テキスト作成</string>
@@ -72,4 +72,10 @@
     <string name="dialog_positive_button">次へ</string>
     <string name="dialog_insert_button">登録</string>
 
+    <!-- result_item.xml -->
+    <string name="result_item_select_answer">選択した解答</string>
+    <string name="result_item_right_answer">問題の解答</string>
+
+    <!-- result_fragment.xml -->
+    <string name="result_details">詳細</string>
 </resources>

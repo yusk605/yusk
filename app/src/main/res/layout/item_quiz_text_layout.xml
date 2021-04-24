@@ -56,10 +56,10 @@
                 android:layout_marginEnd="16dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/item_text_amendment">
+                app:layout_constraintTop_toBottomOf="@+id/item_list_quiz_amendment">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/game_start_statement_edit"
+                    android:id="@+id/item_list_quiz_statement_edit"
                     android:focusable="false"
                     android:layout_width="match_parent"
                     android:layout_height="240dp"
@@ -69,7 +69,7 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/list_text_textInputLayout_first"
+                android:id="@+id/item_select_result_textInputLayout"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -81,7 +81,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/game_start_text_textInputLayout">
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/list_text_answer_first"
+                android:id="@+id/item_list_quiz_select_answer_fist"
                 android:focusable="false"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -91,7 +91,7 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/list_text_textInputLayout_second"
+                android:id="@+id/item_list_textInputLayout_second"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -101,9 +101,9 @@
                 android:hint="@string/item_text_answer_second"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/list_text_textInputLayout_first">
+                app:layout_constraintTop_toBottomOf="@+id/item_select_result_textInputLayout">
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/dialog_text_answer_second"
+                    android:id="@+id/item_list_quiz_select_answer_second"
                     android:layout_width="match_parent"
                     android:focusable="false"
                     android:layout_height="wrap_content"
@@ -113,7 +113,7 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/list_text_textInputLayout_third"
+                android:id="@+id/item_list_textInputLayout_third"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -123,10 +123,10 @@
                 android:hint="@string/item_text_answer_third"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/list_text_textInputLayout_second">
+                app:layout_constraintTop_toBottomOf="@+id/item_list_textInputLayout_second">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/list_text_answer_third"
+                    android:id="@+id/item_list_quiz_select_answer_third"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:focusable="false"
@@ -146,9 +146,9 @@
                 android:hint="@string/item_text_answer_right"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/list_text_textInputLayout_third">
+                app:layout_constraintTop_toBottomOf="@+id/item_list_textInputLayout_third">
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/list_text_answer_right"
+                    android:id="@+id/item_list_quiz_select_answer_right"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:focusable="false"
@@ -158,7 +158,7 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <ImageView
-                android:id="@+id/item_text_amendment"
+                android:id="@+id/item_list_quiz_amendment"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_marginEnd="8dp"
