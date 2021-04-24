@@ -71,15 +71,15 @@ data class QuestionAccuracyEntity(
 @Entity(tableName = "question_quiz")
 data class QuestionQuizEntity(
         @PrimaryKey(autoGenerate = true)val quizNo:Int,
-        @ColumnInfo(name = "quiz_statement")val quizStatement:String,
-        @ColumnInfo(name = "quiz_firs")val quizFirs:String,
-        @ColumnInfo(name = "quiz_second")val quizSecond:String,
-        @ColumnInfo(name = "quiz_third")val quizThird:String,
-        @ColumnInfo(name = "quiz_right")val quizRight:String,
-        @ColumnInfo(name = "quiz_answer_check")val quizAnswerCheck:Int,
-        @ColumnInfo(name = "quiz_answer_commentary")val quizCommentary:String,
-        @ColumnInfo(name = "time_stamp")val timeStamp: LocalDateTime,
-        @ColumnInfo(name = "relation_workbook")val relationWorkBook:Int
+        @ColumnInfo(name = "quiz_statement")var quizStatement:String,
+        @ColumnInfo(name = "quiz_firs")var quizFirs:String,
+        @ColumnInfo(name = "quiz_second")var quizSecond:String,
+        @ColumnInfo(name = "quiz_third")var quizThird:String,
+        @ColumnInfo(name = "quiz_right")var quizRight:String,
+        @ColumnInfo(name = "quiz_answer_check")var quizAnswerCheck:Int,
+        @ColumnInfo(name = "quiz_answer_commentary")var quizCommentary:String,
+        @ColumnInfo(name = "time_stamp")var timeStamp: LocalDateTime,
+        @ColumnInfo(name = "relation_workbook")var relationWorkBook:Int
 ):Parcelable
 
 
