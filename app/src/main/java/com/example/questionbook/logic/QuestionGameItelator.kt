@@ -46,7 +46,7 @@ class QuestionItemShelf(
                     item.entity.quizRight == answer
 
             override fun isIncorrectAnswer(item:QuestionItem, answer:String):Boolean =
-                    item.entity.quizRight == answer
+                    item.entity.quizRight != answer
         }
     }
 
@@ -123,13 +123,13 @@ class ConnCreteQuestionItemIterator(
     private var index = 0
 
     override fun next(): QuestionItem {
-        return questionShelf.getItemAt(index).apply { index++ }
+        val item = questionShelf.getItemAt(index)
+        index++
+        return item
     }
 
     override fun hasNext(): Boolean = index < questionShelf.getSize()
-
     override fun getIndex(): Int = index
-
     override fun getSize(): Int = questionShelf.getSize()
 
 }
