@@ -49,7 +49,7 @@ class QuizListFragment : Fragment() {
                 val quizButton      = dialogView.findViewById<Button>(R.id.form_quiz_add_btn)
                 dialogView.setParameter(entity)
                 quizButton.setOnClickListener {
-                    viewModel.update(dialogView.getParameter().entity)
+                    viewModel.update(dialogView.getParameter(entity = entity).entity)
                     alertDialog.cancel()
                 }
             }
@@ -144,6 +144,30 @@ class QuizListFragment : Fragment() {
                                 relationWorkBook = workBookWithTextAndAccuracy?.workBookEntity?.workBookNo?:0
                 ))
     }
+    private fun View.getParameter(entity: QuestionQuizEntity):QuestionItem{
+
+        val dialogStatement     = findViewById<TextInputEditText>(R.id.form_quiz_statement)
+        val dialogFirst         = findViewById<TextInputEditText>(R.id.form_quiz_answer_first)
+        val dialogTextSecond    = findViewById<TextInputEditText>(R.id.form_quiz_answer_second)
+        val dialogTextThird     = findViewById<TextInputEditText>(R.id.form_quiz_answer_third)
+        val dialogTextRight     = findViewById<TextInputEditText>(R.id.form_quiz_answer_right)
+
+        return QuestionItem(
+                questionTitle = workBookWithTextAndAccuracy?.workBookEntity?.workBookTitle?:"",
+                selectAnswers = mutableListOf(),
+                answerCheck = 0,
+                entity = entity.also {
+                    it.quizFirs = dialogFirst.text.toString()
+                    it.quizSecond = dialogTextSecond.text.toString()
+                    it.quizThird = dialogTextThird.text.toString()
+                    it.quizRight = dialogTextRight.text.toString()
+                    it.quizStatement = dialogStatement.text.toString()
+                    it.quizCommentary = ""
+                    it.quizAnswerCheck = 0
+                    it.timeStamp = LocalDateTime.now()
+                    it.relationWorkBook = workBookWithTextAndAccuracy?.workBookEntity?.workBookNo ?: 0
+                })
+    }
 
     /**
      * ■値をセットする際に呼び出すメソッド
@@ -153,8 +177,9 @@ class QuizListFragment : Fragment() {
      */
     private fun View.setParameter(entity:QuestionQuizEntity){
         findViewById<TextInputEditText>(R.id.form_quiz_statement).setText(entity.quizStatement)
-        findViewById<TextInputEditText>(R.id.form_quiz_answer_first).setText(entity.quizStatement)
-        findViewById<TextInputEditText>(R.id.form_quiz_answer_third).setText(entity.quizStatement)
-        findViewById<TextInputEditText>(R.id.form_quiz_answer_right).setText(entity.quizStatement)
+        findViewById<TextInputEditText>(R.id.form_quiz_answer_second).setText(entity.quizSecond)
+        findViewById<TextInputEditText>(R.id.form_quiz_answer_first).setText(entity.quizFirs)
+        findViewById<TextInputEditText>(R.id.form_quiz_answer_third).setText(entity.quizThird)
+        findViewById<TextInputEditText>(R.id.form_quiz_answer_right).setText(entity.quizRight)
     }
 }
