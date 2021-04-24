@@ -3,6 +3,7 @@ package com.example.questionbook
 import android.os.Parcelable
 import com.example.questionbook.room.QuestionQuizEntity
 import kotlinx.android.parcel.Parcelize
+import kotlinx.android.parcel.RawValue
 
 /**
  * ■問題を表示させるためのオブジェクト
@@ -23,12 +24,17 @@ data class QuestionItem(
 
  */
 
+
 /**
- * ■リザルト画面に結果となるデータを表示させるためのオブジェクト
- * @param questionItemList クイズを行ったデータを保持するクラス
+ * ■クイズゲームを行った際にその結果を保存する
  */
 @Parcelize
-data class ResultItem(
-        val questionItemList:MutableList<QuestionItem>
+data class QuizResult(
+        val resultTitle: String,
+        val resultText:String,
+        val resultProgress:Int,
+        val resultAccuracy:Float
 ):Parcelable
+
+
 
