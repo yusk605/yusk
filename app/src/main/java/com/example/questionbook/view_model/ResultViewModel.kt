@@ -1,0 +1,4 @@
+package com.example.questionbook.view_model
+
+class ResultViewModel {
+}

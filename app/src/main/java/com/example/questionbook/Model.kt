@@ -33,7 +33,8 @@ data class QuizResult(
         val resultTitle: String,
         val resultText:String,
         val resultProgress:Int,
-        val resultAccuracy:Float
+        val resultAccuracy:Float,
+        val relationWorkBookNo:Int
 ):Parcelable
 
 
