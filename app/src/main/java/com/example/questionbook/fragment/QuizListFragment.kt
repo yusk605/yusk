@@ -13,8 +13,7 @@ import com.example.questionbook.adapter.QuizAdapter
 import com.example.questionbook.dialog.*
 import com.example.questionbook.room.QuestionQuizEntity
 import com.example.questionbook.room.WorkBookWithAll
-import com.example.questionbook.room.WorkBookWithTextAndAccuracy
-import com.example.questionbook.view_model.QuizViewModel
+import com.example.questionbook.view_model.QuizListViewModel
 import com.example.questionbook.view_model.QuizViewModelFactory
 import com.google.android.material.textfield.TextInputEditText
 import kotlinx.android.synthetic.main.dialog_text_form_layout.*
@@ -31,9 +30,9 @@ class QuizListFragment : Fragment() {
     private var workBookWithTextAndAccuracy:WorkBookWithAll? = null
 
     //view model
-    private val viewModel:QuizViewModel by lazy {
+    private val viewModel:QuizListViewModel by lazy {
         QuizViewModelFactory(activity?.application!!)
-                .create(QuizViewModel::class.java)
+                .create(QuizListViewModel::class.java)
     }
 
     //アダプター
@@ -46,10 +45,10 @@ class QuizListFragment : Fragment() {
             quizDialog?.let { dg->
                 val alertDialog = dg.create().apply { show() }
                 val dialogView  = dg.getView()
-                val quizButton      = dialogView.findViewById<Button>(R.id.form_quiz_add_btn)
+                val quizButton  = dialogView.findViewById<Button>(R.id.form_quiz_add_btn)
                 dialogView.setParameter(entity)
                 quizButton.setOnClickListener {
-                    viewModel.update(dialogView.getParameter(entity = entity).entity)
+                    viewModel.quizUpdate(dialogView.getParameter(entity = entity).entity)
                     alertDialog.cancel()
                 }
             }
@@ -78,7 +77,7 @@ class QuizListFragment : Fragment() {
         initRecycleView()
 
         //ビューモデルからデータを取得し観測を行う。
-        viewModel.data.observe(viewLifecycleOwner){
+        viewModel.quizEntityList.observe(viewLifecycleOwner){
             data->
             quizAdapter.submitList(
                 data.filter {
@@ -88,7 +87,7 @@ class QuizListFragment : Fragment() {
         }
 
         //クイズテキスト一覧に表示されている、ボタンを押したときの処理
-        fab_text_add.setOnClickListener { v->
+        fab_text_add.setOnClickListener { v ->
             val quizDialog = activity?.let { it1 ->
                 PageQuizDialogFactory(it1,R.layout.dialog_text_form_layout)
                         .create(PageQuizDialog::class.java)
@@ -98,7 +97,7 @@ class QuizListFragment : Fragment() {
                 val quizView        = dg.getView()
                 val quizButton      = quizView.findViewById<Button>(R.id.form_quiz_add_btn)
                 quizButton.setOnClickListener {
-                    viewModel.insert(quizView.getParameter().entity)
+                    viewModel.quizInsert(quizView.getParameter().entity)
                         alertDialog.cancel()
                     }
                 }
