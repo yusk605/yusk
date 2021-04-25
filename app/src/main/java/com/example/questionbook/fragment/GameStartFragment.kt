@@ -13,15 +13,19 @@ import com.example.questionbook.R
 import com.example.questionbook.databinding.FragmentGameStartBinding
 import com.example.questionbook.logic.QuestionItemIterator
 import com.example.questionbook.logic.QuestionItemShelf
+import com.example.questionbook.room.QuestionAccuracyEntity
+import com.example.questionbook.room.QuestionHistoryEntity
 import com.example.questionbook.room.WorkBookWithAll
-import com.example.questionbook.view_model.QuizViewModel
-import com.example.questionbook.view_model.QuizViewModelFactory
+import com.example.questionbook.view_model.QuizGameViewModel
+import com.example.questionbook.view_model.QuizGameViewModelFactory
 import kotlinx.android.synthetic.main.fragment_game_start.*
+import java.time.LocalDate
 
 
 class GameStartFragment : Fragment() {
 
     private lateinit var binding:FragmentGameStartBinding
+    private var workBookNo:Int=0
     private var questionIt:QuestionItemIterator? = null
     private var questionItemShelf:QuestionItemShelf? = null
     private var questionItem:QuestionItem? = null
@@ -29,9 +33,9 @@ class GameStartFragment : Fragment() {
 
     private var questionItemList:MutableList<QuestionItem> = mutableListOf()
 
-    private val viewModel:QuizViewModel by lazy {
-        QuizViewModelFactory(app = activity?.application!!)
-                .create(QuizViewModel::class.java)
+    private val viewModel:QuizGameViewModel by lazy {
+        QuizGameViewModelFactory(app = activity?.application!!)
+                .create(QuizGameViewModel::class.java)
     }
 
     private var workBookWithAll:WorkBookWithAll? = null
@@ -48,6 +52,8 @@ class GameStartFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
+        workBookNo = workBookWithAll?.let { it.workBookEntity.workBookNo }?:0
+
         binding = FragmentGameStartBinding.inflate(inflater,container,false)
 
         return binding.root
@@ -56,21 +62,27 @@ class GameStartFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
             super.onViewCreated(view, savedInstanceState)
+
             var selectAnswer = ""
-            viewModel.data.observe(viewLifecycleOwner){
+
+            viewModel.quizEntityList.observe(viewLifecycleOwner){
                 data->
+                //イテレーターパターンを使用したクイズの集合体インスタンス
                 questionItemShelf = QuestionItemShelf(
-                        data.filter { it.relationWorkBook == workBookWithAll?.workBookEntity?.workBookNo },
+                        data.filter { it.relationWorkBook == workBookNo },
                         workBookWithAll?.workBookEntity?.workBookTitle?:""
                     )
+
+                //クイズとなる集合体を数える役割を果たすイテレーターを取得
                 questionIt = questionItemShelf?.let{ it.createIterator() }
+
+                //
                 questionIt?.let {
-                    questionItem = it.next()
+                    questionItem = it.next()    //始めに出題されるクイズのデータを取得する。
                     questionItem?.set()
                     questionItemList.add(questionItem!!)
                     game_start_quiz_count.text = "${it.getIndex()}/${it.getSize()}"
                 }
-
 
                 game_radio_group.setOnCheckedChangeListener {
                     group, checkedId ->
@@ -103,6 +115,7 @@ class GameStartFragment : Fragment() {
      * ランダムに表示させた問題
      */
     private fun QuestionItemIterator.nextQuiz(view: View){
+
         if(hasNext()) {
             questionItem = next()
             questionItem?.let {
@@ -110,11 +123,38 @@ class GameStartFragment : Fragment() {
                 questionItemList.add(it)
             }
         }else{
-            val bundle = Bundle().apply { putParcelable(ARGS_KEY,questionItem?.setResult()) }
+
+            val questionResult = questionItem?.setResult()
+
+            //回答率を保存するため
+          /*  viewModel.accuracyInsert(
+                    QuestionAccuracyEntity(
+                            accuracyNo       = 0,
+                            accuracyDate     = LocalDate.now(),
+                            accuracyRate     = questionResult?.resultAccuracy?:0.toFloat(),
+                            relationWorkBook = workBookNo
+                    ))
+
+            //履歴を残すためのロジック
+            questionItemList.forEach {
+                viewModel.historyInsert(
+                        QuestionHistoryEntity(
+                                historyNo = 0,
+                                historyRate = it.answerCheck,
+                                historyDate = LocalDate.now(),
+                                relationQuiz = it.entity.quizNo
+                        ))
+            }*/
+
+            val bundle = Bundle().apply { putParcelable(ARGS_KEY,questionResult) }
+
             Navigation.findNavController(view).navigate(R.id.action_gameStartFragment_to_resultFragment,bundle)
+
         }
     }
 
+
+    //リザルトを表示させるためのオブジェクトを取得する。
     private fun QuestionItem.setResult():QuizResult{
         val quizCount           = questionItemList.size
         val quizAnswerCount     = questionItemList.filter { it.answerCheck==1 }.size
@@ -123,7 +163,8 @@ class GameStartFragment : Fragment() {
                 resultTitle = questionTitle,
                 resultText = "${quizCount}問中${quizAnswerCount}問正解",
                 resultAccuracy = quizAccuracy,
-                resultProgress = quizAccuracy.toInt()
+                resultProgress = quizAccuracy.toInt(),
+                relationWorkBookNo = workBookNo
         )
     }
 
@@ -142,7 +183,7 @@ class GameStartFragment : Fragment() {
     }
 
     /**
-     * ■パラメーターをダイヤログに値を持たせる。
+     * ■パラメーターをテキストの値に持たせる。
      */
     private fun QuestionItem.set(){
         item_list_quiz_statement_edit.setText(entity.quizStatement)
