@@ -13,7 +13,7 @@ interface QuestionCategoryDao{
 
 @Dao
 interface QuestionWorkBookDao{
-    @Query("select * from question_workbook")fun get():LiveData<List<WorkBookWithTextAndAccuracy>>
+    @Query("select * from question_workbook")fun getList():LiveData<List<WorkBookWithTextAndAccuracy>>
     @Query("select * from question_workbook")fun getAll():LiveData<List<WorkBookWithAll>>
     @Insert suspend fun insert(entity:QuestionWorkBookEntity)
     @Update suspend fun update(entity:QuestionWorkBookEntity)
@@ -27,7 +27,7 @@ interface QuestionWorkBookDao{
 
 @Dao
 interface QuestionTextDao{
-    @Query("select * from question_text")fun get():LiveData<List<TextWithAnswer>>
+    @Query("select * from question_text")fun getList():LiveData<List<TextWithAnswer>>
     @Insert suspend fun insert(entity:QuestionTextEntity)
     @Update suspend fun update(entity:QuestionTextEntity)
     @Delete suspend fun delete(entity:QuestionTextEntity)
@@ -39,7 +39,7 @@ interface QuestionTextDao{
 
 @Dao
 interface QuestionAccuracyDao{
-    @Query("select * from question_accuracy")fun getAll():LiveData<List<QuestionAccuracyEntity>>
+    @Query("select * from question_accuracy")fun getList():LiveData<List<QuestionAccuracyEntity>>
     @Insert suspend fun insert(entity:QuestionAccuracyEntity)
     @Update suspend fun update(entity:QuestionAccuracyEntity)
     @Delete suspend fun delete(entity:QuestionAccuracyEntity)
@@ -51,7 +51,7 @@ interface QuestionAccuracyDao{
 
 @Dao
 interface QuestionAnswerDao{
-    @Query("select * from question_answer")fun getAll():LiveData<List<QuestionAnswerEntity>>
+    @Query("select * from question_answer")fun getList():LiveData<List<QuestionAnswerEntity>>
     @Insert fun insert(entity:QuestionAnswerEntity)
     @Update fun update(entity:QuestionAnswerEntity)
     @Delete fun delete(entity:QuestionAnswerEntity)
@@ -61,7 +61,7 @@ interface QuestionAnswerDao{
 
 @Dao
 interface QuestionQuizDao{
-    @Query("select * from question_quiz")fun getAll():LiveData<List<QuestionQuizEntity>>
+    @Query("select * from question_quiz")fun getList():LiveData<List<QuestionQuizEntity>>
     @Insert suspend fun insert(entity:QuestionQuizEntity)
     @Update suspend fun update(entity:QuestionQuizEntity)
     @Delete suspend fun delete(entity:QuestionQuizEntity)
