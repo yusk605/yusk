@@ -2,10 +2,7 @@ package com.example.questionbook.view_model
 
 import android.app.Application
 import androidx.lifecycle.*
-import com.example.questionbook.room.QuestionAnswerEntity
-import com.example.questionbook.room.QuestionDatabase
-import com.example.questionbook.room.QuestionQuizEntity
-import com.example.questionbook.room.TextWithAnswer
+import com.example.questionbook.room.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
@@ -19,27 +16,51 @@ class QuizGameViewModel(private val app:Application): AndroidViewModel(app) {
 
     private val db   = QuestionDatabase.getInstance(app,viewModelScope)
 
-    private val answerDao = db.getAnswerDao()
+    private val accuracyDao:QuestionAccuracyDao
+    private val quizDao:QuestionQuizDao
+    private val historyDao:QuestionHistoryDao
 
-    private val quizDao = db.getQuizDao()
+    init {
+        db.run {
+            accuracyDao = getAccuracyDao()
+            quizDao     = getQuizDao()
+            historyDao  = getHistoryDao()
+        }
+    }
 
-    private var _data = quizDao.getAll()
 
-    val data:LiveData<List<QuestionQuizEntity>>
-        get() = _data
+    private var _quizEntityList = quizDao.getList()
 
-    fun insert(entity:QuestionAnswerEntity) =
+    val quizEntityList:LiveData<List<QuestionQuizEntity>>
+        get() = _quizEntityList
+
+    fun accuracyInsert(entity:QuestionAccuracyEntity) =
         viewModelScope.launch(Dispatchers.IO) {
-            answerDao.insert(entity = entity)
+            accuracyDao.insert(entity = entity)
         }
 
-    fun update(entity: QuestionAnswerEntity) =
+    fun accuracyUpdate(entity: QuestionAccuracyEntity) =
         viewModelScope.launch(Dispatchers.IO) {
-            answerDao.update(entity = entity)
+            accuracyDao.update(entity = entity)
         }
 
-    fun delete(entity: QuestionAnswerEntity) =
+    fun accuracyDelete(entity:QuestionAccuracyEntity) =
         viewModelScope.launch(Dispatchers.IO) {
-            answerDao.delete(entity = entity)
+            accuracyDao.delete(entity = entity)
         }
+
+    fun historyInsert(entity: QuestionHistoryEntity) =
+            viewModelScope.launch(Dispatchers.IO) {
+                historyDao.insert( entity = entity )
+            }
+
+    fun  historyUpdate(entity: QuestionHistoryEntity) =
+            viewModelScope.launch(Dispatchers.IO) {
+                historyDao.update( entity = entity)
+            }
+
+    fun historyDelete(entity: QuestionHistoryEntity) =
+            viewModelScope.launch(Dispatchers.IO) {
+                historyDao.delete(entity = entity)
+            }
 }
