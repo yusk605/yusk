@@ -5,7 +5,6 @@ import androidx.lifecycle.*
 import com.example.questionbook.room.QuestionDatabase
 import com.example.questionbook.room.QuestionWorkBookEntity
 import com.example.questionbook.room.WorkBookWithAll
-import com.example.questionbook.room.WorkBookWithTextAndAccuracy
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 

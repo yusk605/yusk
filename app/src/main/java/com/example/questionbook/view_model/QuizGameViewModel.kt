@@ -28,11 +28,11 @@ class QuizGameViewModel(private val app:Application): AndroidViewModel(app) {
         }
     }
 
-
     private var _quizEntityList = quizDao.getList()
 
     val quizEntityList:LiveData<List<QuestionQuizEntity>>
         get() = _quizEntityList
+
 
     fun accuracyInsert(entity:QuestionAccuracyEntity) =
         viewModelScope.launch(Dispatchers.IO) {

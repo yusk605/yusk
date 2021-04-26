@@ -21,9 +21,22 @@ class ResultViewModel(application: Application):AndroidViewModel(application) {
         }
     }
 
-    private var _quizData:LiveData<List<QuestionQuizEntity>> = quizDao.getList()
+    private var _quizData:LiveData<List<QuestionQuizEntity>> =
+            quizDao.getList()
+/*
+    private var _accuracyWithHistory:LiveData<List<AccuracyWithHistory>> =
+            historyDao.getWithAccuracy()
 
+    private var _quizWithHistory:LiveData<List<QuizWithHistory>> =
+            historyDao.getWithQuiz()
+*/
     val quizData
         get() = _quizData
+/*
+    val accuracyWithHistory
+        get() = _accuracyWithHistory
 
+    val quizWithHistory
+        get() = _quizWithHistory
+*/
 }
