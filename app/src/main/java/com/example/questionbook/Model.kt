@@ -14,6 +14,7 @@ import kotlinx.android.parcel.RawValue
 data class QuestionItem(
         var questionTitle:String,
         var answerCheck:Int,
+        var historyQuizNumber:Int=0,
         val entity: QuestionQuizEntity,
         val selectAnswers:MutableList<String>
         )
@@ -21,7 +22,6 @@ data class QuestionItem(
     @Note　
     問題に必要な値を取得するものを考える。
     クエッションアイテム内の属性に question_quiz のエンティティをプロパティに渡すこと。
-
  */
 
 
