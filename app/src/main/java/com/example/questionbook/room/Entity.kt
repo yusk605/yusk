@@ -96,7 +96,8 @@ data class QuestionHistoryEntity(
         @PrimaryKey(autoGenerate = true)val historyNo:Int,
         @ColumnInfo(name = "history_rate")val historyRate:Int,
         @ColumnInfo(name = "history_date")val historyDate:LocalDate,
-        @ColumnInfo(name = "relation_quiz")val relationQuiz:Int
+        @ColumnInfo(name = "relation_accuracy")val relationAccuracy:Int,
+        @ColumnInfo(name ="relation_quiz")val relationQuiz:Int
 ):Parcelable
 
 
@@ -112,6 +113,8 @@ data class CategoryWithWorkBooks(
                 entityColumn = "relation_category"
         )val workBookList:List<QuestionWorkBookEntity>,
 ):Parcelable
+
+
 
 @Parcelize
 data class WorkBookWithAll(
@@ -133,98 +136,35 @@ data class WorkBookWithAll(
 
 
 /**
- * ■単一のクイズデータに紐づくヒストリーリストを取得
+ * ■回答率のデータに基づく単一のレコードに対して、紐づけとなるデータ。
  * @param quizEntity  親となるエンティティを指定（クイズエンティティ）
  * @param historyList 子となるエンティティすべてをリストに格納。
  */
 @Parcelize
-data class QuizWithHistoryList(
+data class AccuracyWithHistory(
+        @Embedded
+        val quizEntity: QuestionAccuracyEntity,
+        @Relation(
+                parentColumn = "accuracyNo",
+                entityColumn = "relation_accuracy"
+        )val historyList:QuestionHistoryEntity
+):Parcelable
+
+
+/**
+ * ■クイズを行った履歴を表示させるためのデータクラス
+ * @param quizEntity    クイズを表示させるためのテーブル
+ * @param historyEntity 履歴を表示させるためのテーブル
+ * 上記を紐づけた理由としては、同じ日にクイズを行った場合
+ * クイズとなる問題の正誤履歴を表示させるためのオブジェクト
+ */
+@Parcelize
+data class QuizWithHistory(
         @Embedded
         val quizEntity: QuestionQuizEntity,
         @Relation(
                 parentColumn = "quizNo",
                 entityColumn = "relation_quiz"
-        )val historyList: List<QuestionHistoryEntity>
+        )val historyEntity: QuestionHistoryEntity
 ):Parcelable
 
-
-
-
-
-
-
-///////////////////////////////////////////////////////////////////////////////
-//削除予定となるエンティティ//////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////
-/**
- * ■問題のテキストとなるデータを表示
- * ・削除予定
- * @param textNo            識別番号
- * @param textStatement     問題文
- * @param textFlag          0..ホルダー、ゲーム表示可 1..ゲーム一覧非表示  2..削除候補
- * @param timeStamp         更新日時
- * @param relationWorkBook  question_workbook workBookNo 紐づけとなるナンバー
- */
-@Parcelize
-@Entity(tableName = "question_text")
-data class QuestionTextEntity(
-        @PrimaryKey(autoGenerate = true)val textNo:Int,
-        @ColumnInfo(name = "text_statement")val textStatement:String,
-        @ColumnInfo(name = "text_flag")val textFlag:Int,
-        @ColumnInfo(name = "timestamp")val timeStamp:LocalDateTime,
-        @ColumnInfo(name = "relation_workbook")val relationWorkBook: Int
-):Parcelable
-
-/**
- * ■解答案を保存するためのエンティティ
- * @param answerNo        識別番号
- * @param answerFirs      解答案その1
- * @param answerSecond    解答案その2
- * @param answerThird     解答案その3
- * @param answerRight     解答案
- * @param relationText question_problem problemNo 紐づけるナンバー
- */
-@Parcelize
-@Entity(tableName = "question_answer")
-data class QuestionAnswerEntity(
-        @PrimaryKey(autoGenerate = true)val answerNo:Int,
-        @ColumnInfo(name = "answer_firs")val answerFirs:String,
-        @ColumnInfo(name = "answer_second")val answerSecond:String,
-        @ColumnInfo(name = "answer_third")val answerThird:String,
-        @ColumnInfo(name = "answer_right")val answerRight:String,
-        @ColumnInfo(name = "relation_text")val relationText:Int
-):Parcelable
-
-/**
- * ワークブック（問題集）の識別番号に紐づいた、テキスト（問題）をすべて取得する。
- */
-@Parcelize
-data class WorkBookWithTextAndAccuracy(
-        @Embedded
-        val workBookEntity:QuestionWorkBookEntity,
-        @Relation(
-                parentColumn = "workBookNo",
-                entityColumn = "relation_workbook" )
-        val textList:List<QuestionQuizEntity>,
-        @Relation(
-                parentColumn = "workBookNo",
-                entityColumn = "relation_workbook" )
-        val accuracyList:List<QuestionAccuracyEntity>
-):Parcelable
-
-
-/**
- *問題となるテキストの識別番号に紐づいた、回答欄すべてを取得する。
- */
-@Parcelize
-data class TextWithAnswer(
-        @Embedded
-        val textEntity: QuestionTextEntity,
-        @Relation(
-                parentColumn = "textNo",
-                entityColumn = "relation_text"
-        )val answer:QuestionAnswerEntity
-):Parcelable
-
-///////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////

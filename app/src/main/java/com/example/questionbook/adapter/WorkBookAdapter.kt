@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.questionbook.R
 import com.example.questionbook.room.WorkBookWithAll
-import com.example.questionbook.room.WorkBookWithTextAndAccuracy
+
 import com.google.android.material.chip.Chip
 
 /**

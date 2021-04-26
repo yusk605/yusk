@@ -15,9 +15,7 @@ import java.time.LocalDateTime
 @Database(entities = [
     QuestionCategoryEntity::class,
     QuestionWorkBookEntity::class,
-    QuestionTextEntity::class,
     QuestionAccuracyEntity::class,
-    QuestionAnswerEntity::class,
     QuestionHistoryEntity::class,
     QuestionQuizEntity::class
                      ],version = 1)
@@ -25,9 +23,7 @@ abstract class QuestionDatabase:RoomDatabase() {
 
     abstract fun getCategoryDao():QuestionCategoryDao
     abstract fun getWorkBookDao():QuestionWorkBookDao
-    abstract fun getTextDao():QuestionTextDao
     abstract fun getAccuracyDao():QuestionAccuracyDao
-    abstract fun getAnswerDao():QuestionAnswerDao
     abstract fun getHistoryDao():QuestionHistoryDao
     abstract fun getQuizDao():QuestionQuizDao
 
@@ -55,7 +51,6 @@ abstract class QuestionDatabase:RoomDatabase() {
                     scope.launch(Dispatchers.IO) {
                         database.run {
                             getWorkBookDao().collBackDelete()
-                            getTextDao().collBackDelete()
                             getAccuracyDao().collBackDelete()
                         }
                     }
