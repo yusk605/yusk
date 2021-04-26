@@ -33,7 +33,11 @@ interface QuestionItemIterator{
 }
 
 /**
- * 問題となるクイズのデータを保持するクラス。
+ * ■問題となるクイズのデータを保持するクラス。
+ * プライマリーコンストラクターに二つの引き数を持ち、引数としては
+ * data:List<QuestionQuizEntity>
+ * title:String
+ *
  */
 class QuestionItemShelf(
         private val data:List<QuestionQuizEntity>,
@@ -53,6 +57,12 @@ class QuestionItemShelf(
     private var correctAnswerCount      =   0
     private var incorrectAnswerCount    =   0
 
+    /**
+     * クイズの表示又は、入力を行うための必要なデータの集合体。
+     * 初期処理としては、question_quiz のエンティティを
+     * workBookNoでデータリストに集約を行った後、リストシャッフルを行い、
+     * 出題される番号を保存するために、シャッフル後に連番を振る。
+     */
     private val _questionItemList:List<QuestionItem> by lazy {
         data.map {
             QuestionItem(
@@ -69,7 +79,7 @@ class QuestionItemShelf(
         }.toList().shuffled().also {
             list->
             list.map {
-                it.historyQuizNumber = list.indexOf(it)
+                it.historyQuizNumber = list.indexOf(it)+1 //インデックス番号は0番スタートのため
             }
         }
     }
@@ -78,8 +88,8 @@ class QuestionItemShelf(
         get() = _questionItemList
 
     /**
-     * ■解答が正解の場合は true
-     * @param item   クイズを保存するためのオブジェクト
+     * ■正解の場合は true
+     * @param item   クイズを保存するためのオブジェクト（QuestionItem）
      * @param answer 選択した解答案
      */
     fun correctAnswerCount(item:QuestionItem, answer:String){
@@ -90,8 +100,8 @@ class QuestionItemShelf(
     }
 
     /**
-     * ■解答が不正解の場合は true
-     * @param item   クイズを保存するためのオブジェクト
+     * ■不正解の場合は true
+     * @param item   クイズを保存するためのオブジェクト（QuestionItem）
      * @param answer 選択した解答案
      */
     fun incorrectAnswerCount(item:QuestionItem, answer:String){
