@@ -30,7 +30,7 @@ interface QuestionWorkBookDao{
 @Dao
 interface QuestionAccuracyDao{
     @Query("select * from question_accuracy")fun getList():LiveData<List<QuestionAccuracyEntity>>
-   // @Query("select * from question_accuracy")fun getAll():LiveData<List<AccuracyWithHistory>>
+    @Query("select * from question_accuracy")fun getAll():LiveData<List<AccuracyWithHistory>>
     @Insert suspend fun insert(entity:QuestionAccuracyEntity)
     @Update suspend fun update(entity:QuestionAccuracyEntity)
     @Delete suspend fun delete(entity:QuestionAccuracyEntity)
@@ -44,7 +44,7 @@ interface QuestionAccuracyDao{
 @Dao
 interface QuestionQuizDao{
     @Query("select * from question_quiz")fun getList():LiveData<List<QuestionQuizEntity>>
-   // @Query("select * from question_quiz")fun getAll():LiveData<List<QuizWithHistory>>
+    @Query("select * from question_quiz")fun getAll():LiveData<List<QuizWithHistory>>
     @Insert suspend fun insert(entity:QuestionQuizEntity)
     @Update suspend fun update(entity:QuestionQuizEntity)
     @Delete suspend fun delete(entity:QuestionQuizEntity)
@@ -58,8 +58,8 @@ interface QuestionQuizDao{
 @Dao
 interface QuestionHistoryDao{
     @Query("select * from question_history")fun getList():LiveData<List<QuestionHistoryEntity>>
-   // @Query("select * from question_quiz")fun getWithQuiz():LiveData<List<QuizWithHistory>>
-   // @Query("select * from question_accuracy")fun getWithAccuracy():LiveData<List<AccuracyWithHistory>>
+    @Query("select * from question_quiz")fun getWithQuiz():LiveData<List<QuizWithHistory>>
+    @Query("select * from question_accuracy")fun getWithAccuracy():LiveData<List<AccuracyWithHistory>>
     @Insert fun insert(entity:QuestionHistoryEntity)
     @Update fun update(entity:QuestionHistoryEntity)
     @Delete fun delete(entity:QuestionHistoryEntity)
