@@ -25,20 +25,27 @@ import java.time.LocalDate
 class GameStartFragment : Fragment() {
 
     private lateinit var binding:FragmentGameStartBinding
+
+    //クイズ表示・保存に必要な値
     private var workBookNo:Int = 0
     private var accuracyNo:Int = 0
-    private var questionIt:QuestionItemIterator? = null
-    private var questionItemShelf:QuestionItemShelf? = null
-    private var questionItem:QuestionItem? = null
-    private var radioButton:RadioButton? = null
 
+    //クイズのロジックを行うための必要なインスタンスを準備
+    private var questionIt:QuestionItemIterator? = null         //イテレータパターンでの反復子
+    private var questionItemShelf:QuestionItemShelf? = null     //イテレータパターンでの集合体
+    private var questionItem:QuestionItem? = null               //クイズを表示するためのオブジェクト
+    private var radioButton:RadioButton? = null                 //ラジオボタン（選択案）
+
+    //クイズを行ったデータを格納するためのリスト。
     private var questionItemList:MutableList<QuestionItem> = mutableListOf()
+
 
     private val viewModel:QuizGameViewModel by lazy {
         QuizGameViewModelFactory(app = activity?.application!!)
                 .create(QuizGameViewModel::class.java)
     }
 
+    //WorkBookFragment から遷移された際に渡される値。
     private var workBookWithAll:WorkBookWithAll? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -49,7 +56,8 @@ class GameStartFragment : Fragment() {
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
 
@@ -71,13 +79,13 @@ class GameStartFragment : Fragment() {
 
             viewModel.quizEntityList.observe(viewLifecycleOwner){
                 data->
-                //イテレーターパターンを使用したクイズの集合体インスタンス
+                //イテレーターパターンを使用した集合体（アグリゲート）インスタンスを取得
                 questionItemShelf = QuestionItemShelf(
                         data.filter { it.relationWorkBook == workBookNo },
                         workBookWithAll?.workBookEntity?.workBookTitle?:""
                     )
 
-                //クイズとなる集合体を数える役割を果たすイテレーターを取得
+                //イテレータパターンを使用した集合体の反復子（イテレーター）インスタンスを取得
                 questionIt = questionItemShelf?.let{ it.createIterator() }
 
                 questionIt?.let {
@@ -100,11 +108,11 @@ class GameStartFragment : Fragment() {
                     game_radio_group.clearCheck()  //ラジオボタンにチェックを外すメソッド
                     questionItemShelf?.let { shelf->
                         questionItem?.let { q->
-                            shelf.incorrectAnswerCount(q,select)
-                            shelf.correctAnswerCount(q,select)
-                            //q.historyInsert()
+                            shelf.incorrectAnswerCount(q,select)    //正解カウントを行う
+                            shelf.correctAnswerCount(q,select)      //不正解カウントを行う
                         }
                     }
+                    //次のクイズを表示する
                     questionIt?.let{
                         it.nextQuiz(view)
                         game_start_quiz_count.text = "${it.getIndex()}/${it.getSize()}"
@@ -112,22 +120,6 @@ class GameStartFragment : Fragment() {
                 }
             }
         }
-
-    /**
-     *  ■ ゲームを行った履歴を保存するためのメソッド。
-     * @param QuestionItem
-     */
-    private fun QuestionItem.historyInsert(){
-        viewModel.historyInsert(
-                QuestionHistoryEntity(
-                        historyNo = 0,
-                        historyDate = LocalDate.now(),
-                        historyRate = answerCheck,
-                        relationQuiz = entity.quizNo,
-                        relationAccuracy = accuracyNo
-                )
-        )
-    }
 
 
     /**
@@ -157,17 +149,9 @@ class GameStartFragment : Fragment() {
                             accuracyRate     = questionResult?.resultAccuracy?:0.toFloat(),
                             relationWorkBook = workBookNo
                     ))
-        /*
+
             //履歴を残すためのロジック
-            questionItemList.forEach {
-                viewModel.historyInsert(
-                        QuestionHistoryEntity(
-                                historyNo = 0,
-                                historyRate = it.answerCheck,
-                                historyDate = LocalDate.now(),
-                                relationQuiz = it.entity.quizNo
-                        ))
-            }*/
+            questionItemList.forEach { it.historyInsert() }
 
             val bundle = Bundle().apply { putParcelable(ARGS_KEY,questionResult) }
 
@@ -175,6 +159,22 @@ class GameStartFragment : Fragment() {
         }
     }
 
+    /**
+     *  ■ ゲームを行った履歴を保存するためのメソッド。
+     * @param QuestionItem
+     */
+    private fun QuestionItem.historyInsert(){
+        viewModel.historyInsert(
+                QuestionHistoryEntity(
+                        historyNo = 0,
+                        historyDate = LocalDate.now(),
+                        historyRate = answerCheck,
+                        historyQuizNumber = historyQuizNumber,
+                        relationQuiz = entity.quizNo,
+                        relationAccuracy = accuracyNo
+                )
+        )
+    }
 
     /**
      * ■クイズの結果を表示させるための準備
