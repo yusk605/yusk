@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.Navigation
 import com.example.questionbook.QuizResult
 import com.example.questionbook.R
 import kotlinx.android.synthetic.main.fragment_result.*
@@ -30,6 +31,12 @@ class ResultFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         resultItem?.let { it.set() }
 
+        concrete_result_button.setOnClickListener {
+            Navigation.findNavController(it).navigate(
+                    R.id.action_resultFragment_to_concreteResultFragment,
+                    Bundle().apply { putInt(SAFE_ARGS_KEY,resultItem.relationWorkBookNo) }
+            )
+        }
     }
 
     private fun QuizResult.set(){
