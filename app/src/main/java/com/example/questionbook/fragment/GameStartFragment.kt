@@ -25,7 +25,8 @@ import java.time.LocalDate
 class GameStartFragment : Fragment() {
 
     private lateinit var binding:FragmentGameStartBinding
-    private var workBookNo:Int=0
+    private var workBookNo:Int = 0
+    private var accuracyNo:Int = 0
     private var questionIt:QuestionItemIterator? = null
     private var questionItemShelf:QuestionItemShelf? = null
     private var questionItem:QuestionItem? = null
@@ -52,7 +53,10 @@ class GameStartFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        workBookNo = workBookWithAll?.let { it.workBookEntity.workBookNo }?:0
+        workBookWithAll?.let {
+            workBookNo = it.workBookEntity.workBookNo
+            accuracyNo = it.accuracyList.filter { f->f.relationWorkBook == it.workBookEntity.workBookNo }.size +1
+        }
 
         binding = FragmentGameStartBinding.inflate(inflater,container,false)
 
@@ -76,14 +80,14 @@ class GameStartFragment : Fragment() {
                 //クイズとなる集合体を数える役割を果たすイテレーターを取得
                 questionIt = questionItemShelf?.let{ it.createIterator() }
 
-                //
                 questionIt?.let {
-                    questionItem = it.next()    //始めに出題されるクイズのデータを取得する。
-                    questionItem?.set()
+                    questionItem = it.next()        //始めに出題されるクイズのデータを取得する。
+                    questionItem?.set()             //取得したクイズデータをレイアウトファイルに表維持させる。
                     questionItemList.add(questionItem!!)
                     game_start_quiz_count.text = "${it.getIndex()}/${it.getSize()}"
                 }
 
+                //選択されたラジオボタンの値を取得する。
                 game_radio_group.setOnCheckedChangeListener {
                     group, checkedId ->
                     radioButton = group.findViewById<RadioButton>(checkedId)
@@ -98,7 +102,9 @@ class GameStartFragment : Fragment() {
                         questionItem?.let { q->
                             shelf.incorrectAnswerCount(q,select)
                             shelf.correctAnswerCount(q,select)
-                        } }
+                            //q.historyInsert()
+                        }
+                    }
                     questionIt?.let{
                         it.nextQuiz(view)
                         game_start_quiz_count.text = "${it.getIndex()}/${it.getSize()}"
@@ -106,6 +112,23 @@ class GameStartFragment : Fragment() {
                 }
             }
         }
+
+    /**
+     *  ■ ゲームを行った履歴を保存するためのメソッド。
+     * @param QuestionItem
+     */
+    private fun QuestionItem.historyInsert(){
+        viewModel.historyInsert(
+                QuestionHistoryEntity(
+                        historyNo = 0,
+                        historyDate = LocalDate.now(),
+                        historyRate = answerCheck,
+                        relationQuiz = entity.quizNo,
+                        relationAccuracy = accuracyNo
+                )
+        )
+    }
+
 
     /**
      * ■次の問題集が存在している場合は次の問題を表示。
@@ -127,14 +150,14 @@ class GameStartFragment : Fragment() {
             val questionResult = questionItem?.setResult()
 
             //回答率を保存するため
-          /*  viewModel.accuracyInsert(
+            viewModel.accuracyInsert(
                     QuestionAccuracyEntity(
                             accuracyNo       = 0,
                             accuracyDate     = LocalDate.now(),
                             accuracyRate     = questionResult?.resultAccuracy?:0.toFloat(),
                             relationWorkBook = workBookNo
                     ))
-
+        /*
             //履歴を残すためのロジック
             questionItemList.forEach {
                 viewModel.historyInsert(
@@ -149,37 +172,29 @@ class GameStartFragment : Fragment() {
             val bundle = Bundle().apply { putParcelable(ARGS_KEY,questionResult) }
 
             Navigation.findNavController(view).navigate(R.id.action_gameStartFragment_to_resultFragment,bundle)
-
         }
     }
 
 
-    //リザルトを表示させるためのオブジェクトを取得する。
+    /**
+     * ■クイズの結果を表示させるための準備
+     * 拡張関数に指定されいる QuestionItem
+     * 単一で指定されている理由としては、
+     * 遷移先に必要となる値が、questionTitle workBookNo
+     * の二つの値をなるので、クイズを行った全データを必要としないため。　
+     * @return リザルト画面での必要となるオブジェクトを返す
+     */
     private fun QuestionItem.setResult():QuizResult{
         val quizCount           = questionItemList.size
         val quizAnswerCount     = questionItemList.filter { it.answerCheck==1 }.size
         val quizAccuracy:Float  = (quizAnswerCount.toFloat()/quizCount.toFloat())*100
         return QuizResult(
-                resultTitle = questionTitle,
-                resultText = "${quizCount}問中${quizAnswerCount}問正解",
-                resultAccuracy = quizAccuracy,
-                resultProgress = quizAccuracy.toInt(),
-                relationWorkBookNo = workBookNo
+                resultTitle         =  questionTitle,
+                resultText          =  "${quizCount}問中${quizAnswerCount}問正解",
+                resultAccuracy      =  quizAccuracy,
+                resultProgress      =  quizAccuracy.toInt(),
+                relationWorkBookNo  =  workBookNo
         )
-    }
-
-    /**
-     * ■ラジオボタンから選択した文字列を返す
-     * @return 文字列
-     */
-    private fun getSelectAnswer():String{
-        var selectAnswer = ""
-        game_radio_group.setOnCheckedChangeListener {
-            group, checkedId ->
-            val radioButton = group.findViewById<RadioButton>(checkedId)
-            selectAnswer = radioButton.text.toString()
-        }
-        return selectAnswer
     }
 
     /**
