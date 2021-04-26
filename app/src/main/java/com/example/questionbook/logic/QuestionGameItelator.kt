@@ -65,10 +65,17 @@ class QuestionItemShelf(
                         add(it.quizFirs)
                         add(it.quizSecond)
                         add(it.quizThird)
-                        shuffled()
                     })
-        }.toList().shuffled()
+        }.toList().shuffled().also {
+            list->
+            list.map {
+                it.historyQuizNumber = list.indexOf(it)
+            }
+        }
     }
+
+    val questionItemList
+        get() = _questionItemList
 
     /**
      * ■解答が正解の場合は true
@@ -125,11 +132,10 @@ class ConnCreteQuestionItemIterator(
     override fun next(): QuestionItem {
         val item = questionShelf.getItemAt(index)
         index++
-        return item
+        return item.also { it.selectAnswers.shuffle() }
     }
 
     override fun hasNext(): Boolean = index < questionShelf.getSize()
     override fun getIndex(): Int = index
     override fun getSize(): Int = questionShelf.getSize()
-
 }
