@@ -108,6 +108,7 @@ class GameStartFragment : Fragment() {
                     game_radio_group.clearCheck()  //ラジオボタンにチェックを外すメソッド
                     questionItemShelf?.let { shelf->
                         questionItem?.let { q->
+                            q.selectAnswer = select                 //履歴のエンティティに保存するため
                             shelf.incorrectAnswerCount(q,select)    //正解カウントを行う
                             shelf.correctAnswerCount(q,select)      //不正解カウントを行う
                         }
@@ -170,6 +171,7 @@ class GameStartFragment : Fragment() {
                         historyDate = LocalDate.now(),
                         historyRate = answerCheck,
                         historyQuizNumber = historyQuizNumber,
+                        historySelectAnswer = selectAnswer,
                         relationQuiz = entity.quizNo,
                         relationAccuracy = accuracyNo
                 )
