@@ -12,16 +12,19 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.questionbook.QuestionItem
 import com.example.questionbook.R
+import com.example.questionbook.room.QuizWithHistory
 import com.google.android.material.chip.Chip
 import com.google.android.material.textfield.TextInputEditText
 
-class ConcreteResultListAdapter:ListAdapter<QuestionItem,ConcreteResultListAdapter.ConcreteResultListHolder>(Diff) {
+class ConcreteResultListAdapter(
+        private val title:String
+):ListAdapter<QuizWithHistory,ConcreteResultListAdapter.ConcreteResultListHolder>(Diff) {
 
-    companion object Diff:DiffUtil.ItemCallback<QuestionItem>() {
-        override fun areItemsTheSame(oldItem: QuestionItem, newItem: QuestionItem): Boolean =
+    companion object Diff:DiffUtil.ItemCallback<QuizWithHistory>() {
+        override fun areItemsTheSame(oldItem: QuizWithHistory, newItem: QuizWithHistory): Boolean =
                 oldItem == newItem
 
-        override fun areContentsTheSame(oldItem: QuestionItem, newItem: QuestionItem): Boolean =
+        override fun areContentsTheSame(oldItem:QuizWithHistory, newItem:QuizWithHistory): Boolean =
                 oldItem == newItem
     }
 
@@ -54,12 +57,12 @@ class ConcreteResultListAdapter:ListAdapter<QuestionItem,ConcreteResultListAdapt
     override fun onBindViewHolder(holder: ConcreteResultListHolder, position: Int) {
         val item = getItem(position)
         holder.also {
-            it.itemConcreteResultListCount.text = "${item.historyQuizNumber}"
-            it.itemConcreteResultListStatementEdit.setText(item.entity.quizStatement)
-            it.itemConcreteResultListSelectAnswer.setText(item.selectAnswer)
-            it.itemConcreteResultListRightAnswer.setText(item.entity.quizRight)
-            it.itemConcreteResultListChip.text = item.questionTitle
-            it.itemConcreteResultListCheck.toImageConvert(item.answerCheck)
+            it.itemConcreteResultListCount.text = "${item.historyEntity.historyQuizNumber}"
+            it.itemConcreteResultListStatementEdit.setText(item.quizEntity.quizStatement)
+            it.itemConcreteResultListSelectAnswer.setText(item.historyEntity.historySelectAnswer)
+            it.itemConcreteResultListRightAnswer.setText(item.quizEntity.quizRight)
+            it.itemConcreteResultListChip.text= title
+            it.itemConcreteResultListCheck.toImageConvert(item.historyEntity.historyRate)
         }
     }
 
