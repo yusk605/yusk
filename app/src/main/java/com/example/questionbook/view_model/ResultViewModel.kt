@@ -6,6 +6,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.viewModelScope
 import com.example.questionbook.room.*
 
+/**
+ * クイズゲームを行った際に必要なデータを取得する。
+ */
 class ResultViewModel(application: Application):AndroidViewModel(application) {
     private val db = QuestionDatabase.getInstance(application,viewModelScope)
 
@@ -21,14 +24,14 @@ class ResultViewModel(application: Application):AndroidViewModel(application) {
         }
     }
 
-    private var _quizData:LiveData<List<QuestionQuizEntity>> =
-            quizDao.getList()
+    private var _quizData:LiveData<List<QuestionQuizEntity>>
+        = quizDao.getList()
 
-    private var _accuracyWithHistory:LiveData<List<AccuracyWithHistory>> =
-            historyDao.getWithAccuracy()
+    private var _accuracyWithHistory:LiveData<List<AccuracyWithHistory>>
+        = historyDao.getWithAccuracy()
 
-    private var _quizWithHistory:LiveData<List<QuizWithHistory>> =
-            historyDao.getWithQuiz()
+    private var _quizWithHistory:LiveData<List<QuizWithHistory>>
+        = historyDao.getWithQuiz()
 
     val quizData
         get() = _quizData
