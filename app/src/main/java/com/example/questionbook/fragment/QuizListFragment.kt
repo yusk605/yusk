@@ -14,7 +14,7 @@ import com.example.questionbook.dialog.*
 import com.example.questionbook.room.QuestionQuizEntity
 import com.example.questionbook.room.WorkBookWithAll
 import com.example.questionbook.view_model.QuizListViewModel
-import com.example.questionbook.view_model.QuizViewModelFactory
+import com.example.questionbook.view_model.QuizListViewModelFactory
 import com.google.android.material.textfield.TextInputEditText
 import kotlinx.android.synthetic.main.dialog_text_form_layout.*
 import kotlinx.android.synthetic.main.fragment_quiz_text_list.*
@@ -31,7 +31,7 @@ class QuizListFragment : Fragment() {
 
     //view model
     private val viewModel:QuizListViewModel by lazy {
-        QuizViewModelFactory(activity?.application!!)
+        QuizListViewModelFactory(activity?.application!!)
                 .create(QuizListViewModel::class.java)
     }
 
