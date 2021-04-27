@@ -7,9 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.RadioButton
 import androidx.navigation.Navigation
-import com.example.questionbook.QuestionItem
-import com.example.questionbook.QuizResult
-import com.example.questionbook.R
+import com.example.questionbook.*
 import com.example.questionbook.databinding.FragmentGameStartBinding
 import com.example.questionbook.logic.QuestionItemIterator
 import com.example.questionbook.logic.QuestionItemShelf
@@ -38,6 +36,8 @@ class GameStartFragment : Fragment() {
 
     //クイズを行ったデータを格納するためのリスト。
     private var questionItemList:MutableList<QuestionItem> = mutableListOf()
+
+    private var flag:Boolean = false
 
 
     private val viewModel:QuizGameViewModel by lazy {
@@ -74,6 +74,8 @@ class GameStartFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
             super.onViewCreated(view, savedInstanceState)
+
+            sendBlock(view)
 
             var selectAnswer = ""
 
@@ -122,6 +124,17 @@ class GameStartFragment : Fragment() {
             }
         }
 
+    /**
+     * バックスタックに移動した際、各バッキングフィールドに初期化を行う
+     */
+    override fun onDestroyView() {
+        super.onDestroyView()
+        flag = true
+        questionItemList    = mutableListOf()
+        questionItem        = null
+        questionIt          = null
+        questionItemShelf   = null
+    }
 
     /**
      * ■次の問題集が存在している場合は次の問題を表示。
@@ -210,6 +223,24 @@ class GameStartFragment : Fragment() {
         game_radio_button_third.text    = selectAnswers[2]
         game_radio_button_force.text    = selectAnswers[3]
     }
+
+    /**
+     * ■一つ前に戻るアクションで生じるバグを防ぐためのメソッド
+     * ゲームクイズを終了した際にリザルト画面へ遷移した時に、
+     * もう一度前の画面へ戻りクイズゲームを終了させるとリザルト画面の結果が
+     * 意図した結果とならないため、クイズゲームからリザルト画面へ遷移を行った時は一度カテゴリー一覧へ
+     * 戻る処理を行うメソッド。
+     */
+    private fun sendBlock(view: View){
+        val navController = Navigation.findNavController(view)
+        val bundle =  newBundleToPutInt(resources.getStringArray(R.array.side_menu_keys)[1], MainActivity.actionGameValue )
+        if (flag){
+            navController.navigate(
+                    R.id.action_gameStartFragment_to_categoryFragment,
+                    bundle ).run { flag =false }
+        }
+    }
+
     companion object{
         const val ARGS_KEY = "GameStartFragment to ResultFragment"
     }
