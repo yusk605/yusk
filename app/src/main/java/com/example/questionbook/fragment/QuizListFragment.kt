@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.questionbook.QuestionItem
 import com.example.questionbook.R
@@ -22,9 +23,6 @@ import java.time.LocalDateTime
 
 
 class QuizListFragment : Fragment() {
-
-    //ダイヤログを表示させるためのオブジェクト
-
 
     //WorkBookFragmentから遷移されたときに渡される値として。
     private var workBookWithTextAndAccuracy:WorkBookWithAll? = null
@@ -45,7 +43,9 @@ class QuizListFragment : Fragment() {
             quizDialog?.let { dg->
                 val alertDialog = dg.create().apply { show() }
                 val dialogView  = dg.getView()
-                val quizButton  = dialogView.findViewById<Button>(R.id.form_quiz_add_btn)
+                val quizButton  = dialogView.findViewById<Button>(R.id.form_quiz_add_btn).apply {
+                    text = activity?.getString(R.string.dialog_update_button)
+                }
                 dialogView.setParameter(entity)
                 quizButton.setOnClickListener {
                     viewModel.quizUpdate(dialogView.getParameter(entity = entity).entity)
@@ -95,7 +95,7 @@ class QuizListFragment : Fragment() {
             quizDialog?.let { dg->
                 val alertDialog     = dg.create().apply { show() }
                 val quizView        = dg.getView()
-                val quizButton      = quizView.findViewById<Button>(R.id.form_quiz_add_btn)
+                val quizButton      = quizView.findViewById<Button>(R.id.form_quiz_add_btn).apply { text = activity?.getString(R.string.dialog_insert_button) }
                 quizButton.setOnClickListener {
                     viewModel.quizInsert(quizView.getParameter().entity)
                         alertDialog.cancel()
