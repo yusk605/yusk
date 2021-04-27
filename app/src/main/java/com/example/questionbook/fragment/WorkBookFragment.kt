@@ -28,7 +28,7 @@ class WorkBookFragment : Fragment() {
     private var category:QuestionCategoryEntity? = null
 
     //サイドメニューから遷移した項目の値。
-    private var flag:Int = 0
+    private var type:Int = 0
 
     //adapter
     private var adapter:WorkBookAdapter? = null
@@ -43,7 +43,7 @@ class WorkBookFragment : Fragment() {
         super.onCreate(savedInstanceState)
         arguments?.let {
             category = it.get(CategoryFragment.ARGS_KEY) as QuestionCategoryEntity
-            flag = it.get(CategoryFragment.ARGS_SIDE_MENU_FLAG) as Int
+            type = it.get(CategoryFragment.ARGS_SIDE_MENU_FLAG) as Int
         }
     }
 
@@ -52,10 +52,10 @@ class WorkBookFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        adapter = WorkBookAdapter(category?.categoryTitle?:""){ view,obj->
+        adapter = WorkBookAdapter(category?.categoryTitle?:"",type){ view, obj->
             val bundle = Bundle().apply { putParcelable(ARGS_KEY,obj) }
             //サイドメニューから項目をタップした時に、その項目の値によって遷移先を変える。
-            flag.actionWorkBook(view,bundle)
+            type.actionWorkBook(view,bundle)
         }
 
         return inflater.inflate(R.layout.fragment_work_book, container, false)
@@ -67,7 +67,8 @@ class WorkBookFragment : Fragment() {
 
         val categoryNo = category?.categoryNo?:0
 
-        viewModel.data.observe(viewLifecycleOwner) { data->
+        viewModel.data.observe(viewLifecycleOwner) {
+            data->
             adapter?.submitList(
                     data.filter {
                         it.workBookEntity.relationCategory == categoryNo }.toList()
