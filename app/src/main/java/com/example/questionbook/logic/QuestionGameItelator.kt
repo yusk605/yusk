@@ -88,7 +88,7 @@ class QuestionItemShelf(
         get() = _questionItemList
 
     /**
-     * ■正解の場合は true
+     * ■正解の場合は true を返したのち、answerCheck = 1
      * @param item   クイズを保存するためのオブジェクト（QuestionItem）
      * @param answer 選択した解答案
      */
@@ -100,7 +100,7 @@ class QuestionItemShelf(
     }
 
     /**
-     * ■不正解の場合は true
+     * ■不正解の場合は true を返したのち、answerCheck = 2
      * @param item   クイズを保存するためのオブジェクト（QuestionItem）
      * @param answer 選択した解答案
      */
