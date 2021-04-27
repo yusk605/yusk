@@ -2,7 +2,6 @@
     <string name="app_name">QuestionBook</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-
     <!--@layout/fragment_category.xml -->
     <string name="category_work_books">問題集×</string>
 
@@ -70,7 +69,8 @@
     <string name="dialog_text_title">テキストの追加</string>
     <string name="dialog_negative_button">キャンセル</string>
     <string name="dialog_positive_button">次へ</string>
-    <string name="dialog_insert_button">登録</string>
+    <string name="dialog_insert_button">追加</string>
+    <string name="dialog_update_button">変更</string>
 
     <!-- result_item.xml -->
     <string name="result_item_select_answer">選択した解答</string>

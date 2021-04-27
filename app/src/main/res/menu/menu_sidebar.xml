@@ -21,7 +21,7 @@
 
         <item
             android:id="@+id/accuracy_list_fragment"
-            android:title="回答率"
+            android:title="解答率"
             android:icon="@drawable/question_accuracy"/>
 
         <item
