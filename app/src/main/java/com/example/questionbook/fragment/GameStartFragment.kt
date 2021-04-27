@@ -195,7 +195,8 @@ class GameStartFragment : Fragment() {
                 resultText          =  "${quizCount}問中${quizAnswerCount}問正解",
                 resultAccuracy      =  quizAccuracy,
                 resultProgress      =  quizAccuracy.toInt(),
-                relationWorkBookNo  =  workBookNo
+                relationWorkBookNo  =  workBookNo,
+                relationAccuracyNo          = accuracyNo
         )
     }
 
