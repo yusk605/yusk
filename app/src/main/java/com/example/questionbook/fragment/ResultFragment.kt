@@ -34,7 +34,7 @@ class ResultFragment : Fragment() {
         concrete_result_button.setOnClickListener {
             Navigation.findNavController(it).navigate(
                     R.id.action_resultFragment_to_concreteResultFragment,
-                    Bundle().apply { putInt(SAFE_ARGS_KEY,resultItem.relationWorkBookNo) }
+                    Bundle().apply { putParcelable(SAFE_ARGS_KEY,resultItem) }
             )
         }
     }
