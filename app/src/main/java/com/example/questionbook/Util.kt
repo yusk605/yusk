@@ -1,10 +1,12 @@
 package com.example.questionbook
 
 import android.content.Context
+import android.os.Bundle
 import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.Spinner
 import androidx.fragment.app.FragmentActivity
+import androidx.navigation.Navigation
 import com.google.android.material.snackbar.Snackbar
 
 /**
@@ -35,3 +37,28 @@ fun FragmentActivity.getMag(no:Int):String =
             else -> getString(R.string.menu_side_accuracy)
         }
 
+/**
+ * ■バンドルを新規で生成したのち、値を格納する。
+ * @param key   値を保存領域に格納しその格納した値を取り出すためのキーを指定
+ * @param value 保存領域に格納する値
+ */
+fun newBundleToPutInt(key:String, value:Int)=
+        Bundle().apply {
+            putInt(key,value)
+        }
+
+/**
+ * ■サイドメニューから渡される値を基に遷移を行う。
+ * @param view      必要となるビュー
+ * @param bundle    必要な値を格納するためのオブジェクト
+ */
+fun Int.actionWorkBook(view: View, bundle: Bundle){
+    when(this){
+        0 -> Navigation.findNavController(view)
+                .navigate(R.id.action_workBookFragment_to_problemListFragment,bundle)
+        1 -> Navigation.findNavController(view)
+                .navigate(R.id.action_workBookFragment_to_gameStartFragment,bundle)
+        2 -> Navigation.findNavController(view)
+                .navigate(R.id.action_workBookFragment_to_accuracyFragment,bundle)
+    }
+}
