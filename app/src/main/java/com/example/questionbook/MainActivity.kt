@@ -66,23 +66,13 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     }
 
     /**
-     * ■バンドルを新規で生成したのち、値を格納する。
-     * @param key   値を保存領域に格納しその格納した値を取り出すためのキーを指定
-     * @param value 保存領域に格納する値
-     */
-    private fun newBundleToPutInt(key:String, value:Int)=
-        Bundle().apply {
-            putInt(key,value)
-    }
-
-    /**
      * ■バンドルでの保存領域に格納する値として。
      * putInt(key,value)
      */
     companion object{
-        private const val actionHolderValue     = 0
-        private const val actionGameValue       = 1
-        private const val actionAccuracyValue   = 2
-        private const val actionGarbageCan      = 3
+         const val actionHolderValue     = 0
+         const val actionGameValue       = 1
+         const val actionAccuracyValue   = 2
+         const val actionGarbageCan      = 3
     }
 }
