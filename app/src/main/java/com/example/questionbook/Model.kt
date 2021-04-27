@@ -14,6 +14,7 @@ import kotlinx.android.parcel.RawValue
 data class QuestionItem(
         var questionTitle:String,
         var answerCheck:Int,
+        var selectAnswer:String="",
         var historyQuizNumber:Int=0,
         val entity: QuestionQuizEntity,
         val selectAnswers:MutableList<String>
