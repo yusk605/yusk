@@ -7,10 +7,12 @@ import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.example.questionbook.MainActivity
 import com.example.questionbook.R
 import com.example.questionbook.room.WorkBookWithAll
 
 import com.google.android.material.chip.Chip
+import com.google.android.material.snackbar.Snackbar
 
 /**
  * ■問題集一覧を表示するためのデータを中間的な役割を果たすクラス
@@ -21,8 +23,12 @@ import com.google.android.material.chip.Chip
  */
 class WorkBookAdapter(
     private val categoryTitle:String,
+    private val type:Int,
     private val onClick:(View, WorkBookWithAll) -> Unit
 ):ListAdapter<WorkBookWithAll,WorkBookAdapter.WorkBookHolder>(Diff) {
+
+    private val onClickSafety:(View) -> Unit =
+            { v-> Snackbar.make(v,"クイズがありません",Snackbar.LENGTH_SHORT).show() }
 
     companion object Diff: DiffUtil.ItemCallback<WorkBookWithAll>() {
         override fun areItemsTheSame(
@@ -44,11 +50,26 @@ class WorkBookAdapter(
        val  itemWorkBookChip    = view.findViewById<Chip>(R.id.game_start_chip)
         init {
             view.setOnClickListener {
-                onClick(
-                    //遷移する際に必要なオブジェクトを渡すため。
-                        view, getItem(adapterPosition)
+                onClickSafety(
+                        layoutPosition,
+                        view,
+                        getItem(adapterPosition)
                 )
             }
+        }
+    }
+
+    /**
+     * ■問題集にクイズとなるデータが存在しない場合は遷移しない
+     * @param position 項目をタップした添え字番号
+     */
+    fun onClickSafety(position: Int,view: View,data:WorkBookWithAll){
+        if ( getItem(position).quizList.isEmpty() &&
+                type == MainActivity.actionGameValue
+            ){
+                onClickSafety(view)
+        }else{
+            onClick(view,data)
         }
     }
 
