@@ -97,6 +97,7 @@ data class QuestionHistoryEntity(
         @ColumnInfo(name = "history_rate")val historyRate:Int,
         @ColumnInfo(name = "history_date")val historyDate:LocalDate,
         @ColumnInfo(name = "history_quiz_number")val historyQuizNumber:Int,
+        @ColumnInfo(name = "history_select_answer")val historySelectAnswer:String,
         @ColumnInfo(name = "relation_accuracy")val relationAccuracy:Int,
         @ColumnInfo(name ="relation_quiz")val relationQuiz:Int
 ):Parcelable
