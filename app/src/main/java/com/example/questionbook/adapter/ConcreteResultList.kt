@@ -20,7 +20,7 @@ class ConcreteResultList:ListAdapter<QuestionItem,ConcreteResultList.ConcreteRes
     }
 
     inner  class ConcreteResultListHolder(private val view:View):RecyclerView.ViewHolder(view){
-        val
+
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int):ConcreteResultList.ConcreteResultListHolder =
