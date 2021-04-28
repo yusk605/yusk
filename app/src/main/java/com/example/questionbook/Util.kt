@@ -58,8 +58,7 @@ fun Int.actionWorkBook(view: View, bundle: Bundle){
                 .navigate(R.id.action_workBookFragment_to_problemListFragment,bundle)
         1 -> Navigation.findNavController(view)
                 .navigate(R.id.action_workBookFragment_to_gameStartFragment,bundle)
-        2 -> Navigation.findNavController(view)
-                .navigate(R.id.action_workBookFragment_to_accuracyFragment,bundle)
+        2 -> return
     }
 }
 
