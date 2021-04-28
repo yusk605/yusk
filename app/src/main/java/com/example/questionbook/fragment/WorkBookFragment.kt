@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.questionbook.R
@@ -15,6 +16,7 @@ import com.example.questionbook.dialog.WorkBookDialogFactory
 import com.example.questionbook.room.QuestionCategoryEntity
 import com.example.questionbook.room.QuestionWorkBookEntity
 import com.example.questionbook.actionWorkBook
+import com.example.questionbook.isHolder
 import com.example.questionbook.view_model.WorkBookViewModel
 import com.example.questionbook.view_model.WorkBookViewModelFactory
 import com.google.android.material.textfield.TextInputEditText
@@ -51,13 +53,12 @@ class WorkBookFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
-        adapter = WorkBookAdapter(category?.categoryTitle?:"",type){ view, obj->
+        adapter = WorkBookAdapter(category?.categoryTitle?:"",type){
+            view, obj->
             val bundle = Bundle().apply { putParcelable(ARGS_KEY,obj) }
             //サイドメニューから項目をタップした時に、その項目の値によって遷移先を変える。
             type.actionWorkBook(view,bundle)
         }
-
         return inflater.inflate(R.layout.fragment_work_book, container, false)
     }
 
@@ -71,18 +72,22 @@ class WorkBookFragment : Fragment() {
             data->
             adapter?.submitList(
                     data.filter {
-                        it.workBookEntity.relationCategory == categoryNo }.toList()
+                        it.workBookEntity.relationCategory == categoryNo
+                    }.toList()
             )}
 
         // 問題集一覧から追加ボタンを押した際に、ダイヤログを表示。
-        fab_workbook_add.setOnClickListener { executeDialog() }
+        fab_workbook_add.also {
+            it.isVisible = type.isHolder()
+            it.setOnClickListener {
+                executeDialog()
+            }
+        }
     }
 
     private fun recycleInit(){
-
         val myLayoutManager = LinearLayoutManager(activity).apply { orientation= LinearLayoutManager.VERTICAL }
         val itemDecoration  = DividerItemDecoration(activity,myLayoutManager.orientation)
-
         recycle_view_work_book.also {
             it.adapter = adapter
             it.layoutManager = myLayoutManager
