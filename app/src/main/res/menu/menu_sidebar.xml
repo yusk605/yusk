@@ -20,8 +20,8 @@
             android:icon="@drawable/question_game_ic"/>
 
         <item
-            android:id="@+id/accuracy_list_fragment"
-            android:title="解答率"
+            android:id="@+id/statistics_fragment"
+            android:title="統計"
             android:icon="@drawable/question_accuracy"/>
 
         <item
