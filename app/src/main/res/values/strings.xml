@@ -9,7 +9,7 @@
     <string-array name="side_menu_keys">
         <item name="side_menu_key_holder">SIDE_MENU_TO_HOLDER</item>
         <item name="side_menu_key_game">SIDE_MENU_TO_GAME</item>
-        <item name="side_menu_key_accuracy">SIDE_MENU_TO_ACCURACY</item>
+        <item name="side_menu_key_statistics">SIDE_MENU_TO_STATISTICS</item>
         <item name="side_menu_key_garbagecan">SIDE_MENU_TO_GARBAGE_CAN</item>
     </string-array>
 
@@ -51,8 +51,8 @@
     <!--@menu/menu_sidebar-->
     <string name="menu_side_holder">ホルダー</string>
     <string name="menu_side_laboratory">ラボ</string>
-    <string name="menu_side_accuracy">回答率</string>
-    <string name="menu_side_game">ゲーム</string>
+    <string name="menu_side_accuracy">統計</string>
+    <string name="menu_side_game">クイズゲーム</string>
     <string name="menu_side_wastebasket">ゴミ箱</string>
 
     <!-- menu_side id -->
