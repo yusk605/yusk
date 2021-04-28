@@ -20,9 +20,6 @@
         <action
             android:id="@+id/action_workBookFragment_to_gameStartFragment"
             app:destination="@id/gameStartFragment" />
-        <action
-            android:id="@+id/action_workBookFragment_to_accuracyFragment"
-            app:destination="@id/accuracyFragment" />
     </fragment>
     <fragment
         android:id="@+id/categoryFragment"
@@ -35,6 +32,9 @@
         <argument android:name="sendFlag"
             app:argType="integer"
             android:defaultValue="0" />
+        <action
+            android:id="@+id/action_categoryFragment_to_statisticsFragment"
+            app:destination="@id/statisticsFragment" />
     </fragment>
     <fragment
         android:id="@+id/gameStartFragment"
@@ -95,5 +95,15 @@
             app:argType="com.example.questionbook.QuizResult"
             app:nullable="true"
             android:defaultValue="@null" />
+    </fragment>
+    <fragment
+        android:id="@+id/statisticsFragment"
+        android:name="com.example.questionbook.fragment.StatisticsFragment"
+        android:label="fragment_statistics"
+        tools:layout="@layout/fragment_statistics" >
+        <argument
+            android:name="categoryEntity"
+            app:argType="com.example.questionbook.room.QuestionCategoryEntity"
+            app:nullable="true" />
     </fragment>
 </navigation>
