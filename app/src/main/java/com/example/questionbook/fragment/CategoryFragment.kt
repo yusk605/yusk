@@ -9,14 +9,11 @@ import android.widget.Button
 import androidx.core.view.isVisible
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.questionbook.R
+import com.example.questionbook.*
 import com.example.questionbook.adapter.CategoryAdapter
 import com.example.questionbook.dialog.CategoryDialog
 import com.example.questionbook.dialog.CategoryDialogFactory
-import com.example.questionbook.getMag
-import com.example.questionbook.isHolder
 import com.example.questionbook.room.QuestionCategoryEntity
-import com.example.questionbook.showSnackBar
 import com.example.questionbook.view_model.CategoryViewModel
 import com.example.questionbook.view_model.CategoryViewModelFactory
 import com.google.android.material.textfield.TextInputEditText
@@ -31,14 +28,18 @@ class CategoryFragment : Fragment() {
     //アダプタークラスの取得を行う。
     private val adapter: CategoryAdapter by lazy {
         CategoryAdapter { entity,view ->
-            Navigation.findNavController(view).navigate(
-                    R.id.action_categoryFragment_to_workBookFragment,
-                    Bundle().apply {
-                        putParcelable(ARGS_KEY,entity)
-                        putInt(ARGS_SIDE_MENU_FLAG,type)
-                    })
-                }
-            }
+            val controller = Navigation.findNavController(view)
+            var rId = R.id.action_categoryFragment_to_workBookFragment
+            val bundle     = Bundle().apply {
+                    putParcelable(ARGS_KEY,entity)
+                    putInt(ARGS_SIDE_MENU_FLAG,type)}
+
+            if(type == MainActivity.actionStatisticsValue)
+                rId = R.id.action_categoryFragment_to_statisticsFragment
+
+            controller.navigate(rId,bundle)
+        }
+    }
 
     //分類一覧のビューモデルを作成
     private val viewModel:CategoryViewModel by lazy {
