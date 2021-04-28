@@ -17,7 +17,7 @@ import com.example.questionbook.room.WorkBookWithAll
 import com.example.questionbook.view_model.QuizGameViewModel
 import com.example.questionbook.view_model.QuizGameViewModelFactory
 import kotlinx.android.synthetic.main.fragment_game_start.*
-import java.time.LocalDate
+import java.time.LocalDateTime
 
 
 class GameStartFragment : Fragment() {
@@ -159,8 +159,8 @@ class GameStartFragment : Fragment() {
             viewModel.accuracyInsert(
                     QuestionAccuracyEntity(
                             accuracyNo       = 0,
-                            accuracyDate     = LocalDate.now(),
                             accuracyRate     = questionResult?.resultAccuracy?:0.toFloat(),
+                            timeStamp        = LocalDateTime.now(),
                             relationWorkBook = workBookNo
                     ))
 
@@ -181,10 +181,15 @@ class GameStartFragment : Fragment() {
         viewModel.historyInsert(
                 QuestionHistoryEntity(
                         historyNo = 0,
-                        historyDate = LocalDate.now(),
-                        historyRate = answerCheck,
+                        timeStamp = LocalDateTime.now(),
+                        historyCheck = answerCheck,
                         historyQuizNumber = historyQuizNumber,
-                        historySelectAnswer = selectAnswer,
+                        historyQuizSelectAnswer = selectAnswer,
+                        historyQuizFirst = entity.quizFirs,
+                        historyQuizSecond = entity.quizSecond,
+                        historyQuizThird = entity.quizThird,
+                        historyQuizRate = entity.quizRight,
+                        historyQuizStatement = entity.quizStatement,
                         relationQuiz = entity.quizNo,
                         relationAccuracy = accuracyNo
                 )

@@ -18,10 +18,6 @@
     <string name="workbook_accuracy_max">最大の正解率</string>
 
     <!--@menu/menu_sidebar.xml -->
-    <string name="side_menu_holder"></string>
-    <string name="side_menu_laboratory"></string>
-    <string name="side_menu_accuracy"></string>
-    <string name="side_menu_game"></string>
 
     <!--@layout/fragment_problem.xml -->
     <string name="item_problem_label">問題</string>
@@ -29,11 +25,12 @@
 
     <!--@layout/quiz_item.xml -->
     <string name="item_text_statement">問題集</string>
-    <string name="item_text_answer_first">選択1</string>
-    <string name="item_text_answer_second">選択2</string>
-    <string name="item_text_answer_third">選択3</string>
-    <string name="item_text_answer_right">解答</string>
+    <string name="item_text_answer_first">選択案1</string>
+    <string name="item_text_answer_second">選択案2</string>
+    <string name="item_text_answer_third">選択案3</string>
+    <string name="item_text_answer_right">正解</string>
     <string name="item_text_btn_update">修正</string>
+    <string name="item_text_select_answer">選択した解答</string>
     <string name="item_text_page">ページ</string>
 
     <!--@layout/fragment.LaboratoryFragment-->

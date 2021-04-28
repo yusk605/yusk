@@ -21,6 +21,7 @@ import com.example.questionbook.view_model.CategoryViewModel
 import com.example.questionbook.view_model.CategoryViewModelFactory
 import com.google.android.material.textfield.TextInputEditText
 import kotlinx.android.synthetic.main.fragment_category.*
+import java.time.LocalDateTime
 
 
 class CategoryFragment : Fragment() {
@@ -127,7 +128,8 @@ class CategoryFragment : Fragment() {
                     QuestionCategoryEntity(
                         categoryNo = 0,
                         categoryFlag = 0,
-                        categoryTitle = title))
+                        categoryTitle = title,
+                        timeStamp = LocalDateTime.now()))
         }
 
 

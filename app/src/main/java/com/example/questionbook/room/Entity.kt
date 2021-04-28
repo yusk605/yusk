@@ -3,7 +3,6 @@ package com.example.questionbook.room
 import android.os.Parcelable
 import androidx.room.*
 import kotlinx.android.parcel.Parcelize
-import java.time.LocalDate
 import java.time.LocalDateTime
 
 /**
@@ -17,7 +16,8 @@ import java.time.LocalDateTime
 data class QuestionCategoryEntity(
     @PrimaryKey(autoGenerate = true)val categoryNo:Int,
     @ColumnInfo(name = "category_title")var categoryTitle:String,
-    @ColumnInfo(name="category_flag")val categoryFlag:Int
+    @ColumnInfo(name="category_flag")val categoryFlag:Int,
+    @ColumnInfo(name="time_stamp")val timeStamp:LocalDateTime
 ):Parcelable
 
 /**
@@ -34,7 +34,7 @@ data class QuestionWorkBookEntity(
     @PrimaryKey(autoGenerate = true)val workBookNo:Int,
     @ColumnInfo(name = "workbook_title")val workBookTitle:String,
     @ColumnInfo(name = "workbook_flag")val workBookFlag:Int,
-    @ColumnInfo(name = "timestamp")val workBookDate:LocalDateTime,
+    @ColumnInfo(name = "time_stamp")val workBookDate:LocalDateTime,
     @ColumnInfo(name = "relation_category")val relationCategory:Int
 ):Parcelable
 
@@ -42,7 +42,7 @@ data class QuestionWorkBookEntity(
  * ■回答率を保持するエンティティ
  * @param accuracyNo        識別番号
  * @param accuracyRate      正解率
- * @param accuracyDate      日付
+ * @param timeStamp      日付
  * @param relationWorkBook  question_workbook workBookNo 紐づけとなるナンバー
  */
 @Parcelize
@@ -50,7 +50,7 @@ data class QuestionWorkBookEntity(
 data class QuestionAccuracyEntity(
         @PrimaryKey(autoGenerate = true)val accuracyNo:Int,
         @ColumnInfo(name = "accuracy_rate")val accuracyRate:Float,
-        @ColumnInfo(name = "accuracy_date")val accuracyDate:LocalDate,
+        @ColumnInfo(name = "time_stamp")val timeStamp:LocalDateTime,
         @ColumnInfo(name = "relation_workbook")val relationWorkBook: Int
 ):Parcelable
 
@@ -86,18 +86,23 @@ data class QuestionQuizEntity(
 /**
  * ■履歴を保存するためのエンティティ
  * @param historyNo        識別番号
- * @param historyRate      正解
- * @param historyDate      日付
+ * @param historyCheck      正解
+ * @param timeStamp      日付
  * @param relationQuiz     解答と紐づくナンバー
  */
 @Parcelize
 @Entity(tableName = "question_history")
 data class QuestionHistoryEntity(
         @PrimaryKey(autoGenerate = true)val historyNo:Int,
-        @ColumnInfo(name = "history_rate")val historyRate:Int,
-        @ColumnInfo(name = "history_date")val historyDate:LocalDate,
+        @ColumnInfo(name = "history_check")val historyCheck:Int,
         @ColumnInfo(name = "history_quiz_number")val historyQuizNumber:Int,
-        @ColumnInfo(name = "history_select_answer")val historySelectAnswer:String,
+        @ColumnInfo(name = "history_quiz_select_answer")val historyQuizSelectAnswer:String,
+        @ColumnInfo(name = "history_quiz_right")val historyQuizRate:String,
+        @ColumnInfo(name = "history_quiz_first")val historyQuizFirst:String,
+        @ColumnInfo(name = "history_quiz_second")val historyQuizSecond:String,
+        @ColumnInfo(name = "history_quiz_third")val historyQuizThird:String,
+        @ColumnInfo(name = "history_quiz_statement")val historyQuizStatement:String,
+        @ColumnInfo(name = "time_stamp")val timeStamp:LocalDateTime,
         @ColumnInfo(name = "relation_accuracy")val relationAccuracy:Int,
         @ColumnInfo(name ="relation_quiz")val relationQuiz:Int
 ):Parcelable

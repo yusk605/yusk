@@ -35,7 +35,7 @@ abstract class QuestionDatabase:RoomDatabase() {
             singleton ?: synchronized(this){
                 val instance = Room
                     .databaseBuilder(application,QuestionDatabase::class.java,"question_book")
-                   // .addCallback(QuestionDBInsertTestCallBack(scope))
+                    .addCallback(QuestionDBInsertTestCallBack(scope))
                     .build()
                 singleton = instance
                 instance
@@ -75,42 +75,46 @@ abstract class QuestionDatabase:RoomDatabase() {
              * 初期化時にデータを入れる。
              */
             private fun initInsertEntity(database: QuestionDatabase,scope:CoroutineScope){
+
                 (0..10).forEach {
                     scope.launch(Dispatchers.IO){
-                      if(it<3) {
-                          database.getCategoryDao().insert(
-                                  QuestionCategoryEntity(
-                                          categoryNo = 0,
-                                          categoryTitle = "CategoryTest${it}",
-                                          categoryFlag = 0
-                                  )
-                          )
-                      }
-                       if(it<3) {
-                           database.getWorkBookDao().insert(
-                                   QuestionWorkBookEntity(
-                                           workBookNo = 0,
-                                           workBookTitle = "WorkbookTitle${it}",
-                                           workBookDate = LocalDateTime.now(),
-                                           workBookFlag = 0,
-                                           relationCategory = 1
-                                   )
-                           )
-                       }
-                        database.getQuizDao().insert(
-                                entity = QuestionQuizEntity(
-                                        quizNo = 0,
-                                        quizAnswerCheck = 0,
-                                        quizCommentary = "",
-                                        quizFirs = "問題1",
-                                        quizSecond = "問題2",
-                                        quizThird = "問題3",
-                                        quizRight = "正解",
-                                        quizStatement = "問題文問題文文字列を問題文問題文問題文",
-                                        timeStamp = LocalDateTime.now(),
-                                        relationWorkBook = 1
+                        if (database.getCategoryDao().get().isEmpty()) {
+                            if (it < 3) {
+                                database.getCategoryDao().insert(
+                                    QuestionCategoryEntity(
+                                        categoryNo = 0,
+                                        categoryTitle = "CategoryTest${it}",
+                                        categoryFlag = 0,
+                                        timeStamp = LocalDateTime.now()
+                                    )
                                 )
-                            )
+                            }
+                            if (it < 3) {
+                                database.getWorkBookDao().insert(
+                                    QuestionWorkBookEntity(
+                                        workBookNo = 0,
+                                        workBookTitle = "WorkbookTitle${it}",
+                                        workBookDate = LocalDateTime.now(),
+                                        workBookFlag = 0,
+                                        relationCategory = 1
+                                    )
+                                )
+                            }
+                            database.getQuizDao().insert(
+                                entity = QuestionQuizEntity(
+                                    quizNo = 0,
+                                    quizAnswerCheck = 0,
+                                    quizCommentary = "",
+                                    quizFirs = "問題1",
+                                    quizSecond = "問題2",
+                                    quizThird = "問題3",
+                                    quizRight = "正解",
+                                    quizStatement = "問題文問題文文字列を問題文問題文問題文",
+                                    timeStamp = LocalDateTime.now(),
+                                    relationWorkBook = 1
+                                    )
+                                )
+                            }
                         }
                     }
                 }

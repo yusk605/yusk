@@ -7,6 +7,7 @@ import androidx.room.*
 @Dao
 interface QuestionCategoryDao{
     @Query("select * from question_category")fun getAll():LiveData<List<CategoryWithWorkBooks>>
+    @Query("select * from question_category limit 1")suspend fun get():List<QuestionCategoryEntity>
     @Insert suspend fun insert(entity:QuestionCategoryEntity)
     @Update suspend fun update(entity:QuestionCategoryEntity)
     @Delete suspend fun delete(entity:QuestionCategoryEntity)
