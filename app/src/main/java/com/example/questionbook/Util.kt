@@ -62,3 +62,5 @@ fun Int.actionWorkBook(view: View, bundle: Bundle){
                 .navigate(R.id.action_workBookFragment_to_accuracyFragment,bundle)
     }
 }
+
+fun Int.isHolder():Boolean = this==MainActivity.actionHolderValue

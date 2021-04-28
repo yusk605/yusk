@@ -1,33 +1,31 @@
 package com.example.questionbook.fragment
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import androidx.core.view.isVisible
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.questionbook.MainActivity
 import com.example.questionbook.R
 import com.example.questionbook.adapter.CategoryAdapter
 import com.example.questionbook.dialog.CategoryDialog
 import com.example.questionbook.dialog.CategoryDialogFactory
 import com.example.questionbook.getMag
+import com.example.questionbook.isHolder
 import com.example.questionbook.room.QuestionCategoryEntity
 import com.example.questionbook.showSnackBar
 import com.example.questionbook.view_model.CategoryViewModel
 import com.example.questionbook.view_model.CategoryViewModelFactory
-import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.textfield.TextInputEditText
 import kotlinx.android.synthetic.main.fragment_category.*
-import java.util.*
 
 
 class CategoryFragment : Fragment() {
 
-    private var flag = 0
+    private var type = 0
 
     //アダプタークラスの取得を行う。
     private val adapter: CategoryAdapter by lazy {
@@ -36,7 +34,7 @@ class CategoryFragment : Fragment() {
                     R.id.action_categoryFragment_to_workBookFragment,
                     Bundle().apply {
                         putParcelable(ARGS_KEY,entity)
-                        putInt(ARGS_SIDE_MENU_FLAG,flag)
+                        putInt(ARGS_SIDE_MENU_FLAG,type)
                     })
                 }
             }
@@ -52,7 +50,7 @@ class CategoryFragment : Fragment() {
         arguments?.let { a->
             resources.getStringArray(R.array.side_menu_keys).let{ f->
                 f.forEach {
-                    if(a.get(it) != null)flag = a.getInt(it)
+                    if(a.get(it) != null)type = a.getInt(it)
                 }
             }
         }
@@ -66,7 +64,7 @@ class CategoryFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_category,container,false)
 
         activity?.let {
-            view.showSnackBar(it.getMag(flag))
+            view.showSnackBar(it.getMag(type))
         }
 
         return view
@@ -80,7 +78,11 @@ class CategoryFragment : Fragment() {
                 adapter.submitList(data)
             }
         }
-        fab_category_add.setOnClickListener { executeDialog() }
+        fab_category_add.also {
+            it.isVisible = type.isHolder()
+            it.setOnClickListener { executeDialog() }
+        }
+
     }
 
     /**
