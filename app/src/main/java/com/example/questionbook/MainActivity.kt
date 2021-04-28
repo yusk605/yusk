@@ -48,10 +48,10 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                         newBundleToPutInt(resources.getStringArray(R.array.side_menu_keys)[1], actionGameValue)
                     )
                 }
-            R.id.accuracy_list_fragment ->{
+            R.id.statistics_fragment ->{
                 controller.navigate(
-                        R.id.accuracyFragment,
-                        newBundleToPutInt(resources.getStringArray(R.array.side_menu_keys)[2], actionAccuracyValue)
+                        R.id.categoryFragment,
+                        newBundleToPutInt(resources.getStringArray(R.array.side_menu_keys)[2], actionStatisticsValue)
                     )
                 }
             R.id.garbage_can_fragment -> {
@@ -70,9 +70,9 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
      * putInt(key,value)
      */
     companion object{
-         const val actionHolderValue     = 0
-         const val actionGameValue       = 1
-         const val actionAccuracyValue   = 2
-         const val actionGarbageCan      = 3
+         const val actionHolderValue        = 0
+         const val actionGameValue          = 1
+         const val actionStatisticsValue    = 2
+         const val actionGarbageCan         = 3
     }
 }
