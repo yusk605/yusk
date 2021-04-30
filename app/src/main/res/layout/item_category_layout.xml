@@ -21,7 +21,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
-            android:id="@+id/category_image_icon"
+            android:id="@+id/item_category_workbook_ic"
             android:layout_width="50dp"
             android:layout_height="50dp"
             app:layout_constraintStart_toStartOf="parent"
@@ -29,27 +29,27 @@
             app:srcCompat="@drawable/question_ic_books" />
 
         <TextView
-            android:id="@+id/category_label_text"
+            android:id="@+id/item_category_workbook_count_label"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/category_work_books"
+            android:text="@string/item_category_workbook_label"
             android:textSize="18dp"
-            app:layout_constraintBottom_toBottomOf="@+id/category_image_icon"
-            app:layout_constraintStart_toEndOf="@+id/category_image_icon"
+            app:layout_constraintBottom_toBottomOf="@+id/item_category_workbook_ic"
+            app:layout_constraintStart_toEndOf="@+id/item_category_workbook_ic"
             app:layout_constraintTop_toBottomOf="@+id/item_category_title" />
 
         <TextView
-            android:id="@+id/category_workbook_count"
+            android:id="@+id/item_category_workbook_count"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="0"
             android:textSize="18dp"
-            app:layout_constraintBottom_toBottomOf="@+id/category_image_icon"
-            app:layout_constraintStart_toEndOf="@+id/category_label_text"
+            app:layout_constraintBottom_toBottomOf="@+id/item_category_workbook_ic"
+            app:layout_constraintStart_toEndOf="@+id/item_category_workbook_count_label"
             app:layout_constraintTop_toBottomOf="@+id/item_category_title" />
 
         <ImageView
-            android:id="@+id/category_submenu"
+            android:id="@+id/item_category_toggle_button"
             android:layout_width="50dp"
             android:layout_height="50dp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -57,7 +57,7 @@
             app:srcCompat="@drawable/baseline_more_vert_black_18dp" />
 
         <com.google.android.material.chip.Chip
-            android:id="@+id/game_start_chip"
+            android:id="@+id/item_category_chip"
             style="@style/question_chip"
             android:text="android"
             android:layout_marginBottom="4dp"

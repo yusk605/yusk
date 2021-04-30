@@ -77,7 +77,7 @@ class WorkBookFragment : Fragment() {
             )}
 
         // 問題集一覧から追加ボタンを押した際に、ダイヤログを表示。
-        fab_workbook_add.also {
+        workbook_add_fab.also {
             it.isVisible = type.isHolder()
             it.setOnClickListener {
                 executeDialog()

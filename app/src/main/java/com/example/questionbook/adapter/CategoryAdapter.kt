@@ -35,7 +35,7 @@ class CategoryAdapter(
     inner class CategoryAdapterHolder(view: View):RecyclerView.ViewHolder(view){
 
         private val _categoryTitle: TextView = view.findViewById(R.id.item_category_title)
-        private val _categoryWorkBookCount:TextView = view.findViewById(R.id.category_workbook_count)
+        private val _categoryWorkBookCount:TextView = view.findViewById(R.id.item_category_workbook_count)
 
         init {
                 itemView.setOnClickListener {
@@ -57,9 +57,10 @@ class CategoryAdapter(
     }
 
     override fun onBindViewHolder(holder: CategoryAdapterHolder, position: Int) {
+        val item = getItem(position)
         holder.also {
-            it.categoryTitle.text = getItem(position).questionCategoryEntity.categoryTitle
-            it.categoryWorkbookCount.text = getItem(position).workBookList.size.toString()
+            it.categoryTitle.text = item.questionCategoryEntity.categoryTitle
+            it.categoryWorkbookCount.text = "×${item.workBookList.size}"
         }
     }
 }

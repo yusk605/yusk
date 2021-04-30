@@ -2,7 +2,7 @@
     <string name="app_name">QuestionBook</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <!--@layout/fragment_category.xml -->
-    <string name="category_work_books">問題集×</string>
+
 
     <!--@MainActivity menu key-->
     <string-array name="side_menu_keys">
@@ -22,8 +22,8 @@
     <string name="item_problem_label">問題</string>
     <string name="item_problem">問題集</string>
 
-    <!--@layout/quiz_item.xml -->
-    <!-- TODO: Remove or change -->
+    <!--recycle item  -->
+    <string name="item_category_workbook_label">問題集</string>
     <string name="item_text_statement">問題集</string>
     <string name="item_text_answer_first">選択案1</string>
     <string name="item_text_answer_second">選択案2</string>
@@ -56,12 +56,6 @@
     <string name="snackbar_statistics_msg">統計</string>
     <string name="snackbar_game_msg">クイズゲーム</string>
     <string name="snackbar_garbagecan_msg">ゴミ箱</string>
-
-    <!-- menu_side id -->
-    <!-- TODO: Remove or change -->
-    <string name="menu_side_holder_id">holder_list_fragment</string>
-    <string name="menu_side_laboratory_id">laboratory_list_fragment</string>
-    <string name="menu_side_game_id">game_list_fragment</string>
 
     <!-- dialog  -->
     <string name="dialog_category_title">カテゴリーの追加</string>
