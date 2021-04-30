@@ -120,5 +120,11 @@
         android:id="@+id/historyListFragment"
         android:name="com.example.questionbook.fragment.HistoryListFragment"
         android:label="fragment_list_history"
-        tools:layout="@layout/fragment_list_history" />
+        tools:layout="@layout/fragment_list_history" >
+        <argument
+            android:name="workBookWithAll"
+            app:argType="com.example.questionbook.room.WorkBookWithAll"
+            app:nullable="true"
+            android:defaultValue="@null" />
+    </fragment>
 </navigation>
