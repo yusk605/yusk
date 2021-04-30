@@ -9,21 +9,21 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.questionbook.R
-import com.example.questionbook.room.QuestionQuizEntity
+import com.example.questionbook.room.QuestionLeafEntity
 import com.google.android.material.textfield.TextInputEditText
 
 class LeafListAdapter(
-        private  val showDialog:(QuestionQuizEntity)->Unit
-    ) :ListAdapter<QuestionQuizEntity,LeafListAdapter.QuizHolder>(Diff) {
+        private  val showDialog:(QuestionLeafEntity)->Unit
+    ) :ListAdapter<QuestionLeafEntity,LeafListAdapter.QuizHolder>(Diff) {
 
-    companion object Diff: DiffUtil.ItemCallback<QuestionQuizEntity>(){
+    companion object Diff: DiffUtil.ItemCallback<QuestionLeafEntity>(){
         override fun areItemsTheSame(
-                oldItem: QuestionQuizEntity,
-                newItem: QuestionQuizEntity
+                oldItem: QuestionLeafEntity,
+                newItem: QuestionLeafEntity
         ): Boolean = oldItem == newItem
         override fun areContentsTheSame(
-                oldItem: QuestionQuizEntity,
-                newItem: QuestionQuizEntity
+                oldItem: QuestionLeafEntity,
+                newItem: QuestionLeafEntity
         ): Boolean = oldItem == newItem
     }
 
@@ -48,17 +48,17 @@ class LeafListAdapter(
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): QuizHolder =
         QuizHolder(
                 LayoutInflater.from(parent.context)
-                        .inflate(R.layout.item_quiz_text_layout,parent,false)
+                        .inflate(R.layout.layout_leaf_layot,parent,false)
         )
 
     override fun onBindViewHolder(holder: QuizHolder, position: Int) {
         val entity = getItem(position)
          holder.also {
-            it.itemTextStatementEdit.setText(getItem(position).quizStatement)
-            it.itemTextAnswerFirst.setText(entity.quizFirs)
-            it.itemTextAnswerSecond.setText(entity.quizSecond)
-            it.itemTextAnswerThird.setText(entity.quizThird)
-            it.itemTextAnswerRight.setText(entity.quizRight)
+            it.itemTextStatementEdit.setText(getItem(position).leafStatement)
+            it.itemTextAnswerFirst.setText(entity.leafFirs)
+            it.itemTextAnswerSecond.setText(entity.leafSecond)
+            it.itemTextAnswerThird.setText(entity.leafThird)
+            it.itemTextAnswerRight.setText(entity.leafRight)
             it.itemTextPageCount.text = "${currentList.indexOf(getItem(position))+1}"
         }
     }

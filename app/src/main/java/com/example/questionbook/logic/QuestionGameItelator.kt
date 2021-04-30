@@ -1,8 +1,7 @@
 package com.example.questionbook.logic
 
 import com.example.questionbook.QuestionItem
-import com.example.questionbook.room.QuestionQuizEntity
-import kotlin.math.log
+import com.example.questionbook.room.QuestionLeafEntity
 
 /**
  * クイズのデータをまとめるためのインターフェイスいわば集合体の役割を果たす。
@@ -40,17 +39,17 @@ interface QuestionItemIterator{
  *
  */
 class QuestionItemShelf(
-        private val data:List<QuestionQuizEntity>,
+        private val data:List<QuestionLeafEntity>,
         private val title:String
     ):AggregationQuestionItem{
 
     private val logic:QuizGameLogic by lazy {
         object :QuizGameLogic{
             override fun isCorrectAnswer(item:QuestionItem, answer:String):Boolean =
-                    item.entity.quizRight == answer
+                    item.entity.leafRight == answer
 
             override fun isIncorrectAnswer(item:QuestionItem, answer:String):Boolean =
-                    item.entity.quizRight != answer
+                    item.entity.leafRight != answer
         }
     }
 
@@ -71,10 +70,10 @@ class QuestionItemShelf(
                     entity = it,
                     selectAnswers =
                     mutableListOf<String>().apply {
-                        add(it.quizRight)
-                        add(it.quizFirs)
-                        add(it.quizSecond)
-                        add(it.quizThird)
+                        add(it.leafRight)
+                        add(it.leafFirs)
+                        add(it.leafSecond)
+                        add(it.leafThird)
                     })
         }.toList().shuffled().also {
             list->

@@ -11,7 +11,7 @@ import com.example.questionbook.QuestionItem
 import com.example.questionbook.R
 import com.example.questionbook.adapter.LeafListAdapter
 import com.example.questionbook.dialog.*
-import com.example.questionbook.room.QuestionQuizEntity
+import com.example.questionbook.room.QuestionLeafEntity
 import com.example.questionbook.room.WorkBookWithAll
 import com.example.questionbook.view_model.QuizListViewModel
 import com.example.questionbook.view_model.QuizListViewModelFactory
@@ -131,20 +131,20 @@ class LeafListFragment : Fragment() {
                 questionTitle = workBookWithTextAndAccuracy?.workBookEntity?.workBookTitle?:"",
                 selectAnswers = mutableListOf(),
                 answerCheck = 0,
-                entity = QuestionQuizEntity(
-                                quizNo          = 0,
-                                quizFirs        = dialogFirst.text.toString(),
-                                quizSecond      = dialogTextSecond.text.toString(),
-                                quizThird       = dialogTextThird.text.toString(),
-                                quizRight       = dialogTextRight.text.toString(),
-                                quizStatement   = dialogStatement.text.toString(),
-                                quizCommentary  = "",
-                                quizAnswerCheck = 0,
+                entity = QuestionLeafEntity(
+                                leafNo          = 0,
+                                leafFirs        = dialogFirst.text.toString(),
+                                leafSecond      = dialogTextSecond.text.toString(),
+                                leafThird       = dialogTextThird.text.toString(),
+                                leafRight       = dialogTextRight.text.toString(),
+                                leafStatement   = dialogStatement.text.toString(),
+                                leafCommentary  = "",
+                                leafAnswerCheck = 0,
                                 timeStamp = LocalDateTime.now(),
                                 relationWorkBook = workBookWithTextAndAccuracy?.workBookEntity?.workBookNo?:0
                 ))
     }
-    private fun View.getParameter(entity: QuestionQuizEntity):QuestionItem{
+    private fun View.getParameter(entity: QuestionLeafEntity):QuestionItem{
 
         val dialogStatement     = findViewById<TextInputEditText>(R.id.form_quiz_statement)
         val dialogFirst         = findViewById<TextInputEditText>(R.id.form_quiz_answer_first)
@@ -157,13 +157,13 @@ class LeafListFragment : Fragment() {
                 selectAnswers = mutableListOf(),
                 answerCheck = 0,
                 entity = entity.also {
-                    it.quizFirs = dialogFirst.text.toString()
-                    it.quizSecond = dialogTextSecond.text.toString()
-                    it.quizThird = dialogTextThird.text.toString()
-                    it.quizRight = dialogTextRight.text.toString()
-                    it.quizStatement = dialogStatement.text.toString()
-                    it.quizCommentary = ""
-                    it.quizAnswerCheck = 0
+                    it.leafFirs = dialogFirst.text.toString()
+                    it.leafSecond = dialogTextSecond.text.toString()
+                    it.leafThird = dialogTextThird.text.toString()
+                    it.leafRight = dialogTextRight.text.toString()
+                    it.leafStatement = dialogStatement.text.toString()
+                    it.leafCommentary = ""
+                    it.leafAnswerCheck = 0
                     it.timeStamp = LocalDateTime.now()
                     it.relationWorkBook = workBookWithTextAndAccuracy?.workBookEntity?.workBookNo ?: 0
                 })
@@ -175,11 +175,11 @@ class LeafListFragment : Fragment() {
      * その際にダイヤログに修正を行うデータを表示させること。
      * @param entity QuestionQuizEntity クイズのデータを格納する値。
      */
-    private fun View.setParameter(entity:QuestionQuizEntity){
-        findViewById<TextInputEditText>(R.id.form_quiz_statement).setText(entity.quizStatement)
-        findViewById<TextInputEditText>(R.id.form_quiz_answer_second).setText(entity.quizSecond)
-        findViewById<TextInputEditText>(R.id.form_quiz_answer_first).setText(entity.quizFirs)
-        findViewById<TextInputEditText>(R.id.form_quiz_answer_third).setText(entity.quizThird)
-        findViewById<TextInputEditText>(R.id.form_quiz_answer_right).setText(entity.quizRight)
+    private fun View.setParameter(entity:QuestionLeafEntity){
+        findViewById<TextInputEditText>(R.id.form_quiz_statement).setText(entity.leafStatement)
+        findViewById<TextInputEditText>(R.id.form_quiz_answer_second).setText(entity.leafSecond)
+        findViewById<TextInputEditText>(R.id.form_quiz_answer_first).setText(entity.leafFirs)
+        findViewById<TextInputEditText>(R.id.form_quiz_answer_third).setText(entity.leafThird)
+        findViewById<TextInputEditText>(R.id.form_quiz_answer_right).setText(entity.leafRight)
     }
 }

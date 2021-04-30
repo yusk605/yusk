@@ -56,28 +56,28 @@ data class QuestionAccuracyEntity(
 
 /**
  * ■解答案を保存するためのエンティティ
- * @param quizNo                識別番号
- * @param quizStatement         問題文
- * @param quizFirs              解答案その1
- * @param quizSecond            解答案その2
- * @param quizThird             解答案その3
- * @param quizRight             解答案
- * @param quizAnswerCheck       解答の値
- * @param quizCommentary        解答案
+ * @param leafNo                識別番号
+ * @param leafStatement         問題文
+ * @param leafFirs              解答案その1
+ * @param leafSecond            解答案その2
+ * @param leafThird             解答案その3
+ * @param leafRight             解答案
+ * @param leafAnswerCheck       解答の値
+ * @param leafCommentary        解答案
  * @param timeStamp             更新時間
  * @param relationWorkBook      問題集に紐づける番号
  */
 @Parcelize
-@Entity(tableName = "question_quiz")
-data class QuestionQuizEntity(
-        @PrimaryKey(autoGenerate = true)val quizNo:Int,
-        @ColumnInfo(name = "quiz_statement")var quizStatement:String,
-        @ColumnInfo(name = "quiz_firs")var quizFirs:String,
-        @ColumnInfo(name = "quiz_second")var quizSecond:String,
-        @ColumnInfo(name = "quiz_third")var quizThird:String,
-        @ColumnInfo(name = "quiz_right")var quizRight:String,
-        @ColumnInfo(name = "quiz_answer_check")var quizAnswerCheck:Int,
-        @ColumnInfo(name = "quiz_answer_commentary")var quizCommentary:String,
+@Entity(tableName = "question_leaf")
+data class QuestionLeafEntity(
+        @PrimaryKey(autoGenerate = true)val leafNo:Int,
+        @ColumnInfo(name = "quiz_statement")var leafStatement:String,
+        @ColumnInfo(name = "quiz_firs")var leafFirs:String,
+        @ColumnInfo(name = "quiz_second")var leafSecond:String,
+        @ColumnInfo(name = "quiz_third")var leafThird:String,
+        @ColumnInfo(name = "quiz_right")var leafRight:String,
+        @ColumnInfo(name = "quiz_answer_check")var leafAnswerCheck:Int,
+        @ColumnInfo(name = "quiz_answer_commentary")var leafCommentary:String,
         @ColumnInfo(name = "time_stamp")var timeStamp: LocalDateTime,
         @ColumnInfo(name = "relation_workbook")var relationWorkBook:Int
 ):Parcelable
@@ -88,23 +88,23 @@ data class QuestionQuizEntity(
  * @param historyNo        識別番号
  * @param historyCheck      正解
  * @param timeStamp      日付
- * @param relationQuiz     解答と紐づくナンバー
+ * @param relationLeaf     解答と紐づくナンバー
  */
 @Parcelize
 @Entity(tableName = "question_history")
 data class QuestionHistoryEntity(
         @PrimaryKey(autoGenerate = true)val historyNo:Int,
         @ColumnInfo(name = "history_check")val historyCheck:Int,
-        @ColumnInfo(name = "history_quiz_number")val historyQuizNumber:Int,
-        @ColumnInfo(name = "history_quiz_select_answer")val historyQuizSelectAnswer:String,
-        @ColumnInfo(name = "history_quiz_right")val historyQuizRate:String,
-        @ColumnInfo(name = "history_quiz_first")val historyQuizFirst:String,
-        @ColumnInfo(name = "history_quiz_second")val historyQuizSecond:String,
-        @ColumnInfo(name = "history_quiz_third")val historyQuizThird:String,
-        @ColumnInfo(name = "history_quiz_statement")val historyQuizStatement:String,
+        @ColumnInfo(name = "history_leaf_number")val historyLeafNumber:Int,
+        @ColumnInfo(name = "history_leaf_select_answer")val historyLeafSelectAnswer:String,
+        @ColumnInfo(name = "history_leaf_right")val historyLeafRate:String,
+        @ColumnInfo(name = "history_leaf_first")val historyLeafFirst:String,
+        @ColumnInfo(name = "history_leaf_second")val historyLeafSecond:String,
+        @ColumnInfo(name = "history_leaf_third")val historyLeafThird:String,
+        @ColumnInfo(name = "history_leaf_statement")val historyLeafStatement:String,
         @ColumnInfo(name = "time_stamp")val timeStamp:LocalDateTime,
         @ColumnInfo(name = "relation_accuracy")val relationAccuracy:Int,
-        @ColumnInfo(name ="relation_quiz")val relationQuiz:Int
+        @ColumnInfo(name ="relation_leaf")val relationLeaf:Int
 ):Parcelable
 
 
@@ -130,7 +130,7 @@ data class WorkBookWithAll(
         @Relation(
                 parentColumn = "workBookNo",
                 entityColumn = "relation_workbook" )
-        val textList:List<QuestionQuizEntity>,
+        val leafList:List<QuestionLeafEntity>,
         @Relation(
                 parentColumn = "workBookNo",
                 entityColumn = "relation_workbook" )
@@ -138,19 +138,19 @@ data class WorkBookWithAll(
         @Relation(
                 parentColumn = "workBookNo",
                 entityColumn = "relation_workbook"
-        )val quizList:List<QuestionQuizEntity>
+        )val quizList:List<QuestionLeafEntity>
         ):Parcelable
 
 
 /**
  * ■回答率のデータに基づく単一のレコードに対して、紐づけとなるデータ。
- * @param quizEntity  親となるエンティティを指定（クイズエンティティ）
+ * @param accuracyEntity  親となるエンティティを指定（クイズエンティティ）
  * @param historyList 子となるエンティティすべてをリストに格納。
  */
 @Parcelize
 data class AccuracyWithHistory(
         @Embedded
-        val quizEntity: QuestionAccuracyEntity,
+        val accuracyEntity: QuestionAccuracyEntity,
         @Relation(
                 parentColumn = "accuracyNo",
                 entityColumn = "relation_accuracy"
@@ -160,18 +160,18 @@ data class AccuracyWithHistory(
 
 /**
  * ■クイズを行った履歴を表示させるためのデータクラス
- * @param quizEntity    クイズを表示させるためのテーブル
+ * @param leafEntity    クイズを表示させるためのテーブル
  * @param historyEntity 履歴を表示させるためのテーブル
  * 上記を紐づけた理由としては、同じ日にクイズを行った場合
  * クイズとなる問題の正誤履歴を表示させるためのオブジェクト
  */
 @Parcelize
-data class QuizWithHistory(
+data class LeafWithHistory(
         @Embedded
-        val quizEntity: QuestionQuizEntity,
+        val leafEntity: QuestionLeafEntity,
         @Relation(
-                parentColumn = "quizNo",
-                entityColumn = "relation_quiz"
+                parentColumn = "leafNo",
+                entityColumn = "relation_leaf"
         )val historyEntity: QuestionHistoryEntity
 ):Parcelable
 

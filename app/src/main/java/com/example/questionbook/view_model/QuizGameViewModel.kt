@@ -17,7 +17,7 @@ class QuizGameViewModel(private val app:Application): AndroidViewModel(app) {
     private val db   = QuestionDatabase.getInstance(app,viewModelScope)
 
     private val accuracyDao:QuestionAccuracyDao
-    private val quizDao:QuestionQuizDao
+    private val quizDao:QuestionLeafDao
     private val historyDao:QuestionHistoryDao
 
     init {
@@ -30,7 +30,7 @@ class QuizGameViewModel(private val app:Application): AndroidViewModel(app) {
 
     private var _quizEntityList = quizDao.getList()
 
-    val quizEntityList:LiveData<List<QuestionQuizEntity>>
+    val quizEntityList:LiveData<List<QuestionLeafEntity>>
         get() = _quizEntityList
 
 

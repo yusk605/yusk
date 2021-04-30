@@ -9,8 +9,8 @@
         <item name="side_menu_key_holder">SIDE_MENU_TO_HOLDER</item>
         <item name="side_menu_key_game">SIDE_MENU_TO_GAME</item>
         <item name="side_menu_key_statistics">SIDE_MENU_TO_STATISTICS</item>
-        <item name="side_menu_key_garbagecan">SIDE_MENU_TO_GARBAGE_CAN</item>
         <item name="side_menu_key_history">SIDE_MENU_TO_HISTORY</item>
+        <item name="side_menu_key_garbagecan">SIDE_MENU_TO_GARBAGE_CAN</item>
     </string-array>
 
     <!--  -->
@@ -18,20 +18,20 @@
     <string name="details_label">詳細</string>
 
     <!-- recycle item  -->
-        <!-- category -->
-        <string name="item_category_workbook_label">問題集</string>
-        <!-- workbook -->
-        <string name="item_workbook_leafs">出題数</string>
-        <string name="item_workbook_accuracy_max">最大正解率</string>
-        <!-- leaf  -->
-        <string name="item_leaf_statement">問題集</string>
-        <string name="item_leaf_answer_first">選択案1</string>
-        <string name="item_leaf_answer_second">選択案2</string>
-        <string name="item_leaf_answer_third">選択案3</string>
-        <string name="item_leaf_answer_right">正解</string>
-        <string name="item_leaf_btn_update">修正</string>
-        <string name="item_leaf_select_answer">選択した解答</string>
-        <string name="item_leaf_page">ページ</string>
+    <!-- category -->
+    <string name="item_category_workbook_label">問題集</string>
+    <!-- workbook -->
+    <string name="item_workbook_leafs">出題数</string>
+    <string name="item_workbook_accuracy_max">最大正解率</string>
+    <!-- leaf  -->
+    <string name="item_leaf_statement">問題集</string>
+    <string name="item_leaf_answer_first">選択案1</string>
+    <string name="item_leaf_answer_second">選択案2</string>
+    <string name="item_leaf_answer_third">選択案3</string>
+    <string name="item_leaf_answer_right">正解</string>
+    <string name="item_leaf_btn_update">修正</string>
+    <string name="item_leaf_select_answer">選択した解答</string>
+    <string name="item_leaf_page">ページ</string>
 
 
     <!-- TODO: Remove or change -->
@@ -62,6 +62,6 @@
 
 
     <!--statistics_fragment -->
-    <string name="statistics_text">問題集全体の解答率割合</string>
+    <string name="statistics_text">問題集全体平均解答率割合</string>
 
 </resources>

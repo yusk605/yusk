@@ -54,10 +54,10 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                         newBundleToPutInt(resources.getStringArray(R.array.side_menu_keys)[2], actionStatisticsValue)
                     )
                 }
-            R.id.garbage_can_fragment -> {
+            R.id.history_list_fragment -> {
                 controller.navigate(
-                        R.id.garbageCanFragment,
-                        newBundleToPutInt(resources.getStringArray(R.array.side_menu_keys)[3], actionGarbageCan)
+                        R.id.categoryListFragment,
+                        newBundleToPutInt(resources.getStringArray(R.array.side_menu_keys)[3], actionHistory)
                     )
                 }
             }
@@ -73,6 +73,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
          const val actionHolderValue        = 0
          const val actionGameValue          = 1
          const val actionStatisticsValue    = 2
-         const val actionGarbageCan         = 3
+         const val actionHistory            = 3
+         const val actionGarbageCan         = 4
     }
 }

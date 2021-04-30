@@ -20,6 +20,9 @@
         <action
             android:id="@+id/action_workBookListFragment_to_gameStartFragment"
             app:destination="@id/gameStartFragment" />
+        <action
+            android:id="@+id/action_workBookListFragment_to_historyListFragment"
+            app:destination="@id/historyListFragment" />
     </fragment>
     <fragment
         android:id="@+id/categoryListFragment"
@@ -113,4 +116,9 @@
             android:id="@+id/action_statisticsFragment_to_statistics_details"
             app:destination="@id/statisticsDetailsFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/historyListFragment"
+        android:name="com.example.questionbook.fragment.HistoryListFragment"
+        android:label="fragment_list_history"
+        tools:layout="@layout/fragment_list_history" />
 </navigation>

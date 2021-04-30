@@ -40,9 +40,9 @@ class ResultDetailsListFragment : Fragment() {
         viewModel.quizWithHistory.observe(viewLifecycleOwner){
             data->
             adapter.submitList(
-                    data.filter { f-> f.quizEntity.relationWorkBook == quizResult?.relationWorkBookNo }
+                    data.filter { f-> f.leafEntity.relationWorkBook == quizResult?.relationWorkBookNo }
                             .filter { f-> f.historyEntity.relationAccuracy == quizResult?.relationAccuracyNo}
-                            .sortedBy { it.historyEntity.historyQuizNumber }
+                            .sortedBy { it.historyEntity.historyLeafNumber }
                             .toList()
             )
         }
@@ -55,7 +55,7 @@ class ResultDetailsListFragment : Fragment() {
     }
 
     private fun recycleInit(){
-        recyclerview_concrete_result.also {
+        concrete_result_recycler_view.also {
             recyclerView ->
             recyclerView.adapter = adapter
             recyclerView.layoutManager =

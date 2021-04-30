@@ -53,12 +53,24 @@ fun newBundleToPutInt(key:String, value:Int)=
  * @param bundle    必要な値を格納するためのオブジェクト
  */
 fun Int.actionWorkBook(view: View, bundle: Bundle){
+
+    val controller = Navigation.findNavController(view)
+
     when(this){
-        0 -> Navigation.findNavController(view)
-                .navigate(R.id.action_workBookListFragment_to_problemListFragment,bundle)
-        1 -> Navigation.findNavController(view)
-                .navigate(R.id.action_workBookListFragment_to_gameStartFragment,bundle)
+
+        0 -> controller.navigate(
+                R.id.action_workBookListFragment_to_problemListFragment,
+                bundle
+        )
+
+        1 -> controller.navigate(
+                R.id.action_workBookListFragment_to_gameStartFragment,
+                bundle
+        )
+        //統計画面ではワークブック一覧画面を使用しないため、処理を行わせない
         2 -> return
+
+        3 -> controller
     }
 }
 

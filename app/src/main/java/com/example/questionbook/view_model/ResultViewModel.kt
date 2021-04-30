@@ -13,7 +13,7 @@ class ResultViewModel(application: Application):AndroidViewModel(application) {
     private val db = QuestionDatabase.getInstance(application,viewModelScope)
 
     private val historyDao:QuestionHistoryDao
-    private val quizDao:QuestionQuizDao
+    private val quizDao:QuestionLeafDao
     private val accuracyDao:QuestionAccuracyDao
 
     init {
@@ -24,14 +24,14 @@ class ResultViewModel(application: Application):AndroidViewModel(application) {
         }
     }
 
-    private var _quizData:LiveData<List<QuestionQuizEntity>>
+    private var _quizData:LiveData<List<QuestionLeafEntity>>
         = quizDao.getList()
 
     private var _accuracyWithHistory:LiveData<List<AccuracyWithHistory>>
         = historyDao.getWithAccuracy()
 
-    private var _quizWithHistory:LiveData<List<QuizWithHistory>>
-        = historyDao.getWithQuiz()
+    private var _quizWithHistory:LiveData<List<LeafWithHistory>>
+        = historyDao.getWithLeaf()
 
     val quizData
         get() = _quizData

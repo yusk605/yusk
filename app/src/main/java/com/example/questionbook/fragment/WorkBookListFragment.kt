@@ -88,7 +88,7 @@ class WorkBookListFragment : Fragment() {
     private fun recycleInit(){
         val myLayoutManager = LinearLayoutManager(activity).apply { orientation= LinearLayoutManager.VERTICAL }
         val itemDecoration  = DividerItemDecoration(activity,myLayoutManager.orientation)
-        recycle_view_work_book.also {
+        work_book_recycle_view.also {
             it.adapter = adapter
             it.layoutManager = myLayoutManager
             it.addItemDecoration(itemDecoration)

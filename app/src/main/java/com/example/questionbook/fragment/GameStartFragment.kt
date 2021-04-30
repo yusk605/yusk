@@ -183,14 +183,14 @@ class GameStartFragment : Fragment() {
                         historyNo = 0,
                         timeStamp = LocalDateTime.now(),
                         historyCheck = answerCheck,
-                        historyQuizNumber = historyQuizNumber,
-                        historyQuizSelectAnswer = selectAnswer,
-                        historyQuizFirst = entity.quizFirs,
-                        historyQuizSecond = entity.quizSecond,
-                        historyQuizThird = entity.quizThird,
-                        historyQuizRate = entity.quizRight,
-                        historyQuizStatement = entity.quizStatement,
-                        relationQuiz = entity.quizNo,
+                        historyLeafNumber = historyQuizNumber,
+                        historyLeafSelectAnswer = selectAnswer,
+                        historyLeafFirst = entity.leafFirs,
+                        historyLeafSecond = entity.leafSecond,
+                        historyLeafThird = entity.leafThird,
+                        historyLeafRate = entity.leafRight,
+                        historyLeafStatement = entity.leafStatement,
+                        relationLeaf = entity.leafNo,
                         relationAccuracy = accuracyNo
                 )
         )
@@ -222,7 +222,7 @@ class GameStartFragment : Fragment() {
      * ■パラメーターをテキストの値に持たせる。
      */
     private fun QuestionItem.set(){
-        game_start_quiz_statement.setText(entity.quizStatement)
+        game_start_quiz_statement.setText(entity.leafStatement)
         game_start_radio_button_first.text    = selectAnswers[0]
         game_start_radio_button_second.text   = selectAnswers[1]
         game_start_radio_button_third.text    = selectAnswers[2]

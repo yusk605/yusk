@@ -3,7 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:showIn="navigation_view">
     <group android:checkableBehavior="single">
-
         <!--
             android:title = "指定される文字列は直打ち"
             理由としては、リソースファイルのstringを使用した文字列を指定すると
@@ -23,6 +22,11 @@
             android:id="@+id/statistics_fragment"
             android:title="統計"
             android:icon="@drawable/question_accuracy"/>
+
+        <item
+            android:id="@+id/history_list_fragment"
+            android:title="履歴"
+            android:icon="@drawable/baseline_history_24" />
 
         <item
             android:id="@+id/garbage_can_fragment"

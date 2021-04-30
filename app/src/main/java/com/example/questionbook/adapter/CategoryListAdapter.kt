@@ -52,7 +52,7 @@ class CategoryListAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CategoryAdapterHolder {
         return CategoryAdapterHolder(
-            LayoutInflater.from(parent.context).inflate(R.layout.item_category_layout,parent,false)
+            LayoutInflater.from(parent.context).inflate(R.layout.layout_category_item,parent,false)
         )
     }
 

@@ -65,11 +65,13 @@ class StatisticsFragment : Fragment(){
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         var sum = 0
+        var max = 0
         var accuracyRate=0f
         viewModel.data.observe(viewLifecycleOwner){
             data->
                 data.filter { it.workBookEntity.relationCategory == categoryNo }
-                    .forEach { all->
+                        .also { max = it.size*100 }
+                        .forEach { all->
                         //解答率のデータが存在する場合は、
                         if (all.accuracyList.isNotEmpty())accuracyRate =
                                 all.accuracyList.map { it.accuracyRate }.sum()/all.accuracyList.size.toFloat()
@@ -77,7 +79,9 @@ class StatisticsFragment : Fragment(){
                         entryList.add(PieEntry(accuracyRate,all.workBookEntity.workBookTitle))
                         titleList.add(all.workBookEntity.workBookTitle)
                         sum += accuracyRate.toInt()
-                    }
+                        accuracyRate = 0f
+                        }
+
 
                 val pieDataSet = createPieDataSet(entryList,"workBook_pieChart")
 
@@ -85,6 +89,8 @@ class StatisticsFragment : Fragment(){
                         .apply { centerText = "${sum}%" }
                         .transformLegend()
                         .invalidate()
+
+                statistics_text.text="全体正解率${max}%中${sum}%正解"
 
                 //スピナーに項目となる値を保持させるための初期化
                 activity?.let { a-> statistics_spinner.initArrayAdapter(a.applicationContext,titleList) }
@@ -128,7 +134,7 @@ class StatisticsFragment : Fragment(){
             //  pie.transparentCircleRadius=35f                         //外側での円の大きさ
             it.isHighlightPerTapEnabled= true
             it.animateY(1000,EaseInOutQuad)                   //アニメーションを開始する
-            it.setExtraOffsets(5f, 0f, 5f, 60f)   //グラフの配置を指定
+            it.setExtraOffsets(5f, 0f, 5f, 6f)   //グラフの配置を指定
             it.isDrawHoleEnabled = true
         }
 

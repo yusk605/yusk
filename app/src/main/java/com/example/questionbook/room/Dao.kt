@@ -43,12 +43,12 @@ interface QuestionAccuracyDao{
 
 // ■ 問題集に紐づいたクイズを保存するためのテーブル（クイズ）
 @Dao
-interface QuestionQuizDao{
-    @Query("select * from question_quiz")fun getList():LiveData<List<QuestionQuizEntity>>
-    @Query("select * from question_quiz")fun getAll():LiveData<List<QuizWithHistory>>
-    @Insert suspend fun insert(entity:QuestionQuizEntity)
-    @Update suspend fun update(entity:QuestionQuizEntity)
-    @Delete suspend fun delete(entity:QuestionQuizEntity)
+interface QuestionLeafDao{
+    @Query("select * from question_leaf")fun getList():LiveData<List<QuestionLeafEntity>>
+    @Query("select * from question_leaf")fun getAll():LiveData<List<LeafWithHistory>>
+    @Insert suspend fun insert(entity:QuestionLeafEntity)
+    @Update suspend fun update(entity:QuestionLeafEntity)
+    @Delete suspend fun delete(entity:QuestionLeafEntity)
 }
 
 /*
@@ -59,7 +59,7 @@ interface QuestionQuizDao{
 @Dao
 interface QuestionHistoryDao{
     @Query("select * from question_history")fun getList():LiveData<List<QuestionHistoryEntity>>
-    @Query("select * from question_quiz")fun getWithQuiz():LiveData<List<QuizWithHistory>>
+    @Query("select * from question_leaf")fun getWithLeaf():LiveData<List<LeafWithHistory>>
     @Query("select * from question_accuracy")fun getWithAccuracy():LiveData<List<AccuracyWithHistory>>
     @Insert fun insert(entity:QuestionHistoryEntity)
     @Update fun update(entity:QuestionHistoryEntity)

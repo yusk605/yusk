@@ -76,14 +76,14 @@ class WorkBookListAdapter(
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): WorkBookHolder =
         WorkBookHolder(
             LayoutInflater.from(parent.context)
-                .inflate(R.layout.item_workbook_layout,parent,false)
+                .inflate(R.layout.layout_workbook_item,parent,false)
         )
 
     override fun onBindViewHolder(holder: WorkBookHolder, position: Int) {
        val average = getItem(position).accuracyList.map {a-> a.accuracyRate }.toList().average()
        holder.also {
            it.itemWorkBookTitle.text = getItem(position).workBookEntity.workBookTitle
-           it.itemWorkBookProblemCount.text = "×${getItem(position).textList.size}"
+           it.itemWorkBookProblemCount.text = "×${getItem(position).leafList.size}"
            it.itemWorkBookAccuracy.text = "$average%"
            it.itemWorkBookChip.text = categoryTitle
        }

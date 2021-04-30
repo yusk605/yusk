@@ -17,7 +17,7 @@ import java.time.LocalDateTime
     QuestionWorkBookEntity::class,
     QuestionAccuracyEntity::class,
     QuestionHistoryEntity::class,
-    QuestionQuizEntity::class
+    QuestionLeafEntity::class
                      ],version = 1)
 abstract class QuestionDatabase:RoomDatabase() {
 
@@ -25,7 +25,7 @@ abstract class QuestionDatabase:RoomDatabase() {
     abstract fun getWorkBookDao():QuestionWorkBookDao
     abstract fun getAccuracyDao():QuestionAccuracyDao
     abstract fun getHistoryDao():QuestionHistoryDao
-    abstract fun getQuizDao():QuestionQuizDao
+    abstract fun getQuizDao():QuestionLeafDao
 
     companion object{
 
@@ -101,15 +101,15 @@ abstract class QuestionDatabase:RoomDatabase() {
                                 )
                             }
                             database.getQuizDao().insert(
-                                entity = QuestionQuizEntity(
-                                    quizNo = 0,
-                                    quizAnswerCheck = 0,
-                                    quizCommentary = "",
-                                    quizFirs = "問題1",
-                                    quizSecond = "問題2",
-                                    quizThird = "問題3",
-                                    quizRight = "正解",
-                                    quizStatement = "問題文問題文文字列を問題文問題文問題文",
+                                entity = QuestionLeafEntity(
+                                    leafNo = 0,
+                                    leafAnswerCheck = 0,
+                                    leafCommentary = "",
+                                    leafFirs = "問題1",
+                                    leafSecond = "問題2",
+                                    leafThird = "問題3",
+                                    leafRight = "正解",
+                                    leafStatement = "問題文問題文文字列を問題文問題文問題文",
                                     timeStamp = LocalDateTime.now(),
                                     relationWorkBook = 1
                                     )
