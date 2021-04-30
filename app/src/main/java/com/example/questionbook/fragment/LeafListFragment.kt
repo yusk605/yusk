@@ -6,11 +6,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.questionbook.QuestionItem
 import com.example.questionbook.R
-import com.example.questionbook.adapter.QuizAdapter
+import com.example.questionbook.adapter.LeafAdapter
 import com.example.questionbook.dialog.*
 import com.example.questionbook.room.QuestionQuizEntity
 import com.example.questionbook.room.WorkBookWithAll
@@ -18,11 +17,11 @@ import com.example.questionbook.view_model.QuizListViewModel
 import com.example.questionbook.view_model.QuizListViewModelFactory
 import com.google.android.material.textfield.TextInputEditText
 import kotlinx.android.synthetic.main.dialog_text_form_layout.*
-import kotlinx.android.synthetic.main.fragment_quiz_text_list.*
+import kotlinx.android.synthetic.main.fragment_leaf_list.*
 import java.time.LocalDateTime
 
 
-class QuizListFragment : Fragment() {
+class LeafListFragment : Fragment() {
 
     //WorkBookFragmentから遷移されたときに渡される値として。
     private var workBookWithTextAndAccuracy:WorkBookWithAll? = null
@@ -34,8 +33,8 @@ class QuizListFragment : Fragment() {
     }
 
     //アダプター
-    private val quizAdapter:QuizAdapter by lazy {
-        QuizAdapter{ entity->
+    private val quizAdapter:LeafAdapter by lazy {
+        LeafAdapter{ entity->
             val quizDialog = activity?.let { it1 ->
                 PageQuizDialogFactory(it1,R.layout.dialog_text_form_layout)
                         .create(PageQuizDialog::class.java) }
@@ -69,7 +68,7 @@ class QuizListFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_quiz_text_list, container, false)
+        return inflater.inflate(R.layout.fragment_leaf_list, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -89,7 +88,7 @@ class QuizListFragment : Fragment() {
         }
 
         //クイズテキスト一覧に表示されている、ボタンを押したときの処理
-        fab_text_add.setOnClickListener { v ->
+        leaf_list_add_fab.setOnClickListener { v ->
             val quizDialog = activity?.let { it1 ->
                 PageQuizDialogFactory(it1,R.layout.dialog_text_form_layout)
                         .create(PageQuizDialog::class.java)
@@ -110,7 +109,7 @@ class QuizListFragment : Fragment() {
      * リサイクラービューでの初期化を行うメソッド。
      */
     private fun initRecycleView(){
-        text_recycle_view.also {
+        leaf_list_recycle_view.also {
             it.layoutManager = LinearLayoutManager(activity).apply { orientation = LinearLayoutManager.VERTICAL }
             it.adapter = quizAdapter
         }

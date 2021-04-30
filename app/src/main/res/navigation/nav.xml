@@ -16,7 +16,7 @@
             android:defaultValue="@null" />
         <action
             android:id="@+id/action_workBookFragment_to_problemListFragment"
-            app:destination="@id/QuizListFragment" />
+            app:destination="@id/LeafListFragment" />
         <action
             android:id="@+id/action_workBookFragment_to_gameStartFragment"
             app:destination="@id/gameStartFragment" />
@@ -66,11 +66,11 @@
         tools:layout="@layout/fragment_garbage_can" />
 
     <fragment
-        android:id="@+id/QuizListFragment"
-        android:name="com.example.questionbook.fragment.QuizListFragment"
-        android:label="fragment_problem_list"
-        tools:layout="@layout/fragment_quiz_text_list" >
-        <argument android:name="workBookWithTextAndAccuracy"
+        android:id="@+id/LeafListFragment"
+        android:name="com.example.questionbook.fragment.LeafListFragment"
+        android:label="fragment_leaf_list"
+        tools:layout="@layout/fragment_leaf_list" >
+        <argument android:name="workBookWithAll"
             app:argType="com.example.questionbook.room.WorkBookWithAll"
             app:nullable="true" />
     </fragment>

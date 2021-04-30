@@ -12,9 +12,9 @@ import com.example.questionbook.R
 import com.example.questionbook.room.QuestionQuizEntity
 import com.google.android.material.textfield.TextInputEditText
 
-class QuizAdapter(
+class LeafAdapter(
         private  val showDialog:(QuestionQuizEntity)->Unit
-    ) :ListAdapter<QuestionQuizEntity,QuizAdapter.QuizHolder>(Diff) {
+    ) :ListAdapter<QuestionQuizEntity,LeafAdapter.QuizHolder>(Diff) {
 
     companion object Diff: DiffUtil.ItemCallback<QuestionQuizEntity>(){
         override fun areItemsTheSame(
@@ -30,12 +30,12 @@ class QuizAdapter(
 
     inner class QuizHolder(view: View):RecyclerView.ViewHolder(view){
         val itemTextStatementEdit   =    view.findViewById<TextInputEditText>(R.id.item_leaf_statement_edit)
-        val itemTextAnswerFirst     =    view.findViewById<TextInputEditText>(R.id.item_list_quiz_select_answer_fist)
-        val itemTextAnswerSecond    =    view.findViewById<TextInputEditText>(R.id.item_list_quiz_select_answer_second)
-        val itemTextAnswerThird     =    view.findViewById<TextInputEditText>(R.id.item_list_quiz_select_answer_third)
-        val itemTextAnswerRight     =    view.findViewById<TextInputEditText>(R.id.item_list_quiz_select_answer_right)
+        val itemTextAnswerFirst     =    view.findViewById<TextInputEditText>(R.id.item_leaf_select_answer_fist)
+        val itemTextAnswerSecond    =    view.findViewById<TextInputEditText>(R.id.item_leaf_select_answer_second)
+        val itemTextAnswerThird     =    view.findViewById<TextInputEditText>(R.id.item_leaf_select_answer_third)
+        val itemTextAnswerRight     =    view.findViewById<TextInputEditText>(R.id.item_leaf_select_answer_right)
         val itemTextPageCount       =    view.findViewById<TextView>(R.id.item_leaf_page_count)
-        val itemIcButton            =    view.findViewById<ImageView>(R.id.item_list_quiz_amendment)
+        val itemIcButton            =    view.findViewById<ImageView>(R.id.item_leaf_amendment)
         init {
             itemIcButton.setOnClickListener {
                 showDialog(

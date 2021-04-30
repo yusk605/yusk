@@ -13,27 +13,27 @@
         <item name="side_menu_key_history">SIDE_MENU_TO_HISTORY</item>
     </string-array>
 
-    <!--@layout/fragment_workbook.xml  -->
-    <string name="workbook_leafs">出題数×</string>
-    <string name="workbook_accuracy_max">最大の正解率</string>
-
-
     <!--@layout/fragment_problem.xml -->
     <string name="item_problem_label">問題</string>
     <string name="item_problem">問題集</string>
 
     <!--recycle item  -->
-    <string name="item_category_workbook_label">問題集</string>
-    <string name="item_text_statement">問題集</string>
-    <string name="item_text_answer_first">選択案1</string>
-    <string name="item_text_answer_second">選択案2</string>
-    <string name="item_text_answer_third">選択案3</string>
-    <string name="item_text_answer_right">正解</string>
-    <string name="item_text_btn_update">修正</string>
-    <string name="item_text_select_answer">選択した解答</string>
-    <string name="item_text_page">ページ</string>
+        <!-- category -->
+        <string name="item_category_workbook_label">問題集</string>
+        <!-- workbook -->
+        <string name="item_workbook_leafs">出題数</string>
+        <string name="item_workbook_accuracy_max">最大正解率</string>
+        <!-- leaf  -->
+        <string name="item_leaf_statement">問題集</string>
+        <string name="item_leaf_answer_first">選択案1</string>
+        <string name="item_leaf_answer_second">選択案2</string>
+        <string name="item_leaf_answer_third">選択案3</string>
+        <string name="item_leaf_answer_right">正解</string>
+        <string name="item_leaf_btn_update">修正</string>
+        <string name="item_leaf_select_answer">選択した解答</string>
+        <string name="item_leaf_page">ページ</string>
 
-    <!--@layout/fragment.LaboratoryFragment-->
+
     <!-- TODO: Remove or change -->
     <string name="laboratory_category_btm">カテゴリーの追加</string>
     <string name="laboratory_workbook_btm">問題集の追加</string>
