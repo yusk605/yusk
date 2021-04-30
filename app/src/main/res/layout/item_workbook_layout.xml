@@ -36,7 +36,7 @@
 
         <com.google.android.material.chip.Chip
             style="@style/question_chip"
-            android:id="@+id/game_start_chip"
+            android:id="@+id/item_workbook_chip"
             android:text="android"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
