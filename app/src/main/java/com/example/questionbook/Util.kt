@@ -32,9 +32,9 @@ fun View.showSnackBar(msg:String){
 
 fun FragmentActivity.getMag(no:Int):String =
         when (no){
-            0 -> getString(R.string.menu_side_holder)
-            1 -> getString(R.string.menu_side_game)
-            else -> getString(R.string.menu_side_accuracy)
+            0 -> getString(R.string.snackbar_holder_msg)
+            1 -> getString(R.string.snackbar_game_msg)
+            else -> getString(R.string.snackbar_statistics_msg)
         }
 
 /**

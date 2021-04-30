@@ -50,10 +50,14 @@
     </fragment>
 
     <fragment
-        android:id="@+id/accuracyFragment"
-        android:name="com.example.questionbook.fragment.AccuracyFragment"
-        android:label="fragment_accuracy"
-        tools:layout="@layout/fragment_accuracy" />
+        android:id="@+id/statisticsDetailsFragment"
+        android:name="com.example.questionbook.fragment.StatisticsDetailsFragment"
+        android:label="fragment_statistics_details"
+        tools:layout="@layout/fragment_statistics_details" >
+        <argument android:name="workBookNo"
+            app:argType="integer"
+            android:defaultValue="0" />
+    </fragment>
 
     <fragment
         android:id="@+id/garbageCanFragment"
@@ -105,5 +109,8 @@
             android:name="categoryEntity"
             app:argType="com.example.questionbook.room.QuestionCategoryEntity"
             app:nullable="true" />
+        <action
+            android:id="@+id/action_statisticsFragment_to_statistics_details"
+            app:destination="@id/statisticsDetailsFragment" />
     </fragment>
 </navigation>

@@ -18,7 +18,7 @@ class PageQuizDialog private constructor(
 
     override fun create(): AlertDialog {
        return  super.dialog
-                .setTitle(activity.getString(R.string.dialog_text_title))
+                .setTitle(activity.getString(R.string.dialog_leaf_insert_title))
                 .setView(dialogView as LinearLayout)
                 .create()
     }

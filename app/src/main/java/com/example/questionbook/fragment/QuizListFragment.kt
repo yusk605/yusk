@@ -41,11 +41,13 @@ class QuizListFragment : Fragment() {
                         .create(PageQuizDialog::class.java) }
 
             quizDialog?.let { dg->
-                val alertDialog = dg.create().apply { show() }
+                val alertDialog = dg.create().apply {
+                        setTitle(requireActivity().getString(R.string.dialog_leaf_updata_title))
+                        show()
+                    }
+
                 val dialogView  = dg.getView()
-                val quizButton  = dialogView.findViewById<Button>(R.id.form_quiz_add_btn).apply {
-                    text = activity?.getString(R.string.dialog_update_button)
-                }
+                val quizButton  = dialogView.findViewById<Button>(R.id.form_quiz_add_btn).apply { text = activity?.getString(R.string.dialog_update_button) }
                 dialogView.setParameter(entity)
                 quizButton.setOnClickListener {
                     viewModel.quizUpdate(dialogView.getParameter(entity = entity).entity)

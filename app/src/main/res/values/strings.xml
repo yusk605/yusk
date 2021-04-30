@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">QuestionBook</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <!--@layout/fragment_category.xml -->
     <string name="category_work_books">問題集×</string>
@@ -11,19 +10,20 @@
         <item name="side_menu_key_game">SIDE_MENU_TO_GAME</item>
         <item name="side_menu_key_statistics">SIDE_MENU_TO_STATISTICS</item>
         <item name="side_menu_key_garbagecan">SIDE_MENU_TO_GARBAGE_CAN</item>
+        <item name="side_menu_key_history">SIDE_MENU_TO_HISTORY</item>
     </string-array>
 
     <!--@layout/fragment_workbook.xml  -->
-    <string name="workbook_problems">出題数×</string>
+    <string name="workbook_leafs">出題数×</string>
     <string name="workbook_accuracy_max">最大の正解率</string>
 
-    <!--@menu/menu_sidebar.xml -->
 
     <!--@layout/fragment_problem.xml -->
     <string name="item_problem_label">問題</string>
     <string name="item_problem">問題集</string>
 
     <!--@layout/quiz_item.xml -->
+    <!-- TODO: Remove or change -->
     <string name="item_text_statement">問題集</string>
     <string name="item_text_answer_first">選択案1</string>
     <string name="item_text_answer_second">選択案2</string>
@@ -34,11 +34,13 @@
     <string name="item_text_page">ページ</string>
 
     <!--@layout/fragment.LaboratoryFragment-->
+    <!-- TODO: Remove or change -->
     <string name="laboratory_category_btm">カテゴリーの追加</string>
     <string name="laboratory_workbook_btm">問題集の追加</string>
     <string name="laboratory_problem_btm">テキストの追加</string>
 
     <!--@layout/quiz_form-->
+    <!-- TODO: Remove or change -->
     <string name="problem_form_label_spinner_category">カテゴリー</string>
     <string name="problem_form_label_spinner_workbook">問題集</string>
     <string name="problem_form_label">テキスト作成</string>
@@ -48,14 +50,15 @@
     <string name="problem_form_answer_third">解答案3</string>
     <string name="problem_form_answer_right">正解</string>
 
-    <!--@menu/menu_sidebar-->
-    <string name="menu_side_holder">ホルダー</string>
-    <string name="menu_side_laboratory">ラボ</string>
-    <string name="menu_side_accuracy">統計</string>
-    <string name="menu_side_game">クイズゲーム</string>
-    <string name="menu_side_wastebasket">ゴミ箱</string>
+    <!--snackBar show-->
+    <string name="snackbar_holder_msg">ホルダー</string>
+    <string name="snackbar_laboratory_msg">ラボ</string>
+    <string name="snackbar_statistics_msg">統計</string>
+    <string name="snackbar_game_msg">クイズゲーム</string>
+    <string name="snackbar_garbagecan_msg">ゴミ箱</string>
 
     <!-- menu_side id -->
+    <!-- TODO: Remove or change -->
     <string name="menu_side_holder_id">holder_list_fragment</string>
     <string name="menu_side_laboratory_id">laboratory_list_fragment</string>
     <string name="menu_side_game_id">game_list_fragment</string>
@@ -63,7 +66,8 @@
     <!-- dialog  -->
     <string name="dialog_category_title">カテゴリーの追加</string>
     <string name="dialog_workbook_title">タイトル</string>
-    <string name="dialog_text_title">テキストの追加</string>
+    <string name="dialog_leaf_insert_title">リーフの追加</string>
+    <string name="dialog_leaf_updata_title">リーフの変更</string>
     <string name="dialog_negative_button">キャンセル</string>
     <string name="dialog_positive_button">次へ</string>
     <string name="dialog_insert_button">追加</string>
@@ -75,4 +79,7 @@
 
     <!-- result_fragment.xml -->
     <string name="result_details">詳細</string>
+
+    <!--statistics_fragment -->
+    <string name="statistics_text">問題集全体の解答率割合</string>
 </resources>

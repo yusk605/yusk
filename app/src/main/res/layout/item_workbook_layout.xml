@@ -20,7 +20,7 @@
         <TextView
             android:id="@+id/item_workbook_text"
             style="@style/question_default_text"
-            android:text="@string/workbook_problems"
+            android:text="@string/workbook_leafs"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@+id/workbook_problem_ic"
             app:layout_constraintTop_toBottomOf="@+id/item_workbook_title" />
