@@ -10,7 +10,7 @@
         android:layout_width="match_parent">
 
         <TextView
-            android:id="@+id/fragment_result_title_text"
+            android:id="@+id/result_title_label"
             android:text="テキスト"
             android:textSize="36sp"
             android:layout_width="wrap_content"
@@ -30,9 +30,9 @@
             android:max="100"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/fragment_result_title_text" />
+            app:layout_constraintTop_toBottomOf="@id/result_title_label" />
         <TextView
-            android:id="@+id/result_progress_accuracy"
+            android:id="@+id/result_progress_accuracy_rate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="80%"
@@ -43,7 +43,7 @@
             app:layout_constraintTop_toTopOf="@+id/result_progress_bar" />
 
         <TextView
-            android:id="@+id/result_result_text"
+            android:id="@+id/result_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="10問中8問正解"
@@ -54,14 +54,14 @@
             app:layout_constraintTop_toBottomOf="@+id/result_progress_bar"/>
 
         <Button
-            android:id="@+id/concrete_result_button"
+            android:id="@+id/result_details_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/result_details"
+            android:text="@string/details_label"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/result_result_text" />
+            app:layout_constraintTop_toBottomOf="@+id/result_text" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>

@@ -31,7 +31,7 @@ class ResultFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         resultItem?.let { it.set() }
 
-        concrete_result_button.setOnClickListener {
+        result_details_button.setOnClickListener {
             Navigation.findNavController(it).navigate(
                     R.id.action_resultFragment_to_concreteResultFragment,
                     Bundle().apply { putParcelable(SAFE_ARGS_KEY,resultItem) }
@@ -40,10 +40,10 @@ class ResultFragment : Fragment() {
     }
 
     private fun QuizResult.set(){
-        fragment_result_title_text.text = resultTitle
-        result_result_text.text         = resultText
+        result_title_label.text = resultTitle
+        result_text.text         = resultText
         result_progress_bar.progress    = resultProgress
-        result_progress_accuracy.text   = "${resultAccuracy.toInt()}%"
+        result_progress_accuracy_rate.text   = "${resultAccuracy.toInt()}%"
     }
 
     companion object{

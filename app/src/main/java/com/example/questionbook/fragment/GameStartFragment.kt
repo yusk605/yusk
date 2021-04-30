@@ -98,16 +98,16 @@ class GameStartFragment : Fragment() {
                 }
 
                 //選択されたラジオボタンの値を取得する。
-                game_radio_group.setOnCheckedChangeListener {
+                game_start__radio_group.setOnCheckedChangeListener {
                     group, checkedId ->
                     radioButton = group.findViewById<RadioButton>(checkedId)
                     selectAnswer = radioButton?.text.toString()
                 }
 
                 //次のボタンを押したときの処理
-                game_answer_btn.setOnClickListener { view ->
+                game_start_next_btn.setOnClickListener { view ->
                     var select = selectAnswer
-                    game_radio_group.clearCheck()  //ラジオボタンにチェックを外すメソッド
+                    game_start__radio_group.clearCheck()  //ラジオボタンにチェックを外すメソッド
                     questionItemShelf?.let { shelf->
                         questionItem?.let { q->
                             q.selectAnswer = select                 //履歴のエンティティに保存するため
@@ -222,11 +222,11 @@ class GameStartFragment : Fragment() {
      * ■パラメーターをテキストの値に持たせる。
      */
     private fun QuestionItem.set(){
-        item_list_quiz_statement_edit.setText(entity.quizStatement)
-        game_radio_button_first.text    = selectAnswers[0]
-        game_radio_button_second.text   = selectAnswers[1]
-        game_radio_button_third.text    = selectAnswers[2]
-        game_radio_button_force.text    = selectAnswers[3]
+        game_start_quiz_statement.setText(entity.quizStatement)
+        game_start_radio_button_first.text    = selectAnswers[0]
+        game_start_radio_button_second.text   = selectAnswers[1]
+        game_start_radio_button_third.text    = selectAnswers[2]
+        game_start_radio_button_force.text    = selectAnswers[3]
     }
 
     /**

@@ -13,11 +13,11 @@
         <item name="side_menu_key_history">SIDE_MENU_TO_HISTORY</item>
     </string-array>
 
-    <!--@layout/fragment_problem.xml -->
-    <string name="item_problem_label">問題</string>
-    <string name="item_problem">問題集</string>
+    <!--  -->
+    <string name="quiz_label">問題</string>
+    <string name="details_label">詳細</string>
 
-    <!--recycle item  -->
+    <!-- recycle item  -->
         <!-- category -->
         <string name="item_category_workbook_label">問題集</string>
         <!-- workbook -->
@@ -38,17 +38,6 @@
     <string name="laboratory_category_btm">カテゴリーの追加</string>
     <string name="laboratory_workbook_btm">問題集の追加</string>
     <string name="laboratory_problem_btm">テキストの追加</string>
-
-    <!--@layout/quiz_form-->
-    <!-- TODO: Remove or change -->
-    <string name="problem_form_label_spinner_category">カテゴリー</string>
-    <string name="problem_form_label_spinner_workbook">問題集</string>
-    <string name="problem_form_label">テキスト作成</string>
-    <string name="problem_form_statement">問題文</string>
-    <string name="problem_form_answer_first">解答案1</string>
-    <string name="problem_form_answer_second">解答案2</string>
-    <string name="problem_form_answer_third">解答案3</string>
-    <string name="problem_form_answer_right">正解</string>
 
     <!--snackBar show-->
     <string name="snackbar_holder_msg">ホルダー</string>
@@ -72,8 +61,9 @@
     <string name="result_item_right_answer">問題の解答</string>
 
     <!-- result_fragment.xml -->
-    <string name="result_details">詳細</string>
+
 
     <!--statistics_fragment -->
     <string name="statistics_text">問題集全体の解答率割合</string>
+
 </resources>
