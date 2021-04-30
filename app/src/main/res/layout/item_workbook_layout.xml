@@ -20,7 +20,7 @@
         <TextView
             android:id="@+id/item_workbook_leaf_count_label"
             style="@style/question_default_text"
-            android:text="@string/workbook_leafs"
+            android:text="@string/item_workbook_leafs"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@+id/item_workbook_laef_ic"
             app:layout_constraintTop_toBottomOf="@+id/item_workbook_title" />
@@ -42,9 +42,9 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/item_workbook_accuracy_count"
+            android:id="@+id/item_workbook_accuracy_max"
             style="@style/question_default_text"
-            android:text="@string/workbook_accuracy_max"
+            android:text="@string/item_workbook_accuracy_max"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@+id/item_workbook_title"
             app:layout_constraintTop_toBottomOf="@+id/item_workbook_title" />
@@ -59,13 +59,13 @@
             app:layout_constraintTop_toBottomOf="@+id/item_workbook_title" />
 
         <TextView
-            android:id="@+id/item_workbook_accuracy"
+            android:id="@+id/item_workbook_accuracy_rate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textStyle="bold"
             android:text="0%"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/item_workbook_accuracy_count"
+            app:layout_constraintStart_toEndOf="@+id/item_workbook_accuracy_max"
             app:layout_constraintTop_toBottomOf="@+id/item_workbook_title" />
  </androidx.constraintlayout.widget.ConstraintLayout>
 </LinearLayout>

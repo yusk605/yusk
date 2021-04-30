@@ -46,7 +46,7 @@ class WorkBookAdapter(
     inner class WorkBookHolder(private val view: View):RecyclerView.ViewHolder(view){
        val  itemWorkBookTitle = view.findViewById<TextView>(R.id.item_workbook_title)
        val  itemWorkBookProblemCount = view.findViewById<TextView>(R.id.item_workbook_problem_count)
-       val  itemWorkBookAccuracy = view.findViewById<TextView>(R.id.item_workbook_accuracy)
+       val  itemWorkBookAccuracy = view.findViewById<TextView>(R.id.item_workbook_accuracy_rate)
        val  itemWorkBookChip    = view.findViewById<Chip>(R.id.item_workbook_chip)
         init {
             view.setOnClickListener {
@@ -83,7 +83,7 @@ class WorkBookAdapter(
        val average = getItem(position).accuracyList.map {a-> a.accuracyRate }.toList().average()
        holder.also {
            it.itemWorkBookTitle.text = getItem(position).workBookEntity.workBookTitle
-           it.itemWorkBookProblemCount.text = "${getItem(position).textList.size}"
+           it.itemWorkBookProblemCount.text = "×${getItem(position).textList.size}"
            it.itemWorkBookAccuracy.text = "$average%"
            it.itemWorkBookChip.text = categoryTitle
        }
