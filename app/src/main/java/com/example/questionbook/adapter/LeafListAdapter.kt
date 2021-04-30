@@ -29,13 +29,13 @@ class LeafListAdapter(
 
 
     inner class QuizHolder(view: View):RecyclerView.ViewHolder(view){
-        val itemTextStatementEdit   =    view.findViewById<TextInputEditText>(R.id.item_leaf_statement_edit)
-        val itemTextAnswerFirst     =    view.findViewById<TextInputEditText>(R.id.item_leaf_select_answer_fist)
-        val itemTextAnswerSecond    =    view.findViewById<TextInputEditText>(R.id.item_leaf_select_answer_second)
-        val itemTextAnswerThird     =    view.findViewById<TextInputEditText>(R.id.item_leaf_select_answer_third)
-        val itemTextAnswerRight     =    view.findViewById<TextInputEditText>(R.id.item_leaf_select_answer_right)
-        val itemTextPageCount       =    view.findViewById<TextView>(R.id.item_leaf_page_count)
-        val itemIcButton            =    view.findViewById<ImageView>(R.id.item_leaf_amendment)
+        val itemTextStatementEdit   = view.findViewById<TextInputEditText>(R.id.item_leaf_statement_edit)!!
+        val itemTextAnswerFirst     = view.findViewById<TextInputEditText>(R.id.item_leaf_select_answer_fist)!!
+        val itemTextAnswerSecond    = view.findViewById<TextInputEditText>(R.id.item_leaf_select_answer_second)!!
+        val itemTextAnswerThird     = view.findViewById<TextInputEditText>(R.id.item_leaf_select_answer_third)!!
+        val itemTextAnswerRight     = view.findViewById<TextInputEditText>(R.id.item_leaf_select_answer_right)!!
+        val itemTextPageCount       = view.findViewById<TextView>(R.id.item_leaf_page_count)!!
+        private val itemIcButton            = view.findViewById<ImageView>(R.id.item_leaf_amendment)!!
         init {
             itemIcButton.setOnClickListener {
                 showDialog(

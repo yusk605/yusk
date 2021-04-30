@@ -9,28 +9,28 @@ import com.example.questionbook.room.QuestionLeafEntity
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class QuizListViewModel(application: Application):AndroidViewModel(application) {
+class LeafListViewModel(application: Application):AndroidViewModel(application) {
 
-    private val quizDao = QuestionDatabase.getInstance(application,viewModelScope).getQuizDao()
+    private val leafDao = QuestionDatabase.getInstance(application,viewModelScope).getQuizDao()
 
-    private var _quizEntityList = quizDao.getList()
+    private var _leafEntityList = leafDao.getList()
 
-    val quizEntityList:LiveData<List<QuestionLeafEntity>>
-        get() = _quizEntityList
+    val leafEntityList:LiveData<List<QuestionLeafEntity>>
+        get() = _leafEntityList
 
 
-    fun quizInsert(entity: QuestionLeafEntity) =
+    fun leafInsert(entity: QuestionLeafEntity) =
             viewModelScope.launch(Dispatchers.IO) {
-                quizDao.insert( entity = entity )
+                leafDao.insert( entity = entity )
             }
 
-    fun  quizUpdate(entity: QuestionLeafEntity) =
+    fun  leafUpdate(entity: QuestionLeafEntity) =
             viewModelScope.launch(Dispatchers.IO) {
-                quizDao.update( entity = entity)
+                leafDao.update( entity = entity)
             }
-    fun quizDelete(entity: QuestionLeafEntity) =
+    fun leafDelete(entity: QuestionLeafEntity) =
             viewModelScope.launch(Dispatchers.IO) {
-                quizDao.delete(entity = entity)
+                leafDao.delete(entity = entity)
             }
 
 }

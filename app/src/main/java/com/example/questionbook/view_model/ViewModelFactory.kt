@@ -24,13 +24,13 @@ class WorkBookViewModelFactory(private val app: Application):ViewModelProvider.F
     }
 }
 
-class AccuracyViewModelFactory(private val app:Application):ViewModelProvider.Factory{
+class HistoryViewModelFactory(private val app:Application):ViewModelProvider.Factory{
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
 
-        if (modelClass.isAssignableFrom(AccuracyViewModel::class.java))
-            return AccuracyViewModel(app) as T
+        if (modelClass.isAssignableFrom(HistoryViewModel::class.java))
+            return HistoryViewModel(app) as T
 
-        throw IllegalArgumentException("Type mismatch AccuracyViewModel")
+        throw IllegalArgumentException("Type mismatch HistoryViewModel")
     }
 }
 
@@ -45,10 +45,10 @@ class QuizGameViewModelFactory(private val app: Application):ViewModelProvider.F
 }
 
 
-class QuizListViewModelFactory(private val app: Application):ViewModelProvider.Factory{
+class LeafListViewModelFactory(private val app: Application):ViewModelProvider.Factory{
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-        if (modelClass.isAssignableFrom(QuizListViewModel::class.java))
-            return QuizListViewModel(app) as T
+        if (modelClass.isAssignableFrom(LeafListViewModel::class.java))
+            return LeafListViewModel(app) as T
 
         throw IllegalArgumentException("Type mismatch QuizViewModel")
     }

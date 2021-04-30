@@ -19,7 +19,7 @@ import java.time.LocalDateTime
     QuestionHistoryEntity::class,
     QuestionLeafEntity::class
                      ],version = 1)
-abstract class QuestionDatabase:RoomDatabase() {
+abstract class QuestionDatabase:RoomDatabase(){
 
     abstract fun getCategoryDao():QuestionCategoryDao
     abstract fun getWorkBookDao():QuestionWorkBookDao
@@ -35,7 +35,7 @@ abstract class QuestionDatabase:RoomDatabase() {
             singleton ?: synchronized(this){
                 val instance = Room
                     .databaseBuilder(application,QuestionDatabase::class.java,"question_book")
-                    .addCallback(QuestionDBInsertTestCallBack(scope))
+                    //.addCallback(QuestionDBInsertTestCallBack(scope))
                     .build()
                 singleton = instance
                 instance

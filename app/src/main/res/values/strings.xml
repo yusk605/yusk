@@ -16,6 +16,7 @@
     <!--  -->
     <string name="quiz_label">問題</string>
     <string name="details_label">詳細</string>
+    <string name="accuracy_rate">解答率</string>
 
     <!-- recycle item  -->
     <!-- category -->
@@ -44,6 +45,7 @@
     <string name="snackbar_laboratory_msg">ラボ</string>
     <string name="snackbar_statistics_msg">統計</string>
     <string name="snackbar_game_msg">クイズゲーム</string>
+    <string name="snackbar_history_msg">ヒストリー</string>
     <string name="snackbar_garbagecan_msg">ゴミ箱</string>
 
     <!-- dialog  -->

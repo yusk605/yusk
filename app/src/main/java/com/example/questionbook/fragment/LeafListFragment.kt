@@ -13,8 +13,8 @@ import com.example.questionbook.adapter.LeafListAdapter
 import com.example.questionbook.dialog.*
 import com.example.questionbook.room.QuestionLeafEntity
 import com.example.questionbook.room.WorkBookWithAll
-import com.example.questionbook.view_model.QuizListViewModel
-import com.example.questionbook.view_model.QuizListViewModelFactory
+import com.example.questionbook.view_model.LeafListViewModel
+import com.example.questionbook.view_model.LeafListViewModelFactory
 import com.google.android.material.textfield.TextInputEditText
 import kotlinx.android.synthetic.main.dialog_text_form_layout.*
 import kotlinx.android.synthetic.main.fragment_list_leaf.*
@@ -27,9 +27,9 @@ class LeafListFragment : Fragment() {
     private var workBookWithTextAndAccuracy:WorkBookWithAll? = null
 
     //view model
-    private val viewModel:QuizListViewModel by lazy {
-        QuizListViewModelFactory(activity?.application!!)
-                .create(QuizListViewModel::class.java)
+    private val viewModel:LeafListViewModel by lazy {
+        LeafListViewModelFactory(activity?.application!!)
+                .create(LeafListViewModel::class.java)
     }
 
     //アダプター
@@ -49,7 +49,7 @@ class LeafListFragment : Fragment() {
                 val quizButton  = dialogView.findViewById<Button>(R.id.form_quiz_add_btn).apply { text = activity?.getString(R.string.dialog_update_button) }
                 dialogView.setParameter(entity)
                 quizButton.setOnClickListener {
-                    viewModel.quizUpdate(dialogView.getParameter(entity = entity).entity)
+                    viewModel.leafUpdate(dialogView.getParameter(entity = entity).entity)
                     alertDialog.cancel()
                 }
             }
@@ -78,7 +78,7 @@ class LeafListFragment : Fragment() {
         initRecycleView()
 
         //ビューモデルからデータを取得し観測を行う。
-        viewModel.quizEntityList.observe(viewLifecycleOwner){
+        viewModel.leafEntityList.observe(viewLifecycleOwner){
             data->
             quizAdapter.submitList(
                 data.filter {
@@ -98,7 +98,7 @@ class LeafListFragment : Fragment() {
                 val quizView        = dg.getView()
                 val quizButton      = quizView.findViewById<Button>(R.id.form_quiz_add_btn).apply { text = activity?.getString(R.string.dialog_insert_button) }
                 quizButton.setOnClickListener {
-                    viewModel.quizInsert(quizView.getParameter().entity)
+                    viewModel.leafInsert(quizView.getParameter().entity)
                         alertDialog.cancel()
                     }
                 }
