@@ -34,7 +34,9 @@ fun FragmentActivity.getMag(no:Int):String =
         when (no){
             0 -> getString(R.string.snackbar_holder_msg)
             1 -> getString(R.string.snackbar_game_msg)
-            else -> getString(R.string.snackbar_statistics_msg)
+            2 -> getString(R.string.snackbar_statistics_msg)
+            3 -> getString(R.string.snackbar_history_msg)
+            else -> ""
         }
 
 /**
@@ -67,10 +69,13 @@ fun Int.actionWorkBook(view: View, bundle: Bundle){
                 R.id.action_workBookListFragment_to_gameStartFragment,
                 bundle
         )
-        //統計画面ではワークブック一覧画面を使用しないため、処理を行わせない
-        2 -> return
 
-        3 -> controller
+        2 -> return //統計画面ではワークブック一覧画面を使用しないため、処理を行わせない
+
+        3 -> controller.navigate(
+            R.id.action_workBookListFragment_to_historyListFragment,
+            bundle
+        )
     }
 }
 
