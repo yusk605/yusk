@@ -75,7 +75,7 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"
                 android:focusable="false"
-                android:hint="@string/item_text_select_answer"
+                android:hint="@string/item_leaf_select_answer"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/item_concrete_result_list_statement_textInputLayout">
@@ -105,7 +105,7 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/item_concrete_result_list_right_answer"
                     android:focusable="false"
-                    android:hint="@string/item_text_answer_right"
+                    android:hint="@string/item_leaf_answer_right"
                     android:textStyle="bold"
                     android:textColor="#E64A19"
                     android:layout_width="match_parent"
@@ -124,7 +124,7 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"
                 android:focusable="false"
-                android:hint="@string/item_text_answer_first"
+                android:hint="@string/item_leaf_answer_first"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/item_concrete_result_list_right_answer_textInputLayout">
@@ -148,7 +148,7 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"
                 android:focusable="false"
-                android:hint="@string/item_text_answer_second"
+                android:hint="@string/item_leaf_answer_second"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/item_concrete_result_list_first_textInputLayout">
@@ -171,7 +171,7 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"
                 android:focusable="false"
-                android:hint="@string/item_text_answer_third"
+                android:hint="@string/item_leaf_answer_third"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/item_concrete_result_list_second_textInputLayout">

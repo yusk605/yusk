@@ -25,7 +25,7 @@
             android:layout_width="match_parent"
             android:layout_height="200dp"
             android:gravity="start|top"
-            android:hint="@string/item_text_statement"
+            android:hint="@string/item_leaf_statement"
             android:maxLines="7" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -37,7 +37,7 @@
         android:layout_marginTop="8dp"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
-        android:hint="@string/item_text_answer_first"
+        android:hint="@string/item_leaf_answer_first"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/form_quiz_textInputLayout">
@@ -59,7 +59,7 @@
         android:layout_marginTop="8dp"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
-        android:hint="@string/item_text_answer_second"
+        android:hint="@string/item_leaf_answer_second"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/form_quiz_textInputLayout_first">
@@ -81,7 +81,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
         android:layout_marginTop="8dp"
-        android:hint="@string/item_text_answer_third"
+        android:hint="@string/item_leaf_answer_third"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/form_quiz_textInputLayout_second">
@@ -104,7 +104,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
         android:layout_marginTop="8dp"
-        android:hint="@string/item_text_answer_right"
+        android:hint="@string/item_leaf_answer_right"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/form_quiz_textInputLayout_third">
@@ -122,7 +122,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="@string/item_text_btn_update"
+            android:text="@string/item_leaf_btn_update"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

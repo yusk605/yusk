@@ -28,7 +28,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/list_text_textInputLayout_fourth">
                 <TableRow>
                     <TextView
-                        android:id="@+id/item_text_page_count"
+                        android:id="@+id/item_leaf_page_count"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="0"
@@ -37,12 +37,12 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/list_text_textInputLayout_fourth" />
                     <TextView
-                        android:id="@+id/item_text_page_text"
+                        android:id="@+id/item_leaf_page_label"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/item_text_page"
+                        android:text="@string/item_leaf_page"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toStartOf="@+id/item_text_page_count"
+                        app:layout_constraintEnd_toStartOf="@+id/item_leaf_page_count"
                         app:layout_constraintTop_toBottomOf="@+id/list_text_textInputLayout_fourth" />
                 </TableRow>
             </TableLayout>
@@ -55,15 +55,15 @@
                 android:layout_marginEnd="16dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/item_list_quiz_amendment">
+                app:layout_constraintTop_toBottomOf="@+id/item_leaf_amendment">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/item_list_quiz_statement_edit"
+                    android:id="@+id/item_leaf_statement_edit"
                     android:focusable="false"
                     android:layout_width="match_parent"
                     android:layout_height="240dp"
                     android:gravity="start|top"
-                    android:hint="@string/item_text_statement"
+                    android:hint="@string/item_leaf_statement"
                     android:maxLines="10" />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -75,12 +75,12 @@
                 android:layout_marginTop="8dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"
-                android:hint="@string/item_text_answer_first"
+                android:hint="@string/item_leaf_answer_first"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/game_start_text_textInputLayout">
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/item_list_quiz_select_answer_fist"
+                android:id="@+id/item_leaf_select_answer_fist"
                 android:focusable="false"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -97,12 +97,12 @@
                 android:layout_marginTop="8dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"
-                android:hint="@string/item_text_answer_second"
+                android:hint="@string/item_leaf_answer_second"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/item_select_result_textInputLayout">
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/item_list_quiz_select_answer_second"
+                    android:id="@+id/item_leaf_select_answer_second"
                     android:layout_width="match_parent"
                     android:focusable="false"
                     android:layout_height="wrap_content"
@@ -119,13 +119,13 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"
                 android:layout_marginTop="8dp"
-                android:hint="@string/item_text_answer_third"
+                android:hint="@string/item_leaf_answer_third"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/item_list_textInputLayout_second">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/item_list_quiz_select_answer_third"
+                    android:id="@+id/item_leaf_select_answer_third"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:focusable="false"
@@ -142,12 +142,12 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"
                 android:layout_marginTop="8dp"
-                android:hint="@string/item_text_answer_right"
+                android:hint="@string/item_leaf_answer_right"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/item_list_textInputLayout_third">
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/item_list_quiz_select_answer_right"
+                    android:id="@+id/item_leaf_select_answer_right"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:focusable="false"
@@ -157,7 +157,7 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <ImageView
-                android:id="@+id/item_list_quiz_amendment"
+                android:id="@+id/item_leaf_amendment"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_marginEnd="8dp"
