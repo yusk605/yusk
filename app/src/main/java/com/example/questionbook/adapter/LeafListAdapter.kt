@@ -12,9 +12,9 @@ import com.example.questionbook.R
 import com.example.questionbook.room.QuestionQuizEntity
 import com.google.android.material.textfield.TextInputEditText
 
-class LeafAdapter(
+class LeafListAdapter(
         private  val showDialog:(QuestionQuizEntity)->Unit
-    ) :ListAdapter<QuestionQuizEntity,LeafAdapter.QuizHolder>(Diff) {
+    ) :ListAdapter<QuestionQuizEntity,LeafListAdapter.QuizHolder>(Diff) {
 
     companion object Diff: DiffUtil.ItemCallback<QuestionQuizEntity>(){
         override fun areItemsTheSame(

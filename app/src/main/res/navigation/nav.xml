@@ -3,32 +3,32 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav"
-    app:startDestination="@id/categoryFragment">
+    app:startDestination="@id/categoryListFragment">
     <fragment
-        android:id="@+id/workBookFragment"
-        android:name="com.example.questionbook.fragment.WorkBookFragment"
-        android:label="fragment_work_book"
-        tools:layout="@layout/fragment_work_book" >
+        android:id="@+id/workBookListFragment"
+        android:name="com.example.questionbook.fragment.WorkBookListFragment"
+        android:label="fragment_list_workbook"
+        tools:layout="@layout/fragment_list_workbook" >
         <argument
             android:name="categoryObj"
             app:argType="com.example.questionbook.room.QuestionCategoryEntity"
             app:nullable="true"
             android:defaultValue="@null" />
         <action
-            android:id="@+id/action_workBookFragment_to_problemListFragment"
+            android:id="@+id/action_workBookListFragment_to_problemListFragment"
             app:destination="@id/LeafListFragment" />
         <action
-            android:id="@+id/action_workBookFragment_to_gameStartFragment"
+            android:id="@+id/action_workBookListFragment_to_gameStartFragment"
             app:destination="@id/gameStartFragment" />
     </fragment>
     <fragment
-        android:id="@+id/categoryFragment"
-        android:name="com.example.questionbook.fragment.CategoryFragment"
-        android:label="fragment_category"
-        tools:layout="@layout/fragment_category" >
+        android:id="@+id/categoryListFragment"
+        android:name="com.example.questionbook.fragment.CategoryListFragment"
+        android:label="fragment_list_category"
+        tools:layout="@layout/fragment_list_category" >
         <action
-            android:id="@+id/action_categoryFragment_to_workBookFragment"
-            app:destination="@id/workBookFragment" />
+            android:id="@+id/action_categoryListFragment_to_workBookListFragment"
+            app:destination="@id/workBookListFragment" />
         <argument android:name="sendFlag"
             app:argType="integer"
             android:defaultValue="0" />
@@ -46,7 +46,7 @@
             app:destination="@id/resultFragment" />
         <action
             android:id="@+id/action_gameStartFragment_to_categoryFragment"
-            app:destination="@id/categoryFragment" />
+            app:destination="@id/categoryListFragment" />
     </fragment>
 
     <fragment
@@ -69,7 +69,7 @@
         android:id="@+id/LeafListFragment"
         android:name="com.example.questionbook.fragment.LeafListFragment"
         android:label="fragment_leaf_list"
-        tools:layout="@layout/fragment_leaf_list" >
+        tools:layout="@layout/fragment_list_leaf" >
         <argument android:name="workBookWithAll"
             app:argType="com.example.questionbook.room.WorkBookWithAll"
             app:nullable="true" />
@@ -87,14 +87,14 @@
             android:defaultValue="@null" />
         <action
             android:id="@+id/action_resultFragment_to_concreteResultFragment"
-            app:destination="@id/ConcreteResultListFragment" />
+            app:destination="@id/ResultDetailsListFragment" />
     </fragment>
 
     <fragment
-        android:id="@+id/ConcreteResultListFragment"
-        android:name="com.example.questionbook.fragment.ConcreteResultListFragment"
-        android:label="fragment_concrete_result"
-        tools:layout="@layout/fragment_concrete_result_list" >
+        android:id="@+id/ResultDetailsListFragment"
+        android:name="com.example.questionbook.fragment.ResultDetailsListFragment"
+        android:label="fragment_list_details_result"
+        tools:layout="@layout/fragment_list_result_details">
         <argument android:name="quizResult"
             app:argType="com.example.questionbook.QuizResult"
             app:nullable="true"

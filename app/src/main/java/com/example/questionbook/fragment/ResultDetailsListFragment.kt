@@ -8,18 +8,18 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.questionbook.QuizResult
 import com.example.questionbook.R
-import com.example.questionbook.adapter.ConcreteResultListAdapter
+import com.example.questionbook.adapter.ResultDetailsListAdapter
 import com.example.questionbook.view_model.ResultViewModel
 import com.example.questionbook.view_model.ResultViewModelFactory
-import kotlinx.android.synthetic.main.fragment_concrete_result_list.*
+import kotlinx.android.synthetic.main.fragment_list_result_details.*
 
 
-class ConcreteResultListFragment : Fragment() {
+class ResultDetailsListFragment : Fragment() {
 
     private var quizResult:QuizResult? = null
 
-    private val adapter:ConcreteResultListAdapter by lazy {
-        ConcreteResultListAdapter(quizResult?.resultTitle?:"")
+    private val adapter:ResultDetailsListAdapter by lazy {
+        ResultDetailsListAdapter(quizResult?.resultTitle?:"")
     }
 
     private val viewModel: ResultViewModel by lazy {
@@ -46,7 +46,7 @@ class ConcreteResultListFragment : Fragment() {
                             .toList()
             )
         }
-        return inflater.inflate(R.layout.fragment_concrete_result_list, container, false)
+        return inflater.inflate(R.layout.fragment_list_result_details, container, false)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {

@@ -60,8 +60,6 @@
     <string name="result_item_select_answer">選択した解答</string>
     <string name="result_item_right_answer">問題の解答</string>
 
-    <!-- result_fragment.xml -->
-
 
     <!--statistics_fragment -->
     <string name="statistics_text">問題集全体の解答率割合</string>

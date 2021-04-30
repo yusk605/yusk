@@ -16,9 +16,9 @@ import com.example.questionbook.room.QuestionCategoryEntity
  * ■項目一覧を取得する
  * @param onClick 第一引数 QuestionCategoryEntity 第二引数 View 遷移を行う際に必要な値
  */
-class CategoryAdapter(
+class CategoryListAdapter(
         private val onClick:(QuestionCategoryEntity,View)->Unit
-    ):ListAdapter< CategoryWithWorkBooks,CategoryAdapter.CategoryAdapterHolder >(Diff){
+    ):ListAdapter< CategoryWithWorkBooks,CategoryListAdapter.CategoryAdapterHolder >(Diff){
 
     companion object Diff: DiffUtil.ItemCallback<CategoryWithWorkBooks>(){
         override fun areItemsTheSame(

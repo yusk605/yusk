@@ -10,7 +10,7 @@ import androidx.core.view.isVisible
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.questionbook.R
-import com.example.questionbook.adapter.WorkBookAdapter
+import com.example.questionbook.adapter.WorkBookListAdapter
 import com.example.questionbook.dialog.WorkBookDialog
 import com.example.questionbook.dialog.WorkBookDialogFactory
 import com.example.questionbook.room.QuestionCategoryEntity
@@ -20,11 +20,11 @@ import com.example.questionbook.isHolder
 import com.example.questionbook.view_model.WorkBookViewModel
 import com.example.questionbook.view_model.WorkBookViewModelFactory
 import com.google.android.material.textfield.TextInputEditText
-import kotlinx.android.synthetic.main.fragment_work_book.*
+import kotlinx.android.synthetic.main.fragment_list_workbook.*
 import java.time.LocalDateTime
 
 
-class WorkBookFragment : Fragment() {
+class WorkBookListFragment : Fragment() {
 
     //カテゴリーリストからタップされた項目番号。
     private var category:QuestionCategoryEntity? = null
@@ -33,7 +33,7 @@ class WorkBookFragment : Fragment() {
     private var type:Int = 0
 
     //adapter
-    private var adapter:WorkBookAdapter? = null
+    private var adapter:WorkBookListAdapter? = null
 
     //view model
     private val  viewModel:WorkBookViewModel by lazy {
@@ -44,8 +44,8 @@ class WorkBookFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-            category = it.get(CategoryFragment.ARGS_KEY) as QuestionCategoryEntity
-            type = it.get(CategoryFragment.ARGS_SIDE_MENU_FLAG) as Int
+            category = it.get(CategoryListFragment.ARGS_KEY) as QuestionCategoryEntity
+            type = it.get(CategoryListFragment.ARGS_SIDE_MENU_FLAG) as Int
         }
     }
 
@@ -53,13 +53,13 @@ class WorkBookFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        adapter = WorkBookAdapter(category?.categoryTitle?:"",type){
+        adapter = WorkBookListAdapter(category?.categoryTitle?:"",type){
             view, obj->
             val bundle = Bundle().apply { putParcelable(ARGS_KEY,obj) }
             //サイドメニューから項目をタップした時に、その項目の値によって遷移先を変える。
             type.actionWorkBook(view,bundle)
         }
-        return inflater.inflate(R.layout.fragment_work_book, container, false)
+        return inflater.inflate(R.layout.fragment_list_workbook, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

@@ -9,7 +9,7 @@ import android.widget.Button
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.questionbook.QuestionItem
 import com.example.questionbook.R
-import com.example.questionbook.adapter.LeafAdapter
+import com.example.questionbook.adapter.LeafListAdapter
 import com.example.questionbook.dialog.*
 import com.example.questionbook.room.QuestionQuizEntity
 import com.example.questionbook.room.WorkBookWithAll
@@ -17,7 +17,7 @@ import com.example.questionbook.view_model.QuizListViewModel
 import com.example.questionbook.view_model.QuizListViewModelFactory
 import com.google.android.material.textfield.TextInputEditText
 import kotlinx.android.synthetic.main.dialog_text_form_layout.*
-import kotlinx.android.synthetic.main.fragment_leaf_list.*
+import kotlinx.android.synthetic.main.fragment_list_leaf.*
 import java.time.LocalDateTime
 
 
@@ -33,8 +33,8 @@ class LeafListFragment : Fragment() {
     }
 
     //アダプター
-    private val quizAdapter:LeafAdapter by lazy {
-        LeafAdapter{ entity->
+    private val quizAdapter:LeafListAdapter by lazy {
+        LeafListAdapter{ entity->
             val quizDialog = activity?.let { it1 ->
                 PageQuizDialogFactory(it1,R.layout.dialog_text_form_layout)
                         .create(PageQuizDialog::class.java) }
@@ -60,7 +60,7 @@ class LeafListFragment : Fragment() {
         super.onCreate(savedInstanceState)
         arguments?.let {
             workBookWithTextAndAccuracy =
-                it.get(WorkBookFragment.ARGS_KEY) as WorkBookWithAll
+                it.get(WorkBookListFragment.ARGS_KEY) as WorkBookWithAll
         }
     }
 
@@ -68,7 +68,7 @@ class LeafListFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_leaf_list, container, false)
+        return inflater.inflate(R.layout.fragment_list_leaf, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

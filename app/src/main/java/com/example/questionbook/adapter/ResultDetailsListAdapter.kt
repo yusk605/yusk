@@ -15,9 +15,9 @@ import com.example.questionbook.room.QuizWithHistory
 import com.google.android.material.chip.Chip
 import com.google.android.material.textfield.TextInputEditText
 
-class ConcreteResultListAdapter(
+class ResultDetailsListAdapter(
         private val title:String
-):ListAdapter<QuizWithHistory,ConcreteResultListAdapter.ConcreteResultListHolder>(Diff) {
+):ListAdapter<QuizWithHistory,ResultDetailsListAdapter.ConcreteResultListHolder>(Diff) {
 
     companion object Diff:DiffUtil.ItemCallback<QuizWithHistory>() {
         override fun areItemsTheSame(oldItem: QuizWithHistory, newItem: QuizWithHistory): Boolean =
@@ -51,7 +51,7 @@ class ConcreteResultListAdapter(
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int):ConcreteResultListAdapter.ConcreteResultListHolder =
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int):ResultDetailsListAdapter.ConcreteResultListHolder =
             ConcreteResultListHolder(
                     LayoutInflater.from(parent.context)
                             .inflate(R.layout.item_result_layout,parent,false)

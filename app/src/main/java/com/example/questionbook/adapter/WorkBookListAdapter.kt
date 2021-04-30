@@ -21,11 +21,11 @@ import com.google.android.material.snackbar.Snackbar
  * ・なお、onClickを実装した理由としては項目をタップした時に、
  * 　その項目に紐づいたリスト一覧を表示させるための必要な処理として。
  */
-class WorkBookAdapter(
+class WorkBookListAdapter(
     private val categoryTitle:String,
     private val type:Int,
     private val onClick:(View, WorkBookWithAll) -> Unit
-):ListAdapter<WorkBookWithAll,WorkBookAdapter.WorkBookHolder>(Diff) {
+):ListAdapter<WorkBookWithAll,WorkBookListAdapter.WorkBookHolder>(Diff) {
 
     private val onClickSafety:(View) -> Unit =
             { v-> Snackbar.make(v,"クイズがありません",Snackbar.LENGTH_SHORT).show() }

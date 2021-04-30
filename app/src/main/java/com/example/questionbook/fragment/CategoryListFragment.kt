@@ -10,26 +10,26 @@ import androidx.core.view.isVisible
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.questionbook.*
-import com.example.questionbook.adapter.CategoryAdapter
+import com.example.questionbook.adapter.CategoryListAdapter
 import com.example.questionbook.dialog.CategoryDialog
 import com.example.questionbook.dialog.CategoryDialogFactory
 import com.example.questionbook.room.QuestionCategoryEntity
 import com.example.questionbook.view_model.CategoryViewModel
 import com.example.questionbook.view_model.CategoryViewModelFactory
 import com.google.android.material.textfield.TextInputEditText
-import kotlinx.android.synthetic.main.fragment_category.*
+import kotlinx.android.synthetic.main.fragment_list_category.*
 import java.time.LocalDateTime
 
 
-class CategoryFragment : Fragment() {
+class CategoryListFragment : Fragment() {
 
     private var type = 0
 
     //アダプタークラスの取得を行う。
-    private val adapter: CategoryAdapter by lazy {
-        CategoryAdapter { entity,view ->
+    private val adapter: CategoryListAdapter by lazy {
+        CategoryListAdapter { entity, view ->
             val controller = Navigation.findNavController(view)
-            var rId = R.id.action_categoryFragment_to_workBookFragment
+            var rId = R.id.action_categoryListFragment_to_workBookListFragment
             val bundle     = Bundle().apply {
                     putParcelable(ARGS_KEY,entity)
                     putInt(ARGS_SIDE_MENU_FLAG,type)}
@@ -63,7 +63,7 @@ class CategoryFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        val view = inflater.inflate(R.layout.fragment_category,container,false)
+        val view = inflater.inflate(R.layout.fragment_list_category,container,false)
 
         activity?.let {
             view.showSnackBar(it.getMag(type))

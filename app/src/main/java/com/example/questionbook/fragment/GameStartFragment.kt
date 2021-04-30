@@ -51,7 +51,7 @@ class GameStartFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-            workBookWithAll = it.get(WorkBookFragment.ARGS_KEY) as WorkBookWithAll
+            workBookWithAll = it.get(WorkBookListFragment.ARGS_KEY) as WorkBookWithAll
         }
     }
 

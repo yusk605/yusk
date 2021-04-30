@@ -22,7 +22,6 @@ import com.github.mikephil.charting.data.PieData
 import com.github.mikephil.charting.data.PieDataSet
 import com.github.mikephil.charting.data.PieEntry
 import com.github.mikephil.charting.utils.ColorTemplate
-import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.fragment_statistics.*
 
 class StatisticsFragment : Fragment(){
@@ -48,8 +47,8 @@ class StatisticsFragment : Fragment(){
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-            category = it.get(CategoryFragment.ARGS_KEY) as QuestionCategoryEntity
-            type = it.get(CategoryFragment.ARGS_SIDE_MENU_FLAG) as Int
+            category = it.get(CategoryListFragment.ARGS_KEY) as QuestionCategoryEntity
+            type = it.get(CategoryListFragment.ARGS_SIDE_MENU_FLAG) as Int
         }
         categoryNo = category?.categoryNo?:0
     }

@@ -38,19 +38,19 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         when(item.itemId){
             R.id.holder_list_fragment -> {
                     controller.navigate(
-                        R.id.categoryFragment,
+                        R.id.categoryListFragment,
                         newBundleToPutInt(resources.getStringArray(R.array.side_menu_keys)[0], actionHolderValue)
                     )
                 }
             R.id.game_list_fragment -> {
                 controller.navigate(
-                        R.id.categoryFragment,
+                        R.id.categoryListFragment,
                         newBundleToPutInt(resources.getStringArray(R.array.side_menu_keys)[1], actionGameValue)
                     )
                 }
             R.id.statistics_fragment ->{
                 controller.navigate(
-                        R.id.categoryFragment,
+                        R.id.categoryListFragment,
                         newBundleToPutInt(resources.getStringArray(R.array.side_menu_keys)[2], actionStatisticsValue)
                     )
                 }

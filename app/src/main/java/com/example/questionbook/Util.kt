@@ -55,9 +55,9 @@ fun newBundleToPutInt(key:String, value:Int)=
 fun Int.actionWorkBook(view: View, bundle: Bundle){
     when(this){
         0 -> Navigation.findNavController(view)
-                .navigate(R.id.action_workBookFragment_to_problemListFragment,bundle)
+                .navigate(R.id.action_workBookListFragment_to_problemListFragment,bundle)
         1 -> Navigation.findNavController(view)
-                .navigate(R.id.action_workBookFragment_to_gameStartFragment,bundle)
+                .navigate(R.id.action_workBookListFragment_to_gameStartFragment,bundle)
         2 -> return
     }
 }
