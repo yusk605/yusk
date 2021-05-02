@@ -40,10 +40,10 @@ class ResultDetailsListFragment : Fragment() {
         viewModel.quizWithHistory.observe(viewLifecycleOwner){
             data->
             adapter.submitList(
-                    data.filter { f-> f.leafEntity.relationWorkBook == quizResult?.relationWorkBookNo }
-                            .filter { f-> f.historyEntity.relationAccuracy == quizResult?.relationAccuracyNo}
-                            .sortedBy { it.historyEntity.historyLeafNumber }
-                            .toList()
+                    data.filter { f-> f.historyEntity.relationAccuracy == quizResult?.relationAccuracyNo}
+                        .sortedBy { it.historyEntity.historyLeafNumber }
+                        .map { it.historyEntity }
+                        .toList()
             )
         }
         return inflater.inflate(R.layout.fragment_list_result_details, container, false)
