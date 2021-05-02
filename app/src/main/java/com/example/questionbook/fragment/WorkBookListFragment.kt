@@ -55,7 +55,9 @@ class WorkBookListFragment : Fragment() {
     ): View? {
         adapter = WorkBookListAdapter(category?.categoryTitle?:"",type){
             view, obj->
-            val bundle = Bundle().apply { putParcelable(ARGS_KEY,obj) }
+            val bundle = Bundle().apply {
+                putParcelable(ARGS_KEY,obj)
+            }
             //サイドメニューから項目をタップした時に、その項目の値によって遷移先を変える。
             type.actionWorkBook(view,bundle)
         }
@@ -125,6 +127,6 @@ class WorkBookListFragment : Fragment() {
     }
 
     companion object {
-        const val ARGS_KEY = "navigate_args_workBook_to_text"
+        const val ARGS_KEY = "navigate_args_workBook_to_leaf"
     }
 }
