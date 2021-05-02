@@ -12,18 +12,19 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.questionbook.R
 import com.example.questionbook.room.LeafWithHistory
+import com.example.questionbook.room.QuestionHistoryEntity
 import com.google.android.material.chip.Chip
 import com.google.android.material.textfield.TextInputEditText
 
 class ResultDetailsListAdapter(
         private val title:String
-):ListAdapter<LeafWithHistory,ResultDetailsListAdapter.ConcreteResultListHolder>(Diff) {
+):ListAdapter<QuestionHistoryEntity,ResultDetailsListAdapter.ConcreteResultListHolder>(Diff) {
 
-    companion object Diff:DiffUtil.ItemCallback<LeafWithHistory>() {
-        override fun areItemsTheSame(oldItem: LeafWithHistory, newItem: LeafWithHistory): Boolean =
+    companion object Diff:DiffUtil.ItemCallback<QuestionHistoryEntity>() {
+        override fun areItemsTheSame(oldItem:QuestionHistoryEntity, newItem:QuestionHistoryEntity): Boolean =
                 oldItem == newItem
 
-        override fun areContentsTheSame(oldItem:LeafWithHistory, newItem:LeafWithHistory): Boolean =
+        override fun areContentsTheSame(oldItem:QuestionHistoryEntity, newItem:QuestionHistoryEntity): Boolean =
                 oldItem == newItem
     }
 
@@ -60,15 +61,15 @@ class ResultDetailsListAdapter(
     override fun onBindViewHolder(holder: ConcreteResultListHolder, position: Int) {
         val item = getItem(position)
         holder.also {
-            it.itemConcreteResultListCount.text = "${item.historyEntity.historyLeafNumber}"
-            it.itemConcreteResultListStatementEdit.setText(item.historyEntity.historyLeafStatement)
-            it.itemConcreteResultListSelectAnswer.setText(item.historyEntity.historyLeafSelectAnswer)
-            it.itemConcreteResultListRightAnswer.setText(item.historyEntity.historyLeafRate)
+            it.itemConcreteResultListCount.text = "${item.historyLeafNumber}"
+            it.itemConcreteResultListStatementEdit.setText(item.historyLeafStatement)
+            it.itemConcreteResultListSelectAnswer.setText(item.historyLeafSelectAnswer)
+            it.itemConcreteResultListRightAnswer.setText(item.historyLeafRate)
             it.itemConcreteResultListChip.text= title
-            it.itemConcreteResultListCheck.toImageConvert(item.historyEntity.historyCheck)
-            it.itemConcreteResultListFirst.setText(item.historyEntity.historyLeafFirst)
-            it.itemConcreteResultListSecond.setText(item.historyEntity.historyLeafSecond)
-            it.itemConcreteResultListThird.setText(item.historyEntity.historyLeafThird)
+            it.itemConcreteResultListCheck.toImageConvert(item.historyCheck)
+            it.itemConcreteResultListFirst.setText(item.historyLeafFirst)
+            it.itemConcreteResultListSecond.setText(item.historyLeafSecond)
+            it.itemConcreteResultListThird.setText(item.historyLeafThird)
         }
     }
 
