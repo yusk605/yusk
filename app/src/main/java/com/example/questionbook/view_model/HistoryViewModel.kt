@@ -18,9 +18,14 @@ class HistoryViewModel(private val app:Application):AndroidViewModel(app) {
             accuracyDao = getAccuracyDao()
         }
     }
+
     private var _accuracyList = accuracyDao.getList()
+    private var _historyList  = historyDao.getList()
     private var _dataWithAccuracy = historyDao.getWithAccuracy()
     private var _dataWithLeaf = historyDao.getWithLeaf()
+
+    val historyList
+        get() = _historyList
 
     val accuracyList
         get() = _accuracyList
