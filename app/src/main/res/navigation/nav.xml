@@ -126,5 +126,22 @@
             app:argType="com.example.questionbook.room.WorkBookWithAll"
             app:nullable="true"
             android:defaultValue="@null" />
+        <action
+            android:id="@+id/action_historyListFragment_to_detailsHistoryListFragment"
+            app:destination="@id/detailsHistoryListFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/detailsHistoryListFragment"
+        android:name="com.example.questionbook.fragment.DetailsHistoryListFragment"
+        android:label="fragment_details_history_list"
+        tools:layout="@layout/fragment_details_history_list" >
+        <argument
+            android:name="accuracyNo"
+            app:argType="integer"
+            android:defaultValue="0" />
+        <argument
+            android:name="workBookTitle"
+            app:argType="string"
+            android:defaultValue='""' />
     </fragment>
 </navigation>
