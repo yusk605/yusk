@@ -5,10 +5,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.example.questionbook.R
 import com.example.questionbook.adapter.HistoryListAdapter
 import com.example.questionbook.room.WorkBookWithAll
@@ -22,8 +21,13 @@ class HistoryListFragment : Fragment() {
     private var workBookWithAll:WorkBookWithAll? = null
 
     private val adapter:HistoryListAdapter by lazy {
-        HistoryListAdapter{
-
+        HistoryListAdapter{ v,no->
+            val bundle = Bundle().apply {
+                putInt(SAFE_ARGS_ACCURACY_NO,no)
+                putString(SAFE_ARGS_WORKBOOK_TITLE,workBookWithAll?.workBookEntity?.workBookTitle)
+            }
+            Navigation.findNavController(v)
+                .navigate(R.id.action_historyListFragment_to_detailsHistoryListFragment,bundle)
         }
     }
 
@@ -66,5 +70,7 @@ class HistoryListFragment : Fragment() {
 
 
     companion object {
+        const val SAFE_ARGS_ACCURACY_NO     = "safe_args_accuracy_no_received_details_history"
+        const val SAFE_ARGS_WORKBOOK_TITLE  = "safe_args_workbook_title_received_details_history"
     }
 }
