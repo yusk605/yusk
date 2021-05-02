@@ -193,7 +193,7 @@ class GameStartFragment : Fragment() {
                         relationLeaf = entity.leafNo,
                         relationAccuracy = accuracyNo
                 )
-        )
+            )
     }
 
     /**

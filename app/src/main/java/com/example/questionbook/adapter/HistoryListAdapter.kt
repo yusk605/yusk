@@ -15,7 +15,7 @@ import com.example.questionbook.room.QuestionAccuracyEntity
 import kotlinx.android.synthetic.main.layout_history_item.view.*
 import java.time.format.DateTimeFormatter
 
-
+//履歴を詳細をタップした時に
 class HistoryListAdapter(
     private val onClick:(Int)->Unit
 ): ListAdapter<QuestionAccuracyEntity,HistoryListAdapter.HistoryListAdapterHolder>(Diff) {
