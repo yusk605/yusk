@@ -33,6 +33,12 @@ class ResultViewModel(application: Application):AndroidViewModel(application) {
     private var _quizWithHistory:LiveData<List<LeafWithHistory>>
         = historyDao.getWithLeaf()
 
+    private var _historyList:LiveData<List<QuestionHistoryEntity>>
+        = historyDao.getList()
+
+    val historyList:LiveData<List<QuestionHistoryEntity>>
+        get() = _historyList
+
     val quizData
         get() = _quizData
 

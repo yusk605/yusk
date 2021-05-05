@@ -3,6 +3,11 @@ package com.example.questionbook.view_model
 import android.app.Application
 import androidx.lifecycle.*
 import com.example.questionbook.room.*
+import io.reactivex.CompletableObserver
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.Disposable
+import io.reactivex.rxkotlin.subscribeBy
+import io.reactivex.schedulers.Schedulers
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
@@ -30,37 +35,26 @@ class QuizGameViewModel(private val app:Application): AndroidViewModel(app) {
 
     private var _quizEntityList = quizDao.getList()
 
+    private var _accuracyEntityList = accuracyDao.getList()
+
+    val accuracyEntityList
+        get() = _accuracyEntityList
+
     val quizEntityList:LiveData<List<QuestionLeafEntity>>
         get() = _quizEntityList
 
+    fun accuracyInsertRx(entity:QuestionAccuracyEntity) = accuracyDao.insertRx(entity)
+
+    fun getAccuracyLast()=accuracyDao.getLast()
 
     fun accuracyInsert(entity:QuestionAccuracyEntity) =
         viewModelScope.launch(Dispatchers.IO) {
             accuracyDao.insert(entity = entity)
         }
 
-    fun accuracyUpdate(entity: QuestionAccuracyEntity) =
-        viewModelScope.launch(Dispatchers.IO) {
-            accuracyDao.update(entity = entity)
-        }
-
-    fun accuracyDelete(entity:QuestionAccuracyEntity) =
-        viewModelScope.launch(Dispatchers.IO) {
-            accuracyDao.delete(entity = entity)
-        }
 
     fun historyInsert(entity: QuestionHistoryEntity) =
             viewModelScope.launch(Dispatchers.IO) {
                 historyDao.insert( entity = entity )
-            }
-
-    fun  historyUpdate(entity: QuestionHistoryEntity) =
-            viewModelScope.launch(Dispatchers.IO) {
-                historyDao.update( entity = entity)
-            }
-
-    fun historyDelete(entity: QuestionHistoryEntity) =
-            viewModelScope.launch(Dispatchers.IO) {
-                historyDao.delete(entity = entity)
             }
 }
