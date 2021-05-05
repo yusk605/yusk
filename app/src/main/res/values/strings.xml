@@ -50,6 +50,7 @@
 
     <!-- dialog  -->
     <string name="dialog_category_title">カテゴリーの追加</string>
+    <string name="dialog_category_update">カテゴリーの変更</string>
     <string name="dialog_workbook_title">タイトル</string>
     <string name="dialog_leaf_insert_title">リーフの追加</string>
     <string name="dialog_leaf_updata_title">リーフの変更</string>

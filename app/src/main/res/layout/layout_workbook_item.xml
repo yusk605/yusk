@@ -9,7 +9,6 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_height="match_parent"
         android:layout_width="match_parent">
-
         <TextView
             android:id="@+id/item_workbook_title"
             style="@style/question_workbook_item_title"
@@ -33,13 +32,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/item_workbook_title"
             app:srcCompat="@drawable/question_problem_ic" />
-
-        <com.google.android.material.chip.Chip
-            style="@style/question_chip"
-            android:id="@+id/item_workbook_chip"
-            android:text="android"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/item_workbook_accuracy_max"

@@ -3,6 +3,7 @@ package com.example.questionbook
 import android.os.Parcelable
 import com.example.questionbook.room.QuestionLeafEntity
 import kotlinx.android.parcel.Parcelize
+import kotlinx.android.parcel.RawValue
 
 /**
  * ■問題を表示させるためのオブジェクト

@@ -15,7 +15,7 @@
 
         <item
             android:id="@+id/game_list_fragment"
-            android:title="ゲーム"
+            android:title="クイズゲーム"
             android:icon="@drawable/question_game_ic"/>
 
         <item
