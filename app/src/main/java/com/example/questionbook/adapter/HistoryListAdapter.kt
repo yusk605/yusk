@@ -17,7 +17,7 @@ import java.time.format.DateTimeFormatter
 
 //履歴を詳細をタップした時に
 class HistoryListAdapter(
-    private val onClick:(View,Int)->Unit
+    private val onClick:(View,QuestionAccuracyEntity)->Unit
 ): ListAdapter<QuestionAccuracyEntity,HistoryListAdapter.HistoryListAdapterHolder>(Diff) {
 
     companion object Diff:DiffUtil.ItemCallback<QuestionAccuracyEntity>(){
@@ -39,7 +39,7 @@ class HistoryListAdapter(
         val itemHistoryAccuracyRateText = view.findViewById<TextView>(R.id.item_history_accuracy_rate_text)!!
         init {
             itemView.setOnClickListener {
-                onClick( itemView, getItem(layoutPosition).accuracyNo )
+                onClick( itemView, getItem(layoutPosition) )
             }
         }
     }

@@ -4,7 +4,9 @@ package com.example.questionbook.adapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.os.persistableBundleOf
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -37,9 +39,13 @@ class CategoryListAdapter(
         private val _categoryTitle: TextView = view.findViewById(R.id.item_category_title)
         private val _categoryWorkBookCount:TextView = view.findViewById(R.id.item_category_workbook_count)
 
+
         init {
                 itemView.setOnClickListener {
-                    onClick(getItem(layoutPosition).questionCategoryEntity, itemView)
+                    onClick(
+                            getItem(layoutPosition).questionCategoryEntity,
+                            itemView
+                    )
                 }
             }
 
