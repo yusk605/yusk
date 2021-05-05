@@ -94,7 +94,7 @@ abstract class QuestionDatabase:RoomDatabase(){
                                     QuestionWorkBookEntity(
                                         workBookNo = 0,
                                         workBookTitle = "WorkbookTitle${it}",
-                                        workBookDate = LocalDateTime.now(),
+                                        timeStamp = LocalDateTime.now(),
                                         workBookFlag = 0,
                                         relationCategory = 1
                                     )
