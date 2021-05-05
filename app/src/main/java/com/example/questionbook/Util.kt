@@ -2,12 +2,15 @@ package com.example.questionbook
 
 import android.content.Context
 import android.os.Bundle
+import android.view.MenuInflater
 import android.view.View
 import android.widget.ArrayAdapter
+import android.widget.PopupMenu
 import android.widget.Spinner
 import androidx.fragment.app.FragmentActivity
 import androidx.navigation.Navigation
 import com.google.android.material.snackbar.Snackbar
+import java.util.zip.Inflater
 
 /**
  * ■スピナーでのドロップリストに保存したい値を入れる
@@ -80,3 +83,16 @@ fun Int.actionWorkBook(view: View, bundle: Bundle){
 }
 
 fun Int.isHolder():Boolean = this==MainActivity.actionHolderValue
+
+/**
+ * ■ポップアップメニューを表示させるためのメソッド
+ * @param popup ポップアップメニューを表示せるためのオブジェクト
+ * @param resource 表示させたいリソースファイル
+ */
+fun createPopup(popup:PopupMenu, resource:Int):PopupMenu =
+    popup.apply {
+        menuInflater.inflate(resource,popup.menu)
+        show()
+    }
+
+
