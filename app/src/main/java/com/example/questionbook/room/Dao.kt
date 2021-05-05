@@ -2,6 +2,8 @@ package com.example.questionbook.room
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
+import io.reactivex.Completable
+import io.reactivex.Single
 
 // ■ 項目でのヒエラルキーの頂点となるテーブル（カテゴリー）
 @Dao
@@ -35,6 +37,12 @@ interface QuestionAccuracyDao{
     @Insert suspend fun insert(entity:QuestionAccuracyEntity)
     @Update suspend fun update(entity:QuestionAccuracyEntity)
     @Delete suspend fun delete(entity:QuestionAccuracyEntity)
+
+    @Insert
+    fun insertRx(entity: QuestionAccuracyEntity):Completable
+
+    @Query("select * from question_accuracy ORDER BY accuracyNo DESC LIMIT 1;")
+    fun getLast():Single<QuestionAccuracyEntity>
 
     @Query("delete from question_accuracy where relation_workbook in (" +
             " select relation_workbook from question_accuracy left join question_workbook on relation_workbook = workBookNo where workBookNo is null)")

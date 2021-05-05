@@ -9,49 +9,52 @@ import java.time.LocalDateTime
  * ■カテゴリーの分類分けをするエンティティ
  *  @param categoryNo　   識別番号
  *  @param categoryTitle  カテゴリーでのタイトル。
- *  @param categoryFlag　 0..ホルダー、ゲーム表示可 1..ゲーム一覧非表示  2..削除候補　
+ *  @param categoryFlag　 0..ホルダー、ゲーム表示可 1..ゲーム一覧非表示  2..削除候補
+ *  @param timeStamp      更新日時　
  */
 @Parcelize
 @Entity(tableName = "question_category")
 data class QuestionCategoryEntity(
-    @PrimaryKey(autoGenerate = true)val categoryNo:Int,
-    @ColumnInfo(name = "category_title")var categoryTitle:String,
-    @ColumnInfo(name="category_flag")val categoryFlag:Int,
-    @ColumnInfo(name="time_stamp")val timeStamp:LocalDateTime
+        @PrimaryKey(autoGenerate = true)val categoryNo:Int,
+        @ColumnInfo(name = "category_title")var categoryTitle:String,
+        @ColumnInfo(name="category_flag")var categoryFlag:Int,
+        @ColumnInfo(name="time_stamp")var timeStamp:LocalDateTime
 ):Parcelable
 
 /**
  * ■問題集の分類分けをするエンティティ
  * @param workBookNo 識別番号
  * @param workBookTitle 問題集のタイトル
- * @param workBookDate timestamp 更新日：更新時間
+ * @param timeStamp timestamp 更新日：更新時間
  * @param workBookFlag 0..ホルダー、ゲーム表示可 1..ゲーム一覧非表示 2..削除候補
  * @param relationCategory question_category categoryNo 紐づけとなるナンバー
  */
 @Parcelize
 @Entity(tableName = "question_workbook")
 data class QuestionWorkBookEntity(
-    @PrimaryKey(autoGenerate = true)val workBookNo:Int,
-    @ColumnInfo(name = "workbook_title")val workBookTitle:String,
-    @ColumnInfo(name = "workbook_flag")val workBookFlag:Int,
-    @ColumnInfo(name = "time_stamp")val workBookDate:LocalDateTime,
-    @ColumnInfo(name = "relation_category")val relationCategory:Int
+        @PrimaryKey(autoGenerate = true)val workBookNo:Int,
+        @ColumnInfo(name = "workbook_title")var workBookTitle:String,
+        @ColumnInfo(name = "workbook_flag")var workBookFlag:Int,
+        @ColumnInfo(name = "time_stamp")var timeStamp:LocalDateTime,
+        @ColumnInfo(name = "relation_category")val relationCategory:Int
 ):Parcelable
 
 /**
  * ■回答率を保持するエンティティ
  * @param accuracyNo        識別番号
  * @param accuracyRate      正解率
- * @param timeStamp      日付
+ * @param accuracyFlag      0..デフォルト　2..削除予定
+ * @param timeStamp         日付
  * @param relationWorkBook  question_workbook workBookNo 紐づけとなるナンバー
  */
 @Parcelize
 @Entity(tableName = "question_accuracy")
 data class QuestionAccuracyEntity(
         @PrimaryKey(autoGenerate = true)val accuracyNo:Int,
-        @ColumnInfo(name = "accuracy_rate")val accuracyRate:Float,
-        @ColumnInfo(name = "time_stamp")val timeStamp:LocalDateTime,
-        @ColumnInfo(name = "relation_workbook")val relationWorkBook: Int
+        @ColumnInfo(name = "accuracy_rate")var accuracyRate:Float,
+        @ColumnInfo(name = "accuracy_flag")var accuracyFlag:Int,
+        @ColumnInfo(name = "time_stamp")var timeStamp:LocalDateTime,
+        @ColumnInfo(name = "relation_workbook")var relationWorkBook: Int
 ):Parcelable
 
 /**
@@ -71,13 +74,13 @@ data class QuestionAccuracyEntity(
 @Entity(tableName = "question_leaf")
 data class QuestionLeafEntity(
         @PrimaryKey(autoGenerate = true)val leafNo:Int,
-        @ColumnInfo(name = "quiz_statement")var leafStatement:String,
-        @ColumnInfo(name = "quiz_firs")var leafFirs:String,
-        @ColumnInfo(name = "quiz_second")var leafSecond:String,
-        @ColumnInfo(name = "quiz_third")var leafThird:String,
-        @ColumnInfo(name = "quiz_right")var leafRight:String,
-        @ColumnInfo(name = "quiz_answer_check")var leafAnswerCheck:Int,
-        @ColumnInfo(name = "quiz_answer_commentary")var leafCommentary:String,
+        @ColumnInfo(name = "leaf_statement")var leafStatement:String,
+        @ColumnInfo(name = "leaf_firs")var leafFirs:String,
+        @ColumnInfo(name = "leaf_second")var leafSecond:String,
+        @ColumnInfo(name = "leaf_third")var leafThird:String,
+        @ColumnInfo(name = "leaf_right")var leafRight:String,
+        @ColumnInfo(name = "leaf_answer_check")var leafAnswerCheck:Int,
+        @ColumnInfo(name = "leaf_answer_commentary")var leafCommentary:String,
         @ColumnInfo(name = "time_stamp")var timeStamp: LocalDateTime,
         @ColumnInfo(name = "relation_workbook")var relationWorkBook:Int
 ):Parcelable
@@ -85,10 +88,19 @@ data class QuestionLeafEntity(
 
 /**
  * ■履歴を保存するためのエンティティ
- * @param historyNo        識別番号
- * @param historyCheck      正解
- * @param timeStamp      日付
- * @param relationLeaf     解答と紐づくナンバー
+ * @param historyNo     識別番号
+ * @param historyCheck  正解
+ * @param timeStamp     日付
+ * @param relationLeaf  解答と紐づくナンバー
+ * @param historyLeafNumber 出題番号履歴
+ * @param historyLeafSelectAnswer 選択解答履歴
+ * @param historyLeafRate 正解案履歴
+ * @param historyLeafFirst 選択案履歴1
+ * @param historyLeafSecond 選択案履歴2
+ * @param historyLeafThird 選択案履歴3
+ * @param historyLeafStatement 問題文履歴
+ * @param relationAccuracy 外部キー question_accuracy -> accuracyNo
+ * @param relationLeaf  外部キー question_leaf -> leafNo
  */
 @Parcelize
 @Entity(tableName = "question_history")
