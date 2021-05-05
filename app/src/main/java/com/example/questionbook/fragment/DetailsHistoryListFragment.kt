@@ -60,11 +60,12 @@ class DetailsHistoryListFragment : Fragment() {
     }
 
 
-    private fun recycleViewInit() =
-        history_details_recyclerview.let { rv->
-        rv.adapter = adapter
-        rv.layoutManager = LinearLayoutManager(requireActivity())
-            .apply { orientation = LinearLayoutManager.VERTICAL }
+    private fun recycleViewInit() {
+        history_details_recyclerview.also { rv ->
+            rv.adapter = adapter
+            rv.layoutManager = LinearLayoutManager(requireActivity())
+                    .apply { orientation = LinearLayoutManager.VERTICAL }
+        }
     }
 
 

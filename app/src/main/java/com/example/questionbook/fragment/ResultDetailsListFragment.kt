@@ -37,12 +37,11 @@ class ResultDetailsListFragment : Fragment() {
                                container: ViewGroup?,
                                savedInstanceState: Bundle? ): View? {
 
-        viewModel.quizWithHistory.observe(viewLifecycleOwner){
+        viewModel.historyList.observe(viewLifecycleOwner){
             data->
             adapter.submitList(
-                    data.filter { f-> f.historyEntity.relationAccuracy == quizResult?.relationAccuracyNo}
-                        .sortedBy { it.historyEntity.historyLeafNumber }
-                        .map { it.historyEntity }
+                    data.filter { f-> f.relationAccuracy == quizResult?.relationAccuracyNo}
+                        .sortedBy { it.historyLeafNumber }
                         .toList()
             )
         }

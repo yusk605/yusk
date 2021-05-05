@@ -39,7 +39,6 @@ class GameStartFragment : Fragment() {
 
     private var flag:Boolean = false
 
-
     private val viewModel:QuizGameViewModel by lazy {
         QuizGameViewModelFactory(app = activity?.application!!)
                 .create(QuizGameViewModel::class.java)
@@ -63,7 +62,7 @@ class GameStartFragment : Fragment() {
 
         workBookWithAll?.let {
             workBookNo = it.workBookEntity.workBookNo
-            accuracyNo = it.accuracyList.filter { f->f.relationWorkBook == it.workBookEntity.workBookNo }.size +1
+            accuracyNo = if (it.accuracyList.isNotEmpty())it.accuracyList.last().accuracyNo+1 else 1
         }
 
         binding = FragmentGameStartBinding.inflate(inflater,container,false)
@@ -75,7 +74,7 @@ class GameStartFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
             super.onViewCreated(view, savedInstanceState)
 
-            sendBlock(view)
+            broker(view)
 
             var selectAnswer = ""
 
@@ -105,7 +104,8 @@ class GameStartFragment : Fragment() {
                 }
 
                 //次のボタンを押したときの処理
-                game_start_next_btn.setOnClickListener { view ->
+                game_start_next_btn.setOnClickListener {
+                    view ->
                     var select = selectAnswer
                     game_start__radio_group.clearCheck()  //ラジオボタンにチェックを外すメソッド
                     questionItemShelf?.let { shelf->
@@ -129,6 +129,7 @@ class GameStartFragment : Fragment() {
      */
     override fun onDestroyView() {
         super.onDestroyView()
+        //下記のフラグは private fun broker(view: View) メソッド内で使用されています。
         flag = true
         questionItemList    = mutableListOf()
         questionItem        = null
@@ -161,17 +162,19 @@ class GameStartFragment : Fragment() {
                             accuracyNo       = 0,
                             accuracyRate     = questionResult?.resultAccuracy?:0.toFloat(),
                             timeStamp        = LocalDateTime.now(),
-                            relationWorkBook = workBookNo
-                    ))
+                            relationWorkBook = workBookNo,
+                            accuracyFlag = 0))
 
-            //履歴を残すためのロジック
             questionItemList.forEach { it.historyInsert() }
 
-            val bundle = Bundle().apply { putParcelable(ARGS_KEY,questionResult) }
+            val bundle = Bundle().apply {
+                putParcelable(ARGS_KEY,questionResult)
+            }
 
             Navigation.findNavController(view).navigate(R.id.action_gameStartFragment_to_resultFragment,bundle)
         }
     }
+
 
     /**
      *  ■ ゲームを行った履歴を保存するためのメソッド。
@@ -214,7 +217,7 @@ class GameStartFragment : Fragment() {
                 resultAccuracy      =  quizAccuracy,
                 resultProgress      =  quizAccuracy.toInt(),
                 relationWorkBookNo  =  workBookNo,
-                relationAccuracyNo          = accuracyNo
+                relationAccuracyNo  = accuracyNo
         )
     }
 
@@ -236,13 +239,12 @@ class GameStartFragment : Fragment() {
      * 意図した結果とならないため、クイズゲームからリザルト画面へ遷移を行った時は一度カテゴリー一覧へ
      * 戻る処理を行うメソッド。
      */
-    private fun sendBlock(view: View){
+    private fun broker(view: View){
         val navController = Navigation.findNavController(view)
         val bundle =  newBundleToPutInt(resources.getStringArray(R.array.side_menu_keys)[1], MainActivity.actionGameValue )
         if (flag){
-            navController.navigate(
-                    R.id.action_gameStartFragment_to_categoryFragment,
-                    bundle ).run { flag =false }
+            navController.navigate(R.id.action_gameStartFragment_to_categoryFragment,bundle)
+                .run{ flag =false }
         }
     }
 

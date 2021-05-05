@@ -6,7 +6,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.PopupMenu
 import androidx.core.view.isVisible
+import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.questionbook.*
@@ -21,23 +23,38 @@ import kotlinx.android.synthetic.main.fragment_list_category.*
 import java.time.LocalDateTime
 
 
-class CategoryListFragment : Fragment() {
+class CategoryListFragment : Fragment(){
 
     private var type = 0
 
     //アダプタークラスの取得を行う。
     private val adapter: CategoryListAdapter by lazy {
         CategoryListAdapter { entity, view ->
+
             val controller = Navigation.findNavController(view)
             var rId = R.id.action_categoryListFragment_to_workBookListFragment
-            val bundle     = Bundle().apply {
-                    putParcelable(ARGS_KEY,entity)
-                    putInt(ARGS_SIDE_MENU_FLAG,type)}
 
-            if(type == MainActivity.actionStatisticsValue)
-                rId = R.id.action_categoryFragment_to_statisticsFragment
+            val bundle = Bundle().apply {
+                    putParcelable(ARGS_KEY, entity)
+                    putInt(ARGS_SIDE_MENU_FLAG, type)
+                }
 
-            controller.navigate(rId,bundle)
+
+            when (type) {
+                //統計画面の場合
+                MainActivity.actionStatisticsValue -> {
+                    rId = R.id.action_categoryFragment_to_statisticsFragment
+                    controller.navigate(rId, bundle)
+                }
+                //タイプがホルダー以外の場合はポップアップメニューを表示する。
+                MainActivity.actionHolderValue -> {
+                    val popupMenu = PopupMenu(requireActivity(), view)
+                    showPopup(popupMenu,entity,controller,rId,bundle)
+                }
+                else -> {
+                    controller.navigate(rId,bundle)
+                }
+            }
         }
     }
 
@@ -66,9 +83,10 @@ class CategoryListFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_list_category,container,false)
 
         activity?.let {
-            view.showSnackBar(it.getMag(type))
+            view.showSnackBar(
+                    it.getMag(type)
+            )
         }
-
         return view
     }
 
@@ -77,21 +95,24 @@ class CategoryListFragment : Fragment() {
         recycleInit()
         viewModel.let { vm ->
             vm.data.observe(viewLifecycleOwner){ data ->
-                adapter.submitList(data)
+                adapter.submitList(
+                        data.filter { it.questionCategoryEntity.categoryFlag != 2 }
+                )
             }
         }
-        fab_category_add.also {
+        category_list_add_fab.also {
             it.isVisible = type.isHolder()
-            it.setOnClickListener { executeDialog() }
+            it.setOnClickListener {
+                insertDialog()
+            }
         }
-
     }
 
     /**
      * ■リサイクラービューの初期化を行う。
      */
     private fun recycleInit(){
-        category_recycle_view.also {
+        category_list_recycle_view.also {
             it.adapter = adapter
             it.layoutManager = LinearLayoutManager(activity)
         }
@@ -101,7 +122,7 @@ class CategoryListFragment : Fragment() {
      * ダイヤログを表示させ、表示させたテキストフィールド内の値を基に、
      * カテゴリーエンティティへデータの登録を行う。
      */
-    private fun executeDialog(){
+    private fun insertDialog(){
 
         val dialogCategory = activity?.let {
             CategoryDialogFactory(it,R.layout.dialog_category_layout)
@@ -120,6 +141,61 @@ class CategoryListFragment : Fragment() {
     }
 
 
+
+    private fun updateDialog(entity: QuestionCategoryEntity){
+        val dialogCategory = activity?.let {
+            CategoryDialogFactory(it,R.layout.dialog_category_layout)
+                    .create(CategoryDialog::class.java)
+        }
+
+        dialogCategory?.let{ dg->
+            val alertDialog = dg.create().also {
+                it.setTitle(getString(R.string.dialog_category_title))
+                it.show()
+            }
+            val (title,btn) = dg.getView().findViewById<TextInputEditText>(R.id.dialog_category_title_edit) to
+                    dg.getView().findViewById<Button>(R.id.dialog_category_insert_btn)
+
+            btn.text = getString(R.string.dialog_update_button)
+            title.setText(entity.categoryTitle)
+
+            btn.setOnClickListener {
+                viewModel.update(entity.apply {
+                    entity.categoryTitle = title.text.toString()
+                    timeStamp = LocalDateTime.now()
+                })
+                alertDialog.cancel()
+            }
+        }
+    }
+
+
+    private fun showPopup(
+            popupMenu:PopupMenu,
+            entity:QuestionCategoryEntity,
+            controller: NavController,
+            rId:Int,
+            bundle: Bundle
+    ){
+        createPopup(popupMenu,R.menu.menu_popup).setOnMenuItemClickListener {
+            return@setOnMenuItemClickListener when(it.itemId){
+                R.id.popup_menu_select_first ->{
+                    controller.navigate(rId,bundle)
+                    true
+                }
+                R.id.popup_menu_select_second  -> {
+                    updateDialog(entity)
+                    true
+                }
+                R.id.popup_menu_select_third -> {
+                    viewModel.update(entity.also { e->e.categoryFlag = 2 })
+                    true
+                }
+                else -> false
+            }
+        }
+    }
+
     /**
      * ■カテゴリーの項目を増やします。初期フラグは 0
      * @param title ダイヤログでの入力された値を引き数として渡してください
@@ -132,8 +208,6 @@ class CategoryListFragment : Fragment() {
                         categoryTitle = title,
                         timeStamp = LocalDateTime.now()))
         }
-
-
 
     companion object{
         const val ARGS_KEY  = "navigate_args_category_to_workBook"
