@@ -63,8 +63,12 @@
     <string name="result_item_select_answer">選択した解答</string>
     <string name="result_item_right_answer">問題の解答</string>
 
-
     <!--statistics_fragment -->
     <string name="statistics_text">問題集全体平均解答率割合</string>
+
+    <!-- GarbageCan   -->
+    <string name="garbage_can_category_button_text">カテゴリー削除候補一覧へ</string>
+    <string name="garbage_can_workbook_button_text">問題集削除候補一覧へ</string>
+    <string name="garbage_can_leaf_button_text">問題文削除候補一覧へ</string>
 
 </resources>
