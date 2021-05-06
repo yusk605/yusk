@@ -66,7 +66,11 @@
         android:id="@+id/garbageCanFragment"
         android:name="com.example.questionbook.fragment.GarbageCanFragment"
         android:label="fragment_garbage_can"
-        tools:layout="@layout/fragment_garbage_can" />
+        tools:layout="@layout/fragment_garbage_can" >
+        <action
+            android:id="@+id/action_garbageCanFragment_to_garbageCanListFragment"
+            app:destination="@id/garbageCanListFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/LeafListFragment"
@@ -144,4 +148,9 @@
             app:argType="string"
             android:defaultValue='""' />
     </fragment>
+    <fragment
+        android:id="@+id/garbageCanListFragment"
+        android:name="com.example.questionbook.GarbageCanListFragment"
+        android:label="fragment_garbage_can_list"
+        tools:layout="@layout/fragment_garbage_can_list" />
 </navigation>
