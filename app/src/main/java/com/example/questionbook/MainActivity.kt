@@ -60,6 +60,12 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                         newBundleToPutInt(resources.getStringArray(R.array.side_menu_keys)[3], actionHistory)
                     )
                 }
+            R.id.garbage_can_fragment -> {
+                controller.navigate(
+                        R.id.garbageCanFragment,
+                        newBundleToPutInt(resources.getStringArray(R.array.side_menu_keys)[4], actionGarbageCan)
+                    )
+                }
             }
         drawerLayout.close()
         return true

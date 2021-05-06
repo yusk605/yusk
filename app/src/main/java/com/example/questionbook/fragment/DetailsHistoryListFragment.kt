@@ -53,12 +53,10 @@ class DetailsHistoryListFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_details_history_list, container, false)
     }
 
-
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         recycleViewInit()
     }
-
 
     private fun recycleViewInit() {
         history_details_recyclerview.also { rv ->
@@ -68,7 +66,5 @@ class DetailsHistoryListFragment : Fragment() {
         }
     }
 
-
-    companion object {
-    }
+    companion object {}
 }
