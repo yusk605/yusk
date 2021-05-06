@@ -5,10 +5,15 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.Navigation
+import com.example.questionbook.GarbageCanActionButton
+import com.example.questionbook.MainActivity
 import com.example.questionbook.R
+import com.example.questionbook.newBundleToPutInt
 
 class GarbageCanFragment : Fragment() {
 
+    private var actionGarbageCan = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -21,11 +26,52 @@ class GarbageCanFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_garbage_can, container, false)
+
+        val view = inflater.inflate(R.layout.fragment_garbage_can_list, container, false)
+        view.safety()
+        return view
     }
 
-    companion object {
-
+    /**
+     * ■渡される値が異なる場合カテゴリー一覧へ遷移する。
+     * サイドメニューから任意の項目をタップされた場合は何もしない
+     */
+    private fun View.safety(){
+        if (actionGarbageCan == 0)
+            Navigation.findNavController(this).navigate(
+                R.id.categoryListFragment,
+                newBundleToPutInt(
+                    resources.getStringArray(R.array.side_menu_keys)[0],
+                    MainActivity.actionHolderValue
+                ))
     }
+
+    /**
+     * ■フラグメントのonClickメソッドに紐づいたハンドラーから呼ばれるメソッド
+     * @param view fragment_garbage_can_list の　onClick属性に使用されています。
+     */
+    fun actionButton(view: View){
+        val bundle  =   Bundle()
+        when(view.id){
+            R.id.garbage_can_category_button -> bundle.putInt(
+                GarbageCanActionButton.CATEGORY.name,
+                GarbageCanActionButton.CATEGORY.get
+            )
+            R.id.garbage_can_workbook_button -> bundle.putInt(
+                GarbageCanActionButton.WORKBOOK.name
+                ,GarbageCanActionButton.WORKBOOK.get
+            )
+            R.id.garbage_can_leaf_button    -> bundle.putInt(
+                GarbageCanActionButton.LEAF.name,
+                GarbageCanActionButton.LEAF.get
+            )
+        }
+        Navigation.findNavController(view)
+            .navigate(
+                R.id.action_garbageCanFragment_to_garbageCanListFragment,
+                bundle
+            )
+        }
+
+    companion object { }
 }
