@@ -10,9 +10,6 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import com.example.questionbook.GarbageCanActionButton
 import com.example.questionbook.R
-import com.example.questionbook.room.QuestionCategoryEntity
-import com.example.questionbook.room.QuestionLeafEntity
-import com.example.questionbook.room.QuestionWorkBookEntity
 import com.example.questionbook.view_model.GarbageCanViewModel
 import com.example.questionbook.view_model.GarbageCanViewModelFactory
 import kotlinx.android.synthetic.main.fragment_garbage_can_list.*
@@ -82,19 +79,31 @@ class GarbageCanListFragment : Fragment() {
             1 -> {
                 viewModel.categoryList.observe(viewLifecycleOwner){
                     data ->
-                    arrayAdapter = getArrayAdapter(data.map { it.categoryTitle }.toList())
+                    arrayAdapter = getArrayAdapter(
+                        data.filter { it.categoryFlag == 2 }
+                            .map { it.categoryTitle }
+                            .toList()
+                    )
                 }
             }
             2 -> {
                 viewModel.workBookList.observe(viewLifecycleOwner){
                     data ->
-                    arrayAdapter = getArrayAdapter(data.map { it.workBookTitle }.toList())
+                    arrayAdapter = getArrayAdapter(
+                        data.filter { it.workBookFlag == 2 }
+                            .map { it.workBookTitle }
+                            .toList()
+                    )
                 }
             }
             3 -> {
                 viewModel.leafList.observe(viewLifecycleOwner){
                     data ->
-                    arrayAdapter = getArrayAdapter(data.map { it.leafStatement }.toList())
+                    arrayAdapter = getArrayAdapter(
+                        data.filter { it.leafFlag == 2 }
+                            .map { it.leafStatement }
+                            .toList()
+                    )
                 }
             }
             else -> throw IllegalAccessException(" selectAdapter not value ")
