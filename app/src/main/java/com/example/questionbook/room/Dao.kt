@@ -9,6 +9,7 @@ import io.reactivex.Single
 @Dao
 interface QuestionCategoryDao{
     @Query("select * from question_category")fun getAll():LiveData<List<CategoryWithWorkBooks>>
+    @Query("select * from question_category")fun getList():LiveData<List<QuestionCategoryEntity>>
     @Query("select * from question_category limit 1")suspend fun get():List<QuestionCategoryEntity>
     @Insert suspend fun insert(entity:QuestionCategoryEntity)
     @Update suspend fun update(entity:QuestionCategoryEntity)
@@ -19,6 +20,7 @@ interface QuestionCategoryDao{
 @Dao
 interface QuestionWorkBookDao{
     @Query("select * from question_workbook")fun getAll():LiveData<List<WorkBookWithAll>>
+    @Query("select * from question_workbook")fun getList():LiveData<List<QuestionWorkBookEntity>>
     @Insert suspend fun insert(entity:QuestionWorkBookEntity)
     @Update suspend fun update(entity:QuestionWorkBookEntity)
     @Delete suspend fun delete(entity:QuestionWorkBookEntity)
