@@ -19,7 +19,7 @@ class ResultViewModel(application: Application):AndroidViewModel(application) {
     init {
         db.run {
             historyDao  = getHistoryDao()
-            quizDao     = getQuizDao()
+            quizDao     = getLeafDao()
             accuracyDao = getAccuracyDao()
         }
     }

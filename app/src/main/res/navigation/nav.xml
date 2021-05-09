@@ -150,7 +150,7 @@
     </fragment>
     <fragment
         android:id="@+id/garbageCanListFragment"
-        android:name="com.example.questionbook.GarbageCanListFragment"
+        android:name="com.example.questionbook.fragment.GarbageCanListFragment"
         android:label="fragment_garbage_can_list"
         tools:layout="@layout/fragment_garbage_can_list" />
 </navigation>

@@ -3,11 +3,6 @@ package com.example.questionbook.view_model
 import android.app.Application
 import androidx.lifecycle.*
 import com.example.questionbook.room.*
-import io.reactivex.CompletableObserver
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.disposables.Disposable
-import io.reactivex.rxkotlin.subscribeBy
-import io.reactivex.schedulers.Schedulers
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
@@ -28,7 +23,7 @@ class QuizGameViewModel(private val app:Application): AndroidViewModel(app) {
     init {
         db.run {
             accuracyDao = getAccuracyDao()
-            quizDao     = getQuizDao()
+            quizDao     = getLeafDao()
             historyDao  = getHistoryDao()
         }
     }

@@ -25,7 +25,7 @@ abstract class QuestionDatabase:RoomDatabase(){
     abstract fun getWorkBookDao():QuestionWorkBookDao
     abstract fun getAccuracyDao():QuestionAccuracyDao
     abstract fun getHistoryDao():QuestionHistoryDao
-    abstract fun getQuizDao():QuestionLeafDao
+    abstract fun getLeafDao():QuestionLeafDao
 
     companion object{
 
@@ -100,7 +100,7 @@ abstract class QuestionDatabase:RoomDatabase(){
                                     )
                                 )
                             }
-                            database.getQuizDao().insert(
+                            database.getLeafDao().insert(
                                 entity = QuestionLeafEntity(
                                     leafNo = 0,
                                     leafAnswerCheck = 0,

@@ -50,7 +50,7 @@ class LeafListViewModelFactory(private val app: Application):ViewModelProvider.F
         if (modelClass.isAssignableFrom(LeafListViewModel::class.java))
             return LeafListViewModel(app) as T
 
-        throw IllegalArgumentException("Type mismatch QuizViewModel")
+        throw IllegalArgumentException("Type mismatch LeafListViewModel")
     }
 }
 
@@ -59,7 +59,16 @@ class ResultViewModelFactory(private val app: Application):ViewModelProvider.Fac
         if (modelClass.isAssignableFrom(ResultViewModel::class.java))
             return ResultViewModel(app) as T
 
-        throw IllegalArgumentException("Type mismatch QuizViewModel")
+        throw IllegalArgumentException("Type mismatch ResultViewModel")
+    }
+}
+
+class GarbageCanViewModelFactory(private val app: Application):ViewModelProvider.Factory{
+    override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+        if (modelClass.isAssignableFrom(GarbageCanViewModel::class.java))
+            return CategoryViewModel(app) as T
+
+        throw IllegalArgumentException("Type mismatch GarbageCanViewModel")
     }
 }
 
