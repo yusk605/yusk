@@ -63,7 +63,7 @@
     </fragment>
 
     <fragment
-        android:id="@+id/garbageCanFragment"
+        android:id="@+id/garbageCanTitleFragment"
         android:name="com.example.questionbook.fragment.GarbageCanFragment"
         android:label="fragment_garbage_can"
         tools:layout="@layout/fragment_garbage_can" >

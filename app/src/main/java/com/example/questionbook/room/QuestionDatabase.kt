@@ -103,7 +103,7 @@ abstract class QuestionDatabase:RoomDatabase(){
                             database.getLeafDao().insert(
                                 entity = QuestionLeafEntity(
                                     leafNo = 0,
-                                    leafAnswerCheck = 0,
+                                    leafFlag = 0,
                                     leafCommentary = "",
                                     leafFirs = "問題1",
                                     leafSecond = "問題2",
