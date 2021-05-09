@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".fragment.GarbageCanFragment">
+    tools:context=".fragment.GarbageCanFragment"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent">
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_height="match_parent"
         android:layout_width="match_parent">
@@ -20,10 +22,9 @@
         <Button
             android:id="@+id/garbage_can_category_button"
             style="@style/side_margin"
-            android:onClick="actionButton"
-            android:text="@string/garbage_can_category_button_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:text="@string/garbage_can_category_button_text"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -32,7 +33,6 @@
         <Button
             android:id="@+id/garbage_can_workbook_button"
             style="@style/side_margin"
-            android:onClick="actionButton"
             android:text="@string/garbage_can_workbook_button_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -43,7 +43,6 @@
         <Button
             android:id="@+id/garbage_can_leaf_button"
             style="@style/side_margin"
-            android:onClick="actionButton"
             android:text="@string/garbage_can_leaf_button_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -52,4 +51,4 @@
             app:layout_constraintTop_toBottomOf="@+id/garbage_can_workbook_button" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-</layout>
+</FrameLayout>
