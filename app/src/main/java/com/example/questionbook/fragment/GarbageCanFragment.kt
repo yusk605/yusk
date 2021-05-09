@@ -18,7 +18,9 @@ class GarbageCanFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-            
+            actionGarbageCan = it.getInt(
+                resources.getStringArray(R.array.side_menu_keys)[4]
+            )
         }
     }
 
@@ -26,9 +28,15 @@ class GarbageCanFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.fragment_garbage_can_list, container, false)
+        return inflater.inflate(R.layout.fragment_garbage_can, container, false)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         view.safety()
-        return view
+
+        //TODO ボタンをクリックした時の処理を記述すること。　イベントハンドラーの場合はエラーが出るため。
+
     }
 
     /**
