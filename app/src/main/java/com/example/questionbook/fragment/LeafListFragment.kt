@@ -139,7 +139,7 @@ class LeafListFragment : Fragment() {
                                 leafRight       = dialogTextRight.text.toString(),
                                 leafStatement   = dialogStatement.text.toString(),
                                 leafCommentary  = "",
-                                leafAnswerCheck = 0,
+                                leafFlag = 0,
                                 timeStamp = LocalDateTime.now(),
                                 relationWorkBook = workBookWithTextAndAccuracy?.workBookEntity?.workBookNo?:0
                 ))
@@ -163,7 +163,7 @@ class LeafListFragment : Fragment() {
                     it.leafRight = dialogTextRight.text.toString()
                     it.leafStatement = dialogStatement.text.toString()
                     it.leafCommentary = ""
-                    it.leafAnswerCheck = 0
+                    it.leafFlag = 0
                     it.timeStamp = LocalDateTime.now()
                     it.relationWorkBook = workBookWithTextAndAccuracy?.workBookEntity?.workBookNo ?: 0
                 })
