@@ -18,7 +18,7 @@ class GarbageCanFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-
+            
         }
     }
 
@@ -26,7 +26,6 @@ class GarbageCanFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
         val view = inflater.inflate(R.layout.fragment_garbage_can_list, container, false)
         view.safety()
         return view
@@ -54,15 +53,15 @@ class GarbageCanFragment : Fragment() {
         val bundle  =   Bundle()
         when(view.id){
             R.id.garbage_can_category_button -> bundle.putInt(
-                GarbageCanActionButton.CATEGORY.name,
+                GarbageCanActionButton.CATEGORY.name.hashCode().toString(),
                 GarbageCanActionButton.CATEGORY.get
             )
             R.id.garbage_can_workbook_button -> bundle.putInt(
-                GarbageCanActionButton.WORKBOOK.name
-                ,GarbageCanActionButton.WORKBOOK.get
+                GarbageCanActionButton.WORKBOOK.name.hashCode().toString(),
+                GarbageCanActionButton.WORKBOOK.get
             )
             R.id.garbage_can_leaf_button    -> bundle.putInt(
-                GarbageCanActionButton.LEAF.name,
+                GarbageCanActionButton.LEAF.name.hashCode().toString(),
                 GarbageCanActionButton.LEAF.get
             )
         }
