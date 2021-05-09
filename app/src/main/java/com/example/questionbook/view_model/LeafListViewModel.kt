@@ -11,7 +11,7 @@ import kotlinx.coroutines.launch
 
 class LeafListViewModel(application: Application):AndroidViewModel(application) {
 
-    private val leafDao = QuestionDatabase.getInstance(application,viewModelScope).getQuizDao()
+    private val leafDao = QuestionDatabase.getInstance(application,viewModelScope).getLeafDao()
 
     private var _leafEntityList = leafDao.getList()
 
