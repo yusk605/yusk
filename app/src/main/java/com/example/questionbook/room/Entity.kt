@@ -65,7 +65,7 @@ data class QuestionAccuracyEntity(
  * @param leafSecond            解答案その2
  * @param leafThird             解答案その3
  * @param leafRight             解答案
- * @param leafAnswerCheck       解答の値
+ * @param leafFlag              解答の値
  * @param leafCommentary        解答案
  * @param timeStamp             更新時間
  * @param relationWorkBook      問題集に紐づける番号
@@ -79,7 +79,7 @@ data class QuestionLeafEntity(
         @ColumnInfo(name = "leaf_second")var leafSecond:String,
         @ColumnInfo(name = "leaf_third")var leafThird:String,
         @ColumnInfo(name = "leaf_right")var leafRight:String,
-        @ColumnInfo(name = "leaf_answer_check")var leafAnswerCheck:Int,
+        @ColumnInfo(name = "leaf_answer_check")var leafFlag:Int,
         @ColumnInfo(name = "leaf_answer_commentary")var leafCommentary:String,
         @ColumnInfo(name = "time_stamp")var timeStamp: LocalDateTime,
         @ColumnInfo(name = "relation_workbook")var relationWorkBook:Int
@@ -88,19 +88,19 @@ data class QuestionLeafEntity(
 
 /**
  * ■履歴を保存するためのエンティティ
- * @param historyNo     識別番号
- * @param historyCheck  正解
- * @param timeStamp     日付
- * @param relationLeaf  解答と紐づくナンバー
- * @param historyLeafNumber 出題番号履歴
- * @param historyLeafSelectAnswer 選択解答履歴
- * @param historyLeafRate 正解案履歴
- * @param historyLeafFirst 選択案履歴1
- * @param historyLeafSecond 選択案履歴2
- * @param historyLeafThird 選択案履歴3
- * @param historyLeafStatement 問題文履歴
- * @param relationAccuracy 外部キー question_accuracy -> accuracyNo
- * @param relationLeaf  外部キー question_leaf -> leafNo
+ * @param historyNo                     識別番号
+ * @param historyCheck                  正解
+ * @param timeStamp                     日付
+ * @param relationLeaf                  解答と紐づくナンバー
+ * @param historyLeafNumber             出題番号履歴
+ * @param historyLeafSelectAnswer       選択解答履歴
+ * @param historyLeafRate               正解案履歴
+ * @param historyLeafFirst              選択案履歴1
+ * @param historyLeafSecond             選択案履歴2
+ * @param historyLeafThird              選択案履歴3
+ * @param historyLeafStatement          問題文履歴
+ * @param relationAccuracy              外部キー question_accuracy -> accuracyNo
+ * @param relationLeaf                  外部キー question_leaf -> leafNo
  */
 @Parcelize
 @Entity(tableName = "question_history")
