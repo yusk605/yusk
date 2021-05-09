@@ -2,6 +2,7 @@ package com.example.questionbook
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.MenuItem
 import androidx.databinding.DataBindingUtil.setContentView
 import androidx.drawerlayout.widget.DrawerLayout
@@ -62,9 +63,10 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 }
             R.id.garbage_can_fragment -> {
                 controller.navigate(
-                        R.id.garbageCanFragment,
+                        R.id.garbageCanTitleFragment,
                         newBundleToPutInt(resources.getStringArray(R.array.side_menu_keys)[4], actionGarbageCan)
                     )
+                    Log.d("garbage","遷移しました。")
                 }
             }
         drawerLayout.close()
