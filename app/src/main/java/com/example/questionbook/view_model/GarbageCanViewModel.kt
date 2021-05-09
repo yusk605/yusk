@@ -3,10 +3,9 @@ package com.example.questionbook.view_model
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.questionbook.room.QuestionCategoryDao
-import com.example.questionbook.room.QuestionDatabase
-import com.example.questionbook.room.QuestionLeafDao
-import com.example.questionbook.room.QuestionWorkBookDao
+import com.example.questionbook.room.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class GarbageCanViewModel(private val app:Application):AndroidViewModel(app) {
 
@@ -31,4 +30,26 @@ class GarbageCanViewModel(private val app:Application):AndroidViewModel(app) {
     val categoryList get() = _categoryList
     val workBookList get() = _workBookList
     val leafList     get() = _leafList
-}
+
+
+    fun deleteMutableCategory(data:List<QuestionCategoryEntity>) =
+        viewModelScope.launch(Dispatchers.IO) {
+            data.forEach {
+                categoryDao.delete(it)
+            }
+        }
+
+    fun deleteMutableWorkBook(data:List<QuestionWorkBookEntity>) =
+        viewModelScope.launch(Dispatchers.IO) {
+            data.forEach {
+                workBookDao.delete(it)
+            }
+        }
+
+    fun deleteMutableLeafList(data:List<QuestionLeafEntity>) =
+        viewModelScope.launch(Dispatchers.IO) {
+            data.forEach {
+                leafDao.delete(it)
+            }
+        }
+    }
