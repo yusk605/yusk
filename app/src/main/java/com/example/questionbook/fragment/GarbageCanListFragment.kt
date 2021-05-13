@@ -1,14 +1,13 @@
 package com.example.questionbook.fragment
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.CheckedTextView
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.RecyclerView
-import com.example.questionbook.GarbageCanActionButton
 import com.example.questionbook.R
 import com.example.questionbook.view_model.GarbageCanViewModel
 import com.example.questionbook.view_model.GarbageCanViewModelFactory
@@ -17,25 +16,18 @@ import kotlinx.android.synthetic.main.fragment_garbage_can_list.*
 class GarbageCanListFragment : Fragment() {
 
     private var typeAction = 0
-    private var adapter: RecyclerView.Adapter<*>? = null
 
-    private var arrayAdapter:ArrayAdapter<String>? = null
+    private var checkedList:MutableList<Int> = mutableListOf()
 
     private val viewModel:GarbageCanViewModel by lazy {
-        GarbageCanViewModelFactory(requireActivity().application)
+        GarbageCanViewModelFactory(activity?.application!!)
             .create(GarbageCanViewModel::class.java)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-            typeAction = it.getInt(
-                GarbageCanActionButton
-                    .CATEGORY
-                    .name
-                    .hashCode()
-                    .toString()
-            )
+            typeAction = it.getInt(GarbageCanFragment.ARGS_KEY)
         }
     }
 
@@ -51,69 +43,105 @@ class GarbageCanListFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         initArrayAdapter()
-        val listView = garbage_can_choice_list
-        listView.adapter = arrayAdapter
-        listView.setOnItemClickListener {
+
+        garbage_can_choice_list.let {
+            listView ->
+            listView.setOnItemClickListener {
                 parent, view, position, id ->
 
-            var checkedTextView:CheckedTextView =
-                listView.getChildAt(position) as CheckedTextView
+                var checkedTextView: CheckedTextView
 
-            if (checkedTextView.isChecked){
-
+                for ( i in 0 until listView.childCount ) {
+                    checkedTextView = listView.getChildAt(i) as CheckedTextView
+                    val position = listView.getPositionForView(checkedTextView)
+                    if ( checkedTextView.isChecked ){
+                        Log.d("index",i.toString())
+                        checkedList.add(position)
+                    }else{
+                        if(checkedList.contains(position)){
+                            checkedList.remove(position)
+                        }
+                    }
+                }
             }
         }
-
     }
 
-    private fun getArrayAdapter(data:List<String>):ArrayAdapter<String>{
-        return ArrayAdapter(
-            requireContext(),
-            android.R.layout.simple_list_item_multiple_choice,
-            data
-        )
-    }
-
+    /**
+     * ▪渡される値によってリストビューのアダプターを変更する。
+     */
     private fun initArrayAdapter(){
         when(typeAction){
             1 -> {
                 viewModel.categoryList.observe(viewLifecycleOwner){
                     data ->
-                    arrayAdapter = getArrayAdapter(
-                        data.filter { it.categoryFlag == 2 }
-                            .map { it.categoryTitle }
-                            .toList()
+                    garbage_can_choice_list.adapter = getArrayAdapter(
+                            data.filter { it.categoryFlag == 2 }
+                                    .map { it.categoryTitle }
+                                    .toList()
                     )
-                }
-            }
+
+                    val categoryList = data.filter { it.categoryFlag == 2 }
+
+                    //削除ボタンを押したときにチェック項目のついた箇所を全て削除する。
+                    garbage_can_delete_button.setOnClickListener {
+                          checkedList.forEach { p->
+                              viewModel.deleteCategory(categoryList[p])
+                          }
+                        //リストの要素をクリアする。
+                        checkedList.clear()
+                    }
+                }}
             2 -> {
                 viewModel.workBookList.observe(viewLifecycleOwner){
                     data ->
-                    arrayAdapter = getArrayAdapter(
+                    garbage_can_choice_list.adapter = getArrayAdapter(
                         data.filter { it.workBookFlag == 2 }
                             .map { it.workBookTitle }
                             .toList()
                     )
-                }
-            }
+
+                    val workBookList = data.filter { it.workBookFlag == 2 }
+
+                    //削除ボタンを押したときにチェック項目のついた箇所をすべて削除
+                    garbage_can_delete_button.setOnClickListener {
+                        checkedList.forEach { p->
+                            viewModel.deleteWorkBook(workBookList[p])
+                        }
+                        //リストの要素をクリアする。
+                        checkedList.clear()
+                    }
+                }}
             3 -> {
                 viewModel.leafList.observe(viewLifecycleOwner){
                     data ->
-                    arrayAdapter = getArrayAdapter(
+                    garbage_can_choice_list.adapter = getArrayAdapter(
                         data.filter { it.leafFlag == 2 }
                             .map { it.leafStatement }
                             .toList()
                     )
-                }
-            }
+
+                    val leafList = data.filter { it.leafFlag == 2 }
+
+                    garbage_can_delete_button.setOnClickListener {
+                        checkedList.forEach { p->
+                            viewModel.deleteLeaf(leafList[p])
+                        }
+                        checkedList.clear()
+                    }
+                }}
+
             else -> throw IllegalAccessException(" selectAdapter not value ")
         }
     }
 
-    private fun  initListView(){
-        garbage_can_choice_list.adapter = arrayAdapter
+    private fun getArrayAdapter(data:List<String>):ArrayAdapter<String>{
+        return ArrayAdapter(
+                requireContext(),
+                android.R.layout.simple_list_item_multiple_choice,
+                data
+        )
     }
-
     companion object {
         @JvmStatic
         fun newInstance(param1: String, param2: String) = GarbageCanListFragment()
