@@ -66,7 +66,7 @@ class ResultViewModelFactory(private val app: Application):ViewModelProvider.Fac
 class GarbageCanViewModelFactory(private val app: Application):ViewModelProvider.Factory{
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(GarbageCanViewModel::class.java))
-            return CategoryViewModel(app) as T
+            return GarbageCanViewModel(app) as T
 
         throw IllegalArgumentException("Type mismatch GarbageCanViewModel")
     }
