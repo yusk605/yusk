@@ -31,23 +31,37 @@ class GarbageCanViewModel(private val app:Application):AndroidViewModel(app) {
     val workBookList get() = _workBookList
     val leafList     get() = _leafList
 
-
     fun deleteCategory(entity: QuestionCategoryEntity){
         viewModelScope.launch(Dispatchers.IO) {
             categoryDao.delete(entity)
         }
     }
 
+    fun upDateCategory(entity: QuestionCategoryEntity){
+        viewModelScope.launch(Dispatchers.IO) {
+            categoryDao.update(entity)
+        }
+    }
 
     fun deleteWorkBook(entity:QuestionWorkBookEntity){
         viewModelScope.launch(Dispatchers.IO) {
             workBookDao.delete(entity)
         }
     }
+    fun upDateWorkBook(entity:QuestionWorkBookEntity){
+        viewModelScope.launch(Dispatchers.IO) {
+            workBookDao.update(entity)
+        }
+    }
 
     fun deleteLeaf(entity:QuestionLeafEntity){
         viewModelScope.launch(Dispatchers.IO) {
             leafDao.delete(entity)
+        }
+    }
+    fun upDateLeaf(entity:QuestionLeafEntity){
+        viewModelScope.launch(Dispatchers.IO) {
+            leafDao.update(entity)
         }
     }
 }
