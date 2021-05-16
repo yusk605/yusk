@@ -34,15 +34,17 @@ abstract class QuestionDatabase:RoomDatabase(){
         fun getInstance(application:Application, scope:CoroutineScope):QuestionDatabase =
             singleton ?: synchronized(this){
                 val instance = Room
-                    .databaseBuilder(application,QuestionDatabase::class.java,"question_book")
-                    .addCallback(QuestionDBInsertTestCallBack(scope))
-                    .build()
+                        .databaseBuilder(application,QuestionDatabase::class.java,"question_book_database")
+                        .addCallback(QuestionDBCallBack(scope))
+                        .fallbackToDestructiveMigration()
+                        .build()
                 singleton = instance
                 instance
             }
 
         /**
-         *多分エラーが発生します。
+         * ▪孤立したエンティティの削除を行う
+         * リレーションされていないワークブックエンティティデータを削除する
          */
         class QuestionDBCallBack(private val scope:CoroutineScope):RoomDatabase.Callback(){
             override fun onOpen(db: SupportSQLiteDatabase) {
@@ -52,6 +54,8 @@ abstract class QuestionDatabase:RoomDatabase(){
                         database.run {
                             getWorkBookDao().collBackDelete()
                             getAccuracyDao().collBackDelete()
+                            getLeafDao().collBackDelete()
+                            getHistoryDao().collBackDelete()
                         }
                     }
                 }
