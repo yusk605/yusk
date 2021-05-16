@@ -65,8 +65,9 @@ class CategoryListAdapter(
     override fun onBindViewHolder(holder: CategoryAdapterHolder, position: Int) {
         val item = getItem(position)
         holder.also {
-            it.categoryTitle.text = item.questionCategoryEntity.categoryTitle
-            it.categoryWorkbookCount.text = "×${item.workBookList.size}"
+            h->
+            h.categoryTitle.text = item.questionCategoryEntity.categoryTitle
+            h.categoryWorkbookCount.text = "×${item.workBookList.filter { it.workBookFlag == 0 ||it.workBookFlag == 1 }.size}"
         }
     }
 }
