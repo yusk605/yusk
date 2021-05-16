@@ -25,8 +25,13 @@ interface QuestionWorkBookDao{
     @Update suspend fun update(entity:QuestionWorkBookEntity)
     @Delete suspend fun delete(entity:QuestionWorkBookEntity)
 
-    @Query("delete from question_workbook where relation_category in (" +
-            "select relation_category from question_workbook left join question_category on relation_category = categoryNo where categoryNo is null)")
+    @Query("delete from question_workbook " +
+            "where relation_category in (" +
+            "select relation_category " +
+            "from question_workbook " +
+            "left join question_category " +
+            "on relation_category = categoryNo " +
+            "where categoryNo is null)")
     suspend fun collBackDelete()
 
 }
@@ -46,8 +51,13 @@ interface QuestionAccuracyDao{
     @Query("select * from question_accuracy ORDER BY accuracyNo DESC LIMIT 1;")
     fun getLast():Single<QuestionAccuracyEntity>
 
-    @Query("delete from question_accuracy where relation_workbook in (" +
-            " select relation_workbook from question_accuracy left join question_workbook on relation_workbook = workBookNo where workBookNo is null)")
+    @Query("delete from question_accuracy " +
+            "where relation_workbook in (" +
+            "select relation_workbook " +
+            "from question_accuracy " +
+            "left join question_workbook " +
+            "on relation_workbook = workBookNo " +
+            "where workBookNo is null)")
     suspend fun collBackDelete()
 }
 
@@ -59,6 +69,15 @@ interface QuestionLeafDao{
     @Insert suspend fun insert(entity:QuestionLeafEntity)
     @Update suspend fun update(entity:QuestionLeafEntity)
     @Delete suspend fun delete(entity:QuestionLeafEntity)
+
+    @Query("delete from question_leaf " +
+            "where relation_workbook in(" +
+            "select relation_workbook " +
+            "from question_leaf " +
+            "left join question_workbook " +
+            "on relation_workbook = workBookNo " +
+            "where workBookNo is null)")
+    suspend fun collBackDelete()
 }
 
 /*
@@ -74,4 +93,13 @@ interface QuestionHistoryDao{
     @Insert fun insert(entity:QuestionHistoryEntity)
     @Update fun update(entity:QuestionHistoryEntity)
     @Delete fun delete(entity:QuestionHistoryEntity)
+
+    @Query("delete from question_history " +
+            "where relation_accuracy in(" +
+            "select relation_accuracy " +
+            "from question_history " +
+            "left join question_accuracy " +
+            "on relation_accuracy = accuracyNo " +
+            "where accuracyNo is null)")
+    suspend fun collBackDelete()
 }

@@ -30,7 +30,6 @@ class LeafListAdapter(
         ): Boolean = oldItem == newItem
     }
 
-
     inner class QuizHolder(view: View):RecyclerView.ViewHolder(view){
         val itemTextStatementEdit   = view.findViewById<TextInputEditText>(R.id.item_leaf_statement_edit)!!
         val itemTextAnswerFirst     = view.findViewById<TextInputEditText>(R.id.item_leaf_select_answer_fist)!!
