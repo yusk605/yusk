@@ -1,8 +1,10 @@
 package com.example.questionbook.adapter
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
@@ -13,7 +15,8 @@ import com.example.questionbook.room.QuestionLeafEntity
 import com.google.android.material.textfield.TextInputEditText
 
 class LeafListAdapter(
-        private  val showDialog:(QuestionLeafEntity)->Unit
+        private val onClickDelete:(QuestionLeafEntity)->Unit,
+        private val onClickUpdate:(QuestionLeafEntity)->Unit,
     ) :ListAdapter<QuestionLeafEntity,LeafListAdapter.QuizHolder>(Diff) {
 
     companion object Diff: DiffUtil.ItemCallback<QuestionLeafEntity>(){
@@ -35,12 +38,13 @@ class LeafListAdapter(
         val itemTextAnswerThird     = view.findViewById<TextInputEditText>(R.id.item_leaf_select_answer_third)!!
         val itemTextAnswerRight     = view.findViewById<TextInputEditText>(R.id.item_leaf_select_answer_right)!!
         val itemTextPageCount       = view.findViewById<TextView>(R.id.item_leaf_page_count)!!
+        val itemDeleteButton        = view.findViewById<Button>(R.id.item_leaf_delete_button)!!
         private val itemIcButton            = view.findViewById<ImageView>(R.id.item_leaf_amendment)!!
         init {
-            itemIcButton.setOnClickListener {
-                showDialog(
-                        getItem(layoutPosition)
-                )
+            itemIcButton.setOnClickListener { onClickUpdate(getItem(layoutPosition)) }
+            itemDeleteButton.setOnClickListener {
+                Log.d("tag","sample_test")
+                onClickDelete(getItem(layoutPosition))
             }
         }
     }
