@@ -85,9 +85,16 @@ class GarbageCanListFragment : Fragment() {
 
                     //削除ボタンを押したときにチェック項目のついた箇所を全て削除する。
                     garbage_can_delete_button.setOnClickListener {
-                          checkedList.forEach { p->
-                              viewModel.deleteCategory(categoryList[p])
-                          }
+                        checkedList.forEach { p ->
+                            viewModel.deleteCategory(categoryList[p])
+                        }
+                        //リストの要素をクリアする。
+                        checkedList.clear()
+                    }
+                    garbage_can_return_button.setOnClickListener {
+                        checkedList.forEach { p ->
+                            viewModel.upDateCategory(categoryList[p].apply { categoryFlag = 0 })
+                        }
                         //リストの要素をクリアする。
                         checkedList.clear()
                     }
@@ -111,6 +118,13 @@ class GarbageCanListFragment : Fragment() {
                         //リストの要素をクリアする。
                         checkedList.clear()
                     }
+                    garbage_can_return_button.setOnClickListener {
+                        checkedList.forEach { p->
+                            viewModel.upDateWorkBook(workBookList[p].apply { workBookFlag = 0 })
+                        }
+                        //リストの要素をクリアする。
+                        checkedList.clear()
+                    }
                 }}
             3 -> {
                 viewModel.leafList.observe(viewLifecycleOwner){
@@ -126,6 +140,12 @@ class GarbageCanListFragment : Fragment() {
                     garbage_can_delete_button.setOnClickListener {
                         checkedList.forEach { p->
                             viewModel.deleteLeaf(leafList[p])
+                        }
+                        checkedList.clear()
+                    }
+                    garbage_can_return_button.setOnClickListener {
+                        checkedList.forEach { p->
+                            viewModel.upDateLeaf(leafList[p].apply { leafFlag = 0 })
                         }
                         checkedList.clear()
                     }
