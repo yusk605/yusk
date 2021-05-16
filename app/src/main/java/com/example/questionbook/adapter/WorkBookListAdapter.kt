@@ -78,9 +78,10 @@ class WorkBookListAdapter(
        val item = getItem(position)
        val max = item.accuracyList.map { a-> a.accuracyRate }.maxOrNull().toString().nullConverter()
        holder.also {
-           it.itemWorkBookTitle.text = getItem(position).workBookEntity.workBookTitle
-           it.itemWorkBookProblemCount.text = "×${item.leafList.size}"
-           it.itemWorkBookAccuracy.text = max
+           h->
+           h.itemWorkBookTitle.text = getItem(position).workBookEntity.workBookTitle
+           h.itemWorkBookProblemCount.text = "×${item.leafList.filter { it.leafFlag == 0 || it.leafFlag == 1 }.size}"
+           h.itemWorkBookAccuracy.text = max
          //  it.itemWorkBookChip.text = categoryTitle
        }
     }
