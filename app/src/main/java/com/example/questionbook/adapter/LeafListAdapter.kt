@@ -58,12 +58,13 @@ class LeafListAdapter(
     override fun onBindViewHolder(holder: QuizHolder, position: Int) {
         val entity = getItem(position)
          holder.also {
-            it.itemTextStatementEdit.setText(getItem(position).leafStatement)
-            it.itemTextAnswerFirst.setText(entity.leafFirs)
-            it.itemTextAnswerSecond.setText(entity.leafSecond)
-            it.itemTextAnswerThird.setText(entity.leafThird)
-            it.itemTextAnswerRight.setText(entity.leafRight)
-            it.itemTextPageCount.text = "${currentList.indexOf(getItem(position))+1}"
+             h->
+             h.itemTextStatementEdit.setText(getItem(position).leafStatement)
+             h.itemTextAnswerFirst.setText(entity.leafFirs)
+             h.itemTextAnswerSecond.setText(entity.leafSecond)
+             h.itemTextAnswerThird.setText(entity.leafThird)
+             h.itemTextAnswerRight.setText(entity.leafRight)
+             h.itemTextPageCount.text = "${position+1}"
         }
     }
 }
