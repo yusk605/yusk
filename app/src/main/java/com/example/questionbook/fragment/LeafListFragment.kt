@@ -33,28 +33,7 @@ class LeafListFragment : Fragment() {
     }
 
     //アダプター
-    private val quizAdapter:LeafListAdapter by lazy {
-        LeafListAdapter{ entity->
-            val quizDialog = activity?.let { it1 ->
-                PageQuizDialogFactory(it1,R.layout.dialog_text_form_layout)
-                        .create(PageQuizDialog::class.java) }
-
-            quizDialog?.let { dg->
-                val alertDialog = dg.create().apply {
-                        setTitle(requireActivity().getString(R.string.dialog_leaf_updata_title))
-                        show()
-                    }
-
-                val dialogView  = dg.getView()
-                val quizButton  = dialogView.findViewById<Button>(R.id.form_quiz_add_btn).apply { text = activity?.getString(R.string.dialog_update_button) }
-                dialogView.setParameter(entity)
-                quizButton.setOnClickListener {
-                    viewModel.leafUpdate(dialogView.getParameter(entity = entity).entity)
-                    alertDialog.cancel()
-                }
-            }
-        }
-    }
+    private var leafAdapter:LeafListAdapter? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -68,6 +47,30 @@ class LeafListFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
+        leafAdapter = LeafListAdapter({ viewModel.leafUpdate(it.apply { leafFlag=2 })})
+        { entity ->
+            val quizDialog = activity?.let {
+                it1 ->
+                PageQuizDialogFactory(it1, R.layout.dialog_text_form_layout)
+                        .create(PageQuizDialog::class.java)
+            }
+
+            quizDialog?.let {
+                dg ->
+                val alertDialog = dg.create().apply {
+                    setTitle(requireActivity().getString(R.string.dialog_leaf_updata_title))
+                    show()
+                }
+                val dialogView = dg.getView()
+                val quizButton = dialogView.findViewById<Button>(R.id.form_quiz_add_btn).apply { text = activity?.getString(R.string.dialog_update_button) }
+                dialogView.setParameter(entity)
+                quizButton.setOnClickListener {
+                    viewModel.leafUpdate(dialogView.getParameter(entity = entity).entity)
+                    alertDialog.cancel()
+                }
+            }
+        }
         return inflater.inflate(R.layout.fragment_list_leaf, container, false)
     }
 
@@ -80,11 +83,12 @@ class LeafListFragment : Fragment() {
         //ビューモデルからデータを取得し観測を行う。
         viewModel.leafEntityList.observe(viewLifecycleOwner){
             data->
-            quizAdapter.submitList(
+            leafAdapter?.submitList(
                 data.filter {
                     it.relationWorkBook ==
                         workBookWithTextAndAccuracy?.workBookEntity?.workBookNo
-                })
+                }.filter { it.leafFlag !=2 }
+            )
         }
 
         //クイズテキスト一覧に表示されている、ボタンを押したときの処理
@@ -111,7 +115,7 @@ class LeafListFragment : Fragment() {
     private fun initRecycleView(){
         leaf_list_recycle_view.also {
             it.layoutManager = LinearLayoutManager(activity).apply { orientation = LinearLayoutManager.VERTICAL }
-            it.adapter = quizAdapter
+            it.adapter = leafAdapter
         }
     }
 
