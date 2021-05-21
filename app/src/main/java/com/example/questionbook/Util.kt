@@ -29,8 +29,12 @@ fun Spinner.setAdapter(data:List<String>,context: Context){
  * ■スナックバーを表示させるためのメソッド
  * @param msg スナックバーの文字列を表示させるため
  */
-fun View.showSnackBar(msg:String){
-    Snackbar.make(this,msg, Snackbar.LENGTH_SHORT).show()
+fun View.showSnackBar(msg:String,boolean: Boolean){
+    val snackbar =  Snackbar.make(this,msg, Snackbar.LENGTH_SHORT,)
+    when(boolean){
+        true -> snackbar.anchorView = this
+    }
+        snackbar.show()
 }
 
 fun FragmentActivity.getMag(no:Int):String =

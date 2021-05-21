@@ -80,14 +80,7 @@ class CategoryListFragment : Fragment(){
         savedInstanceState: Bundle?
     ): View? {
 
-        val view = inflater.inflate(R.layout.fragment_list_category,container,false)
-
-        activity?.let {
-            view.showSnackBar(
-                    it.getMag(type)
-            )
-        }
-        return view
+        return inflater.inflate(R.layout.fragment_list_category,container,false)
     }
 
 
@@ -105,6 +98,11 @@ class CategoryListFragment : Fragment(){
             it.setOnClickListener {
                 insertDialog()
             }
+        }
+        activity?.let {
+            var boolean = category_list_add_fab.isVisible
+            var v:View = if(boolean) category_list_add_fab else category_list_recycle_view
+            v.showSnackBar(it.getMag(type),boolean)
         }
     }
 
