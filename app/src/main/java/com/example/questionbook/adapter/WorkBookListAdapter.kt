@@ -12,6 +12,7 @@ import com.example.questionbook.R
 import com.example.questionbook.room.WorkBookWithAll
 
 import com.google.android.material.snackbar.Snackbar
+import kotlin.math.roundToInt
 
 /**
  * ■問題集一覧を表示するためのデータを中間的な役割を果たすクラス
@@ -76,6 +77,7 @@ class WorkBookListAdapter(
 
     override fun onBindViewHolder(holder: WorkBookHolder, position: Int) {
        val item = getItem(position)
+       //val ave = item.accuracyList.map { a-> a.accuracyRate }.maxOrNull().toString().nullConverter()
        val max = item.accuracyList.map { a-> a.accuracyRate }.maxOrNull().toString().nullConverter()
        holder.also {
            h->
@@ -85,6 +87,6 @@ class WorkBookListAdapter(
          //  it.itemWorkBookChip.text = categoryTitle
        }
     }
-    private fun String.nullConverter() = if (equals("null"))"なし" else "${this}%"
+    private fun String.nullConverter() = if (equals("null"))"なし" else "${"%.2f".format(this.toFloat())}%"
 
  }
