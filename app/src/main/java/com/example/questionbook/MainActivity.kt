@@ -8,10 +8,13 @@ import androidx.databinding.DataBindingUtil.setContentView
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
+import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI
+import androidx.navigation.ui.setupWithNavController
 import com.example.questionbook.databinding.ActivityMainBinding
 import com.google.android.material.navigation.NavigationView
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.content.*
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
@@ -38,37 +41,36 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         when(item.itemId){
             R.id.holder_list_fragment -> {
-                    controller.navigate(
+                controller.navigate(
                         R.id.categoryListFragment,
                         newBundleToPutInt(resources.getStringArray(R.array.side_menu_keys)[0], actionHolderValue)
-                    )
-                }
+                )
+            }
             R.id.game_list_fragment -> {
                 controller.navigate(
                         R.id.categoryListFragment,
                         newBundleToPutInt(resources.getStringArray(R.array.side_menu_keys)[1], actionGameValue)
-                    )
-                }
+                )
+            }
             R.id.statistics_fragment ->{
                 controller.navigate(
                         R.id.categoryListFragment,
                         newBundleToPutInt(resources.getStringArray(R.array.side_menu_keys)[2], actionStatisticsValue)
-                    )
-                }
+                )
+            }
             R.id.history_list_fragment -> {
                 controller.navigate(
                         R.id.categoryListFragment,
                         newBundleToPutInt(resources.getStringArray(R.array.side_menu_keys)[3], actionHistory)
-                    )
-                }
+                )
+            }
             R.id.garbage_can_fragment -> {
                 controller.navigate(
                         R.id.garbageCanTitleFragment,
                         newBundleToPutInt(resources.getStringArray(R.array.side_menu_keys)[4], actionGarbageCan)
-                    )
-                    Log.d("garbage","遷移しました。")
-                }
+                )
             }
+        }
         drawerLayout.close()
         return true
     }
@@ -78,10 +80,10 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
      * putInt(key,value)
      */
     companion object{
-         const val actionHolderValue        = 0
-         const val actionGameValue          = 1
-         const val actionStatisticsValue    = 2
-         const val actionHistory            = 3
-         const val actionGarbageCan         = 4
+        const val actionHolderValue        = 0
+        const val actionGameValue          = 1
+        const val actionStatisticsValue    = 2
+        const val actionHistory            = 3
+        const val actionGarbageCan         = 4
     }
 }
