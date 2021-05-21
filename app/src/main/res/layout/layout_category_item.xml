@@ -50,14 +50,6 @@
             app:layout_constraintStart_toEndOf="@+id/item_category_workbook_count_label"
             app:layout_constraintTop_toTopOf="@+id/item_category_workbook_ic" />
 
-        <com.google.android.material.chip.Chip
-            android:id="@+id/item_category_chip"
-            style="@style/question_chip"
-            android:text="android"
-            android:layout_marginBottom="4dp"
-            android:layout_marginEnd="4dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>
