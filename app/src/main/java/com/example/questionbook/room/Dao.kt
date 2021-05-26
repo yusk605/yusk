@@ -25,6 +25,8 @@ interface QuestionWorkBookDao{
     @Update suspend fun update(entity:QuestionWorkBookEntity)
     @Delete suspend fun delete(entity:QuestionWorkBookEntity)
 
+
+
     @Query("delete from question_workbook " +
             "where relation_category in (" +
             "select relation_category " +
@@ -33,7 +35,6 @@ interface QuestionWorkBookDao{
             "on relation_category = categoryNo " +
             "where categoryNo is null)")
     suspend fun collBackDelete()
-
 }
 
 // ■ 問題集に紐づいた回答率を保存するテーブル（回答率）

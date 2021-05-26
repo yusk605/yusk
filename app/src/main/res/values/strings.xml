@@ -72,4 +72,8 @@
     <string name="garbage_can_leaf_button_text">問題文削除候補一覧へ</string>
     <string name="garbage_can_button_delete">削除</string>
     <string name="garbage_can_button_return">戻す</string>
+
+    <!-- エラーメッセージ   -->
+    <string name="error_dialog_category_0001">すでにそのタイトルは存在します</string>
+    <string name="error_dialog_category_0002">ゴミ箱にあるタイトルと重複してます</string>
 </resources>
