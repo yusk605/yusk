@@ -18,7 +18,7 @@ import com.google.android.material.textfield.TextInputEditText
 
 class ResultDetailsListAdapter(
         private val title:String
-):ListAdapter<QuestionHistoryEntity,ResultDetailsListAdapter.ConcreteResultListHolder>(Diff) {
+        ):ListAdapter<QuestionHistoryEntity,ResultDetailsListAdapter.ConcreteResultListHolder>(Diff) {
 
     companion object Diff:DiffUtil.ItemCallback<QuestionHistoryEntity>() {
         override fun areItemsTheSame(oldItem:QuestionHistoryEntity, newItem:QuestionHistoryEntity): Boolean =
