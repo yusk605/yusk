@@ -40,10 +40,12 @@ class WorkBookListAdapter(
     }
 
     inner class WorkBookHolder(private val view: View):RecyclerView.ViewHolder(view){
-       val  itemWorkBookTitle = view.findViewById<TextView>(R.id.item_workbook_title)
-       val  itemWorkBookProblemCount = view.findViewById<TextView>(R.id.item_workbook_problem_count)
-       val  itemWorkBookAccuracy = view.findViewById<TextView>(R.id.item_workbook_accuracy_rate)
-     // val  itemWorkBookChip    = view.findViewById<Chip>(R.id.item_workbook_chip)
+       val  itemWorkBookTitle        = view.findViewById<TextView>(R.id.item_workbook_title)!!
+       val  itemWorkBookProblemCount = view.findViewById<TextView>(R.id.item_workbook_problem_count)!!
+       val  itemWorkBookAccuracy     = view.findViewById<TextView>(R.id.item_workbook_accuracy_rate)!!
+       val  itemWorkBookItemLabel    = view.findViewById<TextView>(R.id.item_workbook_leaf_count_label)!!
+
+        // val  itemWorkBookChip    = view.findViewById<Chip>(R.id.item_workbook_chip)
         init {
             view.setOnClickListener {
                 onClickSafety(
@@ -76,17 +78,28 @@ class WorkBookListAdapter(
         )
 
     override fun onBindViewHolder(holder: WorkBookHolder, position: Int) {
-       val item = getItem(position)
-       //val ave = item.accuracyList.map { a-> a.accuracyRate }.maxOrNull().toString().nullConverter()
-       val max = item.accuracyList.map { a-> a.accuracyRate }.maxOrNull().toString().nullConverter()
-       holder.also {
-           h->
-           h.itemWorkBookTitle.text = getItem(position).workBookEntity.workBookTitle
-           h.itemWorkBookProblemCount.text = "×${item.leafList.filter { it.leafFlag == 0 || it.leafFlag == 1 }.size}"
-           h.itemWorkBookAccuracy.text = max
-         //  it.itemWorkBookChip.text = categoryTitle
-       }
-    }
-    private fun String.nullConverter() = if (equals("null"))"なし" else "${"%.2f".format(this.toFloat())}%"
 
- }
+        val item = getItem(position)
+        val max = item.accuracyList.map { a-> a.accuracyRate }.maxOrNull().toString().nullConverter()
+
+        holder.also {
+            h->
+            h.itemWorkBookTitle.text = getItem(position).workBookEntity.workBookTitle
+            h.itemWorkBookProblemCount.text = check.typeCounter(item)
+            h.itemWorkBookAccuracy.text = max
+            h.itemWorkBookItemLabel.text = check.typeCounter()
+        }
+    }
+
+    private fun Int.typeCounter():String = when(this){
+                3    -> "プレイ回数×"
+                else -> "出題数×"
+            }
+
+    private fun Int.typeCounter(item:WorkBookWithAll):String = when(this){
+                3    -> "${item.accuracyList.filter { it.accuracyFlag == 0 || it.accuracyFlag == 1 }.size}"
+                else -> "${item.leafList.filter { it.leafFlag == 0 || it.leafFlag == 1 }.size}"
+            }
+
+    private fun String.nullConverter() = if (equals("null"))"なし" else "${"%.2f".format(this.toFloat())}%"
+}
