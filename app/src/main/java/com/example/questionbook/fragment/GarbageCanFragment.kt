@@ -82,30 +82,6 @@ class GarbageCanFragment : Fragment() {
                 ))
     }
 
-    /**
-     * ■フラグメントのonClickメソッドに紐づいたハンドラーから呼ばれるメソッド
-     * @param view fragment_garbage_can_list の　onClick属性に使用されています。
-     */
-    fun actionButton(view: View){
-        val bundle  =   Bundle()
-        when(view.id){
-            R.id.garbage_can_category_button ->
-                bundle.putInt(
-                    ARGS_KEY, GarbageCanActionButton.CATEGORY.get
-                )
-            R.id.garbage_can_workbook_button ->
-                bundle.putInt(
-                    ARGS_KEY, GarbageCanActionButton.WORKBOOK.get
-                )
-            R.id.garbage_can_leaf_button ->
-                bundle.putInt(
-                    ARGS_KEY, GarbageCanActionButton.LEAF.get
-                )
-        }
-        Navigation.findNavController(view)
-            .navigate(R.id.action_garbageCanFragment_to_garbageCanListFragment, bundle)
-        }
-
     companion object {
         const val ARGS_KEY = "garbageCanFragment_to_garbageCanListFragment"
     }

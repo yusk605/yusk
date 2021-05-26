@@ -55,9 +55,12 @@ class GarbageCanListFragment : Fragment() {
                     checkedTextView = listView.getChildAt(i) as CheckedTextView
                     val position = listView.getPositionForView(checkedTextView)
                     if ( checkedTextView.isChecked ){
-                        Log.d("index",i.toString())
-                        checkedList.add(position)
+                        //既にチェックのついた項目の値を重複させないようにするため
+                        if( !checkedList.contains(position)) {
+                            checkedList.add(position)
+                        }
                     }else{
+                        //チェック項目を付けた後の値のみを省きたいため。
                         if(checkedList.contains(position)){
                             checkedList.remove(position)
                         }
