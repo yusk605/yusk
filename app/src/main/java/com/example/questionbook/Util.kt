@@ -10,6 +10,7 @@ import android.widget.Spinner
 import androidx.fragment.app.FragmentActivity
 import androidx.navigation.Navigation
 import com.google.android.material.snackbar.Snackbar
+import com.google.android.material.textfield.TextInputEditText
 import java.util.zip.Inflater
 
 /**
@@ -34,7 +35,7 @@ fun View.showSnackBar(msg:String,boolean: Boolean){
     when(boolean){
         true -> snackbar.anchorView = this
     }
-        snackbar.show()
+    snackbar.show()
 }
 
 fun FragmentActivity.getMag(no:Int):String =
@@ -98,5 +99,11 @@ fun createPopup(popup:PopupMenu, resource:Int):PopupMenu =
         menuInflater.inflate(resource,popup.menu)
         show()
     }
+
+/**
+ * 入力を行った際のエラーを表示を行わせる。
+ */
+fun TextInputEditText.enterAgain(msg: String) = msg.also { error = it }
+
 
 
