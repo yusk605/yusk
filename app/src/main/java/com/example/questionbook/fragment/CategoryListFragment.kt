@@ -39,7 +39,6 @@ class CategoryListFragment : Fragment(){
                     putInt(ARGS_SIDE_MENU_FLAG, type)
                 }
 
-
             when (type) {
                 //統計画面の場合
                 MainActivity.actionStatisticsValue -> {
@@ -79,7 +78,6 @@ class CategoryListFragment : Fragment(){
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
         return inflater.inflate(R.layout.fragment_list_category,container,false)
     }
 
@@ -93,12 +91,14 @@ class CategoryListFragment : Fragment(){
                 )
             }
         }
+
         category_list_add_fab.also {
             it.isVisible = type.isHolder()
             it.setOnClickListener {
                 insertDialog()
             }
         }
+
         activity?.let {
             var boolean = category_list_add_fab.isVisible
             var v:View = if(boolean) category_list_add_fab else category_list_recycle_view
@@ -117,6 +117,7 @@ class CategoryListFragment : Fragment(){
     }
 
     /**
+     * ▪カテゴリーの登録を行う。
      * ダイヤログを表示させ、表示させたテキストフィールド内の値を基に、
      * カテゴリーエンティティへデータの登録を行う。
      */
@@ -132,8 +133,32 @@ class CategoryListFragment : Fragment(){
             val (title,btn) = dg.getView().findViewById<TextInputEditText>(R.id.dialog_category_title_edit) to
                             dg.getView().findViewById<Button>(R.id.dialog_category_insert_btn)
             btn.setOnClickListener {
-                viewModel.toInsert(title.text.toString())
-                alertDialog.cancel()
+                val text = title.text.toString()
+                var isDuplicate = false
+                var isDuplicateSecond = false
+                viewModel.data.observe(viewLifecycleOwner){
+                    data->
+                    val list = data.filter { it.questionCategoryEntity.categoryTitle == text }
+
+                    //ダイヤログに入力したデータ（タイトル）の重複の確認
+                    isDuplicate = false == list.any{it.questionCategoryEntity.categoryTitle==text}
+
+                    //ゴミ箱に重複したタイトルの存在確認
+                    isDuplicateSecond = list.any{it.questionCategoryEntity.categoryFlag==2}
+                }
+
+                //重複していないならインサートを行う。
+                if (isDuplicate) {
+                    viewModel.toInsert(title.text.toString())
+                    alertDialog.cancel()
+                }else {
+                    var msg = ""
+                    activity?.let {
+                        msg = if(isDuplicateSecond)it.getString(R.string.error_dialog_category_0002)
+                        else it.getString(R.string.error_dialog_category_0001)
+                    }
+                    title.enterAgain(msg)
+                }
             }
         }
     }
