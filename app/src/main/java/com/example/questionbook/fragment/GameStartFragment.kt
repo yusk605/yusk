@@ -68,7 +68,6 @@ class GameStartFragment : Fragment() {
         binding = FragmentGameStartBinding.inflate(inflater,container,false)
 
         return binding.root
-
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -96,11 +95,14 @@ class GameStartFragment : Fragment() {
                     game_start_quiz_count.text = "${it.getIndex()}/${it.getSize()}"
                 }
 
+                game_start_next_btn.isEnabled = false;
+
                 //選択されたラジオボタンの値を取得する。
                 game_start__radio_group.setOnCheckedChangeListener {
                     group, checkedId ->
                     radioButton = group.findViewById<RadioButton>(checkedId)
                     selectAnswer = radioButton?.text.toString()
+                    game_start_next_btn.isEnabled = true
                 }
 
                 //次のボタンを押したときの処理
@@ -120,6 +122,7 @@ class GameStartFragment : Fragment() {
                         it.nextQuiz(view)
                         game_start_quiz_count.text = "${it.getIndex()}/${it.getSize()}"
                     }
+                    game_start_next_btn.isEnabled = false
                 }
             }
         }
