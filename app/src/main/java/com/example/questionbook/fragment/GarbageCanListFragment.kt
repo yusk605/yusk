@@ -1,5 +1,6 @@
 package com.example.questionbook.fragment
 
+import android.app.AlertDialog
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -16,6 +17,12 @@ import kotlinx.android.synthetic.main.fragment_garbage_can_list.*
 class GarbageCanListFragment : Fragment() {
 
     private var typeAction = 0
+
+    private val alertBuilder by lazy {
+        AlertDialog.Builder(activity)
+                .setTitle(activity?.getString(R.string.delete_message))
+                .setNegativeButton(R.string.garbage_can_negative_button){d,w->}
+    }
 
     private var checkedList:MutableList<Int> = mutableListOf()
 
@@ -88,11 +95,12 @@ class GarbageCanListFragment : Fragment() {
 
                     //削除ボタンを押したときにチェック項目のついた箇所を全て削除する。
                     garbage_can_delete_button.setOnClickListener {
-                        checkedList.forEach { p ->
-                            viewModel.deleteCategory(categoryList[p])
-                        }
-                        //リストの要素をクリアする。
-                        checkedList.clear()
+                        alertBuilder.setPositiveButton(activity?.getString(R.string.garbage_can_button_delete))
+                        { d, w ->
+                            checkedList.forEach { p -> viewModel.deleteCategory(categoryList[p]) }
+                            //リストの要素をクリアする。
+                            checkedList.clear()
+                        }.create().show()
                     }
                     garbage_can_return_button.setOnClickListener {
                         checkedList.forEach { p ->
@@ -115,11 +123,13 @@ class GarbageCanListFragment : Fragment() {
 
                     //削除ボタンを押したときにチェック項目のついた箇所をすべて削除
                     garbage_can_delete_button.setOnClickListener {
-                        checkedList.forEach { p->
-                            viewModel.deleteWorkBook(workBookList[p])
-                        }
-                        //リストの要素をクリアする。
-                        checkedList.clear()
+                        //ダイヤログの表示を行う。削除の再確認用として
+                        alertBuilder.setPositiveButton(requireActivity().getString(R.string.garbage_can_button_delete)){
+                            d,w->
+                            checkedList.forEach { p-> viewModel.deleteWorkBook(workBookList[p]) }
+                            //リストの要素をクリアする。
+                            checkedList.clear()
+                        }.create().show()
                     }
                     garbage_can_return_button.setOnClickListener {
                         checkedList.forEach { p->
@@ -141,11 +151,14 @@ class GarbageCanListFragment : Fragment() {
                     val leafList = data.filter { it.leafFlag == 2 }
 
                     garbage_can_delete_button.setOnClickListener {
-                        checkedList.forEach { p->
-                            viewModel.deleteLeaf(leafList[p])
-                        }
-                        checkedList.clear()
+                        alertBuilder.setPositiveButton(requireActivity().getString(R.string.garbage_can_button_delete)){
+                            d,w->
+                            checkedList.forEach { p-> viewModel.deleteLeaf(leafList[p]) }
+                            //リストの要素をクリアする。
+                            checkedList.clear()
+                        }.create().show()
                     }
+
                     garbage_can_return_button.setOnClickListener {
                         checkedList.forEach { p->
                             viewModel.upDateLeaf(leafList[p].apply { leafFlag = 0 })
@@ -153,7 +166,6 @@ class GarbageCanListFragment : Fragment() {
                         checkedList.clear()
                     }
                 }}
-
             else -> throw IllegalAccessException(" selectAdapter not value ")
         }
     }
