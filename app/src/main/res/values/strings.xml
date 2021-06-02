@@ -72,8 +72,21 @@
     <string name="garbage_can_leaf_button_text">問題文削除候補一覧へ</string>
     <string name="garbage_can_button_delete">削除</string>
     <string name="garbage_can_button_return">戻す</string>
-
+    <string name="garbage_can_negative_button">キャンセル</string>
+    <string name="delete_message">本当に削除しますか？</string>
     <!-- エラーメッセージ   -->
     <string name="error_dialog_category_0001">すでにそのタイトルは存在します</string>
     <string name="error_dialog_category_0002">ゴミ箱にあるタイトルと重複してます</string>
+
+    <!-- 各フラグメントのタイトル表示 -->
+    <string name="title_category">カテゴリー</string>
+    <string name="title_workbook">ブック</string>
+    <string name="title_leaf">リーフ</string>
+    <string name="title_data">データ</string>
+    <string name="title_history">ヒストリー</string>
+    <string name="title_garbage_can">ゴミ箱</string>
+    <string name="title_game">クイズ</string>
+    <string name="title_result">リザルト</string>
+    <string name="title_details">詳細</string>
+
 </resources>
