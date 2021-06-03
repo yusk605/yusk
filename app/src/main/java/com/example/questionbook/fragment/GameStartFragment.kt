@@ -81,7 +81,8 @@ class GameStartFragment : Fragment() {
                 data->
                 //イテレーターパターンを使用した集合体（アグリゲート）インスタンスを取得
                 questionItemShelf = QuestionItemShelf(
-                        data.filter { it.relationWorkBook == workBookNo },
+                        data.filter { it.relationWorkBook == workBookNo }
+                                .filter { it.leafFlag!=2 },
                         workBookWithAll?.workBookEntity?.workBookTitle?:""
                     )
 
