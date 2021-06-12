@@ -13,6 +13,7 @@ import com.example.questionbook.logic.QuestionItemIterator
 import com.example.questionbook.logic.QuestionItemShelf
 import com.example.questionbook.room.QuestionAccuracyEntity
 import com.example.questionbook.room.QuestionHistoryEntity
+import com.example.questionbook.room.QuestionLeafEntity
 import com.example.questionbook.room.WorkBookWithAll
 import com.example.questionbook.view_model.QuizGameViewModel
 import com.example.questionbook.view_model.QuizGameViewModelFactory
@@ -33,6 +34,7 @@ class GameStartFragment : Fragment() {
     private var questionItemShelf:QuestionItemShelf? = null     //イテレータパターンでの集合体
     private var questionItem:QuestionItem? = null               //クイズを表示するためのオブジェクト
     private var radioButton:RadioButton? = null                 //ラジオボタン（選択案）
+    private val answers:MutableList<String> = mutableListOf()   //選択する解答を位置維持的に保持する。
 
     //クイズを行ったデータを格納するためのリスト。
     private var questionItemList:MutableList<QuestionItem> = mutableListOf()
@@ -90,7 +92,9 @@ class GameStartFragment : Fragment() {
                 questionIt = questionItemShelf?.let{ it.createIterator() }
 
                 questionIt?.let {
-                    questionItem = it.next()        //始めに出題されるクイズのデータを取得する。
+                    //始めに出題されるクイズのデータを取得し選択する回答となる文字をリストに保持する。
+                    questionItem = it.next().also { q->addAnswers(q.entity) }
+
                     questionItem?.set()             //取得したクイズデータをレイアウトファイルに表維持させる。
                     questionItemList.add(questionItem!!)
                     game_start_quiz_count.text = "${it.getIndex()}/${it.getSize()}"
@@ -151,8 +155,11 @@ class GameStartFragment : Fragment() {
     private fun QuestionItemIterator.nextQuiz(view: View){
 
         if(hasNext()) {
+
             questionItem = next()
             questionItem?.let {
+                //次の問題の選択する文字を格納する。
+                addAnswers(it.entity)
                 it.set()
                 questionItemList.add(it)
             }
@@ -230,10 +237,22 @@ class GameStartFragment : Fragment() {
      */
     private fun QuestionItem.set(){
         game_start_quiz_statement.setText(entity.leafStatement)
-        game_start_radio_button_first.text    = selectAnswers[0]
-        game_start_radio_button_second.text   = selectAnswers[1]
-        game_start_radio_button_third.text    = selectAnswers[2]
-        game_start_radio_button_force.text    = selectAnswers[3]
+        game_start_radio_button_first.text    = answers[0]
+        game_start_radio_button_second.text   = answers[1]
+        game_start_radio_button_third.text    = answers[2]
+        game_start_radio_button_force.text    = answers[3]
+    }
+
+    /**
+     * 選択する回答をシャッフルして表示させるため
+     */
+    private fun addAnswers(entity: QuestionLeafEntity){
+        answers.clear()
+        answers.add(entity.leafFirs)
+        answers.add(entity.leafSecond)
+        answers.add(entity.leafThird)
+        answers.add(entity.leafRight)
+        answers.shuffle()
     }
 
     /**

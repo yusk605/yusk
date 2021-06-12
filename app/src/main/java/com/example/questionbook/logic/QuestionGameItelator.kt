@@ -67,14 +67,7 @@ class QuestionItemShelf(
             QuestionItem(
                     questionTitle = title,
                     answerCheck = 0,
-                    entity = it,
-                    selectAnswers =
-                    mutableListOf<String>().apply {
-                        add(it.leafRight)
-                        add(it.leafFirs)
-                        add(it.leafSecond)
-                        add(it.leafThird)
-                    })
+                    entity = it)
         }.toList().shuffled().also {
             list->
             list.map {
@@ -141,7 +134,7 @@ class ConnCreteQuestionItemIterator(
     override fun next(): QuestionItem {
         val item = questionShelf.getItemAt(index)
         index++
-        return item.also { it.selectAnswers.shuffle() }
+        return item
     }
 
     override fun hasNext(): Boolean = index < questionShelf.getSize()

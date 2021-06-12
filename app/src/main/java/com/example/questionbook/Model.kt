@@ -16,8 +16,7 @@ data class QuestionItem(
         var answerCheck:Int,
         var selectAnswer:String="",
         var historyQuizNumber:Int=0,
-        val entity: QuestionLeafEntity,
-        val selectAnswers:MutableList<String>
+        val entity: QuestionLeafEntity
         )
 /*
     @Note　

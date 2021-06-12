@@ -133,7 +133,6 @@ class LeafListFragment : Fragment() {
 
         return QuestionItem(
                 questionTitle = workBookWithTextAndAccuracy?.workBookEntity?.workBookTitle?:"",
-                selectAnswers = mutableListOf(),
                 answerCheck = 0,
                 entity = QuestionLeafEntity(
                                 leafNo          = 0,
@@ -158,7 +157,6 @@ class LeafListFragment : Fragment() {
 
         return QuestionItem(
                 questionTitle = workBookWithTextAndAccuracy?.workBookEntity?.workBookTitle?:"",
-                selectAnswers = mutableListOf(),
                 answerCheck = 0,
                 entity = entity.also {
                     it.leafFirs = dialogFirst.text.toString()
