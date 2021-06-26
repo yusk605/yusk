@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.RadioButton
+import androidx.lifecycle.LifecycleOwner
 import androidx.navigation.Navigation
 import com.example.questionbook.*
 import com.example.questionbook.databinding.FragmentGameStartBinding
@@ -64,7 +65,10 @@ class GameStartFragment : Fragment() {
 
         workBookWithAll?.let {
             workBookNo = it.workBookEntity.workBookNo
-            accuracyNo = if (it.accuracyList.isNotEmpty())it.accuracyList.last().accuracyNo+1 else 1
+           // accuracyNo = if (it.accuracyList.isNotEmpty())it.accuracyList.last().accuracyNo+1 else 1
+        }
+        viewModel.accuracyEntityList.observe(viewLifecycleOwner){
+            data-> accuracyNo = data.last().accuracyNo+1
         }
 
         binding = FragmentGameStartBinding.inflate(inflater,container,false)

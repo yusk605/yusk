@@ -55,8 +55,14 @@ class WorkBookListFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        return inflater.inflate(R.layout.fragment_list_workbook, container, false)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
         adapter = WorkBookListAdapter(category?.categoryTitle?:"",type){
-            view, obj ->
+                view, obj ->
 
             val bundle = Bundle().apply { putParcelable(ARGS_KEY,obj) }
 
@@ -65,11 +71,7 @@ class WorkBookListFragment : Fragment() {
             else
                 type.actionWorkBook(view,bundle)
         }
-        return inflater.inflate(R.layout.fragment_list_workbook, container, false)
-    }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
         recycleInit()
 
         val categoryNo = category?.categoryNo?:0
