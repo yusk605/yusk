@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.PopupMenu
+import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
@@ -101,8 +102,9 @@ class CategoryListFragment : Fragment(){
 
         activity?.let {
             var boolean = category_list_add_fab.isVisible
-            var v:View = if(boolean) category_list_add_fab else category_list_recycle_view
-            v.showSnackBar(it.getMag(type),boolean)
+            Toast.makeText(requireActivity(),it.getMag(type),Toast.LENGTH_SHORT).show()
+            //var v:View = if(boolean) requireView() else category_list_recycle_view
+            //v.showSnackBar(it.getMag(type),boolean)
         }
     }
 
