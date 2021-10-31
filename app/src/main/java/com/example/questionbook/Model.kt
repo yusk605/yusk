@@ -30,12 +30,12 @@ data class QuestionItem(
  */
 @Parcelize
 data class QuizResult(
-        val resultTitle: String,
-        val resultText:String,
-        val resultProgress:Int,
-        val resultAccuracy:Float,
-        val relationWorkBookNo:Int,
-        val relationAccuracyNo:Int
+    val resultTitle: String,
+    val resultText:String,
+    val resultProgress:Int,
+    val resultAccuracy:Float,
+    val relationWorkBookNo:Int,
+    var relationAccuracyNo:Int
 ):Parcelable
 
 
