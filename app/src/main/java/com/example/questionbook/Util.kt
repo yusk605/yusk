@@ -10,8 +10,9 @@ import android.widget.Spinner
 import androidx.fragment.app.FragmentActivity
 import androidx.navigation.Navigation
 import com.google.android.material.snackbar.Snackbar
+
 import com.google.android.material.textfield.TextInputEditText
-import java.util.zip.Inflater
+
 
 /**
  * ■スピナーでのドロップリストに保存したい値を入れる
