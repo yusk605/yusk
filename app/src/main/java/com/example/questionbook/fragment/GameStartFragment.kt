@@ -1,12 +1,11 @@
 package com.example.questionbook.fragment
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.RadioButton
-import androidx.lifecycle.LifecycleOwner
+import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import com.example.questionbook.*
 import com.example.questionbook.databinding.FragmentGameStartBinding
