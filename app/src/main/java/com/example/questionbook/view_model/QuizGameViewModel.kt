@@ -40,7 +40,6 @@ class QuizGameViewModel(private val app:Application): AndroidViewModel(app) {
 
     fun accuracyInsertRx(entity:QuestionAccuracyEntity) = accuracyDao.insertRx(entity)
 
-    fun getAccuracyLast()=accuracyDao.getLast()
 
     fun accuracyInsert(entity:QuestionAccuracyEntity) =
         viewModelScope.launch(Dispatchers.IO) {
