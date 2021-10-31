@@ -4,10 +4,7 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.questionbook.room.QuestionAccuracyDao
-import com.example.questionbook.room.QuestionAccuracyEntity
-import com.example.questionbook.room.QuestionDatabase
-import com.example.questionbook.room.QuestionHistoryDao
+import com.example.questionbook.room.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
@@ -38,6 +35,16 @@ class HistoryViewModel(private val app:Application):AndroidViewModel(app) {
 
     val dataWithLeaf
         get() = _dataWithLeaf
+
+    fun updateHistory(entity:QuestionHistoryEntity){
+        viewModelScope.launch {
+            historyDao.update(entity)
+        }
+    }
+
+    fun getAccuracyLast():List<QuestionAccuracyEntity>{
+        return  accuracyDao.getLast()
+    }
 
     fun accuracyDelete(entity:QuestionAccuracyEntity) =
             viewModelScope.launch(Dispatchers.IO){
