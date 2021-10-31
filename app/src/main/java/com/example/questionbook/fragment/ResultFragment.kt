@@ -1,7 +1,6 @@
 package com.example.questionbook.fragment
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -9,13 +8,21 @@ import android.view.ViewGroup
 import androidx.navigation.Navigation
 import com.example.questionbook.QuizResult
 import com.example.questionbook.R
+import com.example.questionbook.room.QuestionHistoryEntity
+import com.example.questionbook.view_model.HistoryViewModel
+import com.example.questionbook.view_model.HistoryViewModelFactory
+import com.example.questionbook.view_model.QuizGameViewModel
 import kotlinx.android.synthetic.main.fragment_result.*
 
 class ResultFragment : Fragment() {
 
     //クイズゲームを行った時に渡される値
     private lateinit var resultItem:QuizResult
-
+    private var accuracyNo:Int = 0
+    private val viewModel: HistoryViewModel by lazy {
+        HistoryViewModelFactory(requireActivity().application)
+            .create(HistoryViewModel::class.java)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,6 +33,11 @@ class ResultFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
+        viewModel.accuracyList.observe(viewLifecycleOwner){
+            accuracyNo = it.last().accuracyNo
+            resultItem.relationAccuracyNo = accuracyNo
+        }
+
         return inflater.inflate(R.layout.fragment_result, container, false)
     }
 
