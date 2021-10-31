@@ -18,7 +18,6 @@ class ResultFragment : Fragment() {
 
     //クイズゲームを行った時に渡される値
     private lateinit var resultItem:QuizResult
-    private var accuracyNo:Int = 0
     private val viewModel: HistoryViewModel by lazy {
         HistoryViewModelFactory(requireActivity().application)
             .create(HistoryViewModel::class.java)
@@ -33,17 +32,17 @@ class ResultFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        viewModel.accuracyList.observe(viewLifecycleOwner){
-            accuracyNo = it.last().accuracyNo
-            resultItem.relationAccuracyNo = accuracyNo
-        }
+//        viewModel.accuracyList.observe(viewLifecycleOwner){
+//            accuracyNo = it.last().accuracyNo
+//            resultItem.relationAccuracyNo = accuracyNo
+//        }
 
         return inflater.inflate(R.layout.fragment_result, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        resultItem?.let { it.set() }
+        resultItem.set()
 
         result_details_button.setOnClickListener {
             Navigation.findNavController(it).navigate(

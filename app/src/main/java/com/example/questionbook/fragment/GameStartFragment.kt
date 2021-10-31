@@ -67,7 +67,10 @@ class GameStartFragment : Fragment() {
            // accuracyNo = if (it.accuracyList.isNotEmpty())it.accuracyList.last().accuracyNo+1 else 1
         }
         viewModel.accuracyEntityList.observe(viewLifecycleOwner){
-            data-> accuracyNo = data.last().accuracyNo+1
+            data->
+            when (data.isNotEmpty()) {
+                true    ->   accuracyNo = data.last().accuracyNo + 1
+            }
         }
 
         binding = FragmentGameStartBinding.inflate(inflater,container,false)

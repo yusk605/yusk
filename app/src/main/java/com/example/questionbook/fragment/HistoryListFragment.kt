@@ -91,10 +91,10 @@ class HistoryListFragment : Fragment() {
                     )
                     true
                 }
-                R.id.popup_menu_history_select_second -> {
-                    viewModel.accuracyDelete(entity)
-                    true
-                }
+//                R.id.popup_menu_history_select_second -> {
+//                    viewModel.accuracyDelete(entity)
+//                    true
+//                }
               else -> {
                    false
                 }
