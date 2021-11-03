@@ -1,7 +1,10 @@
 # クエッションブック
 ## 自分で問題を作成し作成した問題を出題出来るアプリです。分類ごとにクイズを作成できるため各区分に対して問題を分けて保存できます。
-
-![Screenshot_1635942431](https://user-images.githubusercontent.com/80320642/140059987-ff59bdf0-a72f-491c-97dd-1758232c16cb.png)
+<div style="display:flex">
+<img src="https://user-images.githubusercontent.com/80320642/140059987-ff59bdf0-a72f-491c-97dd-1758232c16cb.png"width="300px">
+<img src="https://user-images.githubusercontent.com/80320642/140061958-f15f85bf-5287-4c64-96c3-9ae406c3da50.png"width="300px">
+<img src="https://user-images.githubusercontent.com/80320642/140062068-ed82ccf3-ac39-454a-8f56-ead2bca5b4d5.png"width="300px">
+</div>
 
 ### ■サイドメニューでの区分として
  1. ホルダー 
